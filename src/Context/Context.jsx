@@ -59,10 +59,10 @@ export function ProviderContext({ children }) {
 
 
     useEffect(() => {
-        if (user) {
+  
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
 
-        }
+       
 
     }, [])
 
@@ -94,6 +94,7 @@ export function ProviderContext({ children }) {
                 setLisCarNew,
                 setLisCarUsed,
                 setListCar,
+                ListCar,
                 setListAllUser,
                 locationR,
                 setlocationR,

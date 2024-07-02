@@ -51,8 +51,8 @@ const Recomendado = () => {
     
     useEffect(() => {
         console.log("Datos filtrados o No");
-        console.log(SeeCar);
-    }, [SeeCar]);
+        console.log(ListCar);
+    }, [ListCar]);
 
     return (
         <div className="bg-transparent z-50 flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
@@ -93,7 +93,7 @@ const Recomendado = () => {
                                 </div>
                             )}
 
-                            {SeeCar.map((car, index) => (
+                            {ListCar.map((car, index) => (
                                 <div key={index} className="flex flex-col  max-md:ml-0 max-md:w-full">
                                     <div className="flex overflow-hidden relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
                                         <button onClick={() => handleOpenModal(car)}>

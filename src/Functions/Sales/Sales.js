@@ -67,9 +67,9 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
                     usedCars.push(data);
                 }
 
-                // console.log("Listar Datos")
-                // console.log(data)
-                // CarSale.push(data);
+                console.log("Listar Datos")
+                console.log(data)
+                CarSale.push(data);
                 
             });
             localStorage.setItem("newCars", JSON.stringify(newCars))
