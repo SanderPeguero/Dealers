@@ -64,6 +64,20 @@ export function ProviderContext({ children }) {
         setCarDatos(nuevaLista)
     }
 
+    const Formatnumber = (number) => {
+
+        if (typeof number === 'string') {
+    
+          number = parseInt(number, 10);
+        }
+    
+        if (!isNaN(number)) {
+          return number.toLocaleString('en-US');
+        }
+    
+        return '0';
+      }
+
     return (
         <Context.Provider
             value={{
@@ -101,6 +115,7 @@ export function ProviderContext({ children }) {
                 setCarEdit,
                 DeleteCarSale,
                 EditCarSale,
+                Formatnumber
 
             }}
         >
