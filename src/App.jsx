@@ -16,8 +16,8 @@ function App() {
   ]
 
   const AdminRoutes = [
-    { path: '/', element: <MainScreen /> },
-    { path: '/CarSale', element: <CarSale /> }
+    // { path: '/', element: <MainScreen /> },
+    // { path: '/CarSale', element: <CarSale /> }
   
   ]
 

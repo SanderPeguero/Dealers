@@ -5,27 +5,21 @@ import { useContextCar } from '../../Context/Context';
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { FaPlus } from "react-icons/fa6";
+import { GoChevronRight } from "react-icons/go";
 
+import { MdDelete } from 'react-icons/md';
 
 const Recomendado = () => {
-    const { user, WhichRole, ListCar, SerchingCar, setAvailable, isFiltro } = useContextCar()
+    const { user, WhichRole, ListCar,setListCar, SerchingCar, setAvailable, isFiltro , setCarEdit,DeleteCarSale} = useContextCar()
     const [showModal, setShowModal] = useState(false);
     const [SeeCar, setSeeCar] = useState([])
     const navigate = useNavigate();
 
-    const handleOpenModal = (car) => {
-        setAvailable(car)
-        setShowModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
 
     
     const handleAgregarAuto = () => {
         window.scrollTo(0, 0);
-        navigate('/admin/CarSale')
+        navigate('/CarSale')
     }
 
     useEffect(() => {
@@ -54,6 +48,21 @@ const Recomendado = () => {
         console.log(ListCar);
     }, [ListCar]);
 
+    const handleEditAuto = (car) => {
+        setCarEdit(car)
+        window.scrollTo(0, 0);
+        navigate('CarSale')
+    }
+
+
+    const handleDelete = async (carSaleId) => {
+        await DeleteCarSale(carSaleId);
+        // Actualizar la lista después de eliminar un elemento
+        const updatedList = listCar.filter(car => car.IdCarSale !== carSaleId);
+        setListCar(updatedList);
+    }
+
+
     return (
         <div className="bg-transparent z-50 flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
 
@@ -68,11 +77,7 @@ const Recomendado = () => {
 
                     <div className="flex text-blue-500 items-center">
                         <a href="#" className="text-[1rem]">Ver más</a>
-                        <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4707172754d78e0e475b23989d8e8c6a800962b1b776c74f53e1cf37665d2790?"
-                            className="w-[18px]"
-                        />
+                        <GoChevronRight className='w-[18px]' />
                     </div>
                 </div>
                 <div className="mt-6 max-md:max-w-full">
@@ -95,15 +100,28 @@ const Recomendado = () => {
 
                             {ListCar.map((car, index) => (
                                 <div key={index} className="flex flex-col  max-md:ml-0 max-md:w-full">
+                                    <div className='flex flex-row'>
+                                            <div className="px-3 py-2   text-xs leading-4">
+                                                <button onClick={() => handleEditAuto(car)} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
+                                                    <FaEdit size={14} className="text-yellow-500" />
+                                                </button>
+                                            </div>
+                                            <div className="px-3 py-2   text-xs leading-4">
+                                                <button className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-red-400 hover:text-white focus:outline-none">
+                                                    <MdDelete size={14} onClick={() => handleDelete(car.IdCarSale)} className="text-red-500" />
+                                                        
+                                                </button>
+                                            </div>
+                                        </div>
                                     <div className="flex overflow-hidden relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
-                                        <button onClick={() => handleOpenModal(car)}>
+                                       
                                             <img
                                                 loading="lazy"
                                                 srcSet={car.Sale.Multimedia.Imagen[0]}
                                                 className="object-cover absolute inset-0 size-full"
                                                 alt={car.Sale.DetalleCoche.Titulo}
                                             />
-                                        </button>
+                                   
 
                                         <div className="flex absolute inset-x-0 bottom-0 text-sm px-2.5 gap-20 py-5   bg-black bg-opacity-30 max-md:mt-52">
                                             <div className="flex-auto">{car.Sale.DetalleCoche.Titulo}</div>
@@ -117,8 +135,6 @@ const Recomendado = () => {
                     </div>
                 </div>
             </div>
-
-            <Modal showModal={showModal} handleClose={handleCloseModal} />
         </div>
     );
 };

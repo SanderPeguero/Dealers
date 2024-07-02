@@ -3,9 +3,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 // Functions
-import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale } from "../Functions/Sales/Sales";
+import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-
 
 
 const Context = createContext();
@@ -15,8 +14,6 @@ export const useContextCar = () => {
     if (!context) throw new Error('There is no Context provider');
     return context;
 };
-
-
 
 
 export function ProviderContext({ children }) {
@@ -36,7 +33,7 @@ export function ProviderContext({ children }) {
     const [ContactoVisibles, setContactoVisibles] = useState(false)
 
     const [CarDatos, setCarDatos] = useState([])
-
+    const [CarEdit, setCarEdit] = useState(null)
 
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -57,22 +54,15 @@ export function ProviderContext({ children }) {
 
 
 
-
     useEffect(() => {
-  
-            ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
-
-       
-
+        ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
     }, [])
 
 
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);
         setCarDatos(nuevaLista)
-
     }
-
 
     return (
         <Context.Provider
@@ -106,7 +96,11 @@ export function ProviderContext({ children }) {
                 setContactoVisibles,
                 CarDatos,
                 setCarDatos,
-                handleRemove
+                handleRemove,
+                CarEdit,
+                setCarEdit,
+                DeleteCarSale,
+                EditCarSale,
 
             }}
         >

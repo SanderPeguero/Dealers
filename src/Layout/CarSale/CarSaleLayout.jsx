@@ -55,8 +55,9 @@ const CarSaleDatos = {
 
 const CarsaleLayaout = () => {
 
-    const { SaveCarSale, user } = useContextCar()
+    const { SaveCarSale, user, CarEdit } = useContextCar()
     const [newFeature, setNewFeature] = useState('');
+    
     const updateCarDetails = (updatedDetails) => {
         CarSaleDatos.Sale.DetalleCoche = updatedDetails;
 
@@ -72,34 +73,78 @@ const CarsaleLayaout = () => {
 
     }
 
-    
+
     const handleSale = (e) => {
         e.preventDefault();
-        
+
         // Imprime la acción del evento
         console.log('Evento preventDefault ejecutado');
-    
+
         // Imprime el estado actual de CarSaleDatos.Sale
         console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
-    
+
         // Verifica si los datos son válidos
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
             // Imprime un mensaje indicando que los datos son válidos
             console.log('Datos validados correctamente');
-    
+
             // Guarda la venta del coche y muestra un mensaje de confirmación
             SaveCarSale(CarSaleDatos, user.uid);
             console.log('Datos guardados con éxito');
-    
+
             alert("Guardado");
         } else {
             // Imprime un mensaje indicando que los datos no son válidos
             console.log('Datos incompletos o inválidos');
-    
+
             alert('Por favor completa todos los campos.');
         }
     };
-    
+
+
+    const handleEdit = (e) => {
+
+
+        e.preventDefault();
+
+        // Imprime la acción del evento
+        console.log('Evento preventDefault ejecutado');
+
+        // Imprime el estado actual de CarSaleDatos.Sale
+        console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
+
+        // Verifica si los datos son válidos
+        if (validateCarSaleDatos(CarSaleDatos.Sale)) {
+            // Imprime un mensaje indicando que los datos son válidos
+            console.log('Datos validados correctamente');
+            console.log(CarSaleDatos);
+            // Guarda la venta del coche y muestra un mensaje de confirmación
+            // EditCarSale(CarSaleDatos, CarEdit.IdCarSale);
+            console.log('Datos guardados con éxito');
+
+            alert("Guardado");
+        } else {
+            // Imprime un mensaje indicando que los datos no son válidos
+            console.log('Datos incompletos o inválidos');
+
+            alert('Por favor completa todos los campos.');
+        }
+
+
+
+
+    }
+
+    useEffect(() => {
+        if (CarEdit !== null) {
+            CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
+            console.log("Editar autos")
+            console.log(CarSaleDatos)
+        }
+
+
+    }, [CarEdit])
+
 
     return (
         <>
@@ -116,14 +161,23 @@ const CarsaleLayaout = () => {
 
                 <div className='flex justify-center'>
 
-                    <button onClick={(e) => handleSale(e)} className="flex justify-center  w-1/2 px-14 py-4 mt-8 mb-8 text-center whitespace-nowrap bg-sky-600 rounded max-md:px-5 max-md:mt-10 max-md:max-w-full">
-                        Vender mi auto
-                    </button>
+                    {
+                        CarEdit !== null ?
+                            <button onClick={(e) => handleEdit(e)} className="flex justify-center  w-1/2 px-14 py-4 mt-8 mb-8 text-center whitespace-nowrap bg-sky-600 rounded max-md:px-5 max-md:mt-10 max-md:max-w-full">
+                                Editar auto
+                            </button>
+                            : <button onClick={(e) => handleSale(e)} className="flex justify-center  w-1/2 px-14 py-4 mt-8 mb-8 text-center whitespace-nowrap bg-sky-600 rounded max-md:px-5 max-md:mt-10 max-md:max-w-full">
+                                Vender mi auto
+                            </button>
+                    }
+
+
                 </div>
+
             </div>
 
         </>
-        
+
     )
 
 

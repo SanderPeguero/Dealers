@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
+import { useContextCar } from '../../Context/Context'
 
 const Price = ({PriceDatos}) => {
+    const { CarEdit } = useContextCar()
+    
     const [price, setPrice] = useState(0)
 
     useEffect(() => {
@@ -9,6 +12,18 @@ const Price = ({PriceDatos}) => {
         }
     }, [price]);
     
+
+
+    useEffect(() => {
+        if (CarEdit !== null) {
+            // console.log("Datos para editar dimenciones")
+            console.log(CarEdit)
+            setPrice(CarEdit.Sale.Precio.Precio)
+            
+          
+        }
+    
+    }, [CarEdit])
     
     return (
         <div  className='bg-[#071620] rounded-lg  text-white mt-4 m-10'>
@@ -29,7 +44,7 @@ const Price = ({PriceDatos}) => {
                                         <div  className="bg-[#004A77] justify-center text-2xl text-white  px-4 py-2 rounded-l  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                             $
                                         </div>
-                                        <input onChange={(e) => setPrice(e.target.value)}  className="bg-[#12232E] text-sm block w-full p-4 rounded-l  " required />
+                                        <input value={price} onChange={(e) => setPrice(e.target.value)}  className="bg-[#12232E] text-sm block w-full p-4 rounded-l  " required />
 
                                     </div>
                                 </div>
