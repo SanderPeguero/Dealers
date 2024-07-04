@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { HashRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import { useContextCar } from './Context/Context'
-
 function App() {
   const { user, WhichRole, locationR } = useContextCar()
 
 
   const commonRoutes = [
-
+    
   ]
 
   const AdminRoutes = [
