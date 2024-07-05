@@ -5,7 +5,7 @@ import Recomendado from "../../Components/Recomendado/Recomendado"
 // import Testimonio from '../../Components/Testimono/Testimonio'
 import Contacto from '../../Components/Contacto/Contacto'
 import { useContextCar } from "../../Context/Context"
-import Testimonio from "../../Components/Testimono/Testimonio"
+// import Testimonio from "../../Components/Testimono/Testimonio"
 
 
 const MainScreen = () => {
@@ -41,10 +41,8 @@ const MainScreen = () => {
             <div ref={AutosRef} >
                 <Recomendado/>
             </div>
-            <Testimonio/>
 
             <div ref={ContactoRef}>
-                
                 <Contacto />
             </div>
             
