@@ -96,8 +96,8 @@ const Hero = () => {
             <div className="flex flex-col items-center  bg-black px-16 pt-20 max-md:px-5 max-md:max-w-full">
 
                 <div className="z-10 lg:mt-32 mb-0  overflow-hidden  md:mt-5 max-md:mb-2.5 max-md:max-w-full">
-                    <div className={`w-full -z-50 absolute right-0 top-0  `}>
-                        <img className="w-full bg-contain brightness-50 blur-[2px] contrast-125" src={SliderImg[current]} alt="" />
+                    <div className={`w-full  -z-50 absolute right-0 top-0  `}>
+                        <img className="w-screen h-screen  bg-contain brightness-50 blur-[2px] contrast-125" src={SliderImg[current]} alt="" />
                     </div>
                     <div className="md:absolute z-50 top-0 md:right-0 md:left-0 md:px-12 ">
 
