@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Routes, Navigate, useNavigate } from 'reac
 import { useContextCar } from './Context/Context'
 import MainScreen from './Layout/MainScreen/MainScreen'
 import CarSale from './Layout/CarSale/CarSaleLayout'
-
+import Footer from './Layout/Footer/Footer'
 
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
           ))}
         </Routes>
       </Router>
+      <Footer />
 
     </>
   )
