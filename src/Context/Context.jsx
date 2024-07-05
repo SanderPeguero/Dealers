@@ -5,13 +5,6 @@ import { auth } from "../firebase/firebase";
 // Functions
 import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-import { createContext, useContext, useState, useEffect } from "react"
-import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "../firebase/firebase"
-
-//Functions
-import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale } from "../Functions/Sales/Sales"
 import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
 
 const Context = createContext();
@@ -42,6 +35,10 @@ export function ProviderContext({ children }) {
     const [CarDatos, setCarDatos] = useState([])
     const [CarEdit, setCarEdit] = useState(null)
 
+    const [TituloHero, setTituloHero] = useState('')
+    const [DescripcionHero, setDescripcionHero] = useState('')
+    const [SliderImg, setSliderImg] = useState([])
+
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -54,7 +51,7 @@ export function ProviderContext({ children }) {
         if (user) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
-            // GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+            GetHero(setTituloHero, setDescripcionHero, setSliderImg)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -63,6 +60,10 @@ export function ProviderContext({ children }) {
 
     useEffect(() => {
         ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
+    }, [])
+
+    useEffect(() => {
+      GetHero(setTituloHero, setDescripcionHero, setSliderImg)
     }, [])
 
 
@@ -122,7 +123,12 @@ export function ProviderContext({ children }) {
                 setCarEdit,
                 DeleteCarSale,
                 EditCarSale,
-                Formatnumber
+                Formatnumber,
+                TituloHero,
+                DescripcionHero,
+                SliderImg,
+                setTituloHero, 
+                setDescripcionHero, setSliderImg, GetHero,
 
             }}
         >

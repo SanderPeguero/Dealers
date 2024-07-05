@@ -161,3 +161,30 @@ const Hero = () => {
 
 export default Hero;
 
+const formatText = (TextHero) => {
+
+    const words = TextHero.split(' ');
+
+    let formattedLines = [];
+
+    let currentLine = '';
+
+    words.forEach((word, index) => {
+
+        currentLine += word;
+
+        if (index < words.length - 1) {
+            currentLine += ' ';
+        }
+
+        if ((index + 1) % 4 === 0 || index === words.length - 1) {
+
+            formattedLines.push(currentLine);
+
+            currentLine = '';
+        }
+    });
+
+    return formattedLines.join('\n');
+};
+
