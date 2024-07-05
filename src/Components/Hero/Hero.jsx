@@ -95,7 +95,7 @@ const Hero = () => {
             <EditIma isOpenEditImg={isOpenEditImg} setisOpenEditImg={setisOpenEditImg} images={SliderImg} />
             <div className="flex flex-col items-center  bg-black px-16 pt-20 w-full max-md:px-5 max-md:max-w-full bg-max-h-20">
 
-                <div className="z-10  lg:mt-32 mb-0 w-full  overflow-hidden max-w-[1040px] md:mt-5 max-md:mb-2.5 max-md:max-w-full">
+                <div className="z-10 lg:mt-32 mb-0 w-full  overflow-hidden max-w-[1040px] md:mt-5 max-md:mb-2.5 max-md:max-w-full">
                     <div className={`w-full h-full -z-50 bg-black absolute right-0 top-0  `}>
                         <img className="w-full  bg-contain brightness-50 blur-[2px] contrast-125" src={SliderImg[current]} alt="" />
                     </div>

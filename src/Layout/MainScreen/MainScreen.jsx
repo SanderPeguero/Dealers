@@ -3,8 +3,9 @@ import Navbar from "../NavBar/NavBar"
 import Hero from '../../Components/Hero/Hero'
 import Recomendado from "../../Components/Recomendado/Recomendado"
 // import Testimonio from '../../Components/Testimono/Testimonio'
-// import Contacto from '../../Components/Contacto/Contacto'
+import Contacto from '../../Components/Contacto/Contacto'
 import { useContextCar } from "../../Context/Context"
+import Testimonio from "../../Components/Testimono/Testimonio"
 
 
 const MainScreen = () => {
@@ -36,15 +37,15 @@ const MainScreen = () => {
         <div className="bg-black">
             <Navbar background={'dark:bg-[#12232E]'} />
             <Hero />
+            
             <div ref={AutosRef} >
                 <Recomendado/>
             </div>
-            
-        
-        
+            <Testimonio/>
 
             <div ref={ContactoRef}>
-                {/* <Contacto /> */}
+                
+                <Contacto />
             </div>
             
 
