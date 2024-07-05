@@ -4,6 +4,7 @@ import Facebook from "../../assets/Footer/Facebook.png"
 import instagram from "../../assets/Footer/instagram.png"
 import youtube from "../../assets/Footer/youtube.png"
 
+import SFMImage from "../../assets/img/SFMImage.jpg"
 // import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 
 // const mapStyles = {
@@ -17,7 +18,8 @@ import youtube from "../../assets/Footer/youtube.png"
 const Contacto = () => {
     
     return (
-        <div  className=" bg-fixed flex bg-transparent overflow-hidden relative flex-col justify-center items-center px-16 py-1 mt-20 w-full min-h-[768px] max-md:px-5 max-md:mt-10 max-md:max-w-full">
+        // style={{backgroundImage: `url( ${Dealer})`}}  
+        <div style={{backgroundImage: `url( ${SFMImage})`}}   className=" bg-fixed flex bg-[#12232E] overflow-hidden relative flex-col justify-center items-center px-16 py-1 mt-20 w-full min-h-[768px] max-md:px-5 max-md:mt-10 max-md:max-w-full">
             
             <div className="bg-transparent relative w-full max-w-[1226px] max-md:max-w-full">
                 <h1 className="text-3xl text-white font-bold"> Contáctanos</h1>
