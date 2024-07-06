@@ -3,6 +3,8 @@ import { HashRouter as Router, Route, Routes, Navigate, useNavigate } from 'reac
 import { useContextCar } from './Context/Context'
 import MainScreen from './Layout/MainScreen/MainScreen'
 import CarSale from './Layout/CarSale/CarSaleLayout'
+import LogInLayout from './Layout/LogInLayout/LogInLayout'
+import SignInLayout from './Layout/SignInLayout/SignInLayout'
 import Footer from './Layout/Footer/Footer'
 
 
@@ -17,7 +19,9 @@ function App() {
 
   const AdminRoutes = [
     { path: '/', element: <MainScreen /> },
-    { path: '/CarSale', element: <CarSale /> }
+    { path: '/CarSale', element: <CarSale /> },
+    { path: '/LognIn', element: <LogInLayout /> },
+    { path: '/SignIn', element: <SignInLayout /> }
   
   ]
 

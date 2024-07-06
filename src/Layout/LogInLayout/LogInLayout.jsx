@@ -1,6 +1,6 @@
 import React from "react"
 import Navbar from "../NavBar/NavBar"
-import LogIn from "../../Components/Login/LogIn"
+import LogIn from "../../Components/LogIn/LogIn"
 const LogInLayout = () => {
 
     return (
