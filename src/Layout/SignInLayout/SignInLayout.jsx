@@ -1,6 +1,6 @@
 import React from "react"
 import Navbar from "../NavBar/NavBar"
-import SingIn from '../../Component/SingIn'
+import SingIn from '../../Components/SigngIn/SingIn'
 const SignInLayout = () => {
 
     return (
