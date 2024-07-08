@@ -1,4 +1,4 @@
-import React , {useState, useRef, useEffect} from "react"
+import React, { useState, useRef, useEffect } from "react"
 import Navbar from "../NavBar/NavBar"
 import Hero from '../../Components/Hero/Hero'
 import Recomendado from "../../Components/Recomendado/Recomendado"
@@ -6,15 +6,18 @@ import Recomendado from "../../Components/Recomendado/Recomendado"
 import Contacto from '../../Components/Contacto/Contacto'
 import { useContextCar } from "../../Context/Context"
 // import Testimonio from "../../Components/Testimono/Testimonio"
-
+import CarDetails from "../../Components/CarDetails/CarDetails"
 
 const MainScreen = () => {
 
-    const { user, WhichRole, AutosVisible,setAutosVisible, AutosInVisible,setAutosInVisible,
-        ContactoVisibles, setContactoVisibles} = useContextCar()
+    const { user, WhichRole, AutosVisible, setAutosVisible, AutosInVisible, setAutosInVisible,
+        ContactoVisibles, setContactoVisibles } = useContextCar()
 
     const AutosRef = useRef(null);
     const ContactoRef = useRef(null);
+
+    //Add vehicle
+    const [isOpenCardDetails, setisOpenCardDetails] = useState(false)
 
     useEffect(() => {
         if (AutosVisible === true && AutosRef.current) {
@@ -33,21 +36,23 @@ const MainScreen = () => {
 
 
     return (
+        <>
+            <CarDetails isOpenCardDetails={isOpenCardDetails} setisOpenCardDetails={setisOpenCardDetails} />
+            <div className="bg-black">
+                <Navbar background={'dark:bg-[#12232E]'} />
+                <Hero />
 
-        <div className="bg-black">
-            <Navbar background={'dark:bg-[#12232E]'} />
-            <Hero />
-            
-            <div ref={AutosRef} >
-                <Recomendado/>
+                <div ref={AutosRef} >
+                    <Recomendado isOpenCardDetails={isOpenCardDetails} setisOpenCardDetails={setisOpenCardDetails}/>
+                </div>
+
+                <div ref={ContactoRef}>
+                    <Contacto />
+                </div>
+
+
             </div>
-
-            <div ref={ContactoRef}>
-                <Contacto />
-            </div>
-            
-
-        </div>
+        </>
     )
 }
 

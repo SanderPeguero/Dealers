@@ -9,7 +9,7 @@ import { GoChevronRight } from "react-icons/go";
 
 import { MdDelete } from 'react-icons/md';
 
-const Recomendado = () => {
+const Recomendado = ({isOpenCardDetails, setisOpenCardDetails}) => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar, setAvailable, isFiltro, setCarEdit,Formatnumber, DeleteCarSale } = useContextCar()
     const [showModal, setShowModal] = useState(false);
     const [SeeCar, setSeeCar] = useState([])
@@ -18,8 +18,9 @@ const Recomendado = () => {
 
 
     const handleAgregarAuto = () => {
-        window.scrollTo(0, 0);
-        navigate('/CarSale')
+        setisOpenCardDetails(!isOpenCardDetails)
+        // window.scrollTo(0, 0);
+        // navigate('/CarSale')
     }
 
     useEffect(() => {
@@ -64,9 +65,9 @@ const Recomendado = () => {
 
 
     return (
-        <div className="bg-transparent  z-50 flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5" >
+        <div className="bg-transparent  flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5" >
 
-            <div className="flex  flex-col mt-96 justify-between  z-50 w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
+            <div className="flex  flex-col mt-96 justify-between  w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
 
                 <div className="flex">
                     <div className="text-2xl mt-3 font-bold text-white ">
