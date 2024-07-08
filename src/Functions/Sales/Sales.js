@@ -1,5 +1,5 @@
-import { dbFire, storage } from "../../firebase/Firebaseirebase"
-import { collection, addDoc, getDocs, onSnapshot } from "firebase/Firestore"
+import { dbFire, storage } from "../../firebase/firebase"
+import { collection, addDoc, getDocs, onSnapshot,deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 export const SaveCarSale = async (datos, userId) => {
@@ -47,6 +47,28 @@ export const SaveArchivo = (file, userId, setLinkUrl) => {
     });
 }
 
+export const DeleteCarSale = async (carSaleId) => {
+    try {
+        const docRef = doc(dbFire, "CarSale", carSaleId);
+        await deleteDoc(docRef);
+        console.log("Documento eliminado con éxito:", carSaleId);
+    } catch (error) {
+        console.error("Error al eliminar el documento:", error);
+    }
+}
+
+export const EditCarSale = async (carSaleId, updatedData) => {
+    try {
+        const docRef = doc(dbFire, "CarSale", carSaleId);
+        await updateDoc(docRef, updatedData);
+        console.log("Documento actualizado con éxito:", carSaleId);
+    } catch (error) {
+        console.error("Error al actualizar el documento:", error);
+    }
+}
+
+
+
 export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
     try {
         const ref = collection(dbFire, "CarSale");
@@ -88,43 +110,3 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
         console.error("Error al obtener los datos de la colección 'CarSale':", error);
     }
 }
-
-
-// export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
-
-//     try {
-//         const ref = collection(dbFire, "CarSale");
-
-//         const docsSnap = await getDocs(ref);
-
-//         const newCars = [];
-//         const usedCars = [];
-//         const CarSale = []
-
-//         docsSnap.forEach(doc => {
-//             const data = doc.data();
-//             const IdCarSale = doc.id;
-//             data.IdCarSale = IdCarSale;
-
-//             if (data.Sale.DetalleCoche.Condicion === "Nuevo") {
-//                 newCars.push(data)
-//                 setLisCarNew(newCars)
-                
-                
-//             }else if (data.Sale.DetalleCoche.Condicion === "Usado") {
-//                 usedCars.push(data)
-//                 setLisCarUsed(usedCars)
-//             }
-
-//             CarSale.push(data)
-//             setListCar(CarSale)
-//         });
-
-//         setLisCarNew(newCars);
-//         setLisCarUsed(usedCars);
-//         setListCar(CarSale);
-
-//     } catch (error) {
-//         console.error("Error al obtener los datos de la colección 'events':", error);
-//     }
-// }
