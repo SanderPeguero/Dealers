@@ -1,4 +1,4 @@
-import { dbFire, storage } from "../../firebase/firebase"
+import { dbFire, storage } from "../../firebase/Firebase"
 import { collection, addDoc, getDocs, onSnapshot,deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage"
 
