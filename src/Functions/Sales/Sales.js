@@ -1,5 +1,5 @@
-import { dbFire, storage } from "../../firebase/Firebaseirebase"
-import { collection, addDoc, getDocs, onSnapshot } from "firebase/Firestore"
+import { dbFire, storage } from "../../firebase/firebase"
+import { collection, addDoc, getDocs, onSnapshot } from "firebase/firestore"
 import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 export const SaveCarSale = async (datos, userId) => {
