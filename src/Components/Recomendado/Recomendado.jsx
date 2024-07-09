@@ -9,8 +9,11 @@ import { GoChevronRight } from "react-icons/go";
 
 import { MdDelete } from 'react-icons/md';
 
-const Recomendado = ({isOpenCardDetails, setisOpenCardDetails}) => {
-    const { user, WhichRole, ListCar, setListCar, SerchingCar, setAvailable, isFiltro, setCarEdit,Formatnumber, DeleteCarSale } = useContextCar()
+const Recomendado = () => {
+    const { user, WhichRole, ListCar, setListCar, SerchingCar, 
+        setAvailable, isFiltro, setCarEdit,Formatnumber, DeleteCarSale ,
+        isOpenCardDetails, setisOpenCardDetails
+    } = useContextCar()
     const [showModal, setShowModal] = useState(false);
     const [SeeCar, setSeeCar] = useState([])
     const navigate = useNavigate();

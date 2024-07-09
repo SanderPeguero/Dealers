@@ -2,8 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 
-const CarDetails = ({ updateCarDetails, isOpenCardDetails, setisOpenCardDetails }) => {
-    const { CarEdit } = useContextCar()
+const CarDetails = ({ updateCarDetails }) => {
+    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente } = useContextCar()
     const [Titulo, setTitulo] = useState('')
     const [Condicion, setCondicion] = useState('')
     const [TipoCuerpo, setTipoCuerpo] = useState('')
@@ -220,7 +220,7 @@ const CarDetails = ({ updateCarDetails, isOpenCardDetails, setisOpenCardDetails 
                                     </div>
                                     <div className='text-left flex justify-between  items-center ' >
                                         <button className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md'>Anterior</button>
-                                        <button className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+                                        <button onClick={handleSiguiente} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                     </div>
                                 </form>
 

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/Firebase";
+import { auth } from "../firebase/firebase";
 
 // Functions
 import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
@@ -38,6 +38,14 @@ export function ProviderContext({ children }) {
     const [TituloHero, setTituloHero] = useState('')
     const [DescripcionHero, setDescripcionHero] = useState('')
     const [SliderImg, setSliderImg] = useState([])
+
+        //Add vehicle (Modales)
+        const [isOpenCardDetails, setisOpenCardDetails] = useState(false)
+        const [isOpenEngineDetails, setisOpenEngineDetails] = useState(false)
+        const [isOpenDimension, setisOpenDimension] = useState(false)
+        const [isOpenFeature, setisOpenFeature] = useState(false)
+        const [isOpenImagen, setisOpenImagen] = useState(false)
+        const [isOpenPrice, setisOpenPrice] = useState(false)
 
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -86,6 +94,31 @@ export function ProviderContext({ children }) {
         return '0';
       }
 
+    const handleAnterior = () => {
+
+    }
+
+    const handleSiguiente = () => {
+        if (isOpenCardDetails === true) {
+            setisOpenEngineDetails(true)
+            setisOpenCardDetails(false)
+        }else if (isOpenEngineDetails === true) {
+            setisOpenDimension(true)
+            setisOpenEngineDetails(false)
+        }else if (isOpenDimension === true) {
+            setisOpenFeature(true)
+            setisOpenDimension(false)
+        }else if (isOpenFeature === true) {
+            setisOpenImagen(true)
+            setisOpenFeature(false)
+        }else if (isOpenImagen === true) {
+            setisOpenPrice(true)
+            setisOpenImagen(false)
+        }
+    }
+
+
+
     return (
         <Context.Provider
             value={{
@@ -129,6 +162,17 @@ export function ProviderContext({ children }) {
                 SliderImg,
                 setTituloHero, 
                 setDescripcionHero, setSliderImg, GetHero,
+
+                isOpenCardDetails, setisOpenCardDetails,
+                isOpenEngineDetails, setisOpenEngineDetails,
+                isOpenDimension, setisOpenDimension,
+                isOpenFeature, setisOpenFeature,
+                isOpenImagen, setisOpenImagen,
+                isOpenPrice, setisOpenPrice,
+
+                handleSiguiente
+
+
 
             }}
         >

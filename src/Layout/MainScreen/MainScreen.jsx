@@ -7,6 +7,11 @@ import Contacto from '../../Components/Contacto/Contacto'
 import { useContextCar } from "../../Context/Context"
 // import Testimonio from "../../Components/Testimono/Testimonio"
 import CarDetails from "../../Components/CarDetails/CarDetails"
+import EngineDetails from "../../Components/EngineDetails/EngineDetails"
+import Dimension from "../../Components/Dimension/Dimension"
+import Feature from "../../Components/Feature/Feature"
+import UpImagine from "../../Components/UpImagine/UpImagine"
+import Price from "../../Components/Price/Price"
 
 const MainScreen = () => {
 
@@ -16,8 +21,7 @@ const MainScreen = () => {
     const AutosRef = useRef(null);
     const ContactoRef = useRef(null);
 
-    //Add vehicle
-    const [isOpenCardDetails, setisOpenCardDetails] = useState(false)
+
 
     useEffect(() => {
         if (AutosVisible === true && AutosRef.current) {
@@ -37,13 +41,19 @@ const MainScreen = () => {
 
     return (
         <>
-            <CarDetails isOpenCardDetails={isOpenCardDetails} setisOpenCardDetails={setisOpenCardDetails} />
+        {/* Modales */}
+            <CarDetails  />
+            <EngineDetails />
+            <Dimension />
+            <Feature />
+            {/* <UpImagine />
+            <Price /> */}
             <div className="bg-black">
                 <Navbar background={'dark:bg-[#12232E]'} />
                 <Hero />
 
                 <div ref={AutosRef} >
-                    <Recomendado isOpenCardDetails={isOpenCardDetails} setisOpenCardDetails={setisOpenCardDetails}/>
+                    <Recomendado />
                 </div>
 
                 <div ref={ContactoRef}>
