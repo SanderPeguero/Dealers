@@ -39,16 +39,21 @@ const MainScreen = () => {
     }, [ContactoVisibles]);
 
 
+
+
     return (
         <>
-        {/* Modales */}
-            <CarDetails  />
+            {/* Modales */}
+            <CarDetails />
             <EngineDetails />
             <Dimension />
             <Feature />
             <UpImagine />
             <Price />
-            
+
+           
+
+
             <div className="bg-black">
                 <Navbar background={'dark:bg-[#12232E]'} />
                 <Hero />

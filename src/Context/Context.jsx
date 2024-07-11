@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/Firebase";
+import { validateCarSaleDatos } from './Validations'
 
 // Functions
 import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
@@ -95,28 +96,77 @@ export function ProviderContext({ children }) {
       }
 
     const handleAnterior = () => {
-
-    }
-
-    const handleSiguiente = () => {
-        if (isOpenCardDetails === true) {
-            setisOpenEngineDetails(true)
-            setisOpenCardDetails(false)
-        }else if (isOpenEngineDetails === true) {
-            setisOpenDimension(true)
-            setisOpenEngineDetails(false)
-        }else if (isOpenDimension === true) {
-            setisOpenFeature(true)
-            setisOpenDimension(false)
-        }else if (isOpenFeature === true) {
+        if (isOpenPrice === true) {
             setisOpenImagen(true)
-            setisOpenFeature(false)
-        }else if (isOpenImagen === true) {
-            setisOpenPrice(true)
+            setisOpenPrice(false)
+        } else if (isOpenImagen === true) {
+            setisOpenFeature(true)
             setisOpenImagen(false)
+        } else if (isOpenFeature === true) {
+            setisOpenDimension(true)
+            setisOpenFeature(false)
+        } else if (isOpenDimension === true) {
+            setisOpenEngineDetails(true)
+            setisOpenDimension(false)
+        } else if (isOpenEngineDetails === true) {
+            setisOpenCardDetails(true)
+            setisOpenEngineDetails(false)
         }
     }
 
+    // const handleSiguiente = () => {
+    //     if (isOpenCardDetails === true) {
+    //         setisOpenEngineDetails(true)
+    //         setisOpenCardDetails(false)
+    //     }else if (isOpenEngineDetails === true) {
+    //         setisOpenDimension(true)
+    //         setisOpenEngineDetails(false)
+    //     }else if (isOpenDimension === true) {
+    //         setisOpenFeature(true)
+    //         setisOpenDimension(false)
+    //     }else if (isOpenFeature === true) {
+    //         setisOpenImagen(true)
+    //         setisOpenFeature(false)
+    //     }else if (isOpenImagen === true) {
+    //         setisOpenPrice(true)
+    //         setisOpenImagen(false)
+    //     }
+    // }
+
+
+
+
+    const handleSiguiente = (validateCarSaleDatos) => {
+        if (isOpenCardDetails === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenEngineDetails(true);
+                setisOpenCardDetails(false);
+            }
+        } else if (isOpenEngineDetails === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenDimension(true);
+                setisOpenEngineDetails(false);
+            }
+        } else if (isOpenDimension === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenFeature(true);
+                setisOpenDimension(false);
+            }
+        } else if (isOpenFeature === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenImagen(true);
+                setisOpenFeature(false);
+            }
+        } else if (isOpenImagen === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenPrice(true);
+                setisOpenImagen(false);
+            }
+        }
+    };
+    
+
+    
 
 
     return (
@@ -170,7 +220,8 @@ export function ProviderContext({ children }) {
                 isOpenImagen, setisOpenImagen,
                 isOpenPrice, setisOpenPrice,
 
-                handleSiguiente
+                handleSiguiente,handleAnterior,
+                // handleEdit,handleSale
 
 
 

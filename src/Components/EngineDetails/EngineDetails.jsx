@@ -4,7 +4,7 @@ import { useContextCar } from '../../Context/Context'
 
 const EngineDetails = ({ }) => {
 
-    const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleSiguiente } = useContextCar()
+    const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleSiguiente, handleAnterior } = useContextCar()
 
     const [TipoCombustimble, setTipoCombustimble] = useState('')
     const [Kilometraje, setKilometraje] = useState('')
@@ -64,6 +64,14 @@ const EngineDetails = ({ }) => {
     }
 
 
+
+    const validateEngineDetails = () => {
+
+        if (!TipoCombustimble || !Kilometraje || !Transmision || !DriverTrain || !CapacidadMotor || !Power) {
+            return false
+        }
+        return true;
+    };
 
 
 
@@ -171,9 +179,9 @@ const EngineDetails = ({ }) => {
                                     </div>
 
                                     <div className='text-left flex justify-between  items-center ' >
-                                        <button className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
-                                        <button onClick={handleSiguiente} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Siguiente</button>
-                                    </div>
+                                        <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
+                                        <button onClick={() => handleSiguiente(validateEngineDetails)}
+                                            className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>                                    </div>
 
                                 </form>
 

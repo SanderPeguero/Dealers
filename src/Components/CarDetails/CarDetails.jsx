@@ -82,6 +82,13 @@ const CarDetails = ({ updateCarDetails }) => {
         setisOpenCardDetails(false)
     }
 
+    const validateCardDetails = () => {
+        if (!Titulo || !Condicion || !TipoCuerpo || !Marca || !Modelo || !Año || !Color || !Descripcion) {
+            // alert('Por favor, completa todos los campos.');
+            return false;
+        }
+        return true;
+    };
 
 
 
@@ -218,9 +225,13 @@ const CarDetails = ({ updateCarDetails }) => {
                                         <label htmlFor="Description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Descripción </label>
                                         <textarea value={Descripcion} onChange={(e) => setDescripcion(e.target.value)} type="text" id="Description" className="bg-[#12232E] rounded-lg cursor-pointer text-sm block w-full p-8" placeholder='Descripción del vehiculo...' required />
                                     </div>
-                                    <div className='text-left flex justify-between  items-center ' >
-                                        <button className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md'>Anterior</button>
-                                        <button onClick={handleSiguiente} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+                                    <div className='text-left flex justify-end  items-center ' >
+                                        {/* <button className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md'>Anterior</button> */}
+                                        
+                                        <button 
+                                        onClick={() => handleSiguiente(validateCardDetails)}
+                                        // onClick={handleSiguiente} 
+                                        className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                     </div>
                                 </form>
 

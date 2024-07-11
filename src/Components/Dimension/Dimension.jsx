@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 const Dimension = ({ updateDimension }) => {
-    const { CarEdit, isOpenDimension, setisOpenDimension, handleSiguiente} = useContextCar()
+    const { CarEdit, isOpenDimension, setisOpenDimension, handleSiguiente, handleAnterior } = useContextCar()
 
     const [Longitud, setLongitud] = useState('')
     const [Ancho, setAncho] = useState('')
@@ -55,7 +55,13 @@ const Dimension = ({ updateDimension }) => {
         setisOpenDimension(!isOpenDimension)
     }
 
-   
+    const validateDimension = () => {
+        if (!Longitud || !Ancho || !Altura || !VolumenCarga) {
+            return false;
+        }
+        return true;
+    };
+
     return (
         <>
             {
@@ -66,14 +72,14 @@ const Dimension = ({ updateDimension }) => {
                             <div className='text-left flex justify-between cursor-pointer items-center' >
                                 <h3 className='  text-2xl mt-4'>Dimensión</h3>
                                 <button
-                                        onClick={handleOpenDimension}
-                                        className='mt-4 text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none'
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                        </svg>
-                                    </button>
+                                    onClick={handleOpenDimension}
+                                    className='mt-4 text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none'
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
 
                             </div>
                             <div className='mt-8 '>
@@ -129,8 +135,10 @@ const Dimension = ({ updateDimension }) => {
                                     </div>
 
                                     <div className='text-left flex justify-between  items-center ' >
-                                        <button className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
-                                        <button onClick={handleSiguiente} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Siguiente</button>
+                                        <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
+
+                                        <button onClick={() => handleSiguiente(validateDimension)}
+                                            className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                     </div>
 
                                 </form>

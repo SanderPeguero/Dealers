@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
-    const { CarEdit, isOpenFeature, setisOpenFeature, handleSiguiente } = useContextCar()
+    const { CarEdit, isOpenFeature, setisOpenFeature, handleSiguiente, handleAnterior } = useContextCar()
     const [selectedFeatures, setSelectedFeatures] = useState([]);
     const [OtroFeature, setOtroFeature] = useState('')
 
@@ -40,11 +40,9 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
     useEffect(() => {
         if (CarEdit !== null) {
             // console.log("Datos para editar dimenciones")
-            console.log(CarEdit)
+            // console.log(CarEdit)
             setSelectedFeatures(CarEdit.Sale.Features.Features)
             setOtroFeature(CarEdit.Sale.Features.newFeature)
-
-
         }
 
     }, [CarEdit])
@@ -69,6 +67,13 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
         }
     }, [isOpenFeature])
 
+    const validateFeature = () => {
+        if (!setSelectedFeatures) {
+            return false;
+        }
+        return true;
+
+    };
 
     return (
         <>
@@ -121,8 +126,10 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
                                     </div>
 
                                     <div className='text-left flex justify-between  items-center ' >
-                                        <button className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
-                                        <button onClick={handleSiguiente} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Siguiente</button>
+                                        <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
+
+                                        <button onClick={() => handleSiguiente(validateFeature)}
+                                            className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                     </div>
 
                                 </form>
