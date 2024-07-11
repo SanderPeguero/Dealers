@@ -40,6 +40,17 @@ const Dimension = ({ updateDimension }) => {
         setOpen(!open)
     }
 
+    useEffect(() => {
+        if (isOpenDimension) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = ""
+        }
+        return () => {
+            document.body.style.overflow = ""
+        }
+    }, [isOpenDimension])
+
     const handleOpenDimension = () => {
         setisOpenDimension(!isOpenDimension)
     }

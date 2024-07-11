@@ -46,8 +46,9 @@ const MainScreen = () => {
             <EngineDetails />
             <Dimension />
             <Feature />
-            {/* <UpImagine />
-            <Price /> */}
+            <UpImagine />
+            <Price />
+            
             <div className="bg-black">
                 <Navbar background={'dark:bg-[#12232E]'} />
                 <Hero />

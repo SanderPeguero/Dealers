@@ -1,5 +1,5 @@
 
-import {auth, db} from "../../firebase/firebase";
+import {auth, db} from "../../firebase/Firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updatePhoneNumber, signOut } from "firebase/auth";
 import { set, ref, get, update } from "firebase/database"
 
