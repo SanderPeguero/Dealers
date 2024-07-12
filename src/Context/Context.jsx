@@ -134,8 +134,6 @@ export function ProviderContext({ children }) {
     // }
 
 
-
-
     const handleSiguiente = (validateCarSaleDatos) => {
         if (isOpenCardDetails === true) {
             if (validateCarSaleDatos()) {
@@ -165,9 +163,8 @@ export function ProviderContext({ children }) {
         }
     };
 
-  
 
- 
+
 
 
     return (
@@ -222,8 +219,7 @@ export function ProviderContext({ children }) {
                 isOpenPrice, setisOpenPrice,
 
                 handleSiguiente, handleAnterior,
-          
-
+               
 
 
 

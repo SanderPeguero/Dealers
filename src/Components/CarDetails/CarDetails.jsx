@@ -17,9 +17,6 @@ const CarDetails = ({updateCarDetails }) => {
     const [capacity, setCapacity] = useState(1);
     const [open, setOpen] = useState(false)
 
-
-
-
     const decreaseCapacity = () => {
         if (capacity > 1) {
             setCapacity(capacity - 1);

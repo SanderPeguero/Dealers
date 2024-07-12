@@ -66,7 +66,6 @@ const MainScreen = () => {
     const ContactoRef = useRef(null);
 
 
-
     useEffect(() => {
         if (AutosVisible === true && AutosRef.current) {
             AutosRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -82,28 +81,12 @@ const MainScreen = () => {
         }
     }, [ContactoVisibles]);
 
- 
 
 
-    
     const [newFeature, setNewFeature] = useState('');
 
-
-
-    useEffect(() => {
-        if (CarEdit !== null) {
-            CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
-            console.log("Editar autos")
-            console.log(CarSaleDatos)
-        }
-    }, [CarEdit])
-
- 
-
     const updateCarDetails = (updatedDetails) => {
-        console.log(updatedDetails)
         CarSaleDatos.Sale.DetalleCoche = updatedDetails;
-        console.log(CarSaleDatos)
 
     }
 
@@ -115,6 +98,49 @@ const MainScreen = () => {
     const updateDimension = (updatedDetails) => {
         CarSaleDatos.Sale.Dimension = updatedDetails
 
+    }
+
+    const CarSaleDatos = {
+        Sale: {
+            IdCarSale: "",
+            DetalleCoche: {
+                Titulo: "",
+                Condicion: "",
+                TipoCuerpo: "",
+                Marca: "",
+                Modelo: "",
+                Year: "",
+                Capacidad: "",
+                Color: "",
+                Descripcion: ""
+            },
+            DetalleMotor: {
+                TipoCombustimble: "",
+                Kilometraje: "",
+                Transmision: "",
+                DriverTrain: "",
+                CapacidadMotor: "",
+                Power: "",
+            },
+            Dimension: {
+                Longitud: "",
+                Ancho: "",
+                Altura: "",
+                VolumenCarga: ""
+            },
+
+            Features: {
+                Features: [],
+                Otros: "No"
+            },
+            Precio: {
+                Precio: 0
+            },
+
+            Multimedia: {
+                Imagen: []
+            },
+        }
     }
 
 
@@ -144,6 +170,7 @@ const MainScreen = () => {
             alert('Por favor completa todos los campos.');
         }
     };
+   
 
 
     const handleEdit = (e) => {
@@ -174,31 +201,32 @@ const MainScreen = () => {
             alert('Por favor completa todos los campos.');
         }
 
-
-
-
     }
+
+    useEffect(() => {
+        if (CarEdit !== null) {
+            CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
+            console.log("Editar autos")
+            console.log(CarSaleDatos)
+        }
+    }, [CarEdit])
+
+ 
+
+
+
+
+
 
 
     return (
         <>
-            {/* Modales */}
-            {/* <CarDetails />
-            <EngineDetails />
-            <Dimension />
-            <Feature />
-            <UpImagine />
-            <Price /> */}
-
             < CarDetails updateCarDetails={updateCarDetails} />
             <EngineDetails updateEngineDetails={updateEngineDetails} />
             <Dimension updateDimension={updateDimension} />
             <Feature FeatureDatos={CarSaleDatos.Sale.Features} newFeature={newFeature} setNewFeature={setNewFeature} />
             <UpImagine AudiovisualDatos={CarSaleDatos.Sale.Multimedia} />
-            <Price PriceDatos={CarSaleDatos.Sale.Precio} handleSale={handleSale}/>
-
-
-
+            <Price PriceDatos={CarSaleDatos.Sale.Precio} handleSale={handleSale} handleEdit={handleEdit} />
 
             <div className="bg-black">
                 <Navbar background={'dark:bg-[#12232E]'} />
