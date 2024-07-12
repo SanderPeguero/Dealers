@@ -2,8 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 
-const CarDetails = ({ }) => {
-    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente,updateCarDetails } = useContextCar()
+const CarDetails = ({updateCarDetails }) => {
+    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente } = useContextCar()
     const [Titulo, setTitulo] = useState('')
     const [Condicion, setCondicion] = useState('')
     const [TipoCuerpo, setTipoCuerpo] = useState('')
@@ -16,9 +16,6 @@ const CarDetails = ({ }) => {
 
     const [capacity, setCapacity] = useState(1);
     const [open, setOpen] = useState(false)
-
-
-
 
     const decreaseCapacity = () => {
         if (capacity > 1) {

@@ -29,13 +29,13 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
         });
     };
 
-    // useEffect(() => {
-    //     FeatureDatos.Features = selectedFeatures
-    //     if (newFeature !== "") {
-    //         FeatureDatos.Otros = newFeature
-    //     }
+    useEffect(() => {
+        FeatureDatos.Features = selectedFeatures
+        if (newFeature !== "") {
+            FeatureDatos.Otros = newFeature
+        }
 
-    // }, [selectedFeatures, FeatureDatos, newFeature])
+    }, [selectedFeatures, FeatureDatos, newFeature])
 
     useEffect(() => {
         if (CarEdit !== null) {
