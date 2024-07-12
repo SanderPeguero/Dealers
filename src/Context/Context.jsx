@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/Firebase";
-import { validateCarSaleDatos } from './Validations'
+import { validateCarSaleDatos } from '../Components/Price/Validations'
 
 // Functions
 import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
@@ -40,13 +40,13 @@ export function ProviderContext({ children }) {
     const [DescripcionHero, setDescripcionHero] = useState('')
     const [SliderImg, setSliderImg] = useState([])
 
-        //Add vehicle (Modales)
-        const [isOpenCardDetails, setisOpenCardDetails] = useState(false)
-        const [isOpenEngineDetails, setisOpenEngineDetails] = useState(false)
-        const [isOpenDimension, setisOpenDimension] = useState(false)
-        const [isOpenFeature, setisOpenFeature] = useState(false)
-        const [isOpenImagen, setisOpenImagen] = useState(false)
-        const [isOpenPrice, setisOpenPrice] = useState(false)
+    //Add vehicle (Modales)
+    const [isOpenCardDetails, setisOpenCardDetails] = useState(false)
+    const [isOpenEngineDetails, setisOpenEngineDetails] = useState(false)
+    const [isOpenDimension, setisOpenDimension] = useState(false)
+    const [isOpenFeature, setisOpenFeature] = useState(false)
+    const [isOpenImagen, setisOpenImagen] = useState(false)
+    const [isOpenPrice, setisOpenPrice] = useState(false)
 
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -72,7 +72,7 @@ export function ProviderContext({ children }) {
     }, [])
 
     useEffect(() => {
-      GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+        GetHero(setTituloHero, setDescripcionHero, setSliderImg)
     }, [])
 
 
@@ -84,16 +84,16 @@ export function ProviderContext({ children }) {
     const Formatnumber = (number) => {
 
         if (typeof number === 'string') {
-    
-          number = parseInt(number, 10);
+
+            number = parseInt(number, 10);
         }
-    
+
         if (!isNaN(number)) {
-          return number.toLocaleString('en-US');
+            return number.toLocaleString('en-US');
         }
-    
+
         return '0';
-      }
+    }
 
     const handleAnterior = () => {
         if (isOpenPrice === true) {
@@ -164,9 +164,126 @@ export function ProviderContext({ children }) {
             }
         }
     };
-    
 
-    
+    const CarSaleDatos = {
+        Sale: {
+            IdCarSale: "",
+            DetalleCoche: {
+                Titulo: "",
+                Condicion: "",
+                TipoCuerpo: "",
+                Marca: "",
+                Modelo: "",
+                Year: "",
+                Capacidad: "",
+                Color: "",
+                Descripcion: ""
+            },
+            DetalleMotor: {
+                TipoCombustimble: "",
+                Kilometraje: "",
+                Transmision: "",
+                DriverTrain: "",
+                CapacidadMotor: "",
+                Power: "",
+            },
+            Dimension: {
+                Longitud: "",
+                Ancho: "",
+                Altura: "",
+                VolumenCarga: ""
+            },
+
+            Features: {
+                Features: [],
+                Otros: "No"
+            },
+            Precio: {
+                Precio: 0
+            },
+
+            Multimedia: {
+                Imagen: []
+            },
+        }
+    }
+
+    const updateCarDetails = (updatedDetails) => {
+        CarSaleDatos.Sale.DetalleCoche = updatedDetails;
+
+    }
+
+    const updateEngineDetails = (updatedDetails) => {
+        CarSaleDatos.Sale.DetalleMotor = updatedDetails;
+
+    }
+
+    const updateDimension = (updatedDetails) => {
+        CarSaleDatos.Sale.Dimension = updatedDetails
+
+    }
+
+
+    const handleSale = (e) => {
+        e.preventDefault();
+
+        // Imprime la acción del evento
+        console.log('Evento preventDefault ejecutado');
+
+        // Imprime el estado actual de CarSaleDatos.Sale
+        console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
+
+        // Verifica si los datos son válidos
+        if (validateCarSaleDatos(CarSaleDatos.Sale)) {
+            // Imprime un mensaje indicando que los datos son válidos
+            console.log('Datos validados correctamente');
+
+            // Guarda la venta del coche y muestra un mensaje de confirmación
+            SaveCarSale(CarSaleDatos, user.uid);
+            console.log('Datos guardados con éxito');
+
+            alert("Guardado");
+        } else {
+            // Imprime un mensaje indicando que los datos no son válidos
+            console.log('Datos incompletos o inválidos');
+
+            alert('Por favor completa todos los campos.');
+        }
+    };
+
+
+    const handleEdit = (e) => {
+
+
+        e.preventDefault();
+
+        // Imprime la acción del evento
+        console.log('Evento preventDefault ejecutado');
+
+        // Imprime el estado actual de CarSaleDatos.Sale
+        console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
+
+        // Verifica si los datos son válidos
+        if (validateCarSaleDatos(CarSaleDatos.Sale)) {
+            // Imprime un mensaje indicando que los datos son válidos
+            console.log('Datos validados correctamente');
+            console.log(CarSaleDatos);
+            // Guarda la venta del coche y muestra un mensaje de confirmación
+            // EditCarSale(CarSaleDatos, CarEdit.IdCarSale);
+            console.log('Datos guardados con éxito');
+
+            alert("Guardado");
+        } else {
+            // Imprime un mensaje indicando que los datos no son válidos
+            console.log('Datos incompletos o inválidos');
+
+            alert('Por favor completa todos los campos.');
+        }
+
+
+
+
+    }
 
 
     return (
@@ -210,7 +327,7 @@ export function ProviderContext({ children }) {
                 TituloHero,
                 DescripcionHero,
                 SliderImg,
-                setTituloHero, 
+                setTituloHero,
                 setDescripcionHero, setSliderImg, GetHero,
 
                 isOpenCardDetails, setisOpenCardDetails,
@@ -220,8 +337,10 @@ export function ProviderContext({ children }) {
                 isOpenImagen, setisOpenImagen,
                 isOpenPrice, setisOpenPrice,
 
-                handleSiguiente,handleAnterior,
-                // handleEdit,handleSale
+                handleSiguiente, handleAnterior,
+                CarSaleDatos, updateCarDetails, updateEngineDetails, updateDimension,
+                handleSale,handleEdit
+
 
 
 

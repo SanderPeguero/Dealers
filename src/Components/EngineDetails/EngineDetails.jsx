@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 
-const EngineDetails = ({ }) => {
+const EngineDetails = ({updateEngineDetails}) => {
 
     const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleSiguiente, handleAnterior } = useContextCar()
 
@@ -23,7 +23,7 @@ const EngineDetails = ({ }) => {
     }), [TipoCombustimble, Kilometraje, Transmision, DriverTrain, CapacidadMotor, Power]);
 
     useEffect(() => {
-        // updateEngineDetails(EngineDetailsdatos)
+        updateEngineDetails(EngineDetailsdatos)
     }, [EngineDetailsdatos]);
 
 

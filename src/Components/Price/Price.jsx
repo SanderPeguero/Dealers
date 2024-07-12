@@ -2,31 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 
-
-
 const Price = ({ PriceDatos }) => {
-    const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, handleEdit, handleSale, SaveCarSale, user } = useContextCar()
+    const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, SaveCarSale, user,CarSaleDatos, handleSale,handleEdit } = useContextCar()
+    
 
     const [newFeature, setNewFeature] = useState('');
 
     const [price, setPrice] = useState(0)
+    
 
     useEffect(() => {
         if (price !== 0) {
             PriceDatos.Precio = price;
         }
     }, [price]);
-
-    useEffect(() => {
-        if (CarEdit !== null) {
-            // console.log("Datos para editar dimenciones")
-            console.log(CarEdit)
-            setPrice(CarEdit.Sale.Precio.Precio)
-        }
-
-    }, [CarEdit])
-
-
 
 
     useEffect(() => {
@@ -35,11 +24,7 @@ const Price = ({ PriceDatos }) => {
             console.log("Editar autos")
             console.log(CarSaleDatos)
         }
-
-
     }, [CarEdit])
-
-
 
     useEffect(() => {
         if (isOpenPrice) {
@@ -52,16 +37,20 @@ const Price = ({ PriceDatos }) => {
         }
     }, [isOpenPrice])
 
+    
+
     const handleClosePrice = () => {
         setisOpenPrice(false)
     }
 
-    // const validatePrecio = () =>{
-    //     if(!price){
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    const validatePrecio = () =>{
+        if(!price){
+            return false;
+        }
+        return true;
+    }
+
+
 
     return (
 
@@ -109,8 +98,6 @@ const Price = ({ PriceDatos }) => {
 
 
                                     <div className='flex justify-center'>
-
-
 
                                         {
                                             CarEdit !== null ?

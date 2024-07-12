@@ -16,7 +16,7 @@ import Price from "../../Components/Price/Price"
 const MainScreen = () => {
 
     const { user, WhichRole, AutosVisible, setAutosVisible, AutosInVisible, setAutosInVisible,
-        ContactoVisibles, setContactoVisibles } = useContextCar()
+        ContactoVisibles, setContactoVisibles, SaveCarSale, CarEdit,CarSaleDatos,updateCarDetails, updateEngineDetails, updateDimension, } = useContextCar()
 
     const AutosRef = useRef(null);
     const ContactoRef = useRef(null);
@@ -38,20 +38,41 @@ const MainScreen = () => {
         }
     }, [ContactoVisibles]);
 
+ 
 
+
+    
+    const [newFeature, setNewFeature] = useState('');
+
+
+
+    useEffect(() => {
+        if (CarEdit !== null) {
+            CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
+            console.log("Editar autos")
+            console.log(CarSaleDatos)
+        }
+    }, [CarEdit])
 
 
     return (
         <>
             {/* Modales */}
-            <CarDetails />
+            {/* <CarDetails />
             <EngineDetails />
             <Dimension />
             <Feature />
             <UpImagine />
-            <Price />
+            <Price /> */}
 
-           
+            < CarDetails updateCarDetails={updateCarDetails} />
+            <EngineDetails updateEngineDetails={updateEngineDetails} />
+            <Dimension updateDimension={updateDimension} />
+            <Feature FeatureDatos={CarSaleDatos.Sale.Features} newFeature={newFeature} setNewFeature={setNewFeature} />
+            <UpImagine AudiovisualDatos={CarSaleDatos.Sale.Multimedia} />
+            <Price PriceDatos={CarSaleDatos.Sale.Precio} />
+
+
 
 
             <div className="bg-black">

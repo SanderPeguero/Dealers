@@ -2,8 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 
-const CarDetails = ({ updateCarDetails }) => {
-    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente } = useContextCar()
+const CarDetails = ({ }) => {
+    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente,updateCarDetails } = useContextCar()
     const [Titulo, setTitulo] = useState('')
     const [Condicion, setCondicion] = useState('')
     const [TipoCuerpo, setTipoCuerpo] = useState('')
@@ -44,7 +44,7 @@ const CarDetails = ({ updateCarDetails }) => {
     }), [Titulo, Condicion, TipoCuerpo, Marca, Modelo, Año, capacity, Color, Descripcion]);
 
     useEffect(() => {
-        // updateCarDetails(CarDetailsdatos)
+        updateCarDetails(CarDetailsdatos)
     }, [CarDetailsdatos]);
 
     useEffect(() => {
