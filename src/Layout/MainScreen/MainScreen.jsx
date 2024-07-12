@@ -12,7 +12,7 @@ import Dimension from "../../Components/Dimension/Dimension"
 import Feature from "../../Components/Feature/Feature"
 import UpImagine from "../../Components/UpImagine/UpImagine"
 import Price from "../../Components/Price/Price"
-import { validateCarSaleDatos } from "../../Context/Validations"
+import {validateCarSaleDatos} from './Validations'
 
 const CarSaleDatos = {
     Sale: {
@@ -100,48 +100,6 @@ const MainScreen = () => {
 
     }
 
-    const CarSaleDatos = {
-        Sale: {
-            IdCarSale: "",
-            DetalleCoche: {
-                Titulo: "",
-                Condicion: "",
-                TipoCuerpo: "",
-                Marca: "",
-                Modelo: "",
-                Year: "",
-                Capacidad: "",
-                Color: "",
-                Descripcion: ""
-            },
-            DetalleMotor: {
-                TipoCombustimble: "",
-                Kilometraje: "",
-                Transmision: "",
-                DriverTrain: "",
-                CapacidadMotor: "",
-                Power: "",
-            },
-            Dimension: {
-                Longitud: "",
-                Ancho: "",
-                Altura: "",
-                VolumenCarga: ""
-            },
-
-            Features: {
-                Features: [],
-                Otros: "No"
-            },
-            Precio: {
-                Precio: 0
-            },
-
-            Multimedia: {
-                Imagen: []
-            },
-        }
-    }
 
 
     const handleSale = (e) => {
