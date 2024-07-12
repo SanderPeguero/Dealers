@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useContextCar } from '../../Context/Context'
 
 
-const Price = ({ PriceDatos }) => {
-    const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, SaveCarSale, user,CarSaleDatos, handleSale,handleEdit } = useContextCar()
+const Price = ({ PriceDatos, handleSale }) => {
+    const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, SaveCarSale, user,CarSaleDatos, handleEdit } = useContextCar()
     
 
     const [newFeature, setNewFeature] = useState('');

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/Firebase";
+import { auth } from "../firebase/firebase";
 import { validateCarSaleDatos } from '../Components/Price/Validations'
 
 // Functions
@@ -165,125 +165,9 @@ export function ProviderContext({ children }) {
         }
     };
 
-    const CarSaleDatos = {
-        Sale: {
-            IdCarSale: "",
-            DetalleCoche: {
-                Titulo: "",
-                Condicion: "",
-                TipoCuerpo: "",
-                Marca: "",
-                Modelo: "",
-                Year: "",
-                Capacidad: "",
-                Color: "",
-                Descripcion: ""
-            },
-            DetalleMotor: {
-                TipoCombustimble: "",
-                Kilometraje: "",
-                Transmision: "",
-                DriverTrain: "",
-                CapacidadMotor: "",
-                Power: "",
-            },
-            Dimension: {
-                Longitud: "",
-                Ancho: "",
-                Altura: "",
-                VolumenCarga: ""
-            },
+  
 
-            Features: {
-                Features: [],
-                Otros: "No"
-            },
-            Precio: {
-                Precio: 0
-            },
-
-            Multimedia: {
-                Imagen: []
-            },
-        }
-    }
-
-    const updateCarDetails = (updatedDetails) => {
-        CarSaleDatos.Sale.DetalleCoche = updatedDetails;
-
-    }
-
-    const updateEngineDetails = (updatedDetails) => {
-        CarSaleDatos.Sale.DetalleMotor = updatedDetails;
-
-    }
-
-    const updateDimension = (updatedDetails) => {
-        CarSaleDatos.Sale.Dimension = updatedDetails
-
-    }
-
-
-    const handleSale = (e) => {
-        e.preventDefault();
-
-        // Imprime la acción del evento
-        console.log('Evento preventDefault ejecutado');
-
-        // Imprime el estado actual de CarSaleDatos.Sale
-        console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
-
-        // Verifica si los datos son válidos
-        if (validateCarSaleDatos(CarSaleDatos.Sale)) {
-            // Imprime un mensaje indicando que los datos son válidos
-            console.log('Datos validados correctamente');
-
-            // Guarda la venta del coche y muestra un mensaje de confirmación
-            SaveCarSale(CarSaleDatos, user.uid);
-            console.log('Datos guardados con éxito');
-
-            alert("Guardado");
-        } else {
-            // Imprime un mensaje indicando que los datos no son válidos
-            console.log('Datos incompletos o inválidos');
-
-            alert('Por favor completa todos los campos.');
-        }
-    };
-
-
-    const handleEdit = (e) => {
-
-
-        e.preventDefault();
-
-        // Imprime la acción del evento
-        console.log('Evento preventDefault ejecutado');
-
-        // Imprime el estado actual de CarSaleDatos.Sale
-        console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
-
-        // Verifica si los datos son válidos
-        if (validateCarSaleDatos(CarSaleDatos.Sale)) {
-            // Imprime un mensaje indicando que los datos son válidos
-            console.log('Datos validados correctamente');
-            console.log(CarSaleDatos);
-            // Guarda la venta del coche y muestra un mensaje de confirmación
-            // EditCarSale(CarSaleDatos, CarEdit.IdCarSale);
-            console.log('Datos guardados con éxito');
-
-            alert("Guardado");
-        } else {
-            // Imprime un mensaje indicando que los datos no son válidos
-            console.log('Datos incompletos o inválidos');
-
-            alert('Por favor completa todos los campos.');
-        }
-
-
-
-
-    }
+ 
 
 
     return (
@@ -338,8 +222,7 @@ export function ProviderContext({ children }) {
                 isOpenPrice, setisOpenPrice,
 
                 handleSiguiente, handleAnterior,
-                CarSaleDatos, updateCarDetails, updateEngineDetails, updateDimension,
-                handleSale,handleEdit
+          
 
 
 

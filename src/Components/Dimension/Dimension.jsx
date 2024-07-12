@@ -18,7 +18,7 @@ const Dimension = ({ updateDimension }) => {
     }), [Longitud, Ancho, Altura, VolumenCarga]);
 
     useEffect(() => {
-        // updateDimension(Dimensiondatos)
+        updateDimension(Dimensiondatos)
     }, [Dimensiondatos]);
 
 
