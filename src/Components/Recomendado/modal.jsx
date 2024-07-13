@@ -5,8 +5,8 @@ import { IoMdClose } from "react-icons/io";
 import { FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useContextCar } from '../../Context/Context';
-import cars from "../../Components/Recomendado/Recomendado";
-const Modal = ({ showModal, handleClose }) => {
+
+const Modal = ({ showModal, handleClose, cars }) => {
     const { user, WhichRole } = useContextCar()
     const navigate = useNavigate();
    
@@ -14,6 +14,7 @@ const Modal = ({ showModal, handleClose }) => {
         window.scrollTo(0,0);
         navigate('/admin/FormularioReserva')
     }
+
     useEffect(() => {
         if (showModal) {
             document.body.style.overflow = "hidden"
@@ -34,7 +35,7 @@ const Modal = ({ showModal, handleClose }) => {
                         <div className="flex flex-col px-7 w-full max-md:px-5 max-md:max-w-full m-4">
 
                             <div className="flex text-3xl mt-5 max-md:text-2xl font-extrabold text-white max-md:flex-wrap max-md:max-w-full">
-                                <div className="flex-auto">{cars.price}</div>
+                                <div className="flex-auto">Tesla model 3</div>
 
                                 <IoMdClose className='cursor-pointer mx-10 hover:bg-red-600 hover:rounded-full' onClick={handleClose} />
                             </div>
