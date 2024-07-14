@@ -71,92 +71,61 @@ const vehicles = [
     }
 ];
 const Recomendado = () => {
-    const { user, WhichRole } = useContextCar()
+    const { user, WhichRole, ListCar, setListCar, SerchingCar, 
+        setAvailable, isFiltro, setCarEdit,Formatnumber, DeleteCarSale ,
+        isOpenCardDetails, setisOpenCardDetails
+    } = useContextCar()
     const [showModal, setShowModal] = useState(false);
+    const [SeeCar, setSeeCar] = useState([])
+    const navigate = useNavigate();
 
-    const handleOpenModal = () => {
-        setShowModal(true);
-    };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
 
-    const cars =[
-        {
-            id: 1,
-            name: "2023 Tesla Model 3",
-            price: "US$ 35,000",
-            imageUrl: "https://i.ibb.co/KmTjKbL/Tesla.jpg"
-        },
-        {
-            id: 2,
-            name: "2021 F-250 Super Duty",
-            price: "US$ 82,098",
-            imageUrl: "https://i.ibb.co/hynQ3wm/Ford.png"
-        },
-        {
-            id: 3,
-            name: "2021 Honda Pilot",
-            price: "US$ 43,735",
-            imageUrl: "https://i.ibb.co/dcKjhRd/Honda.png"
-        },
-        {
-            id: 4,
-            name: "2022 Tesla Model 3",
-            price: "US$ 30,000",
-            imageUrl: "https://i.ibb.co/KmTjKbL/Tesla.jpg"
-        },
-        {
-            id: 5,
-            name: "2024 Toyota Cross",
-            price: "US$ 48,000",
-            imageUrl: "https://i.ibb.co/7NQYFYp/toyota.webp"
-        },
-        {
-            id: 6,
-            name: "2025 Toyota C-HR",
-            price: "US$ 32,000",
-            imageUrl: "https://i.ibb.co/HdRMkvM/toyota2.jpg"
-        },
-        {
-            id: 7,
-            name: "2024 Chevrolet",
-            price: "US$ 30,000",
-            imageUrl: "https://i.ibb.co/vzmDRtc/chevrolet-2024-jeep.jpg"
-        },
-        {
-            id: 8,
-            name: "2024 Toyota Cross",
-            price: "US$ 48,000",
-            imageUrl: "https://i.ibb.co/PQs6FCg/fiat1.jpg"
-        },
-        {
-            id: 9,
-            name: "2025 Toyota C-HR",
-            price: "US$ 32,000",
-            imageUrl: "https://i.ibb.co/DLS2dWZ/Kia-Niro1.jpg"
-        },
-        {
-            id: 10,
-            name: "2022 Tesla Model 3",
-            price: "US$ 30,000",
-            imageUrl: "https://i.ibb.co/KmTjKbL/Tesla.jpg"
-        },
-        {
-            id: 11,
-            name: "2024 Toyota Cross",
-            price: "US$ 48,000",
-            imageUrl: "https://i.ibb.co/7NQYFYp/toyota.webp"
-        },
-        {
-            id: 12,
-            name: "2025 Toyota C-HR",
-            price: "US$ 32,000",
-            imageUrl: "https://i.ibb.co/fGkRFJ4/posher1.webp"
+    const handleAgregarAuto = () => {
+        setisOpenCardDetails(!isOpenCardDetails)
+        // window.scrollTo(0, 0);
+        // navigate('/CarSale')
+    }
+
+    useEffect(() => {
+        if (isFiltro === true) {
+            setSeeCar([...SerchingCar]);
+
         }
-    ];
 
+        if (isFiltro === false) {
+            console.log("holaaaaaaaaaaaaaaaa")
+            setSeeCar([...ListCar])
+        }
+
+    }, [isFiltro])
+
+    useEffect(() => {
+        if (isFiltro === false && ListCar.length > 0) {
+            console.log("Datos no filtrado");
+            console.log(ListCar);
+            setSeeCar([...ListCar]);
+        }
+    }, [isFiltro, ListCar]);
+
+    useEffect(() => {
+        console.log("Datos filtrados o No");
+        console.log(ListCar);
+    }, [ListCar]);
+
+    const handleEditAuto = (car) => {
+        setCarEdit(car)
+        window.scrollTo(0, 0);
+        navigate('CarSale')
+    }
+
+
+    const handleDelete = async (carSaleId) => {
+        await DeleteCarSale(carSaleId);
+        // Actualizar la lista después de eliminar un elemento
+        const updatedList = listCar.filter(car => car.IdCarSale !== carSaleId);
+        setListCar(updatedList);
+    }
 
     return (
         <div className="bg-transparent z-50 flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
