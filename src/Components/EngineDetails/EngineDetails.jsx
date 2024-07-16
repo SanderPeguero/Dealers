@@ -26,18 +26,14 @@ const EngineDetails = ({updateEngineDetails}) => {
         updateEngineDetails(EngineDetailsdatos)
     }, [EngineDetailsdatos]);
 
-
     useEffect(() => {
         if (CarEdit !== null) {
-            console.log("Datos para editar detale motor")
-            console.log(CarEdit)
             setTipoCombustimble(CarEdit.Sale.DetalleMotor.TipoCombustimble)
             setKilometraje(CarEdit.Sale.DetalleMotor.Kilometraje)
             setTransmision(CarEdit.Sale.DetalleMotor.Transmision)
             setDriverTrain(CarEdit.Sale.DetalleMotor.DriverTrain)
             setCapacidadMotor(CarEdit.Sale.DetalleMotor.CapacidadMotor)
             setPower(CarEdit.Sale.DetalleMotor.Power)
-
 
         }
 
@@ -63,17 +59,12 @@ const EngineDetails = ({updateEngineDetails}) => {
         setisOpenEngineDetails(false)
     }
 
-
-
     const validateEngineDetails = () => {
-
         if (!TipoCombustimble || !Kilometraje || !Transmision || !DriverTrain || !CapacidadMotor || !Power) {
             return false
         }
         return true;
     };
-
-
 
     return (
         <>
@@ -99,10 +90,7 @@ const EngineDetails = ({updateEngineDetails}) => {
 
                             </div>
                             <div className='mt-8 '>
-
                                 <form className='max-w-full'>
-
-
                                     <div className='mb-4'>
                                         <div className="grid gap-6 mb-6 lg:grid-cols-3">
                                             <div>
@@ -147,12 +135,8 @@ const EngineDetails = ({updateEngineDetails}) => {
                                         </div>
                                     </div>
 
-
                                     <div className='mb-4'>
                                         <div className="grid gap-6 mb-6 lg:grid-cols-3">
-
-
-
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Capacidad del motor</label>
                                                 <div className="flex">

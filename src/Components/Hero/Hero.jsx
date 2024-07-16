@@ -74,7 +74,6 @@ const Hero = () => {
         }
     }
 
-
     const handleEditDesctHero = () => {
         const newDeesc = prompt('Edit decription home:', DescripcionHero);
         if (newDeesc !== null) {

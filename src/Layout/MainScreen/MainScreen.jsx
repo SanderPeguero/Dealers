@@ -65,7 +65,6 @@ const MainScreen = () => {
     const AutosRef = useRef(null);
     const ContactoRef = useRef(null);
 
-
     useEffect(() => {
         if (AutosVisible === true && AutosRef.current) {
             AutosRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -75,106 +74,52 @@ const MainScreen = () => {
 
     useEffect(() => {
         if (ContactoVisibles === true && ContactoRef.current) {
-            console.log("Scroll automatico")
             ContactoRef.current.scrollIntoView({ behavior: 'smooth' });
             setContactoVisibles(false)
         }
     }, [ContactoVisibles]);
 
 
-
     const [newFeature, setNewFeature] = useState('');
 
     const updateCarDetails = (updatedDetails) => {
         CarSaleDatos.Sale.DetalleCoche = updatedDetails;
-
     }
 
     const updateEngineDetails = (updatedDetails) => {
         CarSaleDatos.Sale.DetalleMotor = updatedDetails;
-
     }
 
     const updateDimension = (updatedDetails) => {
         CarSaleDatos.Sale.Dimension = updatedDetails
-
     }
-
-
 
     const handleSale = (e) => {
         e.preventDefault();
-
-        // Imprime la acción del evento
-        console.log('Evento preventDefault ejecutado');
-
-        // Imprime el estado actual de CarSaleDatos.Sale
-        console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
-
-        // Verifica si los datos son válidos
+     
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
-            // Imprime un mensaje indicando que los datos son válidos
-            console.log('Datos validados correctamente');
-
-            // Guarda la venta del coche y muestra un mensaje de confirmación
             SaveCarSale(CarSaleDatos, user.uid);
-            console.log('Datos guardados con éxito');
-
             alert("Guardado");
         } else {
-            // Imprime un mensaje indicando que los datos no son válidos
-            console.log('Datos incompletos o inválidos');
-
             alert('Por favor completa todos los campos.');
         }
     };
    
-
-
     const handleEdit = (e) => {
 
-
-        e.preventDefault();
-
-        // Imprime la acción del evento
-        console.log('Evento preventDefault ejecutado');
-
-        // Imprime el estado actual de CarSaleDatos.Sale
-        console.log('Datos de la venta del coche:', CarSaleDatos.Sale);
-
-        // Verifica si los datos son válidos
+        e.preventDefault()
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
-            // Imprime un mensaje indicando que los datos son válidos
-            console.log('Datos validados correctamente');
-            console.log(CarSaleDatos);
-            // Guarda la venta del coche y muestra un mensaje de confirmación
-            // EditCarSale(CarSaleDatos, CarEdit.IdCarSale);
-            console.log('Datos guardados con éxito');
-
             alert("Guardado");
         } else {
-            // Imprime un mensaje indicando que los datos no son válidos
-            console.log('Datos incompletos o inválidos');
-
             alert('Por favor completa todos los campos.');
         }
-
     }
 
     useEffect(() => {
         if (CarEdit !== null) {
             CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
-            console.log("Editar autos")
-            console.log(CarSaleDatos)
         }
     }, [CarEdit])
-
- 
-
-
-
-
-
 
 
     return (

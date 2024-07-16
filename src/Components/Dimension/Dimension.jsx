@@ -21,11 +21,8 @@ const Dimension = ({ updateDimension }) => {
         updateDimension(Dimensiondatos)
     }, [Dimensiondatos]);
 
-
     useEffect(() => {
         if (CarEdit !== null) {
-            // console.log("Datos para editar dimenciones")
-            console.log(CarEdit)
             setLongitud(CarEdit.Sale.Dimension.Longitud)
             setAncho(CarEdit.Sale.Dimension.Ancho)
             setAltura(CarEdit.Sale.Dimension.Altura)

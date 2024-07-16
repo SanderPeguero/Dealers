@@ -4,11 +4,11 @@ import Facebook from '../../assets/Footer/Facebook.png'
 import Instagram from '../../assets/Footer/instagram.png'
 import Youtube from '../../assets/Footer/youtube.png'
 import { useContextCar } from '../../Context/Context'
-import { editTituloContact, editUbicacionContact, editGmailContact, editPhoneContact, editTitulotwoContact } from "../../Functions/HomeAdmin/HomeAdmin";
 const Footer = () => {
+
  const {PhoneContact,GmailContact,UbicacionContact} = useContextCar()
 
- console.log(PhoneContact)
+
     return (
         <footer className="bg-[#12232E] text-white p-4 text-center">
             <div className="bg-[#12232E] container mx-auto">

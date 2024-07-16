@@ -9,7 +9,7 @@ export const SaveCarSale = async (datos, userId) => {
         const docRef = await addDoc(collection(dbFire, "CarSale"), datos);
        
     } catch (error) {
-        console.log(error)
+       
     }
 }
 
@@ -23,10 +23,10 @@ export const SaveMedia = (file, userId,LinkUrl, setLinkUrl) => {
                 setLinkUrl([...LinkUrl, url])
             })
             .catch((error) => {
-                console.log(error)
+               
             });
     }).catch((error) => {
-        console.error('Error al subir la imagen:', error);
+        
     });
 }
 
@@ -40,10 +40,10 @@ export const SaveArchivo = (file, userId, setLinkUrl) => {
                 setLinkUrl(url)
             })
             .catch((error) => {
-                console.log(error)
+                
             });
     }).catch((error) => {
-        console.error('Error al subir la Archivo:', error);
+
     });
 }
 
@@ -51,9 +51,8 @@ export const DeleteCarSale = async (carSaleId) => {
     try {
         const docRef = doc(dbFire, "CarSale", carSaleId);
         await deleteDoc(docRef);
-        console.log("Documento eliminado con éxito:", carSaleId);
     } catch (error) {
-        console.error("Error al eliminar el documento:", error);
+        
     }
 }
 
@@ -61,9 +60,9 @@ export const EditCarSale = async (carSaleId, updatedData) => {
     try {
         const docRef = doc(dbFire, "CarSale", carSaleId);
         await updateDoc(docRef, updatedData);
-        console.log("Documento actualizado con éxito:", carSaleId);
+        
     } catch (error) {
-        console.error("Error al actualizar el documento:", error);
+        
     }
 }
 
@@ -88,9 +87,6 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
                 } else if (data.Sale.DetalleCoche.Condicion === "Usado") {
                     usedCars.push(data);
                 }
-
-                console.log("Listar Datos")
-                console.log(data)
                 CarSale.push(data);
                 
             });
@@ -107,6 +103,6 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
 
         return unsubscribe;
     } catch (error) {
-        console.error("Error al obtener los datos de la colección 'CarSale':", error);
+       
     }
 }

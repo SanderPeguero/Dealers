@@ -21,8 +21,7 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
     useEffect(() => {
         if (CarEdit !== null) {
             CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
-            console.log("Editar autos")
-            console.log(CarSaleDatos)
+            
         }
     }, [CarEdit])
 
@@ -37,7 +36,6 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
         }
     }, [isOpenPrice])
 
-    
 
     const handleClosePrice = () => {
         setisOpenPrice(false)
@@ -49,7 +47,6 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
         }
         return true;
     }
-
 
     return (
 
@@ -77,13 +74,11 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
                             </div>
                             
                             <div className='mt-8 '>
-
                                 <form className='max-w-full'>
 
                                     <div className=''>
                                         <div className="grid gap-6 mb-6 lg:grid-cols-1">
                                             <div className='mb-8'>
-                                                {/* <label className="block mb-2 text-2xl font-medium text-gray-900 dark:text-gray-300 ">Precio </label> */}
                                                 <div className="flex">
                                                     <div className="bg-[#004A77] justify-center text-2xl text-white  px-4 py-2 rounded-l  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         $
@@ -94,7 +89,6 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <div className='flex justify-center'>
 

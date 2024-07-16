@@ -11,7 +11,7 @@ const UpImagine = ({ AudiovisualDatos }) => {
     const [mediaType, setMediaType] = useState(null);
     const [Enlace, setEnlace] = useState(null)
 
-    // Esto debe ser un areglo
+
     const [LinkUrl, setLinkUrl] = useState([])
 
     const handleMediaChange = (e) => {
@@ -20,15 +20,12 @@ const UpImagine = ({ AudiovisualDatos }) => {
 
             const reader = new FileReader();
             reader.onloadend = () => {
-                // setMedia(reader.result);
                 if (file.type.startsWith('image')) {
                     setMediaType('LinkUrl');
                     SaveMedia(file, user.uid, LinkUrl, setLinkUrl)
                 } else {
                     setMediaType(null);
                     alert("Debes agregar un archivo tipo imagen");
-
-
                 }
             };
             reader.readAsDataURL(file);
@@ -45,12 +42,9 @@ const UpImagine = ({ AudiovisualDatos }) => {
 
     }), [LinkUrl]);
     useEffect(() => {
-        // console.log(LinkUrl)
-
             if (LinkUrl) {
                 AudiovisualDatos.Imagen = LinkUrl
             }
-   
     }, [LinkUrl])
 
     const imageView = useMemo(() => {
@@ -59,8 +53,6 @@ const UpImagine = ({ AudiovisualDatos }) => {
         }
         return '';
     }, [CarEdit]);
-
-    // {imageView}
 
     useEffect(() => {
         if (isOpenImagen) {
@@ -83,7 +75,6 @@ const UpImagine = ({ AudiovisualDatos }) => {
         }
         return true;
     };
-
 
     return (
 
@@ -120,15 +111,8 @@ const UpImagine = ({ AudiovisualDatos }) => {
 
                                                         style={{
                                                             position: 'relative'
-                                                        }}
-                                                    >
-                                                        {/* {mediaType === 'image' && (
-                                                // qUE SE MUESTRE EN CADA IMAGENE QUE SE SUBA
-                                                <img src={media} alt="Uploaded" className='object-cover h-full w-full rounded-lg' />
-                                            )} */}
-                                                        {/* {mediaType === 'video' && (
-                                        <video src={media} controls className='h-full w-full rounded-lg'></video>
-                                    )} */}
+                                                        }}>
+
                                                         {media && (
                                                             <button onClick={handleRemoveMedia} className='absolute top-2 right-2 text-white text-xs bg-black bg-opacity-50 px-2 py-1 rounded'>Borrar</button>
                                                         )}
@@ -145,12 +129,6 @@ const UpImagine = ({ AudiovisualDatos }) => {
                                                     </div>
 
                                                 </div>
-                                                {/* <div className='mb-4 grid gap-6 lg:grid-cols-1 w-full'>
-                                <div className='mb-8'>
-                                    <label className='block mb-2 text-sm font-medium text-white'>Enlace para el video</label>
-                                    <input type='text' className='bg-[#12232E] text-sm block w-full p-2.5' onChange={(e) => setEnlace(e.target.value)} required />
-                                </div>
-                            </div> */}
                                             </div>
                                         </div>
                                     </form>
@@ -162,7 +140,6 @@ const UpImagine = ({ AudiovisualDatos }) => {
                                     LinkUrl.map((link, index) => (
 
                                         <img
-
                                             key={index}
                                             src={link}
                                             alt="Uploaded"

@@ -8,8 +8,6 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
     const [selectedFeatures, setSelectedFeatures] = useState([]);
     const [OtroFeature, setOtroFeature] = useState('')
 
-
-
     const handleCheckboxChange = (feature) => {
 
         setSelectedFeatures((prevSelectedFeatures) => {
@@ -21,8 +19,6 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
             } else {
                 if (feature === "Otro") {
                     setOtroFeature(feature);
-
-
                 }
                 return [...prevSelectedFeatures, feature];
             }
@@ -39,8 +35,6 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            // console.log("Datos para editar dimenciones")
-            // console.log(CarEdit)
             setSelectedFeatures(CarEdit.Sale.Features.Features)
             setOtroFeature(CarEdit.Sale.Features.newFeature)
         }
@@ -96,7 +90,7 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
                                         </svg>
                                     </button>
                                 </div>
-                                {/* <img className= {`w-6 h-6 ${open ? "rotate-180" : ""}`} src={flechatop} alt="Ver" /> */}
+                               
                             </div>
                             <div className='mt-8 '>
 

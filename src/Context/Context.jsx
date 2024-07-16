@@ -65,8 +65,6 @@ export function ProviderContext({ children }) {
         }
     }, [user])
 
-
-
     useEffect(() => {
         ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
     }, [])
@@ -75,23 +73,19 @@ export function ProviderContext({ children }) {
         GetHero(setTituloHero, setDescripcionHero, setSliderImg)
     }, [])
 
-
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);
         setCarDatos(nuevaLista)
     }
 
     const Formatnumber = (number) => {
-
         if (typeof number === 'string') {
-
             number = parseInt(number, 10);
         }
 
         if (!isNaN(number)) {
             return number.toLocaleString('en-US');
         }
-
         return '0';
     }
 
@@ -113,26 +107,6 @@ export function ProviderContext({ children }) {
             setisOpenEngineDetails(false)
         }
     }
-
-    // const handleSiguiente = () => {
-    //     if (isOpenCardDetails === true) {
-    //         setisOpenEngineDetails(true)
-    //         setisOpenCardDetails(false)
-    //     }else if (isOpenEngineDetails === true) {
-    //         setisOpenDimension(true)
-    //         setisOpenEngineDetails(false)
-    //     }else if (isOpenDimension === true) {
-    //         setisOpenFeature(true)
-    //         setisOpenDimension(false)
-    //     }else if (isOpenFeature === true) {
-    //         setisOpenImagen(true)
-    //         setisOpenFeature(false)
-    //     }else if (isOpenImagen === true) {
-    //         setisOpenPrice(true)
-    //         setisOpenImagen(false)
-    //     }
-    // }
-
 
     const handleSiguiente = (validateCarSaleDatos) => {
         if (isOpenCardDetails === true) {
@@ -162,10 +136,6 @@ export function ProviderContext({ children }) {
             }
         }
     };
-
-
-
-
 
     return (
         <Context.Provider
@@ -210,18 +180,13 @@ export function ProviderContext({ children }) {
                 SliderImg,
                 setTituloHero,
                 setDescripcionHero, setSliderImg, GetHero,
-
                 isOpenCardDetails, setisOpenCardDetails,
                 isOpenEngineDetails, setisOpenEngineDetails,
                 isOpenDimension, setisOpenDimension,
                 isOpenFeature, setisOpenFeature,
                 isOpenImagen, setisOpenImagen,
                 isOpenPrice, setisOpenPrice,
-
                 handleSiguiente, handleAnterior,
-               
-
-
 
             }}
         >

@@ -46,24 +46,19 @@ const CarDetails = ({updateCarDetails }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            console.log("Datos para editar")
-            console.log(CarEdit)
             setTitulo(CarEdit.Sale.DetalleCoche.Titulo)
             setCondicion(CarEdit.Sale.DetalleCoche.Condicion)
             setTipoCuerpo(CarEdit.Sale.DetalleCoche.TipoCuerpo)
             setMarca(CarEdit.Sale.DetalleCoche.Marca)
             setModelo(CarEdit.Sale.DetalleCoche.Modelo)
             setAño(CarEdit.Sale.DetalleCoche.Year)
-            //  setCapacity(CarEdit.Sale.DetalleCoche.Capacity)
             setColor(CarEdit.Sale.DetalleCoche.Color)
             setDescripcion(CarEdit.Sale.DetalleCoche.Descripcion)
-
         }
 
     }, [CarEdit])
 
-    
-    //Para que no haga scroll en el MainScreen
+
     useEffect(() => {
         if (isOpenCardDetails) {
             document.body.style.overflow = "hidden"
@@ -81,13 +76,10 @@ const CarDetails = ({updateCarDetails }) => {
 
     const validateCardDetails = () => {
         if (!Titulo || !Condicion || !TipoCuerpo || !Marca || !Modelo || !Año || !Color || !Descripcion) {
-            // alert('Por favor, completa todos los campos.');
             return false;
         }
         return true;
     };
-
-
 
     return (
         <>
@@ -100,12 +92,11 @@ const CarDetails = ({updateCarDetails }) => {
                             <div className='text-left flex justify-between cursor-pointer items-center ' >
 
                                 <h3 className='items-center text-2xl mt-4'>Detalles del coche</h3>
-
                                 <div className='mt-4'>
                                     <button
                                         onClick={handleCloseCardDetails}
-                                        className='text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none'
-                                    >
+                                        className='text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none' >
+                                            
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
                                             <line x1="18" y1="6" x2="6" y2="18"></line>
                                             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -115,7 +106,6 @@ const CarDetails = ({updateCarDetails }) => {
 
                             </div>
                             <div className='mt-8 '>
-
                                 <form className='max-w-full'>
                                     <div className='mb-4 grid gap-6  lg:grid-cols-2 w-full'>
                                         <div>
@@ -136,8 +126,6 @@ const CarDetails = ({updateCarDetails }) => {
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
 
                                     <div className='mb-4'>
@@ -222,12 +210,9 @@ const CarDetails = ({updateCarDetails }) => {
                                         <label htmlFor="Description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Descripción </label>
                                         <textarea value={Descripcion} onChange={(e) => setDescripcion(e.target.value)} type="text" id="Description" className="bg-[#12232E] rounded-lg cursor-pointer text-sm block w-full p-8" placeholder='Descripción del vehiculo...' required />
                                     </div>
-                                    <div className='text-left flex justify-end  items-center ' >
-                                        {/* <button className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md'>Anterior</button> */}
-                                        
+                                    <div className='text-left flex justify-end  items-center '>
                                         <button 
                                         onClick={() => handleSiguiente(validateCardDetails)}
-                                        // onClick={handleSiguiente} 
                                         className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                     </div>
                                 </form>
