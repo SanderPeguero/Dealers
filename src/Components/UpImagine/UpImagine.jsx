@@ -47,11 +47,10 @@ const UpImagine = ({ AudiovisualDatos }) => {
     useEffect(() => {
         // console.log(LinkUrl)
 
-        if (mediaType === 'image') {
             if (LinkUrl) {
                 AudiovisualDatos.Imagen = LinkUrl
             }
-        }
+   
     }, [LinkUrl])
 
     const imageView = useMemo(() => {
