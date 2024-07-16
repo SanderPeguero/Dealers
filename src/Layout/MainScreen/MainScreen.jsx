@@ -136,7 +136,7 @@ const MainScreen = () => {
                 <Hero />
 
                 <div ref={AutosRef} >
-                    <Recomendado />
+                    <Recomendado handleEdit={handleEdit} />
                 </div>
 
                 <div ref={ContactoRef}>

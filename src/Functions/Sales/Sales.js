@@ -1,5 +1,5 @@
 import { dbFire, storage } from "../../firebase/firebase"
-import { collection, addDoc, getDocs, onSnapshot,deleteDoc, doc, updateDoc } from "firebase/firestore"
+import { collection, addDoc, getDocs, onSnapshot, deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 export const SaveCarSale = async (datos, userId) => {
@@ -7,13 +7,13 @@ export const SaveCarSale = async (datos, userId) => {
     try {
 
         const docRef = await addDoc(collection(dbFire, "CarSale"), datos);
-       
+
     } catch (error) {
-       
+
     }
 }
 
-export const SaveMedia = (file, userId,LinkUrl, setLinkUrl) => {
+export const SaveMedia = (file, userId, LinkUrl, setLinkUrl) => {
     const storageRef = storageref(storage, `CarSaleMultimedia/${file.name}`)
     uploadBytes(storageRef, file).then((snapshot) => {
 
@@ -23,12 +23,13 @@ export const SaveMedia = (file, userId,LinkUrl, setLinkUrl) => {
                 setLinkUrl([...LinkUrl, url])
             })
             .catch((error) => {
-               
+
             });
     }).catch((error) => {
-        
+
     });
 }
+
 
 export const SaveArchivo = (file, userId, setLinkUrl) => {
     const storageRef = storageref(storage, `CarSaleArchivo/${userId}/${file}`)
@@ -36,23 +37,29 @@ export const SaveArchivo = (file, userId, setLinkUrl) => {
 
         getDownloadURL(storageRef)
             .then((url) => {
- 
+
                 setLinkUrl(url)
             })
             .catch((error) => {
-                
+
             });
     }).catch((error) => {
 
     });
 }
 
+
 export const DeleteCarSale = async (carSaleId) => {
     try {
-        const docRef = doc(dbFire, "CarSale", carSaleId);
-        await deleteDoc(docRef);
+        const confirmDelete = window.confirm("¿Estás seguro que deseas eliminar este Auto?");
+
+        if (confirmDelete) {
+            const docRef = doc(dbFire, "CarSale", carSaleId);
+            await deleteDoc(docRef);
+        }
+
     } catch (error) {
-        
+
     }
 }
 
@@ -60,12 +67,11 @@ export const EditCarSale = async (carSaleId, updatedData) => {
     try {
         const docRef = doc(dbFire, "CarSale", carSaleId);
         await updateDoc(docRef, updatedData);
-        
+
     } catch (error) {
-        
+
     }
 }
-
 
 
 export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
@@ -88,21 +94,21 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
                     usedCars.push(data);
                 }
                 CarSale.push(data);
-                
+
             });
             localStorage.setItem("newCars", JSON.stringify(newCars))
             setLisCarNew(JSON.parse(localStorage.getItem("newCars")));
 
             localStorage.setItem("usedCars", JSON.stringify(usedCars))
             setLisCarUsed(JSON.parse(localStorage.getItem("usedCars")));
-            
+
             localStorage.setItem("CarSale", JSON.stringify(CarSale))
             setListCar(JSON.parse(localStorage.getItem("CarSale")));
-              
+
         });
 
         return unsubscribe;
     } catch (error) {
-       
+
     }
 }
