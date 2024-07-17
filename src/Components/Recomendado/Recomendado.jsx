@@ -78,6 +78,10 @@ const Recomendado = () => {
     const [showAll, setShowAll] = useState(false);
     const navigate = useNavigate();
 
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
     const handleAgregarAuto = () => {
         setisOpenCardDetails(!isOpenCardDetails);
     }
