@@ -18,12 +18,12 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
     }, [price]);
 
 
-    useEffect(() => {
-        if (CarEdit !== null) {
-            CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
-            
-        }
-    }, [CarEdit])
+    // useEffect(() => {
+    //     if (CarEdit !== null) {
+    //         CarEdit.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
+    //     }
+    // }, [CarEdit])
+
 
     useEffect(() => {
         if (isOpenPrice) {

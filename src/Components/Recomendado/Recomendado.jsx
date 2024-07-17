@@ -10,7 +10,7 @@ import { MdDelete } from 'react-icons/md';
 const Recomendado = () => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar,
         setAvailable, isFiltro, setCarEdit, Formatnumber, DeleteCarSale,
-        isOpenCardDetails, setisOpenCardDetails
+        isOpenCardDetails, setisOpenCardDetails, ListCarSale,setLisCarNew, setLisCarUsed,EditCarSale
     } = useContextCar();
     const [showModal, setShowModal] = useState(false);
     const [SeeCar, setSeeCar] = useState([]);
@@ -29,23 +29,46 @@ const Recomendado = () => {
         }
     }, [isFiltro, ListCar, SerchingCar]);
 
+
+
     const handleEditAuto = (car) => {
         setCarEdit(car);
-        window.scrollTo(0, 0);
-        
+        setisOpenCardDetails(!isOpenCardDetails);
     }
 
-    // const handleEditAuto = (car) => {
-    //     setCarEdit(car);
-    //     window.scrollTo(0, 0);
-    //     navigate('CarSale');
+    // const handleDelete = async (carSaleId) => {
+    //     await DeleteCarSale(carSaleId);
+    //     setListCar(ListCar);
     // }
 
     const handleDelete = async (carSaleId) => {
-        await DeleteCarSale(carSaleId);
-        const updatedList = ListCar.filter(car => car.IdCarSale !== carSaleId);
-        setListCar(updatedList);
+        try {
+            await DeleteCarSale(carSaleId);
+    
+            const [updatedListCarSale, updatedListCarNew, updatedListCarUsed] = await Promise.all([
+                ListCarSale(),
+                setLisCarNew(),
+                setLisCarUsed()
+            ]);
+    
+            if (Array.isArray(updatedListCarSale)) {
+                setListCar(updatedListCarSale);
+            }
+    
+            if (Array.isArray(updatedListCarNew)) {
+                setListCarNew(updatedListCarNew);
+            }
+    
+            if (Array.isArray(updatedListCarUsed)) {
+                setListCarUsed(updatedListCarUsed);
+            }
+    
+        } catch (error) {
+            
+        }
     }
+    
+
 
     const displayedCars = showAll ? SeeCar : SeeCar.slice(0, 9);
 

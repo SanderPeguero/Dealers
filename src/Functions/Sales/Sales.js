@@ -67,10 +67,7 @@ export const EditCarSale = async (carSaleId, updatedData) => {
     try {
         const docRef = doc(dbFire, "CarSale", carSaleId);
         await updateDoc(docRef, updatedData);
-
-    } catch (error) {
-
-    }
+    } catch (error) { }
 }
 
 

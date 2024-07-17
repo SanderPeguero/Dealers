@@ -173,7 +173,9 @@ export function ProviderContext({ children }) {
                 CarEdit,
                 setCarEdit,
                 DeleteCarSale,
+                
                 EditCarSale,
+
                 Formatnumber,
                 TituloHero,
                 DescripcionHero,
@@ -187,6 +189,10 @@ export function ProviderContext({ children }) {
                 isOpenImagen, setisOpenImagen,
                 isOpenPrice, setisOpenPrice,
                 handleSiguiente, handleAnterior,
+
+                ListCarSale,setLisCarNew, setLisCarUsed, setListCar
+
+
 
             }}
         >

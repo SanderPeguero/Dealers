@@ -60,7 +60,7 @@ const CarSaleDatos = {
 const MainScreen = () => {
 
     const { user, WhichRole, AutosVisible, setAutosVisible, AutosInVisible, setAutosInVisible,
-        ContactoVisibles, setContactoVisibles, SaveCarSale, CarEdit } = useContextCar()
+        ContactoVisibles, setContactoVisibles, SaveCarSale, CarEdit ,EditCarSale} = useContextCar()
 
     const AutosRef = useRef(null);
     const ContactoRef = useRef(null);
@@ -101,19 +101,39 @@ const MainScreen = () => {
             SaveCarSale(CarSaleDatos, user.uid);
             alert("Guardado");
         } else {
+             
             alert('Por favor completa todos los campos.');
         }
     };
    
-    const handleEdit = (e) => {
+    // const handleEdit = (e) => {
 
-        e.preventDefault()
+    //     e.preventDefault()
+    //     if (validateCarSaleDatos(CarSaleDatos.Sale)) {
+    //         alert("Guardado");
+    //     } else {
+    //         EditCarSale(CarSaleDatos, CarEdit.IdCarSale);
+    //         alert('Por favor completa todos los campos.');
+    //     }
+    // }
+    
+    const handleEdit = async (e) => {
+        e.preventDefault();
+        
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
-            alert("Guardado");
+            try {
+                await EditCarSale(CarEdit.IdCarSale, CarSaleDatos);
+                alert("Guardado");
+            } catch (error) {
+                console.error("Error al actualizar los datos:", error);
+                alert("Hubo un error al actualizar los datos.");
+            }
         } else {
             alert('Por favor completa todos los campos.');
         }
-    }
+    };
+    
+
 
     useEffect(() => {
         if (CarEdit !== null) {
@@ -121,6 +141,7 @@ const MainScreen = () => {
         }
     }, [CarEdit])
 
+    
 
     return (
         <>
@@ -136,7 +157,7 @@ const MainScreen = () => {
                 <Hero />
 
                 <div ref={AutosRef} >
-                    <Recomendado handleEdit={handleEdit} />
+                    <Recomendado />
                 </div>
 
                 <div ref={ContactoRef}>
