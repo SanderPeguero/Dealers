@@ -18,11 +18,11 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
     }, [price]);
 
 
-    // useEffect(() => {
-    //     if (CarEdit !== null) {
-    //         CarEdit.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
-    //     }
-    // }, [CarEdit])
+    useEffect(() => {
+        if (CarEdit !== null) {
+            setPrice(CarEdit.Sale.Precio.Precio)
+        }
+    }, [CarEdit])
 
 
     useEffect(() => {

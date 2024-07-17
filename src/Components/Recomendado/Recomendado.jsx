@@ -36,10 +36,7 @@ const Recomendado = () => {
         setisOpenCardDetails(!isOpenCardDetails);
     }
 
-    // const handleDelete = async (carSaleId) => {
-    //     await DeleteCarSale(carSaleId);
-    //     setListCar(ListCar);
-    // }
+ 
 
     const handleDelete = async (carSaleId) => {
         try {

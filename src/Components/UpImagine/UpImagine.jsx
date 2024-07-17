@@ -41,6 +41,7 @@ const UpImagine = ({ AudiovisualDatos }) => {
         Titulo: LinkUrl,
 
     }), [LinkUrl]);
+
     useEffect(() => {
             if (LinkUrl) {
                 AudiovisualDatos.Imagen = LinkUrl
@@ -54,6 +55,14 @@ const UpImagine = ({ AudiovisualDatos }) => {
         return '';
     }, [CarEdit]);
 
+
+    useEffect(() => {
+        if(CarEdit !== null){
+            setLinkUrl(CarEdit.Sale.Multimedia.Imagen)
+        }
+    },[CarEdit])
+  
+
     useEffect(() => {
         if (isOpenImagen) {
             document.body.style.overflow = "hidden"
@@ -64,6 +73,8 @@ const UpImagine = ({ AudiovisualDatos }) => {
             document.body.style.overflow = ""
         }
     }, [isOpenImagen])
+
+
 
     const handleCloseImagen = () => {
         setisOpenImagen(!isOpenImagen)
