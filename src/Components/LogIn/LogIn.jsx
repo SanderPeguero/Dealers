@@ -39,7 +39,6 @@ const LogIn = () => {
                                     id="email"
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required />
-
                             </div>
 
                             <div className="py-2">
@@ -49,7 +48,6 @@ const LogIn = () => {
                                     id="constaseña"
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Constaseña" required />
-
                             </div>
 
                             <button onClick={() => handleLogIn()} className="justify-center items-center px-14 py-4 mt-12 text-center whitespace-nowrap bg-sky-600 rounded max-md:px-5 max-md:mt-10 max-md:max-w-full">
@@ -76,8 +74,6 @@ const LogIn = () => {
                             </div>
                         </div>
                     </div>
-
-
 
                 </div>
                 <div className="py-8"> d</div>
