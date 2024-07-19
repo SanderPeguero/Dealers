@@ -11,13 +11,10 @@ const Modal = ({ showModal, handleClose, cars }) => {
     const navigate = useNavigate();
 
     
-   
     const handlFormulario = () => {
         window.scrollTo(0,0);
         navigate('/admin/DetailsAutos')
     }
-
-
 
     useEffect(() => {
         if (showModal) {
@@ -40,9 +37,8 @@ const Modal = ({ showModal, handleClose, cars }) => {
 
                             <div className="flex text-3xl mt-5 max-md:text-2xl font-extrabold text-white max-md:flex-wrap max-md:max-w-full">
                                 <div className="flex-auto">
-                                    {CarAvailable?.Sale?.DetalleCoche?.Titulo}
-                                 
-
+                                    {cars?.Sale?.DetalleCoche?.Titulo}
+                                
                                 </div>
 
                                 <IoMdClose className='cursor-pointer mx-10 hover:bg-red-600 hover:rounded-full' onClick={() => showModal(false)}  />
