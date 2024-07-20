@@ -3,7 +3,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 // Functions
-import { SaveCarSale, SaveMedia, SaveArchivo, ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
+import { SaveCarSale, SaveMedia, SaveArchivo,
+     ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
 import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
 
@@ -17,7 +18,9 @@ export const useContextCar = () => {
 
 
 export function ProviderContext({ children }) {
+
     const [CarAvailable, setAvailable] = useState(null);
+
     const [WhichRole, setWhichRole] = useState(null)
     const [user, setUser] = useState(null)
 
@@ -140,8 +143,11 @@ export function ProviderContext({ children }) {
         <Context.Provider
             value={{
                 user,
+
                 CarAvailable,
                 setAvailable,
+
+                
                 SaveCarSale,
                 SaveMedia,
                 SaveArchivo,

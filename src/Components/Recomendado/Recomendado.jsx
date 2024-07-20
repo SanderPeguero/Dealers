@@ -1,82 +1,29 @@
+
 import React, { useState, useEffect } from 'react';
 import Modal from './modal';
 import { useContextCar } from '../../Context/Context';
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { FaPlus } from "react-icons/fa6";
+
 import { GoChevronRight } from "react-icons/go";
 import { MdDelete } from 'react-icons/md';
-const vehicles = [
-    {
-        imageUrl: "https://i.ibb.co/KmTjKbL/Tesla.jpg",
-        title: "2023 Tesla Model 3",
-        price: "US$ 35,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/hynQ3wm/Ford.png",
-        title: "2021 F-250 Super Duty",
-        price: "US$ 82,098"
-    },
-    {
-        imageUrl: "https://i.ibb.co/dcKjhRd/Honda.png",
-        title: "2021 Honda Pilot",
-        price: "US$ 43,735"
-    },
-    {
-        imageUrl: "https://i.ibb.co/KmTjKbL/Tesla.jpg",
-        title: "2022 Tesla Model 3",
-        price: "US$ 30,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/7NQYFYp/toyota.webp",
-        title: "2024 Toyota Cross",
-        price: "US$ 48,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/HdRMkvM/toyota2.jpg",
-        title: "2025 Toyota C-HR",
-        price: "US$ 32,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/vzmDRtc/chevrolet-2024-jeep.jpg",
-        title: "2024 chevrolet",
-        price: "US$ 30,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/PQs6FCg/fiat1.jpg",
-        title: "2024 Toyota Cross",
-        price: "US$ 48,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/DLS2dWZ/Kia-Niro1.jpg",
-        title: "2025 Toyota C-HR",
-        price: "US$ 32,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/KmTjKbL/Tesla.jpg",
-        title: "2022 Tesla Model 3",
-        price: "US$ 30,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/7NQYFYp/toyota.webp",
-        title: "2024 Toyota Cross",
-        price: "US$ 48,000"
-    },
-    {
-        imageUrl: "https://i.ibb.co/fGkRFJ4/posher1.webp",
-        title: "2025 Toyota C-HR",
-        price: "US$ 32,000"
-    }
-];
+
 const Recomendado = () => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar,
         setAvailable, isFiltro, setCarEdit, Formatnumber, DeleteCarSale,
-        isOpenCardDetails, setisOpenCardDetails, ListCarSale,setLisCarNew, setLisCarUsed,EditCarSale
-    } = useContextCar();
+        isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
+    } = useContextCar()
     const [showModal, setShowModal] = useState(false);
-    const [SeeCar, setSeeCar] = useState([]);
     const [showAll, setShowAll] = useState(false);
+
+    const [SeeCar, setSeeCar] = useState([])
     const navigate = useNavigate();
+
+    const handleOpenModal = (car) => {
+        setAvailable(car)
+        setShowModal(true);
+    };
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -86,6 +33,12 @@ const Recomendado = () => {
         setisOpenCardDetails(!isOpenCardDetails);
     }
 
+    const handleEditAuto = (car) => {
+        setCarEdit(car);
+        setisOpenCardDetails(!isOpenCardDetails);
+    }
+
+
     useEffect(() => {
         if (isFiltro) {
             setSeeCar([...SerchingCar]);
@@ -94,56 +47,47 @@ const Recomendado = () => {
         }
     }, [isFiltro, ListCar, SerchingCar]);
 
-
-
-    const handleEditAuto = (car) => {
-        setCarEdit(car);
-        setisOpenCardDetails(!isOpenCardDetails);
-    }
-
-    // const handleDelete = async (carSaleId) => {
-    //     await DeleteCarSale(carSaleId);
-    //     setListCar(ListCar);
-    // }
-
     const handleDelete = async (carSaleId) => {
         try {
             await DeleteCarSale(carSaleId);
-    
+
             const [updatedListCarSale, updatedListCarNew, updatedListCarUsed] = await Promise.all([
                 ListCarSale(),
                 setLisCarNew(),
                 setLisCarUsed()
             ]);
-    
+
             if (Array.isArray(updatedListCarSale)) {
                 setListCar(updatedListCarSale);
             }
-    
+
             if (Array.isArray(updatedListCarNew)) {
                 setListCarNew(updatedListCarNew);
             }
-    
+
             if (Array.isArray(updatedListCarUsed)) {
                 setListCarUsed(updatedListCarUsed);
             }
-    
+
         } catch (error) {
-            
+
         }
     }
-    
-
 
     const displayedCars = showAll ? SeeCar : SeeCar.slice(0, 9);
 
     return (
-        <div className="bg-transparent flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5">
-            <div className="flex flex-col mt-96 justify-between w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
+        <div className="bg-transparent flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
+
+            <div className="flex flex-col z-10 mt-96  justify-between w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
+
+
                 <div className="flex">
-                    <div className="text-2xl mt-3 font-bold text-white">
+                    <div className="text-2xl mt-20 font-bold text-white ">
                         Autos disponibles
+
                     </div>
+
                 </div>
                 {SeeCar.length > 9 && (
                     <div className="flex w-full mt-3 px-6 py-3 justify-end font-bold lg:text-2xl">
@@ -157,23 +101,29 @@ const Recomendado = () => {
                 )}
                 <div className="mt-6 max-md:max-w-full">
                     <div className="">
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-3    ">
                             {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                 <div className="flex items-center justify-center text-2xl border text-white rounded transition duration-300 hover:bg-blue-500 hover:text-white focus:outline-none">
-                                    <div>
-                                        <button onClick={handleAgregarAuto}>
+
+                                    <div className="">
+                                        <button onClick={() => handleAgregarAuto()}
+                                        >
                                             <FaPlus className='mx-40 mt-4 text-4xl' />
-                                            <div className='text-4xl m-5'>Agregar auto nuevo</div>
+                                            <div className='text-4xl m-5 '>Agregar auto nuevo </div>
+
                                         </button>
                                     </div>
                                 </div>
                             )}
+
                             {displayedCars.map((car, index) => (
                                 <div key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
                                     {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                         <div className='flex flex-row'>
                                             <div className="px-3 py-2 text-xs leading-4">
-                                                <button onClick={() => handleEditAuto(car)} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
+                                                <button onClick={() => handleEditAuto(car)}
+                                                    className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
                                                     <FaEdit size={14} className="text-yellow-500" />
                                                 </button>
                                             </div>
@@ -185,7 +135,7 @@ const Recomendado = () => {
                                         </div>
                                     )}
                                     <div className="flex overflow-hidden relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
-                                        <button onClick={() => setShowModal(true)}>
+                                        <button onClick={() => handleOpenModal(car)}>
                                             <img
                                                 loading="lazy"
                                                 srcSet={car.Sale.Multimedia.Imagen[0]}
@@ -200,6 +150,9 @@ const Recomendado = () => {
                                     </div>
                                 </div>
                             ))}
+
+
+
                         </div>
 
 

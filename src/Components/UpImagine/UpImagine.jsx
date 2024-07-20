@@ -25,7 +25,7 @@ const UpImagine = ({ AudiovisualDatos }) => {
                     SaveMedia(file, user.uid, LinkUrl, setLinkUrl)
                 } else {
                     setMediaType(null);
-                    alert("Debes agregar un archivo tipo imagen");
+                    alert("Debes Agregar un Archivo Tipo Imagen");
                 }
             };
             reader.readAsDataURL(file);
