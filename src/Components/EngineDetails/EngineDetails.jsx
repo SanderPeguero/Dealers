@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
-
+import close from "../../assets/img/close.png"
 
 const EngineDetails = ({updateEngineDetails}) => {
 
@@ -10,6 +10,7 @@ const EngineDetails = ({updateEngineDetails}) => {
     const [Kilometraje, setKilometraje] = useState('')
     const [Transmision, setTransmision] = useState('')
     const [DriverTrain, setDriverTrain] = useState('')
+    const [notification, setNotification] = useState (false)
     const [CapacidadMotor, setCapacidadMotor] = useState('')
     const [Power, setPower] = useState('')
 
@@ -61,9 +62,9 @@ const EngineDetails = ({updateEngineDetails}) => {
 
     const validateEngineDetails = () => {
         if (!TipoCombustimble || !Kilometraje || !Transmision || !DriverTrain || !CapacidadMotor || !Power) {
-            return false
+            setNotification(!notification)
         }
-        return true;
+        else {return true;}
     };
 
     return (
@@ -107,7 +108,7 @@ const EngineDetails = ({updateEngineDetails}) => {
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kilometraje</label>
                                                 <div className="flex ">
 
-                                                    <input value={Kilometraje} onChange={(e) => setKilometraje(e.target.value)} type="text" id="title" className="bg-[#12232E] text-sm block w-full p-2.5" required />
+                                                    <input value={Kilometraje} onChange={(e) => setKilometraje(e.target.value)} type="number" id="title" className="bg-[#12232E] text-sm block w-full p-2.5" required />
                                                     <div type="button" className="bg-[#004A77] text-white   px-4 py-2 rounded-r  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         km
                                                     </div>
@@ -166,7 +167,26 @@ const EngineDetails = ({updateEngineDetails}) => {
                                         <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
                                         <button onClick={() => handleSiguiente(validateEngineDetails)}
                                             className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>                                    </div>
-
+                                        {notification? (
+                                            <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
+                        
+                                            <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
+                                                <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all  hover:bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => setNotification(false)}>
+                                                    <img src={close} alt="" />
+                                                </button>
+                                                <img
+                                                    loading="lazy"
+                                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/1024px-Info_icon_002.svg.png"
+                                                    className="max-w-full aspect-square w-[80px]"
+                                                />
+                                                <div className="justify-center mt-8 text-xl max-md:text-lg">UPs!</div>
+                                                <div className=" mt-3 text-xl max-md:text-sm m justify-center ">
+                                                    ¡Debe de Llenar Todos los Campos Por Favor!
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        ):""}
                                 </form>
 
                             </div>
