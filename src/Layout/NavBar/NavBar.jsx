@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useContextCar } from '../../Context/Context';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+
 const Navbar = ({ background }) => {
     const { user,WhichRole, logout, AutosVisible, setAutosVisible, ContactoVisibles, setContactoVisibles, locationR, setlocationR } = useContextCar()
 
@@ -53,6 +54,11 @@ const Navbar = ({ background }) => {
         else {
             setContactoVisibles(true)
         }
+    }
+
+    const handleReservas = () => {
+        window.scrollTo(0, 0);
+        navigate('/admin/Reservas')
     }
 
 
@@ -141,6 +147,17 @@ const Navbar = ({ background }) => {
                                 Contáctanos
                             </button>
                         </li>
+                        {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
+                                <div>
+                                    <button
+                                        onClick={handleReservas}
+                                        className="block  text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+
+                                        Reservas
+
+                                    </button>
+                                </div>
+                            )}
 
                     </ul>
 
