@@ -19,7 +19,7 @@ function App() {
     { path: '/', element: <MainScreen /> },
     { path: '/LognIn', element: <LogInLayout /> },
     { path: '/SignIn', element: <SignInLayout /> },
-    { path: '/Reservas', element: <ReservarLayout /> }
+    { path: '/Reservas', element: <ReservarLayout />}
   
   ]
 

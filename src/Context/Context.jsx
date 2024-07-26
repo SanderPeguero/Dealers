@@ -4,7 +4,7 @@ import { auth } from "../firebase/firebase";
 
 // Functions
 import { SaveCarSale, SaveMedia, SaveArchivo,
-     ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
+     ListCarSale, DeleteCarSale, EditCarSale,ListReservaCar ,ReservaCar } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
 import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
 
@@ -139,6 +139,23 @@ export function ProviderContext({ children }) {
         }
     };
 
+
+    
+    const [ReservaCarList, setReservaCarList] = useState([]);
+
+    useEffect(() => {
+        const loadReservaCar = async () => {
+            const reservas = await ListReservaCar();
+            setReservaCarList(reservas);
+        };
+
+        loadReservaCar();
+    }, []);
+
+
+
+
+
     return (
         <Context.Provider
             value={{
@@ -195,7 +212,15 @@ export function ProviderContext({ children }) {
                 isOpenPrice, setisOpenPrice,
                 handleSiguiente, handleAnterior,
 
-                ListCarSale,setLisCarNew, setLisCarUsed, setListCar
+                ListCarSale,
+                setLisCarNew,
+                setLisCarUsed,
+                setListCar,
+
+                ReservaCar,
+                ReservaCarList,
+                ListReservaCar,
+                setReservaCarList
 
 
 

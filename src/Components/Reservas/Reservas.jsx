@@ -27,7 +27,7 @@ const Reservas = () => {
 
                         <tbody className="divide-y divide-gray-600 border-t border-gray-600">
 
-                            {/* {ReservaCarList.map((reserva) => (
+                            {ReservaCarList.map((reserva) => (
                                 <tr key={reserva.id} className="hover:bg-gray-900 text-gray-100 max-w-full">
 
 
@@ -57,13 +57,8 @@ const Reservas = () => {
                                     <th >
                                         <div className='font-medium text-gray-100 mx-2'> {reserva.informationUser.ReservationDate} </div>
                                     </th>
-
-
-
-
-
                                 </tr>
-                            ))} */}
+                            ))}
                         </tbody>
                     </table>
                 </div>
