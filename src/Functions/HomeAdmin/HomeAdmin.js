@@ -2,7 +2,7 @@ import { db, storage } from "../../firebase/firebase";
 import { set, ref, get, update } from "firebase/database"
 import { ref as storageref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"
 
-export const GetHero = async (setTituloHero, setDescripcionHero, setSliderImg) => {
+export const GetHero = async (setTituloHero, setDescripcionHero, setSliderImg,setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact) => {
     const HeroRef = ref(db, 'Hero');
 
     try {
@@ -175,3 +175,4 @@ export const GetContact = async (setTituloContact, setUbicacionContact, setGmail
             console.error("Error al actualizar el Titulo de Redes de Contacto:", error);
         }
     };
+

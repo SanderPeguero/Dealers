@@ -3,8 +3,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 // Functions
-import { SaveCarSale, SaveMedia, SaveArchivo,
-     ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
+import {
+    SaveCarSale, SaveMedia, SaveArchivo,
+    ListCarSale, DeleteCarSale, EditCarSale
+} from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
 import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
 
@@ -50,6 +52,16 @@ export function ProviderContext({ children }) {
     const [isOpenImagen, setisOpenImagen] = useState(false)
     const [isOpenPrice, setisOpenPrice] = useState(false)
 
+
+    // Informacion de Contacto
+    const [TituloContact, setTituloContact] = useState('')
+    const [UbicacionContact, setUbicacionContact] = useState('')
+    const [GmailContact, setGmailContact] = useState('')
+    const [PhoneContact, setPhoneContact] = useState('')
+    const [TitulotwoContact, setTitulotwoContact] = useState('')
+
+
+
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -63,6 +75,7 @@ export function ProviderContext({ children }) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
             GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -73,6 +86,7 @@ export function ProviderContext({ children }) {
 
     useEffect(() => {
         GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+        GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
     }, [])
 
     const handleRemove = (dato) => {
@@ -147,7 +161,7 @@ export function ProviderContext({ children }) {
                 CarAvailable,
                 setAvailable,
 
-                
+
                 SaveCarSale,
                 SaveMedia,
                 SaveArchivo,
@@ -178,7 +192,7 @@ export function ProviderContext({ children }) {
                 CarEdit,
                 setCarEdit,
                 DeleteCarSale,
-                
+
                 EditCarSale,
 
                 Formatnumber,
@@ -195,7 +209,15 @@ export function ProviderContext({ children }) {
                 isOpenPrice, setisOpenPrice,
                 handleSiguiente, handleAnterior,
 
-                ListCarSale,setLisCarNew, setLisCarUsed, setListCar
+                ListCarSale, setLisCarNew, setLisCarUsed, setListCar,
+
+                editTituloContact,
+                TituloContact, setTituloContact,
+                UbicacionContact, setUbicacionContact,
+                GmailContact, setGmailContact,
+                PhoneContact, setPhoneContact,
+                TitulotwoContact, setTitulotwoContact,
+                GetContact
 
 
 
