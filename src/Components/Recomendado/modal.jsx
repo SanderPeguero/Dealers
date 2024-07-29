@@ -1,6 +1,5 @@
-// Modal.js
+
 import React, { useState, useEffect } from 'react';
-// import './Modal.css';
 import { IoMdClose } from "react-icons/io";
 import { FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +12,6 @@ const Modal = ({ showModal, handleClose}) => {
     const handlFormulario = () => {
         window.scrollTo(0,0);
         navigate('/admin/DetailsAutos')
-        // FormularioReserva'
     }
 
     useEffect(() => {
@@ -26,7 +24,6 @@ const Modal = ({ showModal, handleClose}) => {
             document.body.style.overflow = ""
         }
     }, [showModal])
-
 
     return (
         <>
@@ -48,8 +45,6 @@ const Modal = ({ showModal, handleClose}) => {
                                 </div>
                             </div>
                         </div>
-
-
 
                         <div className="prose max-w-screen-md p-6 overflow-y-auto" style={{ maxHeight: '70vh', borderRadius: '0.375rem', boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.1)' }}>
 

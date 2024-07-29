@@ -5,29 +5,16 @@ import instagram from "../../assets/Footer/instagram.png"
 import youtube from "../../assets/Footer/youtube.png"
 
 import SFMImage from "../../assets/img/SFMImage.jpg"
-// import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 
-// const mapStyles = {
-//     height: '300px',
-//     width: '100%',
-// };
-// const defaultCenter = {
-//     lat: 37.7749,
-//     lng: -122.4194,
-// };
 const Contacto = () => {
     
     return (
-        // style={{backgroundImage: `url( ${Dealer})`}}  
         <div style={{backgroundImage: `url( ${SFMImage})`}}   className=" bg-fixed flex bg-[#12232E] overflow-hidden relative flex-col justify-center items-center px-16 py-1 mt-20 w-full min-h-[768px] max-md:px-5 max-md:mt-10 max-md:max-w-full">
             
             <div className="bg-transparent relative w-full max-w-[1226px] max-md:max-w-full">
                 <h1 className="text-3xl text-white font-bold"> Contáctanos</h1>
                 <hr />
                 <div className="bg-transparent mt-6 brightness-105 z-50  gap-5 max-md:flex-col max-md:gap-0">
-                    {/* <LoadScript googleMapsApiKey="AIzaSyCQuMGa2ltQrJMrqUYJUaS48CYZcgfPNO8">
-                        <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={defaultCenter} />
-                    </LoadScript> */}
                     <div className=" mt-10 m-auto md:flex justify-center gap-28 ">
                         <div className=" brightness-110 text-white text-center font-bold"> 
                             <h2 className=" text-2xl font-bold">Encuéntranos</h2>

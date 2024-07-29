@@ -39,6 +39,14 @@ export function ProviderContext({ children }) {
     const [DescripcionHero, setDescripcionHero] = useState('')
     const [SliderImg, setSliderImg] = useState([])
 
+    //Add vehicle (Modales)
+    const [isOpenCardDetails, setisOpenCardDetails] = useState(false)
+    const [isOpenEngineDetails, setisOpenEngineDetails] = useState(false)
+    const [isOpenDimension, setisOpenDimension] = useState(false)
+    const [isOpenFeature, setisOpenFeature] = useState(false)
+    const [isOpenImagen, setisOpenImagen] = useState(false)
+    const [isOpenPrice, setisOpenPrice] = useState(false)
+
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -56,16 +64,13 @@ export function ProviderContext({ children }) {
         }
     }, [user])
 
-
-
     useEffect(() => {
         ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
     }, [])
 
     useEffect(() => {
-      GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+        GetHero(setTituloHero, setDescripcionHero, setSliderImg)
     }, [])
-
 
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);
@@ -73,18 +78,63 @@ export function ProviderContext({ children }) {
     }
 
     const Formatnumber = (number) => {
-
         if (typeof number === 'string') {
-    
-          number = parseInt(number, 10);
+            number = parseInt(number, 10);
         }
-    
+
         if (!isNaN(number)) {
-          return number.toLocaleString('en-US');
+            return number.toLocaleString('en-US');
         }
-    
         return '0';
-      }
+    }
+
+    const handleAnterior = () => {
+        if (isOpenPrice === true) {
+            setisOpenImagen(true)
+            setisOpenPrice(false)
+        } else if (isOpenImagen === true) {
+            setisOpenFeature(true)
+            setisOpenImagen(false)
+        } else if (isOpenFeature === true) {
+            setisOpenDimension(true)
+            setisOpenFeature(false)
+        } else if (isOpenDimension === true) {
+            setisOpenEngineDetails(true)
+            setisOpenDimension(false)
+        } else if (isOpenEngineDetails === true) {
+            setisOpenCardDetails(true)
+            setisOpenEngineDetails(false)
+        }
+    }
+
+    const handleSiguiente = (validateCarSaleDatos) => {
+        if (isOpenCardDetails === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenEngineDetails(true);
+                setisOpenCardDetails(false);
+            }
+        } else if (isOpenEngineDetails === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenDimension(true);
+                setisOpenEngineDetails(false);
+            }
+        } else if (isOpenDimension === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenFeature(true);
+                setisOpenDimension(false);
+            }
+        } else if (isOpenFeature === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenImagen(true);
+                setisOpenFeature(false);
+            }
+        } else if (isOpenImagen === true) {
+            if (validateCarSaleDatos()) {
+                setisOpenPrice(true);
+                setisOpenImagen(false);
+            }
+        }
+    };
 
     return (
         <Context.Provider
@@ -122,13 +172,26 @@ export function ProviderContext({ children }) {
                 CarEdit,
                 setCarEdit,
                 DeleteCarSale,
+                
                 EditCarSale,
+
                 Formatnumber,
                 TituloHero,
                 DescripcionHero,
                 SliderImg,
-                setTituloHero, 
+                setTituloHero,
                 setDescripcionHero, setSliderImg, GetHero,
+                isOpenCardDetails, setisOpenCardDetails,
+                isOpenEngineDetails, setisOpenEngineDetails,
+                isOpenDimension, setisOpenDimension,
+                isOpenFeature, setisOpenFeature,
+                isOpenImagen, setisOpenImagen,
+                isOpenPrice, setisOpenPrice,
+                handleSiguiente, handleAnterior,
+
+                ListCarSale,setLisCarNew, setLisCarUsed, setListCar
+
+
 
             }}
         >
