@@ -1,17 +1,19 @@
-
+// Modal.js
 import React, { useState, useEffect } from 'react';
+// import './Modal.css';
 import { IoMdClose } from "react-icons/io";
 import { FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useContextCar } from '../../Context/Context';
 
-const Modal = ({ showModal, handleClose}) => {
-    const { user, WhichRole,CarAvailable } = useContextCar()
+const Modal = ({  showModal, handleClose}) => {
+
+    const { user, WhichRole,CarAvailable,Formatnumber } = useContextCar()
     const navigate = useNavigate();
 
     const handlFormulario = () => {
         window.scrollTo(0,0);
-        navigate('/admin/DetailsAutos')
+        // navigate('/admin/DetailsAutos')
     }
 
     useEffect(() => {
@@ -24,6 +26,7 @@ const Modal = ({ showModal, handleClose}) => {
             document.body.style.overflow = ""
         }
     }, [showModal])
+
 
     return (
         <>
@@ -40,7 +43,8 @@ const Modal = ({ showModal, handleClose}) => {
                             <div className="flex gap-1.5 self-start mt-6 text-xl font-bold ">
                                 <div className="text-white">US$: </div>
                                 <div className="text-gray-500 flex flex-row ">
-                                   {CarAvailable?.Sale?.Precio?.Precio}
+                                   {/* {CarAvailable?.Sale?.Precio?.Precio} */}
+                                   <div className="">${Formatnumber(CarAvailable?.Sale?.Precio?.Precio)}</div>
                                     
                                 </div>
                             </div>
@@ -65,7 +69,7 @@ const Modal = ({ showModal, handleClose}) => {
                                                 </div>
                                                 <div className="flex gap-3.5 mt-7">
                                                     <div className="text-2xl font-bold text-white max-md:text-xl">Combustible:</div>
-                                                    <div className="text-2xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleMotor?.TipoConbustible}</div>
+                                                    <div className="text-2xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleMotor?.TipoCombustimble}</div>
                                                 </div>
                                             </div>
                                         </div>

@@ -2,6 +2,7 @@ import { dbFire, storage } from "../../firebase/firebase"
 import { collection, addDoc, getDocs, onSnapshot, deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage"
 
+
 export const SaveCarSale = async (datos, userId) => {
 
     try {

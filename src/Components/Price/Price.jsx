@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useContextCar } from '../../Context/Context'
-
+import close from "../../assets/img/close.png"
+import handleSale from "../../Layout/MainScreen/MainScreen"
 const Price = ({ PriceDatos,handleSale,handleEdit}) => {
 
     const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, SaveCarSale, user} = useContextCar()
@@ -9,10 +10,9 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
     const [newFeature, setNewFeature] = useState('');
 
     const [price, setPrice] = useState(0)
-    
-
+    const [notification, setNotification] = useState (false)
     useEffect(() => {
-        if (price !== 0) {
+        if (price > 0) {
             PriceDatos.Precio = price;
         }
     }, [price]);
@@ -42,12 +42,12 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
     }
 
     const validatePrecio = () =>{
-        if(!price){
-            return false;
+        if(price === 0 ){
+            setNotification(!notification)
         }
         return true;
     }
-
+    
     return (
 
         <>
@@ -83,7 +83,7 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
                                                     <div className="bg-[#004A77] justify-center text-2xl text-white  px-4 py-2 rounded-l  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         $
                                                     </div>
-                                                    <input value={price} onChange={(e) => setPrice(e.target.value)} className="bg-[#12232E] text-sm block w-full p-4 rounded-l  " required />
+                                                    <input value={price} onChange={(e) => setPrice(e.target.value)} type='number' className="bg-[#12232E] text-sm block w-full p-4 rounded-l  " required />
 
                                                 </div>
                                             </div>
@@ -97,10 +97,13 @@ const Price = ({ PriceDatos,handleSale,handleEdit}) => {
                                                 <button onClick={(e) => handleEdit(e)} className="flex justify-center  w-1/2 px-14 py-4 mt-8 mb-8 text-center whitespace-nowrap bg-sky-600 rounded max-md:px-5 max-md:mt-10 max-md:max-w-full">
                                                     Editar auto
                                                 </button>
-                                                : <button onClick={(e) =>  handleSale(e)} className="flex justify-center  w-1/2 px-14 py-4 mt-8 mb-8 text-center whitespace-nowrap bg-sky-600 rounded max-md:px-5 max-md:mt-10 max-md:max-w-full">
+                                                : <button onClick={(e) =>  handleSale(e) (validatePrecio)}className="flex justify-center  w-1/2 px-14 py-4 mt-8 mb-8 text-center whitespace-nowrap bg-sky-600 rounded max-md:px-5 max-md:mt-10 max-md:max-w-full">
                                                     Vender mi auto
                                                 </button>
+                                                
                                         }
+                                                
+                                        
                                     </div>
 
                                     <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>

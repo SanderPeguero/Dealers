@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
+import close from "../../assets/img/close.png"
 
 const Dimension = ({ updateDimension }) => {
     const { CarEdit, isOpenDimension, setisOpenDimension, handleSiguiente, handleAnterior } = useContextCar()
@@ -9,7 +10,7 @@ const Dimension = ({ updateDimension }) => {
     const [Ancho, setAncho] = useState('')
     const [Altura, setAltura] = useState('')
     const [VolumenCarga, setVolumenCarga] = useState('')
-
+    const [notification, setNotification] = useState (false)
     const Dimensiondatos = useMemo(() => ({
         Longitud,
         Ancho,
@@ -54,9 +55,9 @@ const Dimension = ({ updateDimension }) => {
 
     const validateDimension = () => {
         if (!Longitud || !Ancho || !Altura || !VolumenCarga) {
-            return false;
+            setNotification(!notification)
         }
-        return true;
+        else {return true;}
     };
 
     return (
@@ -89,7 +90,7 @@ const Dimension = ({ updateDimension }) => {
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Longitud </label>
                                                 <div className="flex">
 
-                                                    <input value={Longitud} onChange={(e) => setLongitud(e.target.value)} type="text" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={Longitud} onChange={(e) => setLongitud(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white   px-4 py-2 rounded-r  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         mm
                                                     </div>
@@ -99,7 +100,7 @@ const Dimension = ({ updateDimension }) => {
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ancho</label>
                                                 <div className="flex">
 
-                                                    <input value={Ancho} onChange={(e) => setAncho(e.target.value)} type="text" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={Ancho} onChange={(e) => setAncho(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white   px-4 py-2 rounded-r  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         mm
                                                     </div>
@@ -110,7 +111,7 @@ const Dimension = ({ updateDimension }) => {
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Altura</label>
                                                 <div className="flex">
 
-                                                    <input value={Altura} onChange={(e) => setAltura(e.target.value)} type="text" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={Altura} onChange={(e) => setAltura(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white   px-4 py-2 rounded-r  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         mm
                                                     </div>
@@ -120,7 +121,7 @@ const Dimension = ({ updateDimension }) => {
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Volumen de carga</label>
                                                 <div className="flex">
 
-                                                    <input value={VolumenCarga} onChange={(e) => setVolumenCarga(e.target.value)} type="text" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={VolumenCarga} onChange={(e) => setVolumenCarga(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white   px-4 py-2 rounded-r  focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         L
                                                     </div>
@@ -136,6 +137,27 @@ const Dimension = ({ updateDimension }) => {
 
                                         <button onClick={() => handleSiguiente(validateDimension)}
                                             className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+
+                                        {notification? (
+                                            <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
+                        
+                                            <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
+                                                <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all  hover:bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => setNotification(false)}>
+                                                    <img src={close} alt="" />
+                                                </button>
+                                                <img
+                                                    loading="lazy"
+                                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/1024px-Info_icon_002.svg.png"
+                                                    className="max-w-full aspect-square w-[80px]"
+                                                />
+                                                <div className="justify-center mt-8 text-xl max-md:text-lg">UPs!</div>
+                                                <div className=" mt-3 text-xl max-md:text-sm m justify-center ">
+                                                    ¡Debe de Llenar Todos los Campos Por Favor!
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        ):""}
                                     </div>
 
                                 </form>
