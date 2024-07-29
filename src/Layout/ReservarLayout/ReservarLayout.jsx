@@ -17,7 +17,7 @@ const ReservarLayout = () => {
         </div>
 
         <div className='flex flex-col mx-4 lg:ml-[6rem] lg:mr-[6rem] '>
-
+          
           <Reservas />
 
         </div>

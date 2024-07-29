@@ -151,20 +151,18 @@ export function ProviderContext({ children }) {
 
         loadReservaCar();
     }, []);
-
-
-
+    
+    
 
 
     return (
         <Context.Provider
             value={{
                 user,
-
                 CarAvailable,
                 setAvailable,
 
-                
+               
                 SaveCarSale,
                 SaveMedia,
                 SaveArchivo,
@@ -229,4 +227,5 @@ export function ProviderContext({ children }) {
             {children}
         </Context.Provider>
     );
+
 }
