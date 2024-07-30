@@ -1,6 +1,5 @@
 // Modal.js
 import React, { useState, useEffect } from 'react';
-// import './Modal.css';
 import { IoMdClose } from "react-icons/io";
 import { FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +12,7 @@ const Modal = ({  showModal, handleClose}) => {
 
     const handlFormulario = () => {
         window.scrollTo(0,0);
-        // navigate('/admin/DetailsAutos')
+        navigate('/admin/DetailsAutos') 
     }
 
     useEffect(() => {
@@ -31,9 +30,9 @@ const Modal = ({  showModal, handleClose}) => {
     return (
         <>
             {showModal &&
-                <div className='fixed inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm ' >
-                    <div className="relative bg-gray-900  rounded-lg overflow-hidden shadow-xl max-w-screen-md w-full m-4" >
-                        <div className="flex flex-col px-7 w-full max-md:px-5 max-md:max-w-full m-4">
+                <div className='fixed inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  mt-3' >
+                    <div className="relative bg-gray-900  rounded-lg overflow-hidden shadow-xl max-w-screen-sm w-full " >
+                        <div className="flex flex-col px-7 w-full max-md:px-5 max-md:max-w-full m-4 mt-2">
 
                             <div className="flex text-3xl mt-5 max-md:text-2xl font-extrabold text-white max-md:flex-wrap max-md:max-w-full">
                                 <div className="flex-auto">{CarAvailable?.Sale?.DetalleCoche?.Titulo}</div>
@@ -50,47 +49,53 @@ const Modal = ({  showModal, handleClose}) => {
                             </div>
                         </div>
 
-                        <div className="prose max-w-screen-md p-6 overflow-y-auto" style={{ maxHeight: '70vh', borderRadius: '0.375rem', boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.1)' }}>
+                        <div className="prose max-w-screen-md p-6 overflow-y-auto -mt-3" style={{ maxHeight: '80vh', borderRadius: '0.375rem', boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.1)' }}>
 
-                            <div className=" xl:max-w-[50rem]  m-5">
+                            <div className=" xl:max-w-[50rem] ">
 
-                                <div className=" w-full bg-white border-white border-solid border-[3px] min-h-[4px] max-md:max-w-full" />
+                                <div className=" w-full bg-white px-7 border-white border-solid border-[3px] min-h-[4px] max-md:max-w-full" />
+                                
                                 <div className="self-center mt-8 w-full max-w-[502px] max-md:mt-10 max-md:max-w-full">
-                                    <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+                                    <div className="flex gap-5  -mt-4 px-7 max-md:flex-col max-md:gap-0">
                                         <div className="flex flex-col w-[56%] max-md:ml-0 max-md:w-full">
-                                            <div className="flex flex-col grow whitespace-nowrap ">
+                                            <div className="flex flex-col grow whitespace-nowrap">
                                                 <div className="flex gap-3.5">
-                                                    <div className="text-2xl font-bold text-white max-md:text-xl">Color:</div>
-                                                    <div className="text-2xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Color}</div>
+                                                    <div className="text-xl font-bold text-white max-md:text-xl">Color:</div>
+                                                    <div className="text-xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Color}</div>
                                                 </div>
                                                 <div className="flex gap-3 mt-6">
-                                                    <div className="text-2xl font-bold text-white max-md:text-xl">Año:</div>
-                                                    <div className="text-2xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Year}</div>
+                                                    <div className="text-xl font-bold text-white max-md:text-xl">Año:</div>
+                                                    <div className="text-xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Year}</div>
                                                 </div>
                                                 <div className="flex gap-3.5 mt-7">
-                                                    <div className="text-2xl font-bold text-white max-md:text-xl">Combustible:</div>
-                                                    <div className="text-2xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleMotor?.TipoCombustimble}</div>
+                                                    <div className="text-xl font-bold text-white max-md:text-xl">Combustible:</div>
+                                                    <div className="text-xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleMotor?.TipoCombustimble}</div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div className="flex flex-col ml-5 w-[44%] max-md:ml-0 max-md:w-full">
                                             <div className="flex flex-col max-md:mt-10">
+                                                
                                                 <div className="flex gap-3.5">
-                                                    <div className="text-2xl font-bold text-white max-md:text-xl">Capacidad:</div>
-                                                    <div className="text-2xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Capacidad} / P</div>
+                                                    <div className="text-xl font-bold text-white max-md:text-xl">Capacidad:</div>
+                                                    <div className="text-xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Capacidad} / P</div>
                                                 </div>
-                                                <div className="flex gap-3.5 mt-6 whitespace-nowrap ">
-                                                    <div className="text-2xl font-bold text-white max-md:text-xl">Condición:</div>
-                                                    <div className="text-2xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Condicion}</div>
+                                               
+                                                <div className="flex gap-3.5 mt-6 ">
+                                                    <div className="text-xl font-bold text-white max-md:text-xl">Condición:</div>
+                                                    <div className="text-xl text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Condicion}</div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mt-10 w-full bg-white border-white border-solid border-[3px] min-h-[4px] max-md:mt-10 max-md:max-w-full" />
+
+                                <div className="mt-7 w-full bg-white border-white border-solid border-[3px] min-h-[4px] max-md:mt-10 max-md:max-w-full " />
 
                                 <div className="flex flex-col mt-5 w-full text-white max-md:px-5 max-md:max-w-full">
-                                    <div className="text-3xl max-md:max-w-full">Descripción</div>
+                                    <div className="text-2xl max-md:max-w-full">Descripción</div>
                                     <div className="px-3 pt-4 pb-28 mt-4 text-xl rounded-lg bg-white bg-opacity-30 text-white text-opacity-90 max-md:pr-5 max-md:max-w-full ">
                                     {CarAvailable?.Sale?.DetalleCoche?.Descripcion}
                                     </div>
