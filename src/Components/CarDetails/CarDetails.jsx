@@ -72,7 +72,20 @@ const CarDetails = ({updateCarDetails }) => {
         }
     }, [isOpenCardDetails])
 
+    
+
     const handleCloseCardDetails = () => {
+        // Reinicia los estados
+        setTitulo('')
+        setCondicion('')
+        setTipoCuerpo('')
+        setMarca('')
+        setModelo('')
+        setAño('')
+        setColor('')
+        setDescripcion('')
+        setCapacity(1)
+
         setisOpenCardDetails(false)
     }
 
