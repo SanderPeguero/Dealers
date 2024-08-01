@@ -110,7 +110,7 @@ const Navbar = ({ background }) => {
                     </button>
                 </div>
                  
-                <div id="mega-menu" className={`items-center bg-slate-400 md:bg-transparent m-auto justify-between z-50  w-full md:block md:w-auto md:order-1 ${isMenuOpen ? "block" : "hidden"}`}>
+                <div id="mega-menu" className={`items-center absolute mt-[250px] md:relative left-0 md:mt-3 bg-slate-400 md:bg-transparent m-auto justify-between   w-full md:block md:w-auto z-50 md:order-1 ${isMenuOpen ? "block" : "hidden"}`}>
                     <ul className="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
                         <li>
                             <Link

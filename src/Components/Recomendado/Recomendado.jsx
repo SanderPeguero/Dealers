@@ -64,7 +64,7 @@ const Recomendado = () => {
 
 
     return (
-        <div className="bg-transparent  z-50 flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5" >
+        <div className="bg-transparent mt-40  z-50 flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5" >
 
             <div className="flex  flex-col mt-96 justify-between  z-50 w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
 
