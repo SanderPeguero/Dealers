@@ -2,13 +2,26 @@ import React, { useState } from 'react';
 import { useContextCar } from '../../Context/Context';
 import profile from "../../assets/img/profile.png"
 import car from "../../assets/img/car.png"
+import ReservationModal from './ReservationModal';
+
 const Reservas = () => {
 
     const {ReservaCarList, Formatnumber } = useContextCar();
     const {Username, setUseName} = useState ("");
     const {Title, setTitle} = useState ("");
 
-   
+    const [showModal, setShowModal] = useState(false);
+    const [selectedReserva, setSelectedReserva] = useState(null);
+
+    const handleOpenModal = (reserva) => {
+        setSelectedReserva(reserva);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedReserva(null);
+    };
     
     return (
         <div className="overflow-x-auto">
@@ -44,7 +57,7 @@ const Reservas = () => {
                         <tbody className="divide-y divide-gray-600 border-t border-gray-600">
 
                             {ReservaCarList.map((reserva) => (
-                                <tr key={reserva.id} className="hover:bg-gray-900 text-gray-100 max-w-full">
+                                <tr key={reserva.id} className="hover:bg-gray-900 text-gray-100 max-w-full cursor-pointer" onClick={() => handleOpenModal(reserva)}>
 
 
                                     <td className="px-6 py-4">
@@ -79,6 +92,7 @@ const Reservas = () => {
                     </table>
                 </div>
             </div>
+            <ReservationModal showModal={showModal} handleClose={handleCloseModal} reserva={selectedReserva} />
         </div>
     );
 
