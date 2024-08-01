@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useContextCar } from '../../Context/Context';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import close from "../../assets/img/close.png"
+import menu from "../../assets/img/menu.png"
 const Navbar = ({ background }) => {
     const { user,WhichRole, logout, AutosVisible, setAutosVisible, ContactoVisibles, setContactoVisibles, locationR, setlocationR } = useContextCar()
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+    const Open= ()=>{
+        setIsMenuOpen(!isMenuOpen)
+    }
     const [openSettingUser, setopenSettingUser] = useState(false)
 
     const navigate = useNavigate()
@@ -99,20 +103,19 @@ const Navbar = ({ background }) => {
                         )
                     }
 
-                    <button data-collapse-toggle="mega-menu" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mega-menu" aria-expanded="false">
+                    <button onClick={Open} data-collapse-toggle="mega-menu" type="button" className="inline-flex relative items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mega-menu" aria-expanded="false">
                         <span className="sr-only">Open main menu</span>
-                        <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-                        </svg>
+                        <img className={`w-7 h-7 z-50 absolute ${isMenuOpen ? "hidden" : "block"}`} src={menu} alt="menu" />
+                        <img className={`w-10 h-10 z-50 absolute ${isMenuOpen ? "block" : "hidden"}`} src={close} alt="close" />
                     </button>
                 </div>
-
-                <div id="mega-menu" className="items-center m-auto justify-between hidden w-full md:flex md:w-auto md:order-1 ">
+                 
+                <div id="mega-menu" className={`items-center bg-slate-400 md:bg-transparent m-auto justify-between z-50  w-full md:block md:w-auto md:order-1 ${isMenuOpen ? "scale-y-100 transition-transform" : "scale-y-0"}`}>
                     <ul className="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
                         <li>
                             <Link
                                 to={getAdjustedPath('/')}
-                                className="block py-2 px-3 text-blue-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 px-3 hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all text-blue-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                                 aria-current="page"
                             >
                                 Home
@@ -122,7 +125,7 @@ const Navbar = ({ background }) => {
                         <li>
                             <button
                                 onClick={handleAutosVisibles}
-                                className="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 px-3 hover:text-center scale-x-95 w-full hover:scale-x-110 transition-all text-gray-900 border-b  text-start border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Autos
                             </button>
@@ -130,7 +133,7 @@ const Navbar = ({ background }) => {
                         <li>
                             <Link
                                 to={getAdjustedPath('/AboutUS')}
-                                className="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 px-3 hover:text-center scale-x-95 w-full hover:scale-x-110 transition-all text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Sobre Nosotros
                             </Link>
@@ -138,7 +141,7 @@ const Navbar = ({ background }) => {
                         <li>
                             <button
                                 onClick={handleContactoVisibles}
-                                className="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 hover:text-center scale-x-95 w-full hover:scale-x-110 transition-all px-3  text-start text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Contáctanos
                             </button>
@@ -148,7 +151,7 @@ const Navbar = ({ background }) => {
 
 
                 </div>
-
+                    
             </div>
         </nav>
 
