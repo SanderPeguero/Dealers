@@ -13,7 +13,7 @@ const Modal = ({  showModal, handleClose}) => {
 
     const handlFormulario = () => {
         window.scrollTo(0,0);
-        // navigate('/admin/DetailsAutos')
+        navigate('/admin/DetailsAutos')
     }
 
     useEffect(() => {
