@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
 
-const CarDetails = ({updateCarDetails }) => {
+const CarDetails = ({ updateCarDetails }) => {
     const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente } = useContextCar()
     const [Titulo, setTitulo] = useState('')
     const [Condicion, setCondicion] = useState('')
@@ -16,7 +16,7 @@ const CarDetails = ({updateCarDetails }) => {
 
     const [capacity, setCapacity] = useState(1);
     const [open, setOpen] = useState(false)
-    const [notification, setNotification] = useState (false)
+    const [notification, setNotification] = useState(false)
 
     const decreaseCapacity = () => {
         if (capacity > 1) {
@@ -55,7 +55,7 @@ const CarDetails = ({updateCarDetails }) => {
             setAño(CarEdit.Sale.DetalleCoche.Year)
             setColor(CarEdit.Sale.DetalleCoche.Color)
             setDescripcion(CarEdit.Sale.DetalleCoche.Descripcion)
-            
+
         }
 
     }, [CarEdit])
@@ -72,7 +72,7 @@ const CarDetails = ({updateCarDetails }) => {
         }
     }, [isOpenCardDetails])
 
-    
+
 
     const handleCloseCardDetails = () => {
         // Reinicia los estados
@@ -92,10 +92,10 @@ const CarDetails = ({updateCarDetails }) => {
     const validateCardDetails = () => {
         if (!Titulo || !Condicion || !TipoCuerpo || !Marca || !Modelo || !Año || !Color || !Descripcion) {
             setNotification(!notification)
-            
+
         }
-        else {return true;}
-        
+        else { return true; }
+
     };
 
     return (
@@ -103,28 +103,25 @@ const CarDetails = ({updateCarDetails }) => {
             {
                 isOpenCardDetails &&
 
-                <div className='fixed  inset-0  backdrop-blur-md z-50'>
-                    <div className='bg-[#071620] m-10 rounded-lg w-auto h-[80%] mt-[6rem] text-white mb-8'>
+                <div className='fixed inset-0 backdrop-blur-md z-50'>
+                    <div className='bg-[#071620] m-10 rounded-lg w-auto h-[80%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                         <div className='ml-8 mr-8 mb-12 mt-8'>
-                            <div className='text-left flex justify-between cursor-pointer items-center ' >
-
+                            <div className='text-left flex justify-between cursor-pointer items-center'>
                                 <h3 className='items-center text-2xl mt-4'>Detalles del coche</h3>
                                 <div className='mt-4'>
                                     <button
                                         onClick={handleCloseCardDetails}
-                                        className='text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none' >
-                                            
+                                        className='text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none'>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
                                             <line x1="18" y1="6" x2="6" y2="18"></line>
                                             <line x1="6" y1="6" x2="18" y2="18"></line>
                                         </svg>
                                     </button>
                                 </div>
-
                             </div>
-                            <div className='mt-8 '>
+                            <div className='mt-8'>
                                 <form className='max-w-full'>
-                                    <div className='mb-4 grid gap-6  lg:grid-cols-2 w-full'>
+                                    <div className='mb-4 grid gap-6 lg:grid-cols-2 w-full'>
                                         <div>
                                             <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Título</label>
                                             <input value={Titulo} onChange={(e) => setTitulo(e.target.value)}
@@ -134,17 +131,16 @@ const CarDetails = ({updateCarDetails }) => {
                                             <label htmlFor="condicion" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Condición </label>
                                             <div className='flex flex-row p-2.5 '>
                                                 <div className='flex flex-row items-center'>
-                                                    <input checked={Condicion === 'Nuevo'} onChange={(e) => setCondicion(e.target.value)} value="Nuevo" type='radio' name='condicion' id='nuevo' className='h-5 w-5 bg-[#071620] rounded-full  border border-blue-gray-200 relative   border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' required />
+                                                    <input checked={Condicion === 'Nuevo'} onChange={(e) => setCondicion(e.target.value)} value="Nuevo" type='radio' name='condicion' id='nuevo' className='h-5 w-5 bg-[#071620] rounded-full border border-blue-gray-200 relative border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' required />
                                                     <label htmlFor='nuevo' className='mr-2 ml-2'>Nuevo</label>
                                                 </div>
                                                 <div className='ml-8 flex flex-row items-center'>
-                                                    <input checked={Condicion === 'Usado'} onChange={(e) => setCondicion(e.target.value)} value="Usado" type='radio' name='condicion' id='usado' className='h-5 w-5 bg-[#071620] rounded-full  border border-blue-gray-200 relative   border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' required/>
+                                                    <input checked={Condicion === 'Usado'} onChange={(e) => setCondicion(e.target.value)} value="Usado" type='radio' name='condicion' id='usado' className='h-5 w-5 bg-[#071620] rounded-full border border-blue-gray-200 relative border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' required />
                                                     <label htmlFor='usado' className='mr-2 ml-2'>Usado</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div className='mb-4'>
                                         <div className="grid gap-6 mb-6 lg:grid-cols-3">
                                             <div>
@@ -176,8 +172,6 @@ const CarDetails = ({updateCarDetails }) => {
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div className='mb-4'>
                                         <div className="grid gap-6 mb-6 lg:grid-cols-3">
                                             <div>
@@ -187,7 +181,6 @@ const CarDetails = ({updateCarDetails }) => {
                                                     <option value="2022">2022</option>
                                                     <option value="2021">2021</option>
                                                     <option value="2020">2020</option>
-
                                                 </select>
                                             </div>
                                             <div>
@@ -212,57 +205,48 @@ const CarDetails = ({updateCarDetails }) => {
                                             </div>
                                             <div>
                                                 <label htmlFor="ExteriorColor" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Color exterior</label>
-                                                <select value={Color} onChange={(e) => setColor(e.target.value)} id="ExteriorColor" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all " required>
+                                                <select value={Color} onChange={(e) => setColor(e.target.value)} id="ExteriorColor" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
                                                     <option value="">Seleccionar</option>
                                                     <option value="Blanco">Blanco</option>
                                                     <option value="Negro">Negro</option>
                                                     <option value="Gris">Gris</option>
                                                 </select>
                                             </div>
-
-
                                         </div>
                                     </div>
                                     <div className='mb-4'>
                                         <label htmlFor="Description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Descripción </label>
                                         <textarea value={Descripcion} onChange={(e) => setDescripcion(e.target.value)} type="text" id="Description" className="bg-[#12232E] rounded-lg cursor-pointer text-sm block w-full p-8" placeholder='Descripción del vehiculo...' required />
                                     </div>
-                                    <div className='text-left flex justify-end  items-center '>
-                                        <button 
-                                        onClick={() => handleSiguiente(validateCardDetails)}
-                                        className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
-                                        {notification? (
-                                            <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
-                        
-                                            <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
-                                                <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all   hover:bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => setNotification(false)}>
-                                                    <img src={close} alt="" />
-                                                </button>
-                                                <img
-                                                    loading="lazy"
-                                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/1024px-Info_icon_002.svg.png"
-                                                    className="max-w-full aspect-square w-[80px]"
-                                                />
-                                                <div className="justify-center mt-8 text-xl max-md:text-lg">UPs!</div>
-                                                <div className=" mt-3 text-xl max-md:text-sm m justify-center ">
-                                                    ¡Debe de Llenar Todos los Campos Por Favor!
+                                    <div className='text-left flex justify-end items-center'>
+                                        <button
+                                            onClick={() => handleSiguiente(validateCardDetails)}
+                                            className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+                                        {notification ? (
+                                            <div className="fixed inset-0 flex items-center justify-center z-50 sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm">
+                                                <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65">
+                                                    <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all hover:bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => setNotification(false)}>
+                                                        <img src={close} alt="" />
+                                                    </button>
+                                                    <img
+                                                        loading="lazy"
+                                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/1024px-Info_icon_002.svg.png"
+                                                        className="max-w-full aspect-square w-[80px]"
+                                                    />
+                                                    <div className="justify-center mt-8 text-xl max-md:text-lg">UPs!</div>
+                                                    <div className="mt-3 text-xl max-md:text-sm m justify-center">
+                                                        ¡Debe de Llenar Todos los Campos Por Favor!
+                                                    </div>
                                                 </div>
-                                                
                                             </div>
-                                        </div>
-                                        ):""}
+                                        ) : ""}
                                     </div>
                                 </form>
-
-
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
+
             }
 
         </>
