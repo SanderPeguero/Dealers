@@ -86,69 +86,70 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
         <>
             {isOpenFeature &&
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
-                    <div className='bg-[#071620] rounded-lg text-white m-10'>
-                        <div className='ml-8 mr-8 mb-12 mt-8'>
-                            <div className='text-left flex justify-between items-center cursor-pointer' onClick={Abre}>
-                                <h3 className='text-2xl mt-4'>Features</h3>
-                                <div className='mt-4'>
-                                    <button
-                                        onClick={handleCloseFeature}
-                                        className='text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none'
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                        </svg>
-                                    </button>
-                                </div>
+                <div className='bg-[#071620] m-10 rounded-lg w-auto h-[80%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
+                    <div className='ml-8 mr-8 mb-12 mt-8'>
+                        <div className='text-left flex justify-between items-center cursor-pointer' onClick={Abre}>
+                            <h3 className='text-2xl mt-4'>Features</h3>
+                            <div className='mt-4'>
+                                <button
+                                    onClick={handleCloseFeature}
+                                    className='text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none'
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
                             </div>
-                            <div className='mt-8 '>
-                                <form className='max-w-full'>
-                                    <div className='mb-8 grid gap-6 lg:grid-cols-4 w-full'>
-                                        {['Dirección asistida', 'Asientos con calefacción', 'Sensor de estacionamiento trasero', 'USB Port', 'AC', 'Wifi', 'Barra de techo', 'Sistema de sonido', 'Alarma', 'Control de crucero', 'Ventanas eléctricas', 'Asiento con memoria', 'Bluetooth', 'Sensor de estacionamiento delantero', 'Techo corredizo', 'Otro'].map((feature) => (
-                                            <CheckBox
-                                                value={feature}
-                                                key={feature}
-                                                text={feature}
-                                                isChecked={selectedFeatures.includes(feature)}
-                                                onCheckboxChange={() => handleCheckboxChange(feature)}
-                                            />
-                                        ))}
-                                    </div>
-
-                                    <div className='mb-4'>
-                                        <p className='mb-2 text-gray-400 ml-2'>Indique aquí si seleccionó la opción "Otro".</p>
-                                        <textarea
-                                            value={newFeature}
-                                            onChange={(e) => setNewFeature(e.target.value)}
-                                            className="bg-[#12232E] text-sm block w-full p-8"
-                                            placeholder='Escribe otra característica aquí.'
-                                            required
-                                            disabled={OtroFeature !== "Otro"}
+                        </div>
+                        <div className='mt-8'>
+                            <form className='max-w-full'>
+                                <div className='mb-8 grid gap-6 lg:grid-cols-4 w-full'>
+                                    {['Dirección asistida', 'Asientos con calefacción', 'Sensor de estacionamiento trasero', 'USB Port', 'AC', 'Wifi', 'Barra de techo', 'Sistema de sonido', 'Alarma', 'Control de crucero', 'Ventanas eléctricas', 'Asiento con memoria', 'Bluetooth', 'Sensor de estacionamiento delantero', 'Techo corredizo', 'Otro'].map((feature) => (
+                                        <CheckBox
+                                            value={feature}
+                                            key={feature}
+                                            text={feature}
+                                            isChecked={selectedFeatures.includes(feature)}
+                                            onCheckboxChange={() => handleCheckboxChange(feature)}
                                         />
-                                    </div>
-
-                                    <div className='text-left flex justify-between items-center'>
-                                        <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
-                                        <button onClick={() => handleSiguiente(validateFeature)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
-                                        {notification ? (
-                                            <div className="fixed inset-0 flex items-center justify-center z-50 sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm">
-                                                <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65">
-                                                    <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all hover:bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => setNotification(false)}>
-                                                        <img src={close} alt="" />
-                                                    </button>
-                                                    <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/1024px-Info_icon_002.svg.png" className="max-w-full aspect-square w-[80px]" />
-                                                    <div className="justify-center mt-8 text-xl max-md:text-lg">UPs!</div>
-                                                    <div className="mt-3 text-xl max-md:text-sm m justify-center">¡Debe de Llenar Todos los Campos Por Favor!</div>
-                                                </div>
+                                    ))}
+                                </div>
+            
+                                <div className='mb-4'>
+                                    <p className='mb-2 text-gray-400 ml-2'>Indique aquí si seleccionó la opción "Otro".</p>
+                                    <textarea
+                                        value={newFeature}
+                                        onChange={(e) => setNewFeature(e.target.value)}
+                                        className="bg-[#12232E] text-sm block w-full p-8"
+                                        placeholder='Escribe otra característica aquí.'
+                                        required
+                                        disabled={OtroFeature !== "Otro"}
+                                    />
+                                </div>
+            
+                                <div className='text-left flex justify-between items-center'>
+                                    <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
+                                    <button onClick={() => handleSiguiente(validateFeature)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+                                    {notification ? (
+                                        <div className="fixed inset-0 flex items-center justify-center z-50 sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm">
+                                            <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65">
+                                                <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all hover:bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => setNotification(false)}>
+                                                    <img src={close} alt="" />
+                                                </button>
+                                                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/1024px-Info_icon_002.svg.png" className="max-w-full aspect-square w-[80px]" />
+                                                <div className="justify-center mt-8 text-xl max-md:text-lg">UPs!</div>
+                                                <div className="mt-3 text-xl max-md:text-sm m justify-center">¡Debe de Llenar Todos los Campos Por Favor!</div>
                                             </div>
-                                        ) : ""}
-                                    </div>
-                                </form>
-                            </div>
+                                        </div>
+                                    ) : ""}
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
+            
             }
 
             {showWarning && (
