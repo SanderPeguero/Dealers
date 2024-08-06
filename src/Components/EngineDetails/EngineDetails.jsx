@@ -83,7 +83,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
         <>
             {isOpenEngineDetails &&
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
-                    <div className='bg-[#071620] rounded-lg text-white mb-8 m-10'>
+                    <div className='bg-[#071620] m-10 rounded-lg w-auto h-[70%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                         <div className='ml-8 mr-8 mb-12 mt-8'>
                             <div className='text-left flex justify-between items-center cursor-pointer'>
                                 <h3 className='text-2xl mt-4'>Detalles del motor</h3>
@@ -116,7 +116,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kilometraje</label>
                                                 <div className="flex">
-                                                    <input value={Kilometraje} onChange={(e) => setKilometraje(e.target.value)} type="number" id="title" className="bg-[#12232E] text-sm block w-full p-2.5" required />
+                                                    <input value={Kilometraje} onChange={(e) => setKilometraje(e.target.value)} type="number" id="title" className="bg-[#12232E] rounded-lg text-sm block w-full p-2.5" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         km
                                                     </div>
@@ -130,7 +130,10 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                                     <option value="Transmisión Automática">Transmisión Automática</option>
                                                 </select>
                                             </div>
-                                            <div className='mb-8'>
+
+                                        
+                                            
+                                            <div className='mb-8 '>
                                                 <label htmlFor="Tracción" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de tranmición</label>
                                                 <select value={DriverTrain} onChange={(e) => setDriverTrain(e.target.value)} id="TTracción" className="bg-[#12232E] text-sm block w-full rounded-lg hover:bg-slate-500 transition-all cursor-pointer p-2.5" required>
                                                     <option value="">Seleccionar</option>
@@ -138,34 +141,36 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                                     <option value="Tracción Trasera">Tracción Trasera</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className='mb-4'>
-                                        <div className="grid gap-6 mb-6 lg:grid-cols-3">
+
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Capacidad del motor</label>
                                                 <div className="flex">
-                                                    <input value={CapacidadMotor} onChange={(e) => setCapacidadMotor(e.target.value)} type="text" id="title" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={CapacidadMotor} onChange={(e) => setCapacidadMotor(e.target.value)} type="number" id="title" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         cc
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
+
+                                            <div >
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Power</label>
                                                 <div className="flex">
-                                                    <input value={Power} onChange={(e) => setPower(e.target.value)} type="text" id="title" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={Power} onChange={(e) => setPower(e.target.value)} type="number" id="title" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         hp
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
+
                                     </div>
+
                                     <div className='text-left flex justify-between items-center'>
                                         <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
                                         <button onClick={() => handleSiguiente(validateEngineDetails)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                     </div>
+
                                     {notification ? (
                                         <div className="fixed inset-0 flex items-center justify-center z-50 sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm">
                                             <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65">
