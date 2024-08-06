@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useContextCar } from '../../Context/Context';
 
 const Price = ({ PriceDatos, handleSale, handleEdit }) => {
-    const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, SaveCarSale, user } = useContextCar();
+    const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, SaveCarSale, user,handleRefresh } = useContextCar();
     const [price, setPrice] = useState(0);
     const [notification, setNotification] = useState(false);
 
@@ -21,6 +21,7 @@ const Price = ({ PriceDatos, handleSale, handleEdit }) => {
 
     const handleClosePrice = () => {
         setisOpenPrice(false);
+        handleRefresh()
     };
 
     const validatePrecio = () => {
@@ -41,6 +42,7 @@ const Price = ({ PriceDatos, handleSale, handleEdit }) => {
             }
             setPrice(0); // Limpiar el campo de precio
             handleClosePrice(); // Cerrar el modal
+            handleRefresh()
         }
     };
 

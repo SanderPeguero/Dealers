@@ -139,11 +139,15 @@ export function ProviderContext({ children }) {
         }
     };
 
+    const handleRefresh = () =>{
+        window.location.reload();
+    }
+
     return (
         <Context.Provider
             value={{
                 user,
-
+                handleRefresh,
                 CarAvailable,
                 setAvailable,
 

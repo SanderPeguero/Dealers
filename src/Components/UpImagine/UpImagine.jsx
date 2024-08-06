@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useContextCar } from '../../Context/Context';
 
 const UpImagine = ({ AudiovisualDatos }) => {
-    const { SaveMedia, user, CarEdit, isOpenImagen, setisOpenImagen, handleSiguiente, handleAnterior } = useContextCar();
+    const { SaveMedia, user, CarEdit, isOpenImagen, setisOpenImagen, handleSiguiente, handleAnterior,handleRefresh } = useContextCar();
     const [media, setMedia] = useState([]);
     const [LinkUrl, setLinkUrl] = useState([]);
     const [showExitWarning, setShowExitWarning] = useState(false);
@@ -70,6 +70,7 @@ const UpImagine = ({ AudiovisualDatos }) => {
         setLinkUrl([]);
         setMedia([]);
         setShowExitWarning(false);
+        handleRefresh()
     };
 
     // Cancelar el cierre del modal

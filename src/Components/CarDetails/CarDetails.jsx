@@ -3,7 +3,7 @@ import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
 
 const CarDetails = ({ updateCarDetails }) => {
-    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente } = useContextCar()
+    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente,handleRefresh  } = useContextCar()
     const [Titulo, setTitulo] = useState('')
     const [Condicion, setCondicion] = useState('')
     const [TipoCuerpo, setTipoCuerpo] = useState('')
@@ -85,8 +85,8 @@ const CarDetails = ({ updateCarDetails }) => {
         setColor('')
         setDescripcion('')
         setCapacity(1)
-
         setisOpenCardDetails(false)
+        handleRefresh ()
     }
 
     const validateCardDetails = () => {

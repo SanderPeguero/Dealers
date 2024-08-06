@@ -5,7 +5,7 @@ import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
 
 const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
-    const { CarEdit, isOpenFeature, setisOpenFeature, handleSiguiente, handleAnterior } = useContextCar()
+    const { CarEdit, isOpenFeature, setisOpenFeature, handleSiguiente, handleAnterior,handleRefresh } = useContextCar()
     const [selectedFeatures, setSelectedFeatures] = useState([]);
     const [OtroFeature, setOtroFeature] = useState('')
     const [notification, setNotification] = useState(false)
@@ -57,6 +57,7 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
         setSelectedFeatures([])
         setOtroFeature('')
         setNewFeature('')
+        handleRefresh()
     }
 
     const cancelClose = () => {

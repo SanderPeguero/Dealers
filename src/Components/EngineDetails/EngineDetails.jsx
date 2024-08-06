@@ -4,7 +4,7 @@ import close from "../../assets/img/close.png"
 
 const EngineDetails = ({ updateEngineDetails }) => {
 
-    const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleSiguiente, handleAnterior } = useContextCar()
+    const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleSiguiente, handleAnterior,handleRefresh } = useContextCar()
 
     const [TipoCombustimble, setTipoCombustimble] = useState('')
     const [Kilometraje, setKilometraje] = useState('')
@@ -64,6 +64,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
         setDriverTrain('')
         setCapacidadMotor('')
         setPower('')
+        handleRefresh()
     }
 
     const cancelClose = () => {
