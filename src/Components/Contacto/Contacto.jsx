@@ -87,11 +87,11 @@ const Contacto = () => {
         // Recuperar los enlaces guardados de Firebase al montar el componente
         const fetchSocialLinks = async () => {
             try {
-                // Aquí se debe recuperar de Firebase, ejemplo con localStorage para prueba
+               
                 const savedLinks = JSON.parse(localStorage.getItem('socialLinks')) || {};
                 setSocialLinks(savedLinks);
             } catch (error) {
-                console.error("Error al recuperar los enlaces de redes sociales:", error);
+               
             }
         };
         fetchSocialLinks();
@@ -106,7 +106,7 @@ const Contacto = () => {
             setSocialLinks(updatedLinks);
             localStorage.setItem('socialLinks', JSON.stringify(updatedLinks));
         } catch (error) {
-            console.error("Error al guardar los enlaces de redes sociales:", error);
+         
         }
     };
 
@@ -149,7 +149,7 @@ const Contacto = () => {
                             <div className=" mt-20 md:flex md:justify-center md:gap-28 sm:gap-12 ">
 
 
-                                <div className="  text-white text-center font-bold flex justify-between gap-12">
+                            <div className="text-white text-center font-bold flex flex-col items-center gap-6 md:flex-row md:justify-between md:gap-12">
 
                                     <div className="ext-2xl font-bold">
                                         <h2 className=" text-2xl font-bold">Encuéntranos</h2>
@@ -167,11 +167,6 @@ const Contacto = () => {
                                                 </div>
                                             )}
                                         </div>
-
-                                        {/*  <div className='flex mt-5 text-lg'>
-                                            #12 Av. Antonio G., San Frac., <br /> Duarte, 31000, Rep. Domicana
-                                        </div> */}
-
                                     </div>
 
                                     <div className="">
@@ -196,10 +191,6 @@ const Contacto = () => {
                                                         </div>
                                                     )}
                                                 </div>
-
-                                                {/* <div className=' text-lg'>
-                                                    info@car.com
-                                                </div> */}
                                             </div>
 
                                             <div>
@@ -216,13 +207,8 @@ const Contacto = () => {
                                                         </div>
                                                     )}
                                                 </div>
-                                                {/* <div className=' text-lg'>
-                                                    588-865-3730
-                                                </div> */}
                                             </div>
                                         </div>
-
-
 
                                     </div>
 

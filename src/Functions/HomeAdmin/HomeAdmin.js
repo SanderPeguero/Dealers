@@ -105,7 +105,7 @@ export const GetContact = async (setTituloContact, setUbicacionContact, setGmail
 
         if (ContactSnashop.exists()) {
             const ContactData = ContactSnashop.val();
-            console.log(ContactData)
+           
             setTituloContact(ContactData.TituloContacto)
             setUbicacionContact(ContactData.Ubicacion)
              setGmailContact(ContactData.Gmail)
