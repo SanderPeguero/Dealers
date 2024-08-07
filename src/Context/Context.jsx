@@ -50,6 +50,16 @@ export function ProviderContext({ children }) {
     const [isOpenImagen, setisOpenImagen] = useState(false)
     const [isOpenPrice, setisOpenPrice] = useState(false)
 
+
+    // Informacion de Contacto
+    const [TituloContact, setTituloContact] = useState('')
+    const [UbicacionContact, setUbicacionContact] = useState('')
+    const [GmailContact, setGmailContact] = useState('')
+    const [PhoneContact, setPhoneContact] = useState('')
+    const [TitulotwoContact, setTitulotwoContact] = useState('')
+
+
+
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -63,6 +73,7 @@ export function ProviderContext({ children }) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
             GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -73,6 +84,7 @@ export function ProviderContext({ children }) {
 
     useEffect(() => {
         GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+        GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
     }, [])
 
     const handleRemove = (dato) => {
@@ -163,6 +175,7 @@ export function ProviderContext({ children }) {
                 setAvailable,
 
                
+
                 SaveCarSale,
                 SaveMedia,
                 SaveArchivo,
@@ -193,7 +206,7 @@ export function ProviderContext({ children }) {
                 CarEdit,
                 setCarEdit,
                 DeleteCarSale,
-                
+
                 EditCarSale,
 
                 Formatnumber,
@@ -218,10 +231,16 @@ export function ProviderContext({ children }) {
                 ReservaCar,
                 ReservaCarList,
                 ListReservaCar,
-                setReservaCarList
+                setReservaCarList,
+                ListCarSale, setLisCarNew, setLisCarUsed, setListCar,
 
-
-
+                editTituloContact,
+                TituloContact, setTituloContact,
+                UbicacionContact, setUbicacionContact,
+                GmailContact, setGmailContact,
+                PhoneContact, setPhoneContact,
+                TitulotwoContact, setTitulotwoContact,
+                GetContact
             }}
         >
             {children}
