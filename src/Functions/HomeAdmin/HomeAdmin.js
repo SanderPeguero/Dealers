@@ -176,3 +176,15 @@ export const GetContact = async (setTituloContact, setUbicacionContact, setGmail
         }
     };
 
+    export const updateSocialMediaLinks = async (socialLinks) => {
+        const socialMediaRef = ref(db, 'SocialMediaLinks'); // Ruta en la base de datos
+    
+        try {
+            await update(socialMediaRef, socialLinks);
+            console.log("Enlaces de redes sociales actualizados");
+        } catch (error) {
+            console.error("Error al actualizar los enlaces de redes sociales:", error);
+        }
+    };
+
+
