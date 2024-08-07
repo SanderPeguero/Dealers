@@ -87,7 +87,7 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
         <>
             {isOpenFeature &&
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
-                <div className='bg-[#071620] m-10 rounded-lg w-auto h-[90%] mt-[4rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
+                <div className='bg-[#071620] m-10 rounded-lg w-auto h-[85%] mt-[4rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                     <div className='ml-8 mr-8 mb-12 mt-8'>
                         <div className='text-left flex justify-between items-center cursor-pointer' onClick={Abre}>
                             <h3 className='text-2xl mt-4'>Features</h3>
@@ -105,7 +105,7 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
                         </div>
                         <div className='mt-8'>
                             <form className='max-w-full'>
-                                <div className='mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 w-full'>
+                                <div className='mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 w-full'>
                                     {['Dirección asistida', 'Asientos con calefacción', 'Sensor de estacionamiento trasero', 'USB Port', 'AC', 'Wifi', 'Barra de techo', 'Sistema de sonido', 'Alarma', 'Control de crucero', 'Ventanas eléctricas', 'Asiento con memoria', 'Bluetooth', 'Sensor de estacionamiento delantero', 'Techo corredizo', 'Otro'].map((feature) => (
                                         <CheckBox
                                             value={feature}

@@ -87,7 +87,8 @@ const UpImagine = ({ AudiovisualDatos }) => {
         <>
             {isOpenImagen && (
                 <div className='fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center'>
-                <div className='bg-[#071620] rounded-lg text-white p-6 max-w-5xl w-full h-[90vh] flex flex-col overflow-y-auto'>
+                    {/* bg-[#071620] m-10 rounded-lg w-auto h-[90%] md:h-auto mt-[4rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none */}
+                <div className='bg-[#071620] m-10 p-6 rounded-lg w-auto h-[45%] md:h-auto mt-[4rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none '>
                     <div className='flex justify-between items-center mb-4'>
                         <h3 className='text-2xl'>Imágenes</h3>
                         <button

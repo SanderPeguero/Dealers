@@ -83,7 +83,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
         <>
             {isOpenEngineDetails &&
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
-                    <div className='bg-[#071620] m-10 rounded-lg w-auto h-[70%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
+                    <div className='bg-[#071620] m-10 rounded-lg w-auto h-[65%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                         <div className='ml-8 mr-8 mb-12 mt-8'>
                             <div className='text-left flex justify-between items-center cursor-pointer'>
                                 <h3 className='text-2xl mt-4'>Detalles del motor</h3>
