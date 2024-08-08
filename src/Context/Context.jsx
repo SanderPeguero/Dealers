@@ -6,7 +6,7 @@ import { auth } from "../firebase/firebase";
 import { SaveCarSale, SaveMedia, SaveArchivo,
      ListCarSale, DeleteCarSale, EditCarSale,ListReservaCar ,ReservaCar } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
+import { GetHero, GetContact, editTituloContact, GetReserva } from "../Functions/HomeAdmin/HomeAdmin"
 
 const Context = createContext();
 
@@ -38,6 +38,12 @@ export function ProviderContext({ children }) {
     const [CarDatos, setCarDatos] = useState([])
     const [CarEdit, setCarEdit] = useState(null)
 
+    const [Name, setName] = useState('')
+    const [Phone, setPhone] = useState('')
+    const [Email, setEmail] = useState('')
+    const [CarName, setCarName] = useState('')
+    const [Price, setPrice] = useState('')
+
     const [TituloHero, setTituloHero] = useState('')
     const [DescripcionHero, setDescripcionHero] = useState('')
     const [SliderImg, setSliderImg] = useState([])
@@ -63,6 +69,7 @@ export function ProviderContext({ children }) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
             GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+            GetReserva(setName, setPhone, setEmail, setCarName, setPrice)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -70,7 +77,9 @@ export function ProviderContext({ children }) {
     useEffect(() => {
         ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
     }, [])
-
+    useEffect(() => {
+        GetReserva(setName, setPhone, setEmail, setCarName, setPrice)
+    }, [])
     useEffect(() => {
         GetHero(setTituloHero, setDescripcionHero, setSliderImg)
     }, [])
@@ -209,7 +218,11 @@ export function ProviderContext({ children }) {
                 isOpenImagen, setisOpenImagen,
                 isOpenPrice, setisOpenPrice,
                 handleSiguiente, handleAnterior,
-
+                setName, 
+                setPhone, 
+                setEmail, 
+                setCarName, 
+                setPrice,GetReserva,
                 ListCarSale,
                 setLisCarNew,
                 setLisCarUsed,
@@ -217,6 +230,11 @@ export function ProviderContext({ children }) {
 
                 ReservaCar,
                 ReservaCarList,
+                Name,
+                Phone,
+                Email,
+                CarName,
+                Price,
                 ListReservaCar,
                 setReservaCarList
 
