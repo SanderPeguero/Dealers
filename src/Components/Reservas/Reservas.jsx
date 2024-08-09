@@ -6,7 +6,7 @@ import ReservationModal from './ReservationModal';
 const Reservas = () => {
     
     
-    const {ReservaCarList, Formatnumber } = useContextCar();
+    const {ReservaCarList, Formatnumber, setchangeReserve } = useContextCar();
     const [Username, setUserName] = useState("");
     const [Title, setTitle] = useState("");
 
@@ -16,6 +16,7 @@ const Reservas = () => {
     const handleOpenModal = (reserva) => {
         setSelectedReserva(reserva);
         setShowModal(true);
+        setchangeReserve(false)
     };
 
     const handleCloseModal = () => {
