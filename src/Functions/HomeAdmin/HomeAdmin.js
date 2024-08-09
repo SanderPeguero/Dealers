@@ -1,4 +1,4 @@
-import { db, storage } from "../../firebase/firebase";
+import { db, dbFire, storage } from "../../firebase/firebase";
 import { set, ref, get, update } from "firebase/database"
 import { ref as storageref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"
 
@@ -95,79 +95,10 @@ export const deleteImageURL = async (imageKey) => {
     }
 };
 
-export const GetReserva = async (setName, setPhone, setEmail, setCarName, setPrice) => {
-    const ReservaRef = ref(db, 'Reserva');
 
-    try {
-        const ReservaSnashop = await get(ReservaRef);
 
-        if (ReservaSnashop.exists()) {
-            const ReservaData = ReservaSnashop.val();
-            setName(ReservaData.UserName)
-            console.log(ReservaData.UserName)
-            setPhone(ReservaData.Phone)
-            setEmail(ReservaData.Email)
-            setCarName(ReservaData.Car)
-            setPrice(ReservaData.Price)
-        } else {
-            console.log("No data available");
-            return null;
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        return null;
-    }
-};
 
-export const editUserName = async (newUserName) => {
-    const ReservaRef = ref(db, 'Reserva');
-    try {
-        await update(ReservaRef, { UserName: newUserName });
-        console.log("Nombre de Usuario Actualizado");
-    } catch (error) {
-        console.error("Error al actualizar el Nombre de Usuario:", error);
-    }
-};
 
-export const editPhone = async (newPhone) => {
-    const ReservaRef = ref(db, 'Reserva');
-    try {
-        await update(ReservaRef, { Phone: newPhone });
-        console.log("Telefono de Usuario Actualizado");
-    } catch (error) {
-        console.error("Error al actualizar el Telefono de Usuario:", error);
-    }
-};
-
-export const editEmail = async (newEmail) => {
-    const ReservaRef = ref(db, 'Reserva');
-    try {
-        await update(ReservaRef, { Email: newEmail });
-        console.log("Correo Electronico de Usuario Actualizado");
-    } catch (error) {
-        console.error("Error al actualizar el Correo Electronico de Usuario:", error);
-    }
-};
-
-export const editCar = async (newCar) => {
-    const ReservaRef = ref(db, 'Reserva');
-    try {
-        await update(ReservaRef, { Car: newCar });
-        console.log("Nombre de Vehiculo Actualizado");
-    } catch (error) {
-        console.error("Error al actualizar el Nombre de Vehiculo:", error);
-    }
-};
-
-export const editPrice = async (newPrice) => {
-    const ReservaRef = ref(db, 'Reserva');
-    try {
-        await update(ReservaRef, { Price: newPrice });
-        console.log("Precio de Vehiculo Actualizado");
-    } catch (error) {
-        console.error("Error al actualizar el Precio de Vehiculo:", error);
-    }
-};
 
 export const GetContact = async (setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact) => {
 

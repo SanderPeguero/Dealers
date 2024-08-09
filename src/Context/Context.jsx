@@ -4,9 +4,9 @@ import { auth } from "../firebase/firebase";
 
 // Functions
 import { SaveCarSale, SaveMedia, SaveArchivo,
-     ListCarSale, DeleteCarSale, EditCarSale,ListReservaCar ,ReservaCar } from "../Functions/Sales/Sales";
+     ListCarSale, DeleteCarSale, EditCarSale,ListReservaCar ,ReservaCar,GetReserva } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-import { GetHero, GetContact, editTituloContact, GetReserva } from "../Functions/HomeAdmin/HomeAdmin"
+import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
 
 const Context = createContext();
 
@@ -43,6 +43,9 @@ export function ProviderContext({ children }) {
     const [Email, setEmail] = useState('')
     const [CarName, setCarName] = useState('')
     const [Price, setPrice] = useState('')
+    const [color, setColor] = useState('')
+    const [year, setYear] = useState('')
+    const [condition, setCondition] = useState('')
 
     const [TituloHero, setTituloHero] = useState('')
     const [DescripcionHero, setDescripcionHero] = useState('')
@@ -69,7 +72,7 @@ export function ProviderContext({ children }) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
             GetHero(setTituloHero, setDescripcionHero, setSliderImg)
-            GetReserva(setName, setPhone, setEmail, setCarName, setPrice)
+            GetReserva(setName, setPhone, setEmail, setCarName, setPrice, setCondition, setYear, setColor)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -78,7 +81,7 @@ export function ProviderContext({ children }) {
         ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
     }, [])
     useEffect(() => {
-        GetReserva(setName, setPhone, setEmail, setCarName, setPrice)
+        GetReserva(setName, setPhone, setEmail, setCarName, setPrice, setCondition, setYear, setColor)
     }, [])
     useEffect(() => {
         GetHero(setTituloHero, setDescripcionHero, setSliderImg)
@@ -227,12 +230,15 @@ export function ProviderContext({ children }) {
                 setLisCarNew,
                 setLisCarUsed,
                 setListCar,
-
+                setCondition, setYear, setColor,
                 ReservaCar,
                 ReservaCarList,
                 Name,
                 Phone,
                 Email,
+                condition,
+                year,
+                color,
                 CarName,
                 Price,
                 ListReservaCar,

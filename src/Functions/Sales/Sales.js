@@ -1,6 +1,6 @@
 import { dbFire, storage } from "../../firebase/firebase"
 import { collection, addDoc, getDocs, onSnapshot, deleteDoc, doc, updateDoc } from "firebase/firestore"
-import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { ref as storageref, uploadBytes, getDownloadURL, ref } from "firebase/storage"
 
 
 export const SaveCarSale = async (datos, userId) => {
@@ -49,6 +49,43 @@ export const SaveArchivo = (file, userId, setLinkUrl) => {
     });
 }
 
+export const GetReserva = async (setName, setPhone, setEmail, setCarName, setPrice, setCondition, setYear, setColor) => {
+    const ReservaRef = ref(dbFire, 'ReservationCar');
+
+    try {
+        const ReservaSnashop = await get(ReservaRef);
+
+        if (ReservaSnashop.exists()) {
+            const ReservaData = ReservaSnashop.val();
+            setName(ReservaData.UserName)
+            setPhone(ReservaData.Phone)
+            setEmail(ReservaData.Email)
+            setCarName(ReservaData.Car)
+            setPrice(ReservaData.Price)
+            setCondition(ReservaData.Condition)
+            setYear(ReservaData.Year)
+            setColor(ReservaData.Color)
+        } else {
+            console.log("No data available");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        return null;
+    }
+};
+
+
+export const editReserve = async (reservaId, updateData) => {
+    
+    try {
+        const docRef = doc(dbFire, 'ReservationCar', reservaId);
+        await updateDoc(docRef, updateData);
+        console.log("Reserva Actualizada");
+    } catch (error) {
+        console.error("Error al actualizar Reserva:", error);
+    }
+};
 
 export const DeleteCarSale = async (carSaleId) => {
     try {
