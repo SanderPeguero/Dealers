@@ -1,4 +1,4 @@
-import { db, storage } from "../../firebase/Firebase";
+import { db, dbFire, storage } from "../../firebase/firebase";
 import { set, ref, get, update } from "firebase/database"
 import { ref as storageref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"
 
@@ -94,6 +94,9 @@ export const deleteImageURL = async (imageKey) => {
         console.error(`Error al eliminar la URL de ${imageKey}:`, error);
     }
 };
+
+
+
 
 
 
