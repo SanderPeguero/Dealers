@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useContextCar } from "../../Context/Context";
+import { useContextCar } from '../../Context/Context'
 
 const ProductDetails = () => {
     const { CarAvailable, Formatnumber, ReservaCar } = useContextCar()
@@ -71,7 +71,7 @@ const ProductDetails = () => {
     return (
 
         <div className=' bg-zinc-950 '>
-            <div className=" text-white flex flex-col justify-center items-start px-16 py-14 w-full bg-zinc-950 max-md:px-5 max-md:max-w-full">
+            <div className=" text-white flex flex-col justify-center items-start px-16 py-14 w-full bg-zinc-950 max-md:px-5 max-md:max-w-full  ">
                 <div className="flex flex-col ml-16 max-md:max-w-full">
                     <div className="text-5xl max-md:max-w-full max-md:text-4xl">
                         {CarAvailable?.Sale?.DetalleCoche?.Titulo}
