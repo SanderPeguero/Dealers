@@ -203,12 +203,16 @@ export function ProviderContext({ children }) {
 
 
 
+    const handleRefresh = () =>{
+        window.location.reload();
+    }
 
     return (
         <Context.Provider
             value={{
                 user,
                 setSliderImg,
+                handleRefresh,
                 CarAvailable,
                 setAvailable,
 
