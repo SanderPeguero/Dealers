@@ -208,6 +208,7 @@ export function ProviderContext({ children }) {
         <Context.Provider
             value={{
                 user,
+                setSliderImg,
                 CarAvailable,
                 setAvailable,
 
