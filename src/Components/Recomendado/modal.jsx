@@ -37,7 +37,7 @@ const Modal = ({ showModal, handleClose }) => {
                         <div className="flex flex-col px-7 w-full max-md:px-5 max-md:max-w-full m-4 mt-2">
 
                             <div className="flex text-2xl mt-5 max-md:text-xl font-extrabold text-white max-md:flex-wrap max-md:max-w-full">
-                                <div className="flex-auto">{CarAvailable?.Sale?.DetalleCoche?.Titulo}</div>
+                                <div className="flex-auto ">{CarAvailable?.Sale?.DetalleCoche?.Titulo}</div>
                                 <IoMdClose className='cursor-pointer mx-10 hover:bg-red-600 hover:rounded-full' onClick={handleClose} />
                             </div>
                             <div className="flex gap-1.5 self-start mt-6 text-lg font-bold">
