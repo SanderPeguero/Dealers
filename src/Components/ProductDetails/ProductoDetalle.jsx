@@ -80,12 +80,12 @@ const ProductDetails = () => {
             </div>
 
 
-            <div className="grid grid-cols-6 mx-20  ">
+            {/* <div className="grid grid-cols-6 mx-20  ">
 
                 {CarAvailable?.Sale?.Multimedia.Imagen.map((Image, index) => (
-                    <div key={index} className="p-2">
+                    <div key={index} className="w-64 mt-10 ">
                         <img
-                            className="rounded-t-lg w-auto cursor-pointer"
+                            className="rounded-t-lg w-56 p-2 cursor-pointer"
                             src={Image}
                             alt={`Image ${index}`}
                             onClick={() => setSelectedImage(Image)}
@@ -93,7 +93,6 @@ const ProductDetails = () => {
                     </div>
                 ))}
 
-                {/* Modal para imagen grande */}
                 {selectedImage && (
                     <div
                         className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75"
@@ -103,17 +102,61 @@ const ProductDetails = () => {
                             src={selectedImage}
                             alt="Enlarged view"
                             className="w-full max-w-3xl h-auto"
-                            onClick={(e) => e.stopPropagation()} // Evita que el clic en la imagen cierre el modal
+                            onClick={(e) => e.stopPropagation()} 
                         />
                     </div>
                 )}
 
 
+            </div> */}
+
+            <div className="mx-5 md:mx-10 lg:mx-20 ">
+                <div className="block md:hidden">
+                    {CarAvailable?.Sale?.Multimedia.Imagen.length > 0 && (
+                        <div className="w-full mt-10">
+                            <img
+                                className="rounded-t-lg w-full h-auto p-2 cursor-pointer"
+                                src={CarAvailable.Sale.Multimedia.Imagen[0]}
+                                alt={`Image 0`}
+                                onClick={() => setSelectedImage(CarAvailable.Sale.Multimedia.Imagen[0])}
+                            />
+                        </div>
+                    )}
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+                    {CarAvailable?.Sale?.Multimedia.Imagen.slice(1).map((Image, index) => (
+                        <div key={index} className="w-full mt-10">
+                            <img
+                                className="rounded-t-lg w-full h-auto p-2 cursor-pointer"
+                                src={Image}
+                                alt={`Image ${index + 1}`}
+                                onClick={() => setSelectedImage(Image)}
+                            />
+                        </div>
+                    ))}
+                </div>
+
+                {selectedImage && (
+                    <div
+                        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 "
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <img
+                            src={selectedImage}
+                            alt="Enlarged view"
+                            className="w-full max-w-3xl h-auto"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </div>
+                )}
             </div>
 
-            <div className="my-10 p-5 flex flex-col self-stretch py-20 mt-32 font-semibold text-white bg-[#0B0C10] max-w-full justify-center md:pl-5 md:mt-10">
+
+
+
+            <div className="mx-2 p-5 flex flex-col self-stretch py-20 mt-3 font-semibold text-white bg-[#0B0C10] max-w-full justify-center md:pl-5 md:mt-10">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:flex-col">
-                    <div className="">
+                    <div className="mx-2">
 
                         <div className="flex flex-col grow mt-1.5 max-md:mt-10 max-md:max-w-full">
                             <div className="text-2xl font-bold text-zinc-300 max-md:max-w-full">
