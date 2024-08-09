@@ -6,7 +6,7 @@ import Youtube from '../../assets/Footer/youtube.png'
 import { useContextCar } from '../../Context/Context'
 const Footer = () => {
 
- const {PhoneContact,GmailContact,UbicacionContact} = useContextCar()
+    const { PhoneContact, GmailContact, UbicacionContact, Socialnetworks } = useContextCar()
 
 
     return (
@@ -21,7 +21,7 @@ const Footer = () => {
                         <a href='#/AboutUS' className='mb-4 bg-[#12232E] cursor-pointer' >
                             SOBRE NOSOTROS
                         </a>
-                    
+
                         <div className='mb-4 bg-[#12232E]'>
                             CONTACTO
                         </div>
@@ -38,23 +38,28 @@ const Footer = () => {
                     <div className='grid lg:grid-cols-1 w-full items-center'>
                         <div className='flex  items-center justify-center'>
                             <p className="line-clamp-3 w-[10rem]">
-                               {UbicacionContact}</p>
+                                {UbicacionContact}</p>
                         </div>
 
 
 
                         <div className='mt-4 '>
                             <div className='flex flex-row items-center justify-center bg-[#12232E] '>
-                                <div className='h-6 w-6 mr-2 bg-[#12232E]'>
-                                    <img src={Facebook} />
-                                </div>
-                                <div className='h-6 w-6 mr-2'>
-                                    <img src={Instagram} />
-                                </div>
-                                <div className='h-6 w-6 mr-2'>
-                                    <img src={Youtube} />
-                                </div>
+                               
+
+                                {Socialnetworks.map((social, index) => (
+                                    <div key={index} className="flex flex-col mr-4 ">
+                                        <div className="">
+                                            <a href={social?.UrlRedSocial} target="_blank" rel="noopener noreferrer"> 
+                                                <img className="w-8 duration-200 rounded-full" src={social?.UrlImgRedSocial} alt="Facebook" /></a>
+                                        </div>
+
+                                    </div>
+                                )
+                                )}
                             </div>
+
+
                         </div>
                     </div>
                 </div>

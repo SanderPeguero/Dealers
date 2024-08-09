@@ -57,6 +57,12 @@ export function ProviderContext({ children }) {
     const [GmailContact, setGmailContact] = useState('')
     const [PhoneContact, setPhoneContact] = useState('')
     const [TitulotwoContact, setTitulotwoContact] = useState('')
+    const [Socialnetworks, setSocialnetworks] = useState([])
+    
+    const [CheckContact, setCheckContact] = useState(false)
+  
+    //Socialnetworks
+
 
 
 
@@ -73,7 +79,7 @@ export function ProviderContext({ children }) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
             GetHero(setTituloHero, setDescripcionHero, setSliderImg)
-            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
+            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact, setSocialnetworks)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -84,8 +90,17 @@ export function ProviderContext({ children }) {
 
     useEffect(() => {
         GetHero(setTituloHero, setDescripcionHero, setSliderImg)
-        GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
+        GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact, setSocialnetworks)
     }, [])
+
+    useEffect(() => {
+        if (CheckContact === true) {
+             GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact, setSocialnetworks)
+             setCheckContact(false)
+        }
+       
+    }, [CheckContact])
+    
 
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);
@@ -240,7 +255,13 @@ export function ProviderContext({ children }) {
                 GmailContact, setGmailContact,
                 PhoneContact, setPhoneContact,
                 TitulotwoContact, setTitulotwoContact,
-                GetContact
+                GetContact,
+                Socialnetworks, setSocialnetworks,
+                GetContact,
+                setCheckContact
+
+
+
             }}
         >
             {children}
