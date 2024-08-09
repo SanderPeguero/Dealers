@@ -3,8 +3,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 // Functions
-import { SaveCarSale, SaveMedia, SaveArchivo,
-     ListCarSale, DeleteCarSale, EditCarSale,ListReservaCar ,ReservaCar } from "../Functions/Sales/Sales";
+import {
+    SaveCarSale, SaveMedia, SaveArchivo,
+    ListCarSale, DeleteCarSale, EditCarSale, ListReservaCar, ReservaCar, GetReserva
+} from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
 import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
 
@@ -38,6 +40,15 @@ export function ProviderContext({ children }) {
     const [CarDatos, setCarDatos] = useState([])
     const [CarEdit, setCarEdit] = useState(null)
 
+    const [Name, setName] = useState('')
+    const [Phone, setPhone] = useState('')
+    const [Email, setEmail] = useState('')
+    const [CarName, setCarName] = useState('')
+    const [Price, setPrice] = useState('')
+    const [color, setColor] = useState('')
+    const [year, setYear] = useState('')
+    const [condition, setCondition] = useState('')
+
     const [TituloHero, setTituloHero] = useState('')
     const [DescripcionHero, setDescripcionHero] = useState('')
     const [SliderImg, setSliderImg] = useState([])
@@ -49,6 +60,7 @@ export function ProviderContext({ children }) {
     const [isOpenFeature, setisOpenFeature] = useState(false)
     const [isOpenImagen, setisOpenImagen] = useState(false)
     const [isOpenPrice, setisOpenPrice] = useState(false)
+    const [changeReserve, setchangeReserve] = useState(false)
 
 
     // Informacion de Contacto
@@ -167,7 +179,7 @@ export function ProviderContext({ children }) {
     };
 
 
-    
+
     const [ReservaCarList, setReservaCarList] = useState([]);
 
     useEffect(() => {
@@ -175,11 +187,21 @@ export function ProviderContext({ children }) {
             const reservas = await ListReservaCar();
             setReservaCarList(reservas);
         };
-
         loadReservaCar();
     }, []);
-    
-    
+
+    useEffect(() => {
+        if (changeReserve === true) {
+            const loadReservaCar = async () => {
+                const reservas = await ListReservaCar();
+                setReservaCarList(reservas);
+            };
+            loadReservaCar();
+        }
+    }, [changeReserve])
+
+
+
 
 
     return (
@@ -189,7 +211,6 @@ export function ProviderContext({ children }) {
                 CarAvailable,
                 setAvailable,
 
-               
 
                 SaveCarSale,
                 SaveMedia,
@@ -237,14 +258,26 @@ export function ProviderContext({ children }) {
                 isOpenImagen, setisOpenImagen,
                 isOpenPrice, setisOpenPrice,
                 handleSiguiente, handleAnterior,
-
+                setName,
+                setPhone,
+                setEmail,
+                setCarName,
+                setPrice, GetReserva,
                 ListCarSale,
                 setLisCarNew,
                 setLisCarUsed,
                 setListCar,
-
+                setCondition, setYear, setColor,
                 ReservaCar,
                 ReservaCarList,
+                Name,
+                Phone,
+                Email,
+                condition,
+                year,
+                color,
+                CarName,
+                Price,
                 ListReservaCar,
                 setReservaCarList,
                 ListCarSale, setLisCarNew, setLisCarUsed, setListCar,
@@ -258,7 +291,8 @@ export function ProviderContext({ children }) {
                 GetContact,
                 Socialnetworks, setSocialnetworks,
                 GetContact,
-                setCheckContact
+                setCheckContact,
+                setchangeReserve
 
 
 
