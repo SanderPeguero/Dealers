@@ -34,7 +34,8 @@ const defaultCenter = {
 };
 const Contacto = () => {
 
-    const { user, WhichRole, GetContact,setCheckContact, TituloContact, setTituloContact, UbicacionContact, setUbicacionContact, GmailContact, setGmailContact, PhoneContact, setPhoneContact, TitulotwoContact, setTitulotwoContact, setSocialnetworks, Socialnetworks } = useContextCar()
+    const { user, WhichRole, GetContact, setCheckContact, TituloContact, setTituloContact, UbicacionContact, setUbicacionContact,
+        GmailContact, setGmailContact, PhoneContact, setPhoneContact, TitulotwoContact, setTitulotwoContact, setSocialnetworks, Socialnetworks } = useContextCar()
 
     const [TitleContact, setTitleContact] = useState('Encuentranos en')
     const [UbicationContact, setUbicationContact] = useState('#12 Av. Antonio G. San Frac., Duarte, 31000, Rep. Dom.')
@@ -303,15 +304,12 @@ const Contacto = () => {
                                     <AddSocialMedia isOpen={isModalOpen} onClose={closeModal} />
                                     <EditSocialMedia isOpen={isOpenEditModal} onClose={CloseModalEdit} datos={SocialEdit} index={IndexEdit} />
 
-
-
                                     <div className="flex flex-col items-center">
-
 
                                         <div className="mt-4 flex flex-wrap justify-center gap-4">
                                             <div className=" flex items-center justify-center">
                                                 {Socialnetworks.map((social, index) => (
-                                                    <div key={index} className="flex flex-col mr-4">
+                                                    <div key={index} className="flex flex-col mr-4 ">
                                                         {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                                             <div className="px-3 py-2   text-xs leading-4">
                                                                 <button onClick={() => OpenModalEdit(social, index)} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
@@ -320,7 +318,10 @@ const Contacto = () => {
                                                             </div>
                                                         )}
                                                         <div className="">
-                                                            <a href="#"><img className="w-16 duration-200" src={social?.UrlImgRedSocial} alt="Facebook" /></a>
+                                                            {/* <a href=""><img className="w-16 duration-200 rounded-full" src={social?.UrlImgRedSocial} alt="Facebook" /></a> */}
+                                                            <a href={social?.UrlRedSocial} target="_blank" rel="noopener noreferrer">
+                                                                <img className="w-16 duration-200 rounded-full" src={social?.UrlImgRedSocial} alt="Facebook" />
+                                                            </a>
                                                         </div>
                                                         {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                                             <div className="px-3 py-2   text-xs leading-4">
@@ -331,11 +332,8 @@ const Contacto = () => {
                                                         )}
                                                     </div>
                                                 )
-
-
-
-
                                                 )}
+
                                                 {/* <div className="flex flex-col mr-4">
                                                     {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                                         <div className="px-3 py-2   text-xs leading-4">
@@ -376,10 +374,7 @@ const Contacto = () => {
                                                     </div>
                                                 </div> */}
 
-
-
                                             </div>
-
 
 
                                             {/*  {Object.keys(socialLinks).map((social) => (
@@ -416,9 +411,12 @@ const Contacto = () => {
                                             ))}*/}
                                         </div>
 
-                                        <div className="cursor-pointer mt-4" onClick={openModal} >
-                                            <IoAddCircleOutline size={54} className="text-white bg-transparent rounded-full" />
-                                        </div>
+                                        {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
+
+                                            <div className="cursor-pointer mt-4" onClick={openModal} >
+                                                <IoAddCircleOutline size={54} className="text-white bg-transparent rounded-full" />
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { AgregarRedSocial, uploadImageRedSocial } from '../../Functions/HomeAdmin/HomeAdmin';
 import { useContextCar } from '../../Context/Context';
 const AddSocialMedia = ({ isOpen, onClose }) => {
+
     const {setCheckContact} = useContextCar()
+
     const [UrlPerfil, setUrlPerfil] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [imageUrl, setImageUrl] = useState('');

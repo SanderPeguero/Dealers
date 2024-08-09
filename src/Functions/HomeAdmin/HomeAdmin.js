@@ -105,7 +105,7 @@ export const GetContact = async (setTituloContact, setUbicacionContact, setGmail
 
         if (ContactSnashop.exists()) {
             const ContactData = ContactSnashop.val();
-            console.log(ContactData)
+            // console.log(ContactData)
 
             setTituloContact(ContactData.TituloContacto)
             setUbicacionContact(ContactData.Ubicacion)
@@ -206,7 +206,8 @@ export const AgregarRedSocial = async (nuevaRedSocial) => {
 
             // Subir el arreglo actualizado de nuevo a Firebase
             await update(ContactRef, { SocialMedia: socialMediaArray });
-            console.log("Nueva red social agregada");
+            console.log("Nueva red social agregada" );
+            console.log(nuevaRedSocial.Url)
         } else {
             console.error("No se encontraron datos en Contact");
         }
