@@ -5,20 +5,23 @@ import MainScreen from './Layout/MainScreen/MainScreen'
 import LogInLayout from './Layout/LogInLayout/LogInLayout'
 import SignInLayout from './Layout/SignInLayout/SignInLayout'
 import Footer from './Layout/Footer/Footer'
-
-
+import ReservarLayout from './Layout/ReservarLayout/ReservarLayout'
+import DetailsAutos from './Layout/DetailsAutos/DetailsAuto'
 function App() {
   const { user, WhichRole, locationR } = useContextCar()
 
 
   const commonRoutes = [
     { path: '/', element: <MainScreen /> },
+    { path: '/DetailsAutos', element: <DetailsAutos /> },
   ]
 
   const AdminRoutes = [
     { path: '/', element: <MainScreen /> },
     { path: '/LognIn', element: <LogInLayout /> },
-    { path: '/SignIn', element: <SignInLayout /> }
+    { path: '/SignIn', element: <SignInLayout /> },
+    { path: '/Reservas', element: <ReservarLayout />},
+    { path: '/DetailsAutos', element: <DetailsAutos /> },
   
   ]
 
@@ -29,7 +32,7 @@ function App() {
 
     <>
       <Router>
-        <Routes>
+        <Routes>1
           {routes.map((route, index) => (
             <Route key={index} {...route} />
           ))}

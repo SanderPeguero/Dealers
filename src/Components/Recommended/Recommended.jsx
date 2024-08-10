@@ -9,7 +9,7 @@ import { FaPlus } from "react-icons/fa6";
 import { GoChevronRight } from "react-icons/go";
 import { MdDelete } from 'react-icons/md';
 
-const Recomendado = () => {
+const Recommended = () => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar,
         setAvailable, isFiltro, setCarEdit, Formatnumber, DeleteCarSale,
         isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
@@ -29,7 +29,7 @@ const Recomendado = () => {
         setShowModal(false);
     };
 
-    const handleAgregarAuto = () => {
+    const handleAddAuto = () => {
         setisOpenCardDetails(!isOpenCardDetails);
     }
 
@@ -107,7 +107,7 @@ const Recomendado = () => {
                                 <div className="flex items-center justify-center text-2xl border text-white rounded transition duration-300 hover:bg-blue-500 hover:text-white focus:outline-none">
 
                                     <div className="">
-                                        <button onClick={() => handleAgregarAuto()}
+                                        <button onClick={() => handleAddAuto()}
                                         >
                                             <FaPlus className='mx-40 mt-4 text-4xl' />
                                             <div className='text-4xl m-5 '>Agregar auto nuevo </div>
@@ -168,4 +168,4 @@ const Recomendado = () => {
     );
 };
 
-export default Recomendado;
+export default Recommended;

@@ -3,10 +3,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 // Functions
-import { SaveCarSale, SaveMedia, SaveArchivo,
-     ListCarSale, DeleteCarSale, EditCarSale } from "../Functions/Sales/Sales";
+import {
+    SaveCarSale, SaveMedia, SaveArchivo,
+    ListCarSale, DeleteCarSale, EditCarSale, ListReservaCar, ReservaCar, GetReserva
+} from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
+import { GetHero, GetContact, editTitleContact } from "../Functions/HomeAdmin/HomeAdmin"
 
 const Context = createContext();
 
@@ -33,13 +35,22 @@ export function ProviderContext({ children }) {
 
     const [AutosVisible, setAutosVisible] = useState(false)
     const [AutosInVisible, setAutosInVisible] = useState(false)
-    const [ContactoVisibles, setContactoVisibles] = useState(false)
+    const [ContactVisible, setContactVisible] = useState(false)
 
     const [CarDatos, setCarDatos] = useState([])
     const [CarEdit, setCarEdit] = useState(null)
 
-    const [TituloHero, setTituloHero] = useState('')
-    const [DescripcionHero, setDescripcionHero] = useState('')
+    const [Name, setName] = useState('')
+    const [Phone, setPhone] = useState('')
+    const [Email, setEmail] = useState('')
+    const [CarName, setCarName] = useState('')
+    const [Price, setPrice] = useState('')
+    const [color, setColor] = useState('')
+    const [year, setYear] = useState('')
+    const [condition, setCondition] = useState('')
+
+    const [TitleHero, setTitleHero] = useState('')
+    const [DescriptionHero, setDescriptionHero] = useState('')
     const [SliderImg, setSliderImg] = useState([])
 
     //Add vehicle (Modales)
@@ -47,8 +58,25 @@ export function ProviderContext({ children }) {
     const [isOpenEngineDetails, setisOpenEngineDetails] = useState(false)
     const [isOpenDimension, setisOpenDimension] = useState(false)
     const [isOpenFeature, setisOpenFeature] = useState(false)
-    const [isOpenImagen, setisOpenImagen] = useState(false)
+    const [isOpenImage, setisOpenImage] = useState(false)
     const [isOpenPrice, setisOpenPrice] = useState(false)
+    const [changeReserve, setchangeReserve] = useState(false)
+
+
+    // Informacion de Contacto
+    const [TitleContacts, setTitleContacts] = useState('')
+    const [UbicationContacts, setUbicationContacts] = useState('')
+    const [GmailContact, setGmailContact] = useState('')
+    const [PhoneContact, setPhoneContact] = useState('')
+    const [TitletwoContact, setTitletwoContact] = useState('')
+    const [Socialnetworks, setSocialnetworks] = useState([])
+    
+    const [CheckContact, setCheckContact] = useState(false)
+  
+    //Socialnetworks
+
+
+
 
     useEffect(() => {
         const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -62,7 +90,8 @@ export function ProviderContext({ children }) {
         if (user) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
-            GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+            GetHero(setTitleHero, setDescriptionHero, setSliderImg)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -72,8 +101,18 @@ export function ProviderContext({ children }) {
     }, [])
 
     useEffect(() => {
-        GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+        GetHero(setTitleHero, setDescriptionHero, setSliderImg)
+        GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
     }, [])
+
+    useEffect(() => {
+        if (CheckContact === true) {
+             GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
+             setCheckContact(false)
+        }
+       
+    }, [CheckContact])
+    
 
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);
@@ -91,13 +130,13 @@ export function ProviderContext({ children }) {
         return '0';
     }
 
-    const handleAnterior = () => {
+    const handleLast= () => {
         if (isOpenPrice === true) {
-            setisOpenImagen(true)
+            setisOpenImage(true)
             setisOpenPrice(false)
-        } else if (isOpenImagen === true) {
+        } else if (isOpenImage === true) {
             setisOpenFeature(true)
-            setisOpenImagen(false)
+            setisOpenImage(false)
         } else if (isOpenFeature === true) {
             setisOpenDimension(true)
             setisOpenFeature(false)
@@ -110,7 +149,7 @@ export function ProviderContext({ children }) {
         }
     }
 
-    const handleSiguiente = (validateCarSaleDatos) => {
+    const handleNext = (validateCarSaleDatos) => {
         if (isOpenCardDetails === true) {
             if (validateCarSaleDatos()) {
                 setisOpenEngineDetails(true);
@@ -128,26 +167,56 @@ export function ProviderContext({ children }) {
             }
         } else if (isOpenFeature === true) {
             if (validateCarSaleDatos()) {
-                setisOpenImagen(true);
+                setisOpenImage(true);
                 setisOpenFeature(false);
             }
-        } else if (isOpenImagen === true) {
+        } else if (isOpenImage === true) {
             if (validateCarSaleDatos()) {
                 setisOpenPrice(true);
-                setisOpenImagen(false);
+                setisOpenImage(false);
             }
         }
     };
+
+
+
+    const [ReservaCarList, setReservaCarList] = useState([]);
+
+    useEffect(() => {
+        const loadReservaCar = async () => {
+            const reservas = await ListReservaCar();
+            setReservaCarList(reservas);
+        };
+        loadReservaCar();
+    }, []);
+
+    useEffect(() => {
+        if (changeReserve === true) {
+            const loadReservaCar = async () => {
+                const reservas = await ListReservaCar();
+                setReservaCarList(reservas);
+            };
+            loadReservaCar();
+        }
+    }, [changeReserve])
+
+
+
+
+    const handleRefresh = () =>{
+        window.location.reload();
+    }
 
     return (
         <Context.Provider
             value={{
                 user,
-
+                setSliderImg,
+                handleRefresh,
                 CarAvailable,
                 setAvailable,
 
-                
+
                 SaveCarSale,
                 SaveMedia,
                 SaveArchivo,
@@ -170,32 +239,65 @@ export function ProviderContext({ children }) {
                 setAutosInVisible,
                 AutosVisible,
                 setAutosVisible,
-                ContactoVisibles,
-                setContactoVisibles,
+                ContactVisible,
+                setContactVisible,
                 CarDatos,
                 setCarDatos,
                 handleRemove,
                 CarEdit,
                 setCarEdit,
                 DeleteCarSale,
-                
+
                 EditCarSale,
 
                 Formatnumber,
-                TituloHero,
-                DescripcionHero,
+                TitleHero,
+                DescriptionHero,
                 SliderImg,
-                setTituloHero,
-                setDescripcionHero, setSliderImg, GetHero,
+                setTitleHero,
+                setDescriptionHero, setSliderImg, GetHero,
                 isOpenCardDetails, setisOpenCardDetails,
                 isOpenEngineDetails, setisOpenEngineDetails,
                 isOpenDimension, setisOpenDimension,
                 isOpenFeature, setisOpenFeature,
-                isOpenImagen, setisOpenImagen,
+                isOpenImage, setisOpenImage,
                 isOpenPrice, setisOpenPrice,
-                handleSiguiente, handleAnterior,
+                handleNext, handleLast,
+                setName,
+                setPhone,
+                setEmail,
+                setCarName,
+                setPrice, GetReserva,
+                ListCarSale,
+                setLisCarNew,
+                setLisCarUsed,
+                setListCar,
+                setCondition, setYear, setColor,
+                ReservaCar,
+                ReservaCarList,
+                Name,
+                Phone,
+                Email,
+                condition,
+                year,
+                color,
+                CarName,
+                Price,
+                ListReservaCar,
+                setReservaCarList,
+                ListCarSale, setLisCarNew, setLisCarUsed, setListCar,
 
-                ListCarSale,setLisCarNew, setLisCarUsed, setListCar
+                editTitleContact,
+                TitleContacts, setTitleContacts,
+                UbicationContacts, setUbicationContacts,
+                GmailContact, setGmailContact,
+                PhoneContact, setPhoneContact,
+                TitletwoContact, setTitletwoContact,
+                GetContact,
+                Socialnetworks, setSocialnetworks,
+                GetContact,
+                setCheckContact,
+                setchangeReserve
 
 
 
@@ -204,4 +306,5 @@ export function ProviderContext({ children }) {
             {children}
         </Context.Provider>
     );
+
 }
