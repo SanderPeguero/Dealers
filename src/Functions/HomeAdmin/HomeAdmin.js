@@ -2,7 +2,7 @@ import { db, storage } from "../../firebase/firebase";
 import { set, ref, get, update } from "firebase/database"
 import { ref as storageref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"
 
-export const GetHero = async (setTituloHero, setDescripcionHero, setSliderImg, setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact) => {
+export const GetHero = async (setTitleHero, setDescriptionHero, setSliderImg) => {
     const HeroRef = ref(db, 'Hero');
 
     try {
@@ -10,8 +10,8 @@ export const GetHero = async (setTituloHero, setDescripcionHero, setSliderImg, s
 
         if (HeroSnashop.exists()) {
             const HeroData = HeroSnashop.val();
-            setTituloHero(HeroData.Titulo)
-            setDescripcionHero(HeroData.Descripcion)
+            setTitleHero(HeroData.Title)
+            setDescriptionHero(HeroData.Description)
             let image = [
                 HeroData.Slider1,
                 HeroData.Slider2,
@@ -29,20 +29,20 @@ export const GetHero = async (setTituloHero, setDescripcionHero, setSliderImg, s
     }
 };
 
-export const editTituloHero = async (newTitulo) => {
+export const editTitleHero = async (newTitle) => {
     const HeroRef = ref(db, 'Hero');
     try {
-        await update(HeroRef, { Titulo: newTitulo });
+        await update(HeroRef, { Title: newTitle });
         console.log("Título actualizado");
     } catch (error) {
         console.error("Error al actualizar el título:", error);
     }
 };
 
-export const editDescripcionHero = async (newDescripcion) => {
+export const editDescriptionHero = async (newDescription) => {
     const HeroRef = ref(db, 'Hero');
     try {
-        await update(HeroRef, { Descripcion: newDescripcion });
+        await update(HeroRef, { Description: newDescription});
         console.log("Descripción actualizada");
     } catch (error) {
         console.error("Error al actualizar la descripción:", error);
@@ -97,7 +97,7 @@ export const deleteImageURL = async (imageKey) => {
 
 
 
-export const GetContact = async (setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact, setSocialnetworks) => {
+export const GetContact = async (setTitleContact, setUbicationContact, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks) => {
 
     const ContactRef = ref(db, 'Contact');
     try {
@@ -107,11 +107,11 @@ export const GetContact = async (setTituloContact, setUbicacionContact, setGmail
             const ContactData = ContactSnashop.val();
             // console.log(ContactData)
 
-            setTituloContact(ContactData.TituloContacto)
-            setUbicacionContact(ContactData.Ubicacion)
+            setTitleContact(ContactData.TitleContact)
+            setUbicationContact(ContactData.Ubication)
             setGmailContact(ContactData.Gmail)
             setPhoneContact(ContactData.Phone)
-            setTitulotwoContact(ContactData.TituloDos)
+            setTitletwoContact(ContactData.Titletwo)
             setSocialnetworks(ContactData.SocialMedia)
 
         } else {
@@ -126,10 +126,10 @@ export const GetContact = async (setTituloContact, setUbicacionContact, setGmail
 }
 
 
-export const editTituloContact = async (newTituloContact) => {
+export const editTitleContact = async (newTitleContact) => {
     const ContactRef = ref(db, 'Contact');
     try {
-        await update(ContactRef, { TituloContacto: newTituloContact });
+        await update(ContactRef, { TitleContact: newTitleContact });
         console.log("Título de Contacto Actualizado");
     } catch (error) {
         console.error("Error al actualizar el título de Contacto:", error);
@@ -137,10 +137,10 @@ export const editTituloContact = async (newTituloContact) => {
 };
 
 
-export const editUbicacionContact = async (newUbicacionContact) => {
+export const editUbicationContact = async (newUbicationContact) => {
     const ContactRef = ref(db, 'Contact');
     try {
-        await update(ContactRef, { Ubicacion: newUbicacionContact });
+        await update(ContactRef, { Ubication: newUbicationContact });
         console.log("Ubicacion de Contacto Actualizado");
     } catch (error) {
         console.error("Error al actualizar la Ubicacion de Contacto:", error);
@@ -271,7 +271,7 @@ export const editPhoneContact = async (newPhoneContact) => {
 };
 
 
-export const editTitulotwoContact = async (newTitulotwoContact) => {
+export const editTitletwoContact = async (newTitulotwoContact) => {
     const ContactRef = ref(db, 'Contact');
     try {
         await update(ContactRef, { TituloDos: newTitulotwoContact });

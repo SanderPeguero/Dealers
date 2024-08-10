@@ -16,7 +16,7 @@ import SocialMediaModal from './SocialMediaModal';
 
 import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
-import { editTituloContact, deleteSocialMedia, editUbicacionContact, editGmailContact, editPhoneContact, editTitulotwoContact, updateSocialMediaLinks } from "../../Functions/HomeAdmin/HomeAdmin";
+import { editTitleContact, deleteSocialMedia, editUbicationContact, editGmailContact, editPhoneContact, editTitletwoContact, updateSocialMediaLinks } from "../../Functions/HomeAdmin/HomeAdmin";
 
 import { useContextCar } from "../../Context/Context";
 import { ImagenRedSocial } from "../../Functions/HomeAdmin/HomeAdmin";
@@ -32,10 +32,10 @@ const defaultCenter = {
     lat: 37.7749,
     lng: -122.4194,
 };
-const Contacto = () => {
+const Contact = () => {
 
-    const { user, WhichRole, GetContact, setCheckContact, TituloContact, setTituloContact, UbicacionContact, setUbicacionContact,
-        GmailContact, setGmailContact, PhoneContact, setPhoneContact, TitulotwoContact, setTitulotwoContact, setSocialnetworks, Socialnetworks } = useContextCar()
+    const { user, WhichRole, GetContact, setCheckContact, TitleContacts, setTitleContacts, UbicationContacts, setUbicationContacts,
+        GmailContact, setGmailContact, PhoneContact, setPhoneContact, TitletwoContact, setTitletwoContact, setSocialnetworks, Socialnetworks } = useContextCar()
 
     const [TitleContact, setTitleContact] = useState('Encuentranos en')
     const [UbicationContact, setUbicationContact] = useState('#12 Av. Antonio G. San Frac., Duarte, 31000, Rep. Dom.')
@@ -45,41 +45,41 @@ const Contacto = () => {
 
 
     const handleEditTextContact = () => {
-        const newTitle = prompt('Edit title home:', TituloContact);
+        const newTitle = prompt('Edit title home:', TitleContacts);
         if (newTitle !== null) {
-            editTituloContact(newTitle)
-            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
+            editTitleContact(newTitle)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact)
         }
     }
-    const handleEditUbicacion = () => {
-        const newUbicacion = prompt('Edit ubication home:', UbicacionContact);
-        if (newUbicacion !== null) {
-            editUbicacionContact(newUbicacion)
-            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
+    const handleEditUbication = () => {
+        const newUbication = prompt('Edit ubication home:', UbicationContacts);
+        if (newUbication !== null) {
+            editUbicationContact(newUbication)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact)
         }
     }
 
     const handleEditGmail = () => {
-        const newCorreo = prompt('Edit gmail home:', GmailContact);
-        if (newCorreo !== null) {
-            editGmailContact(newCorreo)
-            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
+        const newEmail = prompt('Edit gmail home:', GmailContact);
+        if (newEmail !== null) {
+            editGmailContact(newEmail)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact)
         }
     }
 
-    const handleEditTelefono = () => {
-        const newTelefono = prompt('Edit phone home:', PhoneContact);
-        if (newTelefono !== null) {
-            editPhoneContact(newTelefono)
-            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
+    const handleEditPhone = () => {
+        const newPhone = prompt('Edit phone home:', PhoneContact);
+        if (newPhone !== null) {
+            editPhoneContact(newPhone)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact)
         }
     }
 
     const handleEditTitleTwo = () => {
-        const newTituloDos = prompt('Edit title two home:', TitulotwoContact);
-        if (newTituloDos !== null) {
-            editTitulotwoContact(newTituloDos)
-            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact)
+        const newTitleTwo = prompt('Edit title two home:', TitletwoContact);
+        if (newTitleTwo !== null) {
+            editTitletwoContact(newTitleTwo)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact)
         }
     }
     const [isOpenEditImg, setisOpenEditImg] = useState(false)
@@ -187,12 +187,12 @@ const Contacto = () => {
 
                                         <div className='mt-5'>
                                             <div className="w-56">
-                                                {UbicacionContact}
+                                                {UbicationContacts}
                                             </div>
 
                                             {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                                 <div className="px-3 py-2 text-xs">
-                                                    <button onClick={() => handleEditUbicacion()} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
+                                                    <button onClick={() => handleEditUbication()} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
                                                         <FaEdit size={14} className="text-yellow-400" />
                                                     </button>
                                                 </div>
@@ -232,7 +232,7 @@ const Contacto = () => {
                                                     {PhoneContact}
                                                     {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                                         <div className="px-3 py-2   text-xs leading-4">
-                                                            <button onClick={() => handleEditTelefono()} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
+                                                            <button onClick={() => handleEditPhone()} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
                                                                 <FaEdit size={14} className="text-yellow-400" />
                                                             </button>
                                                         </div>
@@ -445,4 +445,4 @@ const Contacto = () => {
     );
 
 }
-export default Contacto;
+export default Contact;

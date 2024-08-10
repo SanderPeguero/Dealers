@@ -50,11 +50,11 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
                 ReservationDate: reserva?.informationUser.ReservationDate
             },
             informationVehicle: {
-                Titulo: ReservationData.inputAuto,
-                marca: reserva?.informationVehicle.marca,
-                modelo: reserva?.informationVehicle.modelo,
-                condicion: ReservationData.inputcondiction,
-                precio: ReservationData.inputprice,
+                Title: ReservationData.inputAuto,
+                brand: reserva?.informationVehicle.marca,
+                model: reserva?.informationVehicle.modelo,
+                condition: ReservationData.inputcondiction,
+                price: ReservationData.inputprice,
                 year: ReservationData.inputyear, 
                 color: ReservationData.inputcolor 
             }

@@ -3,7 +3,7 @@ import { useContextCar } from '../../Context/Context';
 
 import ReservationModal from './ReservationModal';
 
-const Reservas = () => {
+const Reservations = () => {
     
     
     const {ReservaCarList, Formatnumber, setchangeReserve } = useContextCar();
@@ -108,4 +108,4 @@ const Reservas = () => {
 
 
 }
-export default Reservas
+export default Reservations

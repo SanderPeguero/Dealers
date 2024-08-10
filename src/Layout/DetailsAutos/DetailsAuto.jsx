@@ -1,5 +1,5 @@
 import React from "react"
-import ProductDetails from '../../Components/ProductDetails/ProductoDetalle'
+import ProductDetails from '../../Components/ProductDetails/ProductDetails'
 import Navbar from "../NavBar/NavBar"
 const DetailsAutos = () => {
 

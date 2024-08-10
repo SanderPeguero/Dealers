@@ -8,7 +8,7 @@ import {
     ListCarSale, DeleteCarSale, EditCarSale, ListReservaCar, ReservaCar, GetReserva
 } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-import { GetHero, GetContact, editTituloContact } from "../Functions/HomeAdmin/HomeAdmin"
+import { GetHero, GetContact, editTitleContact } from "../Functions/HomeAdmin/HomeAdmin"
 
 const Context = createContext();
 
@@ -35,7 +35,7 @@ export function ProviderContext({ children }) {
 
     const [AutosVisible, setAutosVisible] = useState(false)
     const [AutosInVisible, setAutosInVisible] = useState(false)
-    const [ContactoVisibles, setContactoVisibles] = useState(false)
+    const [ContactVisible, setContactVisible] = useState(false)
 
     const [CarDatos, setCarDatos] = useState([])
     const [CarEdit, setCarEdit] = useState(null)
@@ -49,8 +49,8 @@ export function ProviderContext({ children }) {
     const [year, setYear] = useState('')
     const [condition, setCondition] = useState('')
 
-    const [TituloHero, setTituloHero] = useState('')
-    const [DescripcionHero, setDescripcionHero] = useState('')
+    const [TitleHero, setTitleHero] = useState('')
+    const [DescriptionHero, setDescriptionHero] = useState('')
     const [SliderImg, setSliderImg] = useState([])
 
     //Add vehicle (Modales)
@@ -58,17 +58,17 @@ export function ProviderContext({ children }) {
     const [isOpenEngineDetails, setisOpenEngineDetails] = useState(false)
     const [isOpenDimension, setisOpenDimension] = useState(false)
     const [isOpenFeature, setisOpenFeature] = useState(false)
-    const [isOpenImagen, setisOpenImagen] = useState(false)
+    const [isOpenImage, setisOpenImage] = useState(false)
     const [isOpenPrice, setisOpenPrice] = useState(false)
     const [changeReserve, setchangeReserve] = useState(false)
 
 
     // Informacion de Contacto
-    const [TituloContact, setTituloContact] = useState('')
-    const [UbicacionContact, setUbicacionContact] = useState('')
+    const [TitleContacts, setTitleContacts] = useState('')
+    const [UbicationContacts, setUbicationContacts] = useState('')
     const [GmailContact, setGmailContact] = useState('')
     const [PhoneContact, setPhoneContact] = useState('')
-    const [TitulotwoContact, setTitulotwoContact] = useState('')
+    const [TitletwoContact, setTitletwoContact] = useState('')
     const [Socialnetworks, setSocialnetworks] = useState([])
     
     const [CheckContact, setCheckContact] = useState(false)
@@ -90,8 +90,8 @@ export function ProviderContext({ children }) {
         if (user) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
-            GetHero(setTituloHero, setDescripcionHero, setSliderImg)
-            GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact, setSocialnetworks)
+            GetHero(setTitleHero, setDescriptionHero, setSliderImg)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -101,13 +101,13 @@ export function ProviderContext({ children }) {
     }, [])
 
     useEffect(() => {
-        GetHero(setTituloHero, setDescripcionHero, setSliderImg)
-        GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact, setSocialnetworks)
+        GetHero(setTitleHero, setDescriptionHero, setSliderImg)
+        GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
     }, [])
 
     useEffect(() => {
         if (CheckContact === true) {
-             GetContact(setTituloContact, setUbicacionContact, setGmailContact, setPhoneContact, setTitulotwoContact, setSocialnetworks)
+             GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
              setCheckContact(false)
         }
        
@@ -130,13 +130,13 @@ export function ProviderContext({ children }) {
         return '0';
     }
 
-    const handleAnterior = () => {
+    const handleLast= () => {
         if (isOpenPrice === true) {
-            setisOpenImagen(true)
+            setisOpenImage(true)
             setisOpenPrice(false)
-        } else if (isOpenImagen === true) {
+        } else if (isOpenImage === true) {
             setisOpenFeature(true)
-            setisOpenImagen(false)
+            setisOpenImage(false)
         } else if (isOpenFeature === true) {
             setisOpenDimension(true)
             setisOpenFeature(false)
@@ -149,7 +149,7 @@ export function ProviderContext({ children }) {
         }
     }
 
-    const handleSiguiente = (validateCarSaleDatos) => {
+    const handleNext = (validateCarSaleDatos) => {
         if (isOpenCardDetails === true) {
             if (validateCarSaleDatos()) {
                 setisOpenEngineDetails(true);
@@ -167,13 +167,13 @@ export function ProviderContext({ children }) {
             }
         } else if (isOpenFeature === true) {
             if (validateCarSaleDatos()) {
-                setisOpenImagen(true);
+                setisOpenImage(true);
                 setisOpenFeature(false);
             }
-        } else if (isOpenImagen === true) {
+        } else if (isOpenImage === true) {
             if (validateCarSaleDatos()) {
                 setisOpenPrice(true);
-                setisOpenImagen(false);
+                setisOpenImage(false);
             }
         }
     };
@@ -239,8 +239,8 @@ export function ProviderContext({ children }) {
                 setAutosInVisible,
                 AutosVisible,
                 setAutosVisible,
-                ContactoVisibles,
-                setContactoVisibles,
+                ContactVisible,
+                setContactVisible,
                 CarDatos,
                 setCarDatos,
                 handleRemove,
@@ -251,18 +251,18 @@ export function ProviderContext({ children }) {
                 EditCarSale,
 
                 Formatnumber,
-                TituloHero,
-                DescripcionHero,
+                TitleHero,
+                DescriptionHero,
                 SliderImg,
-                setTituloHero,
-                setDescripcionHero, setSliderImg, GetHero,
+                setTitleHero,
+                setDescriptionHero, setSliderImg, GetHero,
                 isOpenCardDetails, setisOpenCardDetails,
                 isOpenEngineDetails, setisOpenEngineDetails,
                 isOpenDimension, setisOpenDimension,
                 isOpenFeature, setisOpenFeature,
-                isOpenImagen, setisOpenImagen,
+                isOpenImage, setisOpenImage,
                 isOpenPrice, setisOpenPrice,
-                handleSiguiente, handleAnterior,
+                handleNext, handleLast,
                 setName,
                 setPhone,
                 setEmail,
@@ -287,12 +287,12 @@ export function ProviderContext({ children }) {
                 setReservaCarList,
                 ListCarSale, setLisCarNew, setLisCarUsed, setListCar,
 
-                editTituloContact,
-                TituloContact, setTituloContact,
-                UbicacionContact, setUbicacionContact,
+                editTitleContact,
+                TitleContacts, setTitleContacts,
+                UbicationContacts, setUbicationContacts,
                 GmailContact, setGmailContact,
                 PhoneContact, setPhoneContact,
-                TitulotwoContact, setTitulotwoContact,
+                TitletwoContact, setTitletwoContact,
                 GetContact,
                 Socialnetworks, setSocialnetworks,
                 GetContact,

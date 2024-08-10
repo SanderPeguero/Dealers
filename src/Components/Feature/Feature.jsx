@@ -2,10 +2,10 @@ import React from 'react'
 import CheckBox from '../Checkbox/CheckBox'
 import { useState, useEffect } from 'react'
 import { useContextCar } from '../../Context/Context'
-import close from "../../assets/img/close.png"
+
 
 const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
-    const { CarEdit, isOpenFeature, setisOpenFeature, handleSiguiente, handleAnterior,handleRefresh } = useContextCar()
+    const { CarEdit, isOpenFeature, setisOpenFeature, handleNext, handleLast,handleRefresh } = useContextCar()
     const [selectedFeatures, setSelectedFeatures] = useState([]);
     const [OtroFeature, setOtroFeature] = useState('')
     const [notification, setNotification] = useState(false)
@@ -130,8 +130,8 @@ const Feature = ({ FeatureDatos, newFeature, setNewFeature }) => {
                                 </div>
             
                                 <div className='text-left flex justify-between items-center'>
-                                    <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
-                                    <button onClick={() => handleSiguiente(validateFeature)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+                                    <button onClick={handleLast} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
+                                    <button onClick={() => handleNext(validateFeature)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                 </div>
                             </form>
                         </div>

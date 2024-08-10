@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react"
 import Navbar from "../NavBar/NavBar"
 import Hero from '../../Components/Hero/Hero'
-import Recomendado from "../../Components/Recomendado/Recomendado"
+import Recommended from "../../Components/Recommended/Recommended"
 // import Testimonio from '../../Components/Testimono/Testimonio'
-import Contacto from '../../Components/Contacto/Contacto'
+import Contact from '../../Components/Contact/Contact'
 import { useContextCar } from "../../Context/Context"
 // import Testimonio from "../../Components/Testimono/Testimonio"
 import CarDetails from "../../Components/CarDetails/CarDetails"
@@ -21,42 +21,42 @@ import carsucess from "../../assets/img/carsucess.png"
 const CarSaleDatos = {
     Sale: {
         IdCarSale: "",
-        DetalleCoche: {
-            Titulo: "",
-            Condicion: "",
-            TipoCuerpo: "",
-            Marca: "",
-            Modelo: "",
+        CarDetails: {
+            Title: "",
+            Condition: "",
+            BodyType: "",
+            brand: "",
+            Model: "",
             Year: "",
-            Capacidad: "",
+            Capacity: "",
             Color: "",
-            Descripcion: ""
+            Description: ""
         },
-        DetalleMotor: {
-            TipoCombustimble: "",
-            Kilometraje: "",
-            Transmision: "",
+        MotorDetails: {
+            FuelType: "",
+            Mileage: "",
+            Transmition: "",
             DriverTrain: "",
-            CapacidadMotor: "",
+            EngineCapacity: "",
             Power: "",
         },
         Dimension: {
-            Longitud: "",
-            Ancho: "",
-            Altura: "",
-            VolumenCarga: ""
+            Longitude: "",
+            Width: "",
+            Height: "",
+            CargoVolume: ""
         },
 
         Features: {
             Features: [],
-            Otros: "No"
+            Others: "No"
         },
-        Precio: {
-            Precio: 0
+        Price: {
+            Price: 0
         },
 
         Multimedia: {
-            Imagen: []
+            Image: []
         },
     }
 }
@@ -64,12 +64,12 @@ const CarSaleDatos = {
 const MainScreen = () => {
 
     const { user, WhichRole, AutosVisible, setAutosVisible, AutosInVisible, setAutosInVisible,
-        ContactoVisibles, setContactoVisibles, SaveCarSale, CarEdit, EditCarSale } = useContextCar()
+        ContactVisible, setContactVisible, SaveCarSale, CarEdit, EditCarSale } = useContextCar()
 
     const AutosRef = useRef(null);
     const ContactoRef = useRef(null);
     const [notification, setNotification] = useState(false)
-    const [bien, setBien] = useState(false)
+    const [good, setGood] = useState(false)
     const [erros, setErros] = useState(false)
     useEffect(() => {
         if (AutosVisible === true && AutosRef.current) {
@@ -79,11 +79,11 @@ const MainScreen = () => {
     }, [AutosVisible]);
 
     useEffect(() => {
-        if (ContactoVisibles === true && ContactoRef.current) {
+        if (ContactVisible === true && ContactoRef.current) {
             ContactoRef.current.scrollIntoView({ behavior: 'smooth' });
-            setContactoVisibles(false)
+            setContactVisible(false)
         }
-    }, [ContactoVisibles]);
+    }, [ContactVisible]);
 
 
     const [newFeature, setNewFeature] = useState('');
@@ -105,7 +105,7 @@ const MainScreen = () => {
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
             try {
                 SaveCarSale(CarSaleDatos, user.uid);
-                setBien(!bien)
+                setGood(!bien)
             } catch (error) {
                 console.error("Error al actualizar los datos:", error);
                 setErros(!erros)
@@ -181,7 +181,7 @@ const MainScreen = () => {
                 </div>
             ) : ""}
 
-            {bien ? (
+            {good ? (
                 <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
 
                     <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-green-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
@@ -230,11 +230,11 @@ const MainScreen = () => {
                 <Hero />
 
                 <div ref={AutosRef} >
-                    <Recomendado />
+                    <Recommended />
                 </div>
 
                 <div ref={ContactoRef}>
-                    <Contacto />
+                    <Contact />
                 </div>
 
 

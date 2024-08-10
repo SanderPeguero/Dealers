@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useContextCar } from '../../Context/Context';
 
 const UpImagine = ({ AudiovisualDatos }) => {
-    const { SaveMedia, user, CarEdit, isOpenImagen, setisOpenImagen, handleSiguiente, handleAnterior,handleRefresh } = useContextCar();
+    const { SaveMedia, user, CarEdit, isOpenImagen, setisOpenImagen, handleNext, handleLast,handleRefresh } = useContextCar();
     const [media, setMedia] = useState([]);
     const [LinkUrl, setLinkUrl] = useState([]);
     const [showExitWarning, setShowExitWarning] = useState(false);
@@ -56,7 +56,7 @@ const UpImagine = ({ AudiovisualDatos }) => {
     }, [isOpenImagen]);
 
     // Maneja el cierre del modal con advertencia si hay imágenes cargadas
-    const handleCloseImagen = () => {
+    const handleCloseImage = () => {
         if (LinkUrl.length > 0) {
             setShowExitWarning(true);
         } else {
@@ -92,7 +92,7 @@ const UpImagine = ({ AudiovisualDatos }) => {
                     <div className='flex justify-between items-center mb-4'>
                         <h3 className='text-2xl'>Imágenes</h3>
                         <button
-                            onClick={handleCloseImagen}
+                            onClick={handleCloseImage}
                             className='text-gray-500 hover:text-white hover:bg-red-600 hover:rounded-full p-2 focus:outline-none'
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x">
@@ -133,8 +133,8 @@ const UpImagine = ({ AudiovisualDatos }) => {
                     </div>
             
                     <div className='flex justify-between'>
-                        <button onClick={handleAnterior} className='hover:bg-blue-600 p-2 rounded-md transition-all'>Anterior</button>
-                        <button onClick={() => handleSiguiente(validateImagen)} className='hover:bg-blue-600 p-2 rounded-md transition-all'>Siguiente</button>
+                        <button onClick={handleLast} className='hover:bg-blue-600 p-2 rounded-md transition-all'>Anterior</button>
+                        <button onClick={() => handleNext(validateImagen)} className='hover:bg-blue-600 p-2 rounded-md transition-all'>Siguiente</button>
                     </div>
                 </div>
             </div>

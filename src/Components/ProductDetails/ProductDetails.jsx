@@ -52,11 +52,11 @@ const ProductDetails = () => {
                 ReservationDate
             },
             informationVehicle: {
-                Titulo: CarAvailable.Sale.DetalleCoche.Titulo,
-                marca: CarAvailable.Sale.DetalleCoche.Marca,
-                modelo: CarAvailable.Sale.DetalleCoche.Modelo,
-                condicion: CarAvailable.Sale.DetalleCoche.Condicion,
-                precio: CarAvailable.Sale.Precio.Precio
+                Title: CarAvailable.Sale.DetalleCoche.Titulo,
+                brand: CarAvailable.Sale.DetalleCoche.Marca,
+                model: CarAvailable.Sale.DetalleCoche.Modelo,
+                condition: CarAvailable.Sale.DetalleCoche.Condicion,
+                price: CarAvailable.Sale.Precio.Precio
             }
         };
         // Llamar a la función ReservaCar con los datos de la reserva

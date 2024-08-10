@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useContextCar } from '../../Context/Context';
 
 const Price = ({ PriceDatos, handleSale, handleEdit }) => {
-    const { CarEdit, isOpenPrice, setisOpenPrice, handleAnterior, SaveCarSale, user,handleRefresh } = useContextCar();
+    const { CarEdit, isOpenPrice, setisOpenPrice, handleLast, SaveCarSale, user,handleRefresh } = useContextCar();
     const [price, setPrice] = useState(0);
     const [notification, setNotification] = useState(false);
 
@@ -98,7 +98,7 @@ const Price = ({ PriceDatos, handleSale, handleEdit }) => {
                                     </div>
 
                                     <button
-                                        onClick={handleAnterior}
+                                        onClick={handleLast}
                                         className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'
                                     >
                                         Anterior

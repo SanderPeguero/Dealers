@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useContextCar } from "../../Context/Context";
 import { FaEdit } from "react-icons/fa";
-import { editTituloHero, editDescripcionHero } from "../../Functions/HomeAdmin/HomeAdmin";
+import { editTitleHero, editDescriptionHero } from "../../Functions/HomeAdmin/HomeAdmin";
 
 const Hero = () => {
-    const { user, WhichRole, TituloHero, DescripcionHero, SliderImg, setTituloHero, setDescripcionHero, setSliderImg, GetHero } = useContextCar()
+    const { user, WhichRole, TitleHero, DescriptionHero, SliderImg, setTitleHero, setDescriptionHero, setSliderImg, GetHero } = useContextCar()
 
     const [opentwo, setOpenTwo] = useState(false);
     const [openone, setOpenOne] = useState(false);
@@ -13,15 +13,10 @@ const Hero = () => {
     const [DescHome, setDescHome] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
 
 
-    const [Todos, setTodos] = useState(true)
-    const [Nuevo, setNuevo] = useState(false)
-    const [Usado, setUsado] = useState(false)
-    const slider = [
-        "src/assets/img/Heroimg.png",
-        "src/assets/img/HeroImgtwo.jpg",
-        "src/assets/img/HeroImgfive.jpg",
-        "src/assets/img/HeroImgsix.jpg"
-    ];
+    const [EveryThing, setEveryThing] = useState(true)
+    const [New, setNew] = useState(false)
+    const [Used, setUsed] = useState(false)
+   
 
 
 
@@ -46,40 +41,40 @@ const Hero = () => {
         setCurrent(count)
     }
 
-    const handleTodo = () => {
-        setTodos(true)
-        setNuevo(false)
-        setUsado(false)
+    const handleAll = () => {
+        setEveryThing(true)
+        setNew(false)
+        setUsed(false)
     }
 
-    const handleNuevo = () => {
-        setTodos(false)
-        setNuevo(true)
-        setUsado(false)
+    const handleNew = () => {
+        setEveryThing(false)
+        setNew(true)
+        setUsed(false)
     }
 
-    const handleUsado = () => {
-        setTodos(false)
-        setNuevo(false)
-        setUsado(true)
+    const handleUsed = () => {
+        setEveryThing(false)
+        setNew(false)
+        setUsed(true)
     }
     const [values, setValues] = useState([0, 3000000]);
     const min = 0;
     const max = 3000000;
 
     const handleEditTextHero = () => {
-        const newTitle = prompt('Edit title home:', TituloHero);
+        const newTitle = prompt('Edit title home:', TitleHero);
         if (newTitle !== null) {
-            editTituloHero(newTitle)
-            GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+            editTitleHero(newTitle)
+            GetHero(setTitleHero, setDescriptionHero, setSliderImg)
         }
     }
 
     const handleEditDesctHero = () => {
-        const newDeesc = prompt('Edit decription home:', DescripcionHero);
+        const newDeesc = prompt('Edit decription home:', DescriptionHero);
         if (newDeesc !== null) {
-            editDescripcionHero(newDeesc)
-            GetHero(setTituloHero, setDescripcionHero, setSliderImg)
+            editDescriptionHero(newDeesc)
+            GetHero(setTitleHero, setDescriptionHero, setSliderImg)
         }
     }
 
@@ -102,7 +97,7 @@ const Hero = () => {
                         <div className="lg:text-5xl left-[20px]  md:text-4xl xl:p-20 font-semibold absolute top-20 lg:p-20 md:top-[9rem] text-white max-md:max-w-full max-md:text-4xl">
                             <h1 className="lg:text-5xl md:text-4xl md:-mt-[3rem] text-[1.2rem] xl:px-30 xl:text-6xl px-6">
                                 <div className="flex flex-row text-[15px] md:text-[40px] items-center ">
-                                    {TituloHero}
+                                    {TitleHero}
 
                                 </div>
                             </h1>
@@ -111,7 +106,7 @@ const Hero = () => {
 
                             <div className="flex flex-row  items-center">
 
-                                <p className={`text-[0.7rem] md:-mt-[3.9rem] xl:-mt-5 md:text-[25px] px-6 xl:px-30 xl:text-4xl ${user ? WhichRole === 'admin' || WhichRole === 'Owner' ? 'w-1/2' : '' : 'w-[60%]'} `}>{formatText(DescripcionHero)}</p>
+                                <p className={`text-[0.7rem] md:-mt-[3.9rem] xl:-mt-5 md:text-[25px] px-6 xl:px-30 xl:text-4xl ${user ? WhichRole === 'admin' || WhichRole === 'Owner' ? 'w-1/2' : '' : 'w-[60%]'} `}>{formatText(DescriptionHero)}</p>
 
                             </div>
 
@@ -140,15 +135,15 @@ export default Hero;
 
 const formatText = (TextHero) => {
 
-    const words = TextHero.split(' ');
+    const words = (TextHero || '').split(' ');
 
     let formattedLines = [];
 
     let currentLine = '';
 
-    words.forEach((word, index) => {
+    words.forEach((words, index) => {
 
-        currentLine += word;
+        currentLine += words;
 
         if (index < words.length - 1) {
             currentLine += ' ';

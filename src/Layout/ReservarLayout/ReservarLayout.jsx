@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../NavBar/NavBar'
-import Reservas from '../../Components/Reservas/Reservas'
+import Reservations from '../../Components/Reservations/Reservations'
 
 const ReservarLayout = () => {
   return (
@@ -18,7 +18,7 @@ const ReservarLayout = () => {
 
         <div className='flex flex-col mx-4 lg:ml-[6rem] lg:mr-[6rem] '>
           
-          <Reservas />
+          <Reservations />
 
         </div>
       </div>

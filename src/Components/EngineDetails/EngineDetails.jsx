@@ -4,25 +4,25 @@ import close from "../../assets/img/close.png"
 
 const EngineDetails = ({ updateEngineDetails }) => {
 
-    const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleSiguiente, handleAnterior,handleRefresh } = useContextCar()
+    const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleNext, handleLast, handleRefresh } = useContextCar()
 
-    const [TipoCombustimble, setTipoCombustimble] = useState('')
-    const [Kilometraje, setKilometraje] = useState('')
-    const [Transmision, setTransmision] = useState('')
+    const [FuelType, setFuelType] = useState('')
+    const [Mileage, setMileage] = useState('')
+    const [Transmition, setTransmition] = useState('')
     const [DriverTrain, setDriverTrain] = useState('')
     const [notification, setNotification] = useState(false)
-    const [CapacidadMotor, setCapacidadMotor] = useState('')
+    const [EngineCapacity, setEngineCapacity] = useState('')
     const [Power, setPower] = useState('')
     const [showWarning, setShowWarning] = useState(false)
 
     const EngineDetailsdatos = useMemo(() => ({
-        TipoCombustimble,
-        Kilometraje,
-        Transmision,
+        FuelType,
+        Mileage,
+        Transmition,
         DriverTrain,
-        CapacidadMotor,
+        EngineCapacity,
         Power,
-    }), [TipoCombustimble, Kilometraje, Transmision, DriverTrain, CapacidadMotor, Power]);
+    }), [FuelType, Mileage, Transmition, DriverTrain, EngineCapacity, Power]);
 
     useEffect(() => {
         updateEngineDetails(EngineDetailsdatos)
@@ -30,11 +30,11 @@ const EngineDetails = ({ updateEngineDetails }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            setTipoCombustimble(CarEdit.Sale.DetalleMotor.TipoCombustimble)
-            setKilometraje(CarEdit.Sale.DetalleMotor.Kilometraje)
-            setTransmision(CarEdit.Sale.DetalleMotor.Transmision)
+            setFuelType(CarEdit.Sale.DetalleMotor.TipoCombustimble)
+            setMileage(CarEdit.Sale.DetalleMotor.Kilometraje)
+            setTransmition(CarEdit.Sale.DetalleMotor.Transmision)
             setDriverTrain(CarEdit.Sale.DetalleMotor.DriverTrain)
-            setCapacidadMotor(CarEdit.Sale.DetalleMotor.CapacidadMotor)
+            setEngineCapacity(CarEdit.Sale.DetalleMotor.CapacidadMotor)
             setPower(CarEdit.Sale.DetalleMotor.Power)
         }
     }, [CarEdit])
@@ -58,11 +58,11 @@ const EngineDetails = ({ updateEngineDetails }) => {
         setisOpenEngineDetails(false)
         setShowWarning(false)
         // Limpiar los estados
-        setTipoCombustimble('')
-        setKilometraje('')
-        setTransmision('')
+        setFuelType('')
+        setMileage('')
+        setTransmition('')
         setDriverTrain('')
-        setCapacidadMotor('')
+        setEngineCapacity('')
         setPower('')
         handleRefresh()
     }
@@ -72,7 +72,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
     }
 
     const validateEngineDetails = () => {
-        if (!TipoCombustimble || !Kilometraje || !Transmision || !DriverTrain || !CapacidadMotor || !Power) {
+        if (!FuelType || !Mileage || !Transmition || !DriverTrain || !EngineCapacity || !Power) {
             setNotification(!notification)
         } else {
             return true;
@@ -105,7 +105,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                         <div className="grid gap-6 mb-6 lg:grid-cols-3">
                                             <div>
                                                 <label htmlFor="Typeofload" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipos de combustible </label>
-                                                <select value={TipoCombustimble} onChange={(e) => setTipoCombustimble(e.target.value)} id="Typeofload" className="bg-[#12232E] text-sm block w-full p-2.5 cursor-pointer rounded-lg hover:bg-slate-500 transition-all" required>
+                                                <select value={FuelType} onChange={(e) => setFuelType(e.target.value)} id="Typeofload" className="bg-[#12232E] text-sm block w-full p-2.5 cursor-pointer rounded-lg hover:bg-slate-500 transition-all" required>
                                                     <option value="">Seleccionar</option>
                                                     <option value="Gasolina">Gasolina</option>
                                                     <option value="Diésel">Diésel</option>
@@ -116,7 +116,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kilometraje</label>
                                                 <div className="flex">
-                                                    <input value={Kilometraje} onChange={(e) => setKilometraje(e.target.value)} type="number" id="title" className="bg-[#12232E] rounded-lg text-sm block w-full p-2.5" required />
+                                                    <input value={Mileage} onChange={(e) => setMileage(e.target.value)} type="number" id="title" className="bg-[#12232E] rounded-lg text-sm block w-full p-2.5" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         km
                                                     </div>
@@ -124,7 +124,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                             </div>
                                             <div>
                                                 <label htmlFor="Transmisión" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Transmisión</label>
-                                                <select value={Transmision} onChange={(e) => setTransmision(e.target.value)} id="Transmisión" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
+                                                <select value={Transmition} onChange={(e) => setTransmition(e.target.value)} id="Transmisión" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
                                                     <option value="">Seleccionar</option>
                                                     <option value="Transmisión Manual">Transmisión Manual</option>
                                                     <option value="Transmisión Automática">Transmisión Automática</option>
@@ -145,7 +145,7 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Capacidad del motor</label>
                                                 <div className="flex">
-                                                    <input value={CapacidadMotor} onChange={(e) => setCapacidadMotor(e.target.value)} type="number" id="title" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={EngineCapacity} onChange={(e) => setEngineCapacity(e.target.value)} type="number" id="title" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         cc
                                                     </div>
@@ -167,8 +167,8 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                     </div>
 
                                     <div className='text-left flex justify-between items-center'>
-                                        <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
-                                        <button onClick={() => handleSiguiente(validateEngineDetails)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+                                        <button onClick={handleLast} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
+                                        <button onClick={() => handleNext(validateEngineDetails)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                     </div>
 
                                     {notification ? (

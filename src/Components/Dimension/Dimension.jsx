@@ -3,21 +3,21 @@ import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
 
 const Dimension = ({ updateDimension }) => {
-    const { CarEdit, isOpenDimension, setisOpenDimension, handleSiguiente, handleAnterior } = useContextCar()
+    const { CarEdit, isOpenDimension, setisOpenDimension, handleNext, handleLast} = useContextCar()
 
-    const [Longitud, setLongitud] = useState('')
-    const [Ancho, setAncho] = useState('')
-    const [Altura, setAltura] = useState('')
-    const [VolumenCarga, setVolumenCarga] = useState('')
+    const [Longitude, setLongitude] = useState('')
+    const [Width, setWidth] = useState('')
+    const [Height, setHeight] = useState('')
+    const [CargoVolume, setCargoVolume] = useState('')
     const [notification, setNotification] = useState(false)
     const [showWarning, setShowWarning] = useState(false)
 
     const Dimensiondatos = useMemo(() => ({
-        Longitud,
-        Ancho,
-        Altura,
-        VolumenCarga,
-    }), [Longitud, Ancho, Altura, VolumenCarga]);
+        Longitude,
+        Width,
+        Height,
+        CargoVolume,
+    }), [Longitude, Width, Height, CargoVolume]);
 
     useEffect(() => {
         updateDimension(Dimensiondatos)
@@ -25,10 +25,10 @@ const Dimension = ({ updateDimension }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            setLongitud(CarEdit.Sale.Dimension.Longitud)
-            setAncho(CarEdit.Sale.Dimension.Ancho)
-            setAltura(CarEdit.Sale.Dimension.Altura)
-            setVolumenCarga(CarEdit.Sale.Dimension.VolumenCarga)
+            setLongitude(CarEdit.Sale.Dimension.Longitud)
+            setWidth(CarEdit.Sale.Dimension.Ancho)
+            setHeight(CarEdit.Sale.Dimension.Altura)
+            setCargoVolume(CarEdit.Sale.Dimension.VolumenCarga)
         }
     }, [CarEdit])
 
@@ -51,10 +51,10 @@ const Dimension = ({ updateDimension }) => {
         setisOpenDimension(false)
         setShowWarning(false)
         // Limpiar los estados
-        setLongitud('')
-        setAncho('')
-        setAltura('')
-        setVolumenCarga('')
+        setLongitude('')
+        setWidth('')
+        setHeight('')
+        setCargoVolume('')
     }
 
     const cancelClose = () => {
@@ -62,7 +62,7 @@ const Dimension = ({ updateDimension }) => {
     }
 
     const validateDimension = () => {
-        if (!Longitud || !Ancho || !Altura || !VolumenCarga) {
+        if (!Longitude || !Width || !Height || !CargoVolume) {
             setNotification(!notification)
         } else {
             return true;
@@ -94,7 +94,7 @@ const Dimension = ({ updateDimension }) => {
                                             <div className='mb-8'>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Longitud </label>
                                                 <div className="flex">
-                                                    <input value={Longitud} onChange={(e) => setLongitud(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={Longitude} onChange={(e) => setLongitude(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         mm
                                                     </div>
@@ -103,7 +103,7 @@ const Dimension = ({ updateDimension }) => {
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ancho</label>
                                                 <div className="flex">
-                                                    <input value={Ancho} onChange={(e) => setAncho(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={Width} onChange={(e) => setWidth(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         mm
                                                     </div>
@@ -112,7 +112,7 @@ const Dimension = ({ updateDimension }) => {
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Altura</label>
                                                 <div className="flex">
-                                                    <input value={Altura} onChange={(e) => setAltura(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={Height} onChange={(e) => setHeight(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         mm
                                                     </div>
@@ -121,7 +121,7 @@ const Dimension = ({ updateDimension }) => {
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Volumen de carga</label>
                                                 <div className="flex">
-                                                    <input value={VolumenCarga} onChange={(e) => setVolumenCarga(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
+                                                    <input value={CargoVolume} onChange={(e) => setCargoVolume(e.target.value)} type="number" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg hover:bg-slate-500 transition-all" required />
                                                     <div type="button" className="bg-[#004A77] text-white px-4 py-2 rounded-r focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                                                         L
                                                     </div>
@@ -130,8 +130,8 @@ const Dimension = ({ updateDimension }) => {
                                         </div>
                                     </div>
                                     <div className='text-left flex justify-between items-center'>
-                                        <button onClick={handleAnterior} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
-                                        <button onClick={() => handleSiguiente(validateDimension)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
+                                        <button onClick={handleLast} className='items-center ml-4 hover:bg-blue-600 p-2 hover:rounded-md mb-4'>Anterior</button>
+                                        <button onClick={() => handleNext(validateDimension)} className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                         {notification ? (
                                             <div className="fixed inset-0 flex items-center justify-center z-50 sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm">
                                                 <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-orange-400 max-w-[671px] max-md:w-[85%] max-md:h-65">
