@@ -64,16 +64,17 @@ const ProductDetails = () => {
         setIosOpen(true);
     };
 
-
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(
+        CarAvailable?.Sale?.Multimedia.Imagen[0] || ''
+    );
 
 
     return (
 
         <div className=' bg-zinc-950 '>
             <div className=" text-white flex flex-col justify-center items-start px-16 py-14 w-full bg-zinc-950 max-md:px-5 max-md:max-w-full  ">
-                <div className="flex flex-col ml-16 max-md:max-w-full">
-                    <div className="text-5xl max-md:max-w-full max-md:text-4xl">
+                <div className="flex flex-col ml-4 max-md:max-w-full">
+                    <div className="  text-xl md:text-4xl sm:text-3xl xs:text-2xl max-w-full">
                         {CarAvailable?.Sale?.DetalleCoche?.Titulo}
                     </div>
                 </div>
@@ -109,7 +110,7 @@ const ProductDetails = () => {
 
 
             </div> */}
-
+            {/* 
             <div className="mx-5 md:mx-10 lg:mx-20 ">
                 <div className="block md:hidden">
                     {CarAvailable?.Sale?.Multimedia.Imagen.length > 0 && (
@@ -149,7 +150,41 @@ const ProductDetails = () => {
                         />
                     </div>
                 )}
+            </div> */}
+
+
+            <div className="mx-5 md:mx-10 lg:mx-20 items-center">
+                {/* Imagen destacada */}
+                <div className="w-full mt-10 flex justify-center">
+                    {CarAvailable?.Sale?.Multimedia.Imagen.length > 0 && (
+                        <div className="w-full md:w-8/12 lg:w-6/12 h-80 flex items-center justify-center">
+                            <img
+                                className="rounded-lg object-cover w-full h-full cursor-pointer"
+                                src={selectedImage}
+                                alt="Featured"
+                                onClick={() => setSelectedImage(selectedImage)}
+                            />
+                        </div>
+                    )}
+                </div>
+
+                {/* Galería de imágenes estilo Masonry */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-10">
+                    {CarAvailable?.Sale?.Multimedia.Imagen.slice(1).map((Image, index) => (
+                        <div key={index} className="break-inside-avoid mb-2">
+                            <div className="w-full h-40 flex items-center justify-center">
+                                <img
+                                    className="rounded-lg object-cover w-full h-full cursor-pointer"
+                                    src={Image}
+                                    alt={`Image ${index + 1}`}
+                                    onClick={() => setSelectedImage(Image)}
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
+
 
 
 
@@ -322,14 +357,14 @@ const ProductDetails = () => {
                                     Transmisión
                                     <br />
                                 </div>
-                                <div className="text-lg text-right text-white">{CarAvailable?.Sale?.DetalleMotor?.Transmision}</div>
+                                <div className="text-lg text-right text-wrap text-white ">{CarAvailable?.Sale?.DetalleMotor?.Transmision}</div>
                             </div>
                             <div className="flex gap-5 justify-between py-1.5 mt-2">
                                 <div className="text-base font-medium text-neutral-400">
                                     Tracción
                                     <br />
                                 </div>
-                                <div className="text-lg text-right text-white">
+                                <div className="text-lg text-right text-white ">
                                     {CarAvailable?.Sale?.DetalleMotor?.DriverTrain}
                                     <br />
                                 </div>
