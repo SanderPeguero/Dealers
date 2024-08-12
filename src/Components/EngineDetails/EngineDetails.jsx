@@ -30,12 +30,12 @@ const EngineDetails = ({ updateEngineDetails }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            setFuelType(CarEdit.Sale.DetalleMotor.TipoCombustimble)
-            setMileage(CarEdit.Sale.DetalleMotor.Kilometraje)
-            setTransmition(CarEdit.Sale.DetalleMotor.Transmision)
-            setDriverTrain(CarEdit.Sale.DetalleMotor.DriverTrain)
-            setEngineCapacity(CarEdit.Sale.DetalleMotor.CapacidadMotor)
-            setPower(CarEdit.Sale.DetalleMotor.Power)
+            setFuelType(CarEdit.Sale.MotorDetails.FuelType)
+            setMileage(CarEdit.Sale.MotorDetails.Mileage)
+            setTransmition(CarEdit.Sale.MotorDetails.Transmition)
+            setDriverTrain(CarEdit.Sale.MotorDetails.DriverTrain)
+            setEngineCapacity(CarEdit.Sale.MotorDetails.EngineCapacity)
+            setPower(CarEdit.Sale.MotorDetails.Power)
         }
     }, [CarEdit])
 

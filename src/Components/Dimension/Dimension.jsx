@@ -25,10 +25,10 @@ const Dimension = ({ updateDimension }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            setLongitude(CarEdit.Sale.Dimension.Longitud)
-            setWidth(CarEdit.Sale.Dimension.Ancho)
-            setHeight(CarEdit.Sale.Dimension.Altura)
-            setCargoVolume(CarEdit.Sale.Dimension.VolumenCarga)
+            setLongitude(CarEdit.Sale.Dimension.Longitude)
+            setWidth(CarEdit.Sale.Dimension.Width)
+            setHeight(CarEdit.Sale.Dimension.Height)
+            setCargoVolume(CarEdit.Sale.Dimension.CargoVolume)
         }
     }, [CarEdit])
 

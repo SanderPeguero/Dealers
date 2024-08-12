@@ -37,13 +37,13 @@ const Modal = ({ showModal, handleClose }) => {
                         <div className="flex flex-col px-7 w-full max-md:px-5 max-md:max-w-full m-4 mt-2">
 
                             <div className="flex text-2xl mt-5 max-md:text-xl font-extrabold text-white max-md:flex-wrap max-md:max-w-full">
-                                <div className="flex-auto ">{CarAvailable?.Sale?.DetalleCoche?.Titulo}</div>
+                                <div className="flex-auto ">{CarAvailable?.Sale?.CarDetails?.Title}</div>
                                 <IoMdClose className='cursor-pointer mx-10 hover:bg-red-600 hover:rounded-full' onClick={handleClose} />
                             </div>
                             <div className="flex gap-1.5 self-start mt-6 text-lg font-bold">
                                 <div className="text-white">US$: </div>
                                 <div className="text-gray-500 flex flex-row">
-                                    <div>${Formatnumber(CarAvailable?.Sale?.Precio?.Precio)}</div>
+                                    <div>${Formatnumber(CarAvailable?.Sale?.Price?.Price)}</div>
                                 </div>
                             </div>
                         </div>
@@ -58,15 +58,15 @@ const Modal = ({ showModal, handleClose }) => {
                                             <div className="flex flex-col grow whitespace-nowrap">
                                                 <div className="flex gap-3.5">
                                                     <div className="text-lg font-bold text-white max-md:text-xl">Color:</div>
-                                                    <div className="text-lg text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Color}</div>
+                                                    <div className="text-lg text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.CarDetails?.Color}</div>
                                                 </div>
                                                 <div className="flex gap-3 mt-6 text-lg">
                                                     <div className="font-bold text-white max-md:text-xl">Año:</div>
-                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Year}</div>
+                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.CarDetails?.Year}</div>
                                                 </div>
                                                 <div className="flex gap-3.5 mt-7 text-lg">
                                                     <div className="font-bold text-white max-md:text-xl">Combustible:</div>
-                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleMotor?.TipoCombustimble}</div>
+                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.MotorDetails?.FuelType}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,12 +75,12 @@ const Modal = ({ showModal, handleClose }) => {
                                             <div className="flex flex-col max-md:mt-10">
                                                 <div className="flex gap-3.5 text-lg">
                                                     <div className="font-bold text-white max-md:text-xl">Capacidad:</div>
-                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Capacidad} / P</div>
+                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.CarDetails?.Capacidad} / P</div>
                                                 </div>
 
                                                 <div className="flex gap-3.5 mt-6 text-lg">
                                                     <div className="font-bold text-white max-md:text-xl">Condición:</div>
-                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.DetalleCoche?.Condicion}</div>
+                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.CarDetails?.Condition}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@ const Modal = ({ showModal, handleClose }) => {
                                     <div className="text-lg max-md:max-w-full">Descripción</div>
 
                                     <div className="px-3 pt-4 pb-28 mt-4 text-lg rounded-md border border-white border-opacity-25 text-white text-opacity-90 max-md:pr-5 max-md:max-w-full">
-                                        {CarAvailable?.Sale?.DetalleCoche?.Descripcion}
+                                        {CarAvailable?.Sale?.CarDetails?.Description}
                                     </div>
 
                                     <div className="justify-center self-center px-7 py-4 mt-6 text-lg max-md:text-xl whitespace-nowrap rounded-lg bg-sky-600 hover:bg-sky-400 bg-opacity-60 max-md:px-5 cursor-pointer"

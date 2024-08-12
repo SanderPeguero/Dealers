@@ -31,11 +31,11 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
             setInputName(reserva?.informationUser.nameUser || "");
             setInputPhone(reserva?.informationUser.phoneUser || "");
             setInputEmail(reserva?.informationUser.emailUser || "");
-            setInputAuto(reserva?.informationVehicle.Titulo || "");
+            setInputAuto(reserva?.informationVehicle.Title || "");
             setInputYear(reserva?.informationVehicle.year || "");
             setInputColor(reserva?.informationVehicle.color || "");
-            setInputPrice(reserva?.informationVehicle.precio || "");
-            setInputCondiction(reserva?.informationVehicle.condicion || "");
+            setInputPrice(reserva?.informationVehicle.price || "");
+            setInputCondiction(reserva?.informationVehicle.condition || "");
         }
     }, [reserva]);
 
@@ -51,14 +51,16 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
             },
             informationVehicle: {
                 Title: ReservationData.inputAuto,
-                brand: reserva?.informationVehicle.marca,
-                model: reserva?.informationVehicle.modelo,
+                brand: reserva?.informationVehicle.brand,
+                model: reserva?.informationVehicle.model,
                 condition: ReservationData.inputcondiction,
                 price: ReservationData.inputprice,
                 year: ReservationData.inputyear, 
                 color: ReservationData.inputcolor 
             }
         };
+
+        console.log(reservationUpdate)
 
         await editReserve(reserva.id, reservationUpdate);
         setInputName('');

@@ -3,7 +3,7 @@ import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
 
 const CarDetails = ({ updateCarDetails }) => {
-    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleSiguiente,handleRefresh  } = useContextCar()
+    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleNext,handleRefresh  } = useContextCar()
     const [Title, setTitle] = useState('')
     const [Condition, setCondition] = useState('')
     const [BodyType, setBodyType] = useState('')
@@ -47,14 +47,14 @@ const CarDetails = ({ updateCarDetails }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            setTitle(CarEdit.Sale.DetalleCoche.Titulo)
-            setCondition(CarEdit.Sale.DetalleCoche.Condicion)
-            setBodyType(CarEdit.Sale.DetalleCoche.TipoCuerpo)
-            setBrand(CarEdit.Sale.DetalleCoche.Marca)
-            setModel(CarEdit.Sale.DetalleCoche.Modelo)
-            setYear(CarEdit.Sale.DetalleCoche.Year)
-            setColor(CarEdit.Sale.DetalleCoche.Color)
-            setDescription(CarEdit.Sale.DetalleCoche.Descripcion)
+            setTitle(CarEdit.Sale.CarDetails.Title)
+            setCondition(CarEdit.Sale.CarDetails.Condition)
+            setBodyType(CarEdit.Sale.CarDetails.BodyType)
+            setBrand(CarEdit.Sale.CarDetails.Brand)
+            setModel(CarEdit.Sale.CarDetails.Model)
+            setYear(CarEdit.Sale.CarDetails.Year)
+            setColor(CarEdit.Sale.CarDetails.Color)
+            setDescription(CarEdit.Sale.CarDetails.Description)
 
         }
 
@@ -101,7 +101,7 @@ const CarDetails = ({ updateCarDetails }) => {
     return (
         <>
             {
-                isOpenCardDetails &&
+            isOpenCardDetails &&
 
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
                     <div className='bg-[#071620] m-10 rounded-lg w-auto h-[80%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
@@ -220,7 +220,7 @@ const CarDetails = ({ updateCarDetails }) => {
                                     </div>
                                     <div className='text-left flex justify-end items-center'>
                                         <button
-                                            onClick={() => handleSiguiente(validateCardDetails)}
+                                            onClick={() => handleNext(validateCardDetails)}
                                             className='items-center mr-4 hover:bg-blue-600 p-2 hover:rounded-md'>Siguiente</button>
                                         {notification ? (
                                             <div className="fixed inset-0 flex items-center justify-center z-50 sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm">

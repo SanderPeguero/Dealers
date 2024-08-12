@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useContextCar } from '../../Context/Context';
 
 const UpImagine = ({ AudiovisualDatos }) => {
-    const { SaveMedia, user, CarEdit, isOpenImagen, setisOpenImagen, handleNext, handleLast,handleRefresh } = useContextCar();
+    const { SaveMedia, user, CarEdit, isOpenImage, setisOpenImage, handleNext, handleLast,handleRefresh } = useContextCar();
     const [media, setMedia] = useState([]);
     const [LinkUrl, setLinkUrl] = useState([]);
     const [showExitWarning, setShowExitWarning] = useState(false);
@@ -43,30 +43,30 @@ const UpImagine = ({ AudiovisualDatos }) => {
     // Actualiza AudiovisualDatos con las imágenes seleccionadas
     useEffect(() => {
         if (LinkUrl.length > 0) {
-            AudiovisualDatos.Imagen = LinkUrl;
+            AudiovisualDatos.Image = LinkUrl;
         }
     }, [LinkUrl]);
 
     // Controla el desbordamiento del cuerpo del documento
     useEffect(() => {
-        document.body.style.overflow = isOpenImagen ? "hidden" : "";
+        document.body.style.overflow = isOpenImage ? "hidden" : "";
         return () => {
             document.body.style.overflow = "";
         };
-    }, [isOpenImagen]);
+    }, [isOpenImage]);
 
     // Maneja el cierre del modal con advertencia si hay imágenes cargadas
     const handleCloseImage = () => {
         if (LinkUrl.length > 0) {
             setShowExitWarning(true);
         } else {
-            setisOpenImagen(false);
+            setisOpenImage(false);
         }
     };
 
     // Confirmar el cierre del modal y limpiar datos
     const confirmExit = () => {
-        setisOpenImagen(false);
+        setisOpenImage(false);
         setLinkUrl([]);
         setMedia([]);
         setShowExitWarning(false);
@@ -83,9 +83,16 @@ const UpImagine = ({ AudiovisualDatos }) => {
         return LinkUrl.length > 0;
     };
 
+    useEffect(() => {
+        if (CarEdit !== null) {
+            setLinkUrl(CarEdit.Sale.Multimedia.Image)
+        }
+
+    }, [CarEdit])
+
     return (
         <>
-            {isOpenImagen && (
+            {isOpenImage && (
                 <div className='fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center'>
                     {/* bg-[#071620] m-10 rounded-lg w-auto h-[90%] md:h-auto mt-[4rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none */}
                 <div className='bg-[#071620] m-10 p-6 rounded-lg w-auto h-[45%] md:h-auto mt-[4rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none '>

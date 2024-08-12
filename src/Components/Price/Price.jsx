@@ -8,7 +8,7 @@ const Price = ({ PriceDatos, handleSale, handleEdit }) => {
 
     useEffect(() => {
         if (price > 0) {
-            PriceDatos.Precio = price;
+            PriceDatos.Price = price;
         }
     }, [price]);
 
@@ -21,7 +21,7 @@ const Price = ({ PriceDatos, handleSale, handleEdit }) => {
 
     const handleClosePrice = () => {
         setisOpenPrice(false);
-        handleRefresh()
+        // handleRefresh()
     };
 
     const validatePrecio = () => {
@@ -42,9 +42,16 @@ const Price = ({ PriceDatos, handleSale, handleEdit }) => {
             }
             setPrice(0); // Limpiar el campo de precio
             handleClosePrice(); // Cerrar el modal
-            handleRefresh()
+            // handleRefresh()
         }
     };
+
+    useEffect(() => {
+        if (CarEdit !== null) {
+            setPrice(CarEdit.Sale.Price.Price)
+        }
+
+    }, [CarEdit])
 
     return (
         <>

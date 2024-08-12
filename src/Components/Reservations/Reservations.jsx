@@ -26,7 +26,7 @@ const Reservations = () => {
     
     const FilterReservas = ReservaCarList.filter(reservas => 
         reservas.informationUser.nameUser.toLowerCase().includes(Username.toLowerCase()) &&
-        reservas.informationVehicle.Titulo.toLowerCase().includes(Title.toLocaleLowerCase())
+        reservas.informationVehicle.Title.toLowerCase().includes(Title.toLocaleLowerCase())
     )
 
     return (
@@ -82,16 +82,16 @@ const Reservations = () => {
                                     <th className="flex gap-3 px-6 py-4 font-normal text-gray-100">
 
                                         <div className="text-sm">
-                                            <div className="font-medium text-gray-100">{reserva.informationVehicle.Titulo}</div>
-                                            <div className="text-gray-400">Condicion: {reserva.informationVehicle.condicion} <br />
-                                                Año:  {reserva.informationVehicle.year},  Color: {reserva.informationVehicle.color}</div>
+                                            <div className="font-medium text-gray-100">{reserva.informationVehicle?.Title}</div>
+                                            <div className="text-gray-400">Condicion: {reserva.informationVehicle?.condition} <br />
+                                                Año:  {reserva.informationVehicle.year},  Color: {reserva.informationVehicle?.color}</div>
                                         </div>
                                     </th>
                                     <td className="px-6 py-4">
-                                        ${Formatnumber(reserva.informationVehicle.precio)}</td>
+                                        ${Formatnumber(reserva.informationVehicle?.price)}</td>
 
                                     <th >
-                                        <div   className='font-medium text-gray-100 mx-2'> {reserva.informationUser.ReservationDate} </div>
+                                        <div   className='font-medium text-gray-100 mx-2'> {reserva.informationUser?.ReservationDate} </div>
                                     </th>
                                 </tr>
                             ))}

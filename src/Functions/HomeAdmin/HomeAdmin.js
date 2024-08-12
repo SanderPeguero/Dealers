@@ -97,7 +97,7 @@ export const deleteImageURL = async (imageKey) => {
 
 
 
-export const GetContact = async (setTitleContact, setUbicationContact, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks) => {
+export const GetContact = async (setTitleContact, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks) => {
 
     const ContactRef = ref(db, 'Contact');
     try {
@@ -108,7 +108,7 @@ export const GetContact = async (setTitleContact, setUbicationContact, setGmailC
             // console.log(ContactData)
 
             setTitleContact(ContactData.TitleContact)
-            setUbicationContact(ContactData.Ubication)
+            setUbicationContacts(ContactData.Ubicacion)
             setGmailContact(ContactData.Gmail)
             setPhoneContact(ContactData.Phone)
             setTitletwoContact(ContactData.Titletwo)

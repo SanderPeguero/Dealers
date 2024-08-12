@@ -89,11 +89,11 @@ const MainScreen = () => {
     const [newFeature, setNewFeature] = useState('');
 
     const updateCarDetails = (updatedDetails) => {
-        CarSaleDatos.Sale.DetalleCoche = updatedDetails;
+        CarSaleDatos.Sale.CarDetails = updatedDetails;
     }
 
     const updateEngineDetails = (updatedDetails) => {
-        CarSaleDatos.Sale.DetalleMotor = updatedDetails;
+        CarSaleDatos.Sale.MotorDetails = updatedDetails;
     }
 
     const updateDimension = (updatedDetails) => {
@@ -104,6 +104,7 @@ const MainScreen = () => {
         e.preventDefault();
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
             try {
+                console.log(CarSaleDatos)
                 SaveCarSale(CarSaleDatos, user.uid);
                 setGood(!bien)
             } catch (error) {
@@ -146,7 +147,7 @@ const MainScreen = () => {
 
     useEffect(() => {
         if (CarEdit !== null) {
-            CarSaleDatos.Sale.DetalleCoche = CarEdit.Sale.DetalleCoche
+            CarSaleDatos.Sale.CarDetails = CarEdit.Sale.CarDetails
         }
     }, [CarEdit])
 
@@ -154,12 +155,12 @@ const MainScreen = () => {
 
     return (
         <>
-            < CarDetails updateCarDetails={updateCarDetails} />
+            <CarDetails updateCarDetails={updateCarDetails} />
             <EngineDetails updateEngineDetails={updateEngineDetails} />
             <Dimension updateDimension={updateDimension} />
             <Feature FeatureDatos={CarSaleDatos.Sale.Features} newFeature={newFeature} setNewFeature={setNewFeature} />
             <UpImagine AudiovisualDatos={CarSaleDatos.Sale.Multimedia} />
-            <Price PriceDatos={CarSaleDatos.Sale.Precio} handleSale={handleSale} handleEdit={handleEdit} />
+            <Price PriceDatos={CarSaleDatos.Sale.Price} handleSale={handleSale} handleEdit={handleEdit} />
             {notification ? (
                 <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
 

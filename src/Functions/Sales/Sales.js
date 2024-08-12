@@ -122,9 +122,9 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
                 const IdCarSale = doc.id;
                 data.IdCarSale = IdCarSale;
 
-                if (data.Sale.DetalleCoche.Condicion === "Nuevo") {
+                if (data.Sale.DetalleCoche?.Condicion === "Nuevo") {
                     newCars.push(data);
-                } else if (data.Sale.DetalleCoche.Condicion === "Usado") {
+                } else if (data.Sale.DetalleCoche?.Condicion === "Usado") {
                     usedCars.push(data);
                 }
                 CarSale.push(data);

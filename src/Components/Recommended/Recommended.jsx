@@ -138,14 +138,14 @@ const Recommended = () => {
                                         <button onClick={() => handleOpenModal(car)}>
                                             <img
                                                 loading="lazy"
-                                                srcSet={car.Sale.Multimedia.Imagen[0]}
+                                                srcSet={car.Sale.Multimedia?.Image[0]}
                                                 className="object-cover absolute inset-0 size-full"
-                                                alt={car.Sale.DetalleCoche.Titulo}
+                                                alt={car.Sale.CarDetails?.Title}
                                             />
                                         </button>
                                         <div className="flex absolute inset-x-0 bottom-0 text-sm px-2.5 gap-20 py-5 bg-black bg-opacity-30 max-md:mt-52">
-                                            <div className="flex-auto">{car.Sale.DetalleCoche.Titulo}</div>
-                                            <div className="">${Formatnumber(car.Sale.Precio.Precio)}</div>
+                                            <div className="flex-auto">{car.Sale.CarDetails?.Title}</div>
+                                            <div className="">${Formatnumber(car.Sale.Price?.Price)}</div>
                                         </div>
                                     </div>
                                 </div>

@@ -6,7 +6,7 @@ import Youtube from '../../assets/Footer/youtube.png'
 import { useContextCar } from '../../Context/Context'
 const Footer = () => {
 
-    const { PhoneContact, GmailContact, UbicacionContact, Socialnetworks } = useContextCar()
+    const { PhoneContact, GmailContact, UbicationContacts, Socialnetworks } = useContextCar()
 
 
     return (
@@ -38,7 +38,7 @@ const Footer = () => {
                     <div className='grid lg:grid-cols-1 w-full items-center'>
                         <div className='flex  items-center justify-center'>
                             <p className="line-clamp-3 w-[10rem]">
-                                {UbicacionContact}</p>
+                                {UbicationContacts}</p>
                         </div>
 
 

@@ -150,6 +150,7 @@ export function ProviderContext({ children }) {
     }
 
     const handleNext = (validateCarSaleDatos) => {
+        console.log("Boton next")
         if (isOpenCardDetails === true) {
             if (validateCarSaleDatos()) {
                 setisOpenEngineDetails(true);
