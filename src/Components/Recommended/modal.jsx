@@ -82,6 +82,10 @@ const Modal = ({ showModal, handleClose }) => {
                                                     <div className="font-bold text-white max-md:text-xl">Condición:</div>
                                                     <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.CarDetails?.Condition}</div>
                                                 </div>
+                                                <div className="flex gap-3.5 mt-6 text-lg">
+                                                    <div className="font-bold text-white max-md:text-xl">Cantidad:</div>
+                                                    <div className="text-white text-opacity-50 max-md:text-xl">{CarAvailable?.Sale?.CarDetails?.Amount}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

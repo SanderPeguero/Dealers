@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
-
+import SelectL from '../Select/Select'
+import { FaPlusCircle } from "react-icons/fa";
+import ModalAdd from '../ModalAdd/ModalAdd';
+import { GetItemsCarEngine } from '../../Functions/Sales/Sales';
 const EngineDetails = ({ updateEngineDetails }) => {
 
     const { CarEdit, isOpenEngineDetails, setisOpenEngineDetails, handleNext, handleLast, handleRefresh } = useContextCar()
@@ -14,6 +17,8 @@ const EngineDetails = ({ updateEngineDetails }) => {
     const [EngineCapacity, setEngineCapacity] = useState('')
     const [Power, setPower] = useState('')
     const [showWarning, setShowWarning] = useState(false)
+    const [isOpenAdd, setisOpenAdd] = useState(false)
+    const [Text, setText] = useState("")
 
     const EngineDetailsdatos = useMemo(() => ({
         FuelType,
@@ -57,7 +62,6 @@ const EngineDetails = ({ updateEngineDetails }) => {
     const confirmClose = () => {
         setisOpenEngineDetails(false)
         setShowWarning(false)
-        // Limpiar los estados
         setFuelType('')
         setMileage('')
         setTransmition('')
@@ -79,10 +83,41 @@ const EngineDetails = ({ updateEngineDetails }) => {
         }
     };
 
+    const [optionTypeFuel, setoptionTypeFuel] = useState([])
+    const [optionTransmission, setoptionTransmission] = useState([])
+    const [optionTraction, setoptionTraction] = useState([])
+    const [Category, setCategory] = useState('')
+    const [UpdateList, setUpdateList] = useState(false)
+
+
+    const Onclose = () => {
+        setisOpenAdd(!isOpenAdd);
+    };
+
+    const OpenModal = (text, category) => {
+        setisOpenAdd(true)
+        setText(text)
+        setCategory(category)
+    }
+
+    useEffect(() => {
+        GetItemsCarEngine(setoptionTypeFuel, setoptionTransmission, setoptionTraction)
+    }, [])
+
+    useEffect(() => {
+        if (UpdateList === true) {
+            GetItemsCarEngine(setoptionTypeFuel, setoptionTransmission, setoptionTraction)
+            setUpdateList(false)
+        }
+
+    }, [UpdateList])
+
+
     return (
         <>
             {isOpenEngineDetails &&
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
+                      <ModalAdd isOpen={isOpenAdd} onClose={Onclose} Text={Text} Category={Category} updateList={setUpdateList}/>
                     <div className='bg-[#071620] m-10 rounded-lg w-auto h-[65%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                         <div className='ml-8 mr-8 mb-12 mt-8'>
                             <div className='text-left flex justify-between items-center cursor-pointer'>
@@ -104,14 +139,23 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                     <div className='mb-4'>
                                         <div className="grid gap-6 mb-6 lg:grid-cols-3">
                                             <div>
-                                                <label htmlFor="Typeofload" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipos de combustible </label>
-                                                <select value={FuelType} onChange={(e) => setFuelType(e.target.value)} id="Typeofload" className="bg-[#12232E] text-sm block w-full p-2.5 cursor-pointer rounded-lg hover:bg-slate-500 transition-all" required>
-                                                    <option value="">Seleccionar</option>
-                                                    <option value="Gasolina">Gasolina</option>
-                                                    <option value="Diésel">Diésel</option>
-                                                    <option value="Biodiésel">Biodiésel</option>
-                                                    <option value="Gas natural">Gas natural</option>
-                                                </select>
+                                                <div className='flex flex-row items-center'>
+                                                    <label htmlFor="Typeofload" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Tipos de combustible
+                                                    </label>
+                                                    <button onClick={() => OpenModal("Tipos de combustible", "optionTypeFuel")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
+                                                </div>
+
+                                                <SelectL
+                                                    value={FuelType}
+                                                    onChange={setFuelType}
+                                                    options={optionTypeFuel}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                />
+
                                             </div>
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kilometraje</label>
@@ -123,23 +167,43 @@ const EngineDetails = ({ updateEngineDetails }) => {
                                                 </div>
                                             </div>
                                             <div>
-                                                <label htmlFor="Transmisión" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Transmisión</label>
-                                                <select value={Transmition} onChange={(e) => setTransmition(e.target.value)} id="Transmisión" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
-                                                    <option value="">Seleccionar</option>
-                                                    <option value="Transmisión Manual">Transmisión Manual</option>
-                                                    <option value="Transmisión Automática">Transmisión Automática</option>
-                                                </select>
+                                                <div className='flex flex-row items-center'>
+                                                    <label htmlFor="Transmisión" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Transmisión
+                                                    </label>
+                                                    <button onClick={() => OpenModal("Transmisión", "optionTransmission")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
+                                                </div>
+
+                                                <SelectL
+                                                    value={Transmition}
+                                                    onChange={setTransmition}
+                                                    options={optionTransmission}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                />
+
                                             </div>
 
-                                        
-                                            
                                             <div className='mb-8 '>
-                                                <label htmlFor="Tracción" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de tranmición</label>
-                                                <select value={DriverTrain} onChange={(e) => setDriverTrain(e.target.value)} id="TTracción" className="bg-[#12232E] text-sm block w-full rounded-lg hover:bg-slate-500 transition-all cursor-pointer p-2.5" required>
-                                                    <option value="">Seleccionar</option>
-                                                    <option value="Tracción Delantera">Tracción Delantera</option>
-                                                    <option value="Tracción Trasera">Tracción Trasera</option>
-                                                </select>
+                                                <div className='flex flex-row items-center'>
+                                                    <label htmlFor="Tracción" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Tipo de Tracción
+                                                    </label>
+                                                    <button onClick={() => OpenModal("Tipo de Tracción", "optionTraction")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
+                                                </div>
+
+                                                <SelectL
+                                                    value={DriverTrain}
+                                                    onChange={setDriverTrain}
+                                                    options={optionTraction}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                />
+
                                             </div>
 
                                             <div>

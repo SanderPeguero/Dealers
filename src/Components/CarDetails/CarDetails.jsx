@@ -1,25 +1,43 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
-
+import SelectL from '../Select/Select';
+import { FaPlusCircle } from "react-icons/fa";
+import ModalAdd from '../ModalAdd/ModalAdd';
+import { GetItemsCarDetails } from '../../Functions/Sales/Sales';
 const CarDetails = ({ updateCarDetails }) => {
-    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleNext,handleRefresh  } = useContextCar()
+    const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleNext, handleRefresh } = useContextCar()
     const [Title, setTitle] = useState('')
     const [Condition, setCondition] = useState('')
     const [BodyType, setBodyType] = useState('')
     const [Brand, setBrand] = useState('')
     const [Model, setModel] = useState('')
+    const [Amount, setAmount] = useState(0)
     const [Year, setYear] = useState('')
 
     const [Color, setColor] = useState('')
     const [Description, setDescription] = useState('')
 
-    const [capacity, setCapacity] = useState(1);
+    const [capacity, setCapacity] = useState(2);
     const [open, setOpen] = useState(false)
     const [notification, setNotification] = useState(false)
+    const [isOpenAdd, setisOpenAdd] = useState(false)
+    const [Text, setText] = useState("")
+
+    const [amountError, setAmountError] = useState('');
+
+    const handleAmountChange = (e) => {
+        const value = e.target.value;
+        if (value === '' || Number(value) >= 0) {
+            setAmount(Number(value));
+            setAmountError(''); 
+        } else {
+            setAmountError('La cantidad no puede ser negativa.');
+        }
+    };
 
     const decreaseCapacity = () => {
-        if (capacity > 1) {
+        if (capacity > 2) {
             setCapacity(capacity - 1);
         }
     }
@@ -35,11 +53,12 @@ const CarDetails = ({ updateCarDetails }) => {
         BodyType,
         Brand,
         Model,
+        Amount,
         Year: Year,
         Capacidad: capacity,
         Color,
         Description
-    }), [Title, Condition, BodyType, Brand, Model, Year, capacity, Color, Description]);
+    }), [Title, Condition, BodyType, Brand, Model,Amount, Year, capacity, Color, Description]);
 
     useEffect(() => {
         updateCarDetails(CarDetailsdatos)
@@ -75,7 +94,7 @@ const CarDetails = ({ updateCarDetails }) => {
 
 
     const handleCloseCardDetails = () => {
-        // Reinicia los estados
+
         setTitle('')
         setCondition('')
         setBodyType('')
@@ -86,7 +105,7 @@ const CarDetails = ({ updateCarDetails }) => {
         setDescription('')
         setCapacity(1)
         setisOpenCardDetails(false)
-        handleRefresh ()
+        handleRefresh()
     }
 
     const validateCardDetails = () => {
@@ -96,14 +115,48 @@ const CarDetails = ({ updateCarDetails }) => {
         }
         else { return true; }
 
+    }
+
+    const optionsYear = Array.from({ length: 50 }, (_, i) => {
+        const year = new Date().getFullYear() + 1 - i;
+        return { value: year.toString(), label: year.toString() };
+    });
+
+    const [optionBodyType, setoptionBodyType] = useState([])
+    const [optionsBrand, setoptionsBrand] = useState([])
+    const [optionsModel, setoptionsModel] = useState([])
+    const [Category, setCategory] = useState('')
+    const [UpdateList, setUpdateList] = useState(false)
+
+    const Onclose = () => {
+        setisOpenAdd(!isOpenAdd);
     };
+
+    const OpenModal = (text, category) => {
+        setisOpenAdd(true)
+        setText(text)
+        setCategory(category)
+    }
+
+    useEffect(() => {
+        GetItemsCarDetails(setoptionBodyType, setoptionsBrand, setoptionsModel)
+    }, [])
+
+    useEffect(() => {
+        if (UpdateList === true) {
+            GetItemsCarDetails(setoptionBodyType, setoptionsBrand, setoptionsModel)
+            setUpdateList(false)
+        }
+    }, [UpdateList])
 
     return (
         <>
+
             {
-            isOpenCardDetails &&
+                isOpenCardDetails &&
 
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
+                    <ModalAdd isOpen={isOpenAdd} onClose={Onclose} Text={Text} Category={Category} updateList={setUpdateList} />
                     <div className='bg-[#071620] m-10 rounded-lg w-auto h-[80%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                         <div className='ml-8 mr-8 mb-12 mt-8'>
                             <div className='text-left flex justify-between cursor-pointer items-center'>
@@ -142,46 +195,94 @@ const CarDetails = ({ updateCarDetails }) => {
                                         </div>
                                     </div>
                                     <div className='mb-4'>
-                                        <div className="grid gap-6 mb-6 lg:grid-cols-3">
+                                        <div className="grid gap-6 mb-6 lg:grid-cols-4">
                                             <div>
-                                                <label htmlFor="Typeofload" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de cuerpo</label>
-                                                <select value={BodyType} onChange={(e) => setBodyType(e.target.value)} id="Typeofload" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
-                                                    <option value="">Selecciona</option>
-                                                    <option value="sedan">Sedán</option>
-                                                    <option value="coupe">Coupé</option>
-                                                    <option value="suv">SUV</option>
-                                                </select>
+                                                <div className='flex flex-row items-center '>
+                                                    <label htmlFor="Typeofload" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Tipo de cuerpo
+                                                    </label>
+
+                                                    <button onClick={() => OpenModal("Tipo de cuerpo", "optionBodyType")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
+
+                                                </div>
+
+                                                <SelectL
+                                                    value={BodyType}
+                                                    onChange={setBodyType}
+                                                    options={optionBodyType}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                />
                                             </div>
                                             <div>
-                                                <label htmlFor="Brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Marca</label>
-                                                <select value={Brand} onChange={(e) => setBrand(e.target.value)} id="Brand" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
-                                                    <option value="">Selecciona</option>
-                                                    <option value="toyota">Toyota</option>
-                                                    <option value="honda">Honda</option>
-                                                    <option value="ford">Ford</option>
-                                                </select>
+                                                <div className='flex flex-row items-center '>
+                                                    <label htmlFor="Brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Marca
+                                                    </label>
+                                                    <button onClick={() => OpenModal("Marca", "optionsBrand")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
+                                                </div>
+
+                                                <SelectL
+                                                    value={Brand}
+                                                    onChange={setBrand}
+                                                    options={optionsBrand}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                />
                                             </div>
                                             <div>
-                                                <label htmlFor="Model" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Modelo</label>
-                                                <select value={Model} onChange={(e) => setModel(e.target.value)} id="Model" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
-                                                    <option value="">Selecciona</option>
-                                                    <option value="corolla">Corolla</option>
-                                                    <option value="civic">Civic</option>
-                                                    <option value="mustang">Mustang</option>
-                                                </select>
+                                                <div className='flex flex-row items-center '>
+                                                    <label htmlFor="Model" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Modelo
+                                                    </label>
+                                                    <button onClick={() => OpenModal("Modelo", "optionsModel")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
+                                                </div>
+
+                                                <SelectL
+                                                    value={Model}
+                                                    onChange={setModel}
+                                                    options={optionsModel}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                    isDisabled={!Brand}
+                                                />
+                                            </div>
+                                            <div>
+                                                <div className='mb-4'>
+                                                    <label htmlFor="Amount" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cantidad</label>
+                                                    <input
+                                                        value={Amount}
+                                                        onChange={handleAmountChange}
+                                                        type="number"
+                                                        id="Amount"
+                                                        className="bg-[#12232E] text-sm rounded-lg hover:bg-slate-500 transition-all block w-full p-2.5"
+                                                        required
+                                                    />
+                                                    {amountError && <p className="mt-1 text-sm text-red-500">{amountError}</p>}
+                                                </div>
+                                                {/* <label htmlFor="ExteriorColor" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cantidad</label>
+                                                <input value={Amount} onChange={(e) => setAmount(e.target.value)}
+                                                    type="number" id="Amount" className="bg-[#12232E] text-sm rounded-lg hover:bg-slate-500 transition-all block w-full p-2.5" required /> */}
                                             </div>
                                         </div>
                                     </div>
                                     <div className='mb-4'>
                                         <div className="grid gap-6 mb-6 lg:grid-cols-3">
                                             <div>
-                                                <label htmlFor="Year" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Año</label>
-                                                <select value={Year} onChange={(e) => setYear(e.target.value)} id="Year" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
-                                                    <option value="">Seleccionar</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2020">2020</option>
-                                                </select>
+                                                <label htmlFor="year" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Año</label>
+                                                <SelectL
+                                                    value={Year}
+                                                    onChange={setYear}
+                                                    options={optionsYear}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                />
                                             </div>
                                             <div>
                                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Capacidad de pasajeros</label>
@@ -193,7 +294,7 @@ const CarDetails = ({ updateCarDetails }) => {
                                                         type="text"
                                                         value={capacity}
                                                         onChange={(e) => setCapacity(parseInt(e.target.value))}
-                                                        min={1}
+                                                        min={2}
                                                         max={100}
                                                         className="bg-[#12232E] text-sm text-center block w-full p-2.5"
                                                         required
@@ -204,13 +305,9 @@ const CarDetails = ({ updateCarDetails }) => {
                                                 </div>
                                             </div>
                                             <div>
-                                                <label htmlFor="ExteriorColor" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Color exterior</label>
-                                                <select value={Color} onChange={(e) => setColor(e.target.value)} id="ExteriorColor" className="bg-[#12232E] text-sm block w-full p-2.5 rounded-lg cursor-pointer hover:bg-slate-500 transition-all" required>
-                                                    <option value="">Seleccionar</option>
-                                                    <option value="Blanco">Blanco</option>
-                                                    <option value="Negro">Negro</option>
-                                                    <option value="Gris">Gris</option>
-                                                </select>
+                                                <label htmlFor="ExteriorColor" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Color Exterior</label>
+                                                <input value={Color} onChange={(e) => setColor(e.target.value)}
+                                                    type="text" id="color" className="bg-[#12232E] text-sm rounded-lg hover:bg-slate-500 transition-all block w-full p-2.5" required />
                                             </div>
                                         </div>
                                     </div>

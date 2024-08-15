@@ -27,6 +27,7 @@ const CarSaleDatos = {
             BodyType: "",
             brand: "",
             Model: "",
+            Amount: 0,
             Year: "",
             Capacity: "",
             Color: "",
