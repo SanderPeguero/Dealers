@@ -1,12 +1,36 @@
 import React, { useEffect, useState, } from 'react';
 import { useContextCar } from '../../Context/Context';
-
+import edit from "../../assets/img/edit.png"
+import delet from "../../assets/img/delet.png"
 import ReservationModal from './ReservationModal';
+import { Await } from 'react-router-dom';
 
 const Reservations = () => {
     
     
-    const {ReservaCarList, Formatnumber, setchangeReserve } = useContextCar();
+    const {ReservaCarList, Formatnumber, setchangeReserve, DeleteReservation, setListReservation, ListReservation } = useContextCar();
+
+    const handleDeleteReservation = async (ReservationId) => {
+        try {
+            await DeleteReservation(ReservationId);
+            const [updatedReservaCarList] = await Promise.all([
+                ReservaCarList(),
+            ]);
+
+            if (Array.isArray(updatedListCarSale)) {
+                setListReservation(updatedReservaCarList);
+                setOpenModal(true)
+            }
+
+
+        } catch (error) {
+            console.log("Algo ha Salido mal")
+        }
+        
+    }
+
+
+
     const [Username, setUserName] = useState("");
     const [Title, setTitle] = useState("");
 
@@ -57,14 +81,14 @@ const Reservations = () => {
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-100">Auto</th>
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-100">Precio</th>
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-100">Fecha</th>
-
+                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Acción</th>
                             </tr>
                         </thead>
 
                         <tbody className="divide-y divide-gray-600 border-t border-gray-600">
 
                             {FilterReservas.map((reserva) => (
-                                <tr key={reserva.id} className="hover:bg-gray-900 text-gray-100 max-w-full cursor-pointer" onClick={() => handleOpenModal(reserva)}>
+                                <tr key={reserva.id} className="hover:bg-gray-900 text-gray-100 max-w-full " >
 
 
                                     <td className="px-6 py-4">
@@ -93,6 +117,20 @@ const Reservations = () => {
                                     <th >
                                         <div   className='font-medium text-gray-100 mx-2'> {reserva.informationUser?.ReservationDate} </div>
                                     </th>
+
+                                    <th>
+                                        <div className='flex justify-center gap-5'>
+                                            <button className='hover:bg-slate-400 p-2'>
+                                                <img className='w-6 h-6 cursor-pointer' onClick={() => handleOpenModal(reserva)} src={edit} alt="" />
+                                            </button>
+                                            <button className="hover:bg-slate-400 p-2" >
+                                                <img className='w-6 h-6 cursor-pointer' onClick={() => handleDeleteReservation(reserva.id) } src={delet} alt="deletebutton" />
+                                            </button>
+                                        
+                                        </div>
+                                       
+                                    </th>
+
                                 </tr>
                             ))}
                         </tbody>

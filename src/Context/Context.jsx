@@ -5,7 +5,7 @@ import { auth } from "../firebase/firebase";
 // Functions
 import {
     SaveCarSale, SaveMedia, SaveArchivo,
-    ListCarSale, DeleteCarSale, EditCarSale, ListReservaCar, ReservaCar, GetReserva
+    ListCarSale, DeleteCarSale, EditCarSale, ListReservaCar, ReservaCar, GetReserva, DeleteReservation
 } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
 import { GetHero, GetContact, editTitleContact } from "../Functions/HomeAdmin/HomeAdmin"
@@ -29,6 +29,7 @@ export function ProviderContext({ children }) {
     const [LisCarNew, setLisCarNew] = useState([])
     const [LisCarUsed, setLisCarUsed] = useState([])
     const [ListCar, setListCar] = useState([])
+    const [ListReservation, setListReservation] = useState([])
     const [ListAllUser, setListAllUser] = useState([])
 
     const [locationR, setlocationR] = useState('')
@@ -216,7 +217,7 @@ export function ProviderContext({ children }) {
                 handleRefresh,
                 CarAvailable,
                 setAvailable,
-
+                DeleteReservation,
 
                 SaveCarSale,
                 SaveMedia,
@@ -250,7 +251,8 @@ export function ProviderContext({ children }) {
                 DeleteCarSale,
 
                 EditCarSale,
-
+                ListReservation,
+                setListReservation,
                 Formatnumber,
                 TitleHero,
                 DescriptionHero,

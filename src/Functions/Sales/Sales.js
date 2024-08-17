@@ -97,7 +97,22 @@ export const DeleteCarSale = async (carSaleId) => {
         }
 
     } catch (error) {
+        
+    }
+}
 
+
+export const DeleteReservation = async (ReservationId) => {
+    try {
+        const confirmDelete = window.confirm("¿Estás seguro que deseas eliminar esta Reserva?");
+
+        if (confirmDelete) {
+            const docRef = doc(dbFire, "ReservationCar", ReservationId);
+            await deleteDoc(docRef);
+        }
+
+    } catch (error) {
+        console.log("Ha salido algo mal");
     }
 }
 
