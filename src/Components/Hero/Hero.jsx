@@ -1,88 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useContextCar } from "../../Context/Context";
 import { FaEdit } from "react-icons/fa";
 import { editTitleHero, editDescriptionHero } from "../../Functions/HomeAdmin/HomeAdmin";
 
 const Hero = () => {
-    const { user, WhichRole, TitleHero, DescriptionHero, SliderImg, setTitleHero, setDescriptionHero, setSliderImg, GetHero } = useContextCar()
+    const {
+        user,
+        WhichRole,
+        TitleHero,
+        DescriptionHero,
+        SliderImg,
+        setTitleHero,
+        setDescriptionHero,
+        setSliderImg,
+        GetHero,
+    } = useContextCar();
 
-    const [opentwo, setOpenTwo] = useState(false);
-    const [openone, setOpenOne] = useState(false);
-    const [TitleHome, setTitleHome] = useState('Encuentra el coche de tus sueños')
-    const [DescHome, setDescHome] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+    const [current, setCurrent] = useState(0);
+    const [isOpenEditImg, setIsOpenEditImg] = useState(false);
 
-
-    const [EveryThing, setEveryThing] = useState(true)
-    const [New, setNew] = useState(false)
-    const [Used, setUsed] = useState(false)
-   
-
-
-
-    let count = 0
-    const [current, setCurrent] = useState(0)
     useEffect(() => {
-        
-        Start()
-    }, [])
-    const Start = () => {
-        setInterval(() => {
-            next();
+        const interval = setInterval(() => {
+            setCurrent((prev) => (prev + 1) % SliderImg.length);
         }, 7000);
-    }
-    const next = () => {
-        count = (count + 1) % SliderImg.length
-        setCurrent(count)
-    }
-    const before = () => {
-        const e = SliderImg.length
-        count = (current + e - 1) % e
-        setCurrent(count)
-    }
-
-    const handleAll = () => {
-        setEveryThing(true)
-        setNew(false)
-        setUsed(false)
-    }
-
-    const handleNew = () => {
-        setEveryThing(false)
-        setNew(true)
-        setUsed(false)
-    }
-
-    const handleUsed = () => {
-        setEveryThing(false)
-        setNew(false)
-        setUsed(true)
-    }
-    const [values, setValues] = useState([0, 3000000]);
-    const min = 0;
-    const max = 3000000;
+        return () => clearInterval(interval)
+    }, [SliderImg.length]);
 
     const handleEditTextHero = () => {
         const newTitle = prompt('Edit title home:', TitleHero);
         if (newTitle !== null) {
-            editTitleHero(newTitle)
-            GetHero(setTitleHero, setDescriptionHero, setSliderImg)
+            editTitleHero(newTitle);
+            GetHero(setTitleHero, setDescriptionHero, setSliderImg);
         }
-    }
+    };
 
     const handleEditDesctHero = () => {
-        const newDeesc = prompt('Edit decription home:', DescriptionHero);
-        if (newDeesc !== null) {
-            editDescriptionHero(newDeesc)
-            GetHero(setTitleHero, setDescriptionHero, setSliderImg)
+        const newDesc = prompt('Edit description home:', DescriptionHero);
+        if (newDesc !== null) {
+            editDescriptionHero(newDesc);
+            GetHero(setTitleHero, setDescriptionHero, setSliderImg);
         }
-    }
+    };
 
-    const [isOpenEditImg, setisOpenEditImg] = useState(false)
-
-    const handleOpenEditImage = () => {
-        setisOpenEditImg(!isOpenEditImg)
-    }
+    const formatText = (text) => {
+        if (!text) return "";
+        const words = text.split(' ');
+        return words.reduce((acc, word, index) => {
+            if ((index + 1) % 4 === 0 || index === words.length - 1) {
+                acc += `${word}\n`;
+            } else {
+                acc += `${word} `;
+            }
+            return acc;
+        }, "");
+    };
 
     return (
         <>
@@ -123,7 +94,7 @@ const Hero = () => {
                     </div>
 
 
-                    
+
                 </div>
             </div>
 
