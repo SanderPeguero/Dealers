@@ -30,7 +30,7 @@ const CarDetails = ({ updateCarDetails }) => {
         const value = e.target.value;
         if (value === '' || Number(value) >= 0) {
             setAmount(Number(value));
-            setAmountError('');
+            setAmountError(''); 
         } else {
             setAmountError('La cantidad no puede ser negativa.');
         }
@@ -58,7 +58,7 @@ const CarDetails = ({ updateCarDetails }) => {
         Capacidad: capacity,
         Color,
         Description
-    }), [Title, Condition, BodyType, Brand, Model, Amount, Year, capacity, Color, Description]);
+    }), [Title, Condition, BodyType, Brand, Model,Amount, Year, capacity, Color, Description]);
 
     useEffect(() => {
         updateCarDetails(CarDetailsdatos)
@@ -149,55 +149,6 @@ const CarDetails = ({ updateCarDetails }) => {
         }
     }, [UpdateList])
 
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalText, setModalText] = useState('');
-    const [modalCategory, setModalCategory] = useState('');
-    const [setOptionsBrand] = useState([]);
-    const [setOptionsModel] = useState([]);
-    const [brand] = useState(null);
-    const [model] = useState(null);
-
-    const updateList = async (updated) => {
-        if (updated) {
-            try {
-                // Obtén los datos actualizados desde Firebase
-                const data = await GetItemsCarDetails(
-                    () => { }, // Puedes dejar estos setters vacíos si no los usas aquí
-                    setOptionsBrand,
-                    setOptionsModel
-                );
-                
-                if (!data) {
-                    console.error("No se obtuvieron datos actualizados.");
-                }
-            } catch (error) {
-                console.error("Error al obtener los datos actualizados: ", error);
-            }
-        }
-    };
-    useEffect(() => {
-        // Inicializa las listas de opciones al cargar el componente
-        const fetchInitialData = async () => {
-            try {
-                const data = await GetItemsCarDetails(
-                    setOptionsBrand,
-                    setOptionsBrand,
-                    setOptionsModel
-                );
-                if (!data) {
-                    console.error("No se obtuvieron datos iniciales.");
-                }
-            } catch (error) {
-                console.error("Error al obtener los datos iniciales: ", error);
-            }
-        };
-
-        fetchInitialData();
-    }, []);
-
-    // Función para actualizar la lista de opciones
-
-
     return (
         <>
 
@@ -265,54 +216,43 @@ const CarDetails = ({ updateCarDetails }) => {
                                                     placeholder="Selecciona"
                                                 />
                                             </div>
-                                           
-                                                <div>
-                                                    <div className='flex flex-row items-center'>
-                                                        <label htmlFor="Brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                            Marca
-                                                        </label>
-                                                        <button onClick={() => OpenModal("Marca", "optionsBrand")}>
-                                                            <FaPlusCircle size={20} className='ml-2' />
-                                                        </button>
-                                                    </div>
-
-                                                    <SelectL
-                                                        value={brand}
-                                                        onChange={setBrand}
-                                                        options={optionsBrand}
-                                                        isClearable
-                                                        placeholder="Selecciona"
-                                                    />
+                                            <div>
+                                                <div className='flex flex-row items-center '>
+                                                    <label htmlFor="Brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Marca
+                                                    </label>
+                                                    <button onClick={() => OpenModal("Marca", "optionsBrand")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
                                                 </div>
 
-                                                <div>
-                                                    <div className='flex flex-row items-center'>
-                                                        <label htmlFor="Model" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                            Modelo
-                                                        </label>
-                                                        <button onClick={() => OpenModal("Modelo", "optionsModel")}>
-                                                            <FaPlusCircle size={20} className='ml-2' />
-                                                        </button>
-                                                    </div>
-
-                                                    <SelectL
-                                                        value={model}
-                                                        onChange={setModel}
-                                                        options={optionsModel}
-                                                        isClearable
-                                                        placeholder="Selecciona"
-                                                        isDisabled={!brand}
-                                                    />
-                                                </div>
-
-                                                <ModalAdd
-                                                    isOpen={modalOpen}
-                                                    onClose={() => setModalOpen(false)}
-                                                    Text={modalText}
-                                                    Category={modalCategory}
-                                                    updateList={updateList}
+                                                <SelectL
+                                                    value={Brand}
+                                                    onChange={setBrand}
+                                                    options={optionsBrand}
+                                                    isClearable
+                                                    placeholder="Selecciona"
                                                 />
-                                            
+                                            </div>
+                                            <div>
+                                                <div className='flex flex-row items-center '>
+                                                    <label htmlFor="Model" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Modelo
+                                                    </label>
+                                                    <button onClick={() => OpenModal("Modelo", "optionsModel")}>
+                                                        <FaPlusCircle size={20} className='ml-2' />
+                                                    </button>
+                                                </div>
+
+                                                <SelectL
+                                                    value={Model}
+                                                    onChange={setModel}
+                                                    options={optionsModel}
+                                                    isClearable
+                                                    placeholder="Selecciona"
+                                                    isDisabled={!Brand}
+                                                />
+                                            </div>
                                             <div>
                                                 <div className='mb-4'>
                                                     <label htmlFor="Amount" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cantidad</label>
