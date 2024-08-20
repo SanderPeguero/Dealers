@@ -238,28 +238,90 @@ export const AddItemsCar = (data) => {
         });
 }
 
-export const addNewOption = async (category, newOption) => {
-    
+// Función para agregar una nueva opción
+export const addNewOption = async (category, newOption, brand = '') => {
+    // Define la referencia a la base de datos dependiendo de la categoría
     const dbRef = refDB(db, `cars/options/${category}`);
 
     try {
-
         const snapshot = await get(dbRef);
         const existingData = snapshot.val() || {};
+
+        // Verifica si la opción ya está en la base de datos
+        const isOptionAlreadyExists = Object.values(existingData).some(option => option.name === newOption.name);
+
+        if (isOptionAlreadyExists) {
+            alert("La opción ya está registrada. Por favor, revisa antes de agregar una nueva.");
+            return; // Salir de la función si la opción ya existe
+        }
+
+        // Si la opción no existe, procede a agregarla
+        const existingKeys = Object.keys(existingData);
+        const highestIndex = existingKeys.length > 0 ? Math.max(...existingKeys.map(Number)) : -1;
+        const newIndex = highestIndex + 1;
+
+        // Incluye la marca en el objeto de nueva opción si está disponible
+        const optionWithBrand = { ...newOption, brand };
+
+        const updateData = {
+            [newIndex]: optionWithBrand
+        };
+
+        await update(dbRef, updateData);
+
+        alert("Nueva opción agregada exitosamente.");
+    } catch (error) {
+        alert("Error al agregar la nueva opción: " + error.message);
+    }
+};
+
+
+// Función para agregar un nuevo modelo
+export const addNewModel = async (model, brand) => {
+    const dbRef = refDB(db, `cars/options/optionsModel/${brand}`);
+
+    try {
+        const snapshot = await get(dbRef);
+        const existingData = snapshot.val() || {};
+
+        const isModelAlreadyExists = Object.values(existingData).some(existingModel => existingModel.name === model.name);
+
+        if (isModelAlreadyExists) {
+            alert("El modelo ya está registrado para esta marca.");
+            return;
+        }
 
         const existingKeys = Object.keys(existingData);
         const highestIndex = existingKeys.length > 0 ? Math.max(...existingKeys.map(Number)) : -1;
         const newIndex = highestIndex + 1;
 
         const updateData = {
-            [newIndex]: newOption
+            [newIndex]: model
         };
 
         await update(dbRef, updateData);
 
-        console.log("Nueva opción agregada exitosamente");
+        alert("Nuevo modelo agregado exitosamente.");
     } catch (error) {
-        console.error("Error al agregar la nueva opción: ", error);
+        alert("Error al agregar el nuevo modelo: " + error.message);
+    }
+};
+
+// Función para obtener las marcas
+export const fetchBrands = async () => {
+    const dbRef = refDB(db, 'cars/options/optionsBrand'); // Ajusta la referencia según la estructura de tu base de datos
+
+    try {
+        const snapshot = await get(dbRef);
+        const brandsData = snapshot.val() || {};
+
+        return Object.keys(brandsData).map(key => ({
+            value: key,
+            label: brandsData[key].label
+        }));
+    } catch (error) {
+        console.error("Error al obtener las marcas: ", error);
+        throw error;
     }
 };
 
