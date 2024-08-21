@@ -191,50 +191,50 @@ export const ListReservaCar = async () => {
 
 export const AddItemsCar = (data) => {
 
-    const data = {
-        optionBodyType: [
-            { value: "suv", label: "SUV" },
-            { value: "coupe", label: "Coupé" },
-            { value: "sedan", label: "Sedán" }
-        ],
-        optionsBrand: [
-            { value: "toyota", label: "Toyota" },
-            { value: "honda", label: "Honda" },
-            { value: "ford", label: "Ford" }
-        ],
-        optionsModel: {
-            toyota: [
-                { value: "corolla", label: "Corolla" },
-                { value: "camry", label: "Camry" }
-            ],
-            honda: [
-                { value: "civic", label: "Civic" },
-                { value: "accord", label: "Accord" }
-            ],
-            ford: [
-                { value: "mustang", label: "Mustang" },
-                { value: "focus", label: "Focus" }
-            ]
-        },
-        optionTypeFuel: [
-            { value: "Gasolina", label: "Gasolina" },
-            { value: "Diésel", label: "Diésel" },
-            { value: "Biodiésel", label: "Biodiésel" },
-            { value: "Gas natural", label: "Gas natural" },
-            { value: "Electricidad", label: "Electricidad" },
-            { value: "Etanol ", label: "Etanol " },
-        ],
-        optionTransmission: [
-            { value: "Transmisión Automática", label: "Transmisión Automática" },
-            { value: "Transmisión Manual", label: "Transmisión Manual" },
-        ],
-        optionTraction: [
-            { value: "Tracción delantera", label: "Tracción delantera" },
-            { value: "Tracción trasera", label: "Tracción trasera" },
-            { value: "Todas las ruedas", label: "Todas las ruedas" },
-            { value: "Tracción 4×4 conectable", label: "Tracción 4×4 conectable" },
-        ]
-    }
+    // const data = {
+    //     optionBodyType: [
+    //         { value: "suv", label: "SUV" },
+    //         { value: "coupe", label: "Coupé" },
+    //         { value: "sedan", label: "Sedán" }
+    //     ],
+    //     optionsBrand: [
+    //         { value: "toyota", label: "Toyota" },
+    //         { value: "honda", label: "Honda" },
+    //         { value: "ford", label: "Ford" }
+    //     ],
+    //     optionsModel: {
+    //         toyota: [
+    //             { value: "corolla", label: "Corolla" },
+    //             { value: "camry", label: "Camry" }
+    //         ],
+    //         honda: [
+    //             { value: "civic", label: "Civic" },
+    //             { value: "accord", label: "Accord" }
+    //         ],
+    //         ford: [
+    //             { value: "mustang", label: "Mustang" },
+    //             { value: "focus", label: "Focus" }
+    //         ]
+    //     },
+    //     optionTypeFuel: [
+    //         { value: "Gasolina", label: "Gasolina" },
+    //         { value: "Diésel", label: "Diésel" },
+    //         { value: "Biodiésel", label: "Biodiésel" },
+    //         { value: "Gas natural", label: "Gas natural" },
+    //         { value: "Electricidad", label: "Electricidad" },
+    //         { value: "Etanol ", label: "Etanol " },
+    //     ],
+    //     optionTransmission: [
+    //         { value: "Transmisión Automática", label: "Transmisión Automática" },
+    //         { value: "Transmisión Manual", label: "Transmisión Manual" },
+    //     ],
+    //     optionTraction: [
+    //         { value: "Tracción delantera", label: "Tracción delantera" },
+    //         { value: "Tracción trasera", label: "Tracción trasera" },
+    //         { value: "Todas las ruedas", label: "Todas las ruedas" },
+    //         { value: "Tracción 4×4 conectable", label: "Tracción 4×4 conectable" },
+    //     ]
+    // }
 
     const dbRef = refDB(db, 'cars/options');
 
