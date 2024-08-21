@@ -1,7 +1,7 @@
 import { dbFire, storage, db } from "../../firebase/firebase"
-import { collection, addDoc, getDocs, onSnapshot,deleteDoc, doc, updateDoc } from "firebase/firestore"
+import { collection, addDoc, getDocs, onSnapshot, deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { ref as storageref, uploadBytes, getDownloadURL } from "firebase/storage"
-import { ref as refDB, set, get, update  } from "firebase/database"
+import { ref as refDB, set, get, update } from "firebase/database"
 
 export const SaveCarSale = async (datos, userId) => {
 
@@ -77,7 +77,7 @@ export const GetReserva = async (setName, setPhone, setEmail, setCarName, setPri
 
 
 export const editReserve = async (reservaId, updateData) => {
-    
+
     try {
         const docRef = doc(dbFire, 'ReservationCar', reservaId);
         await updateDoc(docRef, updateData);
@@ -97,7 +97,7 @@ export const DeleteCarSale = async (carSaleId) => {
         }
 
     } catch (error) {
-        
+
     }
 }
 
@@ -164,23 +164,23 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
 }
 
 
-export const ReservaCar = async(reservationData) => {
+export const ReservaCar = async (reservationData) => {
 
     try {
 
-    //   await dbFire.collection('ReservationCar').add(reservationData);
- 
-    const docRef = await addDoc(collection(dbFire, "ReservationCar"),reservationData);
+        //   await dbFire.collection('ReservationCar').add(reservationData);
 
-    //   alert('Reservation successfully saved!');
+        const docRef = await addDoc(collection(dbFire, "ReservationCar"), reservationData);
+
+        //   alert('Reservation successfully saved!');
     } catch (error) {
-         console.error("Error saving reservation: ", error);
-    }   
+        console.error("Error saving reservation: ", error);
+    }
 
 
-  };
+};
 
-  export const ListReservaCar = async () => {
+export const ListReservaCar = async () => {
     const snapshot = await getDocs(collection(dbFire, 'ReservationCar'));
     const reservas = snapshot.docs.map(doc => ({
         id: doc.id,
@@ -191,41 +191,50 @@ export const ReservaCar = async(reservationData) => {
 
 export const AddItemsCar = (data) => {
 
-    // const data = {
-    //     optionBodyType: [
-    //         { value: "suv", label: "SUV" },
-    //         { value: "coupe", label: "Coupé" },
-    //         { value: "sedan", label: "Sedán" }
-    //     ],
-    //     optionsBrand: [
-    //         { value: "toyota", label: "Toyota" },
-    //         { value: "honda", label: "Honda" },
-    //         { value: "ford", label: "Ford" }
-    //     ],
-    //     optionsModel: [
-    //         { value: "corolla", label: "Corolla" },
-    //         { value: "civic", label: "Civic" },
-    //         { value: "mustang", label: "Mustang" }
-    //     ],
-    //     optionTypeFuel: [
-    //         { value: "Gasolina", label: "Gasolina" },
-    //         { value: "Diésel", label: "Diésel" },
-    //         { value: "Biodiésel", label: "Biodiésel" },
-    //         { value: "Gas natural", label: "Gas natural" },
-    //         { value: "Electricidad", label: "Electricidad" },
-    //         { value: "Etanol ", label: "Etanol " },
-    //     ],
-    //     optionTransmission: [
-    //         { value: "Transmisión Automática", label: "Transmisión Automática" },
-    //         { value: "Transmisión Manual", label: "Transmisión Manual" },
-    //     ],
-    //     optionTraction: [
-    //         { value: "Tracción delantera", label: "Tracción delantera" },
-    //         { value: "Tracción trasera", label: "Tracción trasera" },
-    //         { value: "Todas las ruedas", label: "Todas las ruedas" },
-    //         { value: "Tracción 4×4 conectable", label: "Tracción 4×4 conectable" },
-    //     ]
-    // }
+    const data = {
+        optionBodyType: [
+            { value: "suv", label: "SUV" },
+            { value: "coupe", label: "Coupé" },
+            { value: "sedan", label: "Sedán" }
+        ],
+        optionsBrand: [
+            { value: "toyota", label: "Toyota" },
+            { value: "honda", label: "Honda" },
+            { value: "ford", label: "Ford" }
+        ],
+        optionsModel: {
+            toyota: [
+                { value: "corolla", label: "Corolla" },
+                { value: "camry", label: "Camry" }
+            ],
+            honda: [
+                { value: "civic", label: "Civic" },
+                { value: "accord", label: "Accord" }
+            ],
+            ford: [
+                { value: "mustang", label: "Mustang" },
+                { value: "focus", label: "Focus" }
+            ]
+        },
+        optionTypeFuel: [
+            { value: "Gasolina", label: "Gasolina" },
+            { value: "Diésel", label: "Diésel" },
+            { value: "Biodiésel", label: "Biodiésel" },
+            { value: "Gas natural", label: "Gas natural" },
+            { value: "Electricidad", label: "Electricidad" },
+            { value: "Etanol ", label: "Etanol " },
+        ],
+        optionTransmission: [
+            { value: "Transmisión Automática", label: "Transmisión Automática" },
+            { value: "Transmisión Manual", label: "Transmisión Manual" },
+        ],
+        optionTraction: [
+            { value: "Tracción delantera", label: "Tracción delantera" },
+            { value: "Tracción trasera", label: "Tracción trasera" },
+            { value: "Todas las ruedas", label: "Todas las ruedas" },
+            { value: "Tracción 4×4 conectable", label: "Tracción 4×4 conectable" },
+        ]
+    }
 
     const dbRef = refDB(db, 'cars/options');
 
@@ -239,30 +248,40 @@ export const AddItemsCar = (data) => {
 }
 
 
-export const addNewOption = async (category, newOption) => {
-    
-    const dbRef = refDB(db, `cars/options/${category}`);
+export const addNewOption = async (category, newOption, selectedBrand) => {
+
+    const dbRef = refDB(db, `cars/options/${category}`)
 
     try {
 
         const snapshot = await get(dbRef);
         const existingData = snapshot.val() || {};
 
-        const existingKeys = Object.keys(existingData);
-        const highestIndex = existingKeys.length > 0 ? Math.max(...existingKeys.map(Number)) : -1;
-        const newIndex = highestIndex + 1;
+        if (category === "optionsModel") {
 
-        const updateData = {
-            [newIndex]: newOption
-        };
+            if (existingData[selectedBrand]) {
+   
+                existingData[selectedBrand].push(newOption);
+            } else {
 
-        await update(dbRef, updateData);
+                existingData[selectedBrand] = [newOption];
+            }
+        } else {
+
+            const existingKeys = Object.keys(existingData);
+            const highestIndex = existingKeys.length > 0 ? Math.max(...existingKeys.map(Number)) : -1;
+            const newIndex = highestIndex + 1;
+            existingData[newIndex] = newOption;
+        }
+
+        await update(dbRef, existingData);
 
         console.log("Nueva opción agregada exitosamente");
     } catch (error) {
         console.error("Error al agregar la nueva opción: ", error);
     }
-};
+
+}
 
 export const GetItemsCarDetails = async (setoptionBodyType, setoptionsBrand, setoptionsModel) => {
 
@@ -279,8 +298,8 @@ export const GetItemsCarDetails = async (setoptionBodyType, setoptionsBrand, set
             setoptionBodyType(data.optionBodyType)
             setoptionsBrand(data.optionsBrand)
             setoptionsModel(data.optionsModel)
-            
-          
+
+
         } else {
             console.log("No hay datos disponibles");
             return null;
@@ -307,7 +326,7 @@ export const GetItemsCarEngine = async (setoptionTypeFuel, setoptionTransmission
             setoptionTypeFuel(data.optionTypeFuel)
             setoptionTransmission(data.optionTransmission)
             setoptionTraction(data.optionTraction)
-          
+
         } else {
             console.log("No hay datos disponibles");
             return null;

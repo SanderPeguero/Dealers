@@ -4,7 +4,7 @@ import close from "../../assets/img/close.png"
 import SelectL from '../Select/Select';
 import { FaPlusCircle } from "react-icons/fa";
 import ModalAdd from '../ModalAdd/ModalAdd';
-import { GetItemsCarDetails } from '../../Functions/Sales/Sales';
+import { GetItemsCarDetails, AddItemsCar } from '../../Functions/Sales/Sales';
 const CarDetails = ({ updateCarDetails }) => {
     const { CarEdit, isOpenCardDetails, setisOpenCardDetails, handleNext, handleRefresh } = useContextCar()
     const [Title, setTitle] = useState('')
@@ -125,6 +125,7 @@ const CarDetails = ({ updateCarDetails }) => {
     const [optionBodyType, setoptionBodyType] = useState([])
     const [optionsBrand, setoptionsBrand] = useState([])
     const [optionsModel, setoptionsModel] = useState([])
+    const [filteredModels, setFilteredModels] = useState([]);
     const [Category, setCategory] = useState('')
     const [UpdateList, setUpdateList] = useState(false)
 
@@ -149,6 +150,20 @@ const CarDetails = ({ updateCarDetails }) => {
         }
     }, [UpdateList])
 
+    useEffect(() => {
+
+        if (Brand) {
+            const selectedBrandModels = optionsModel[Brand.value] || [];
+            setFilteredModels(selectedBrandModels);
+        } else {
+            setFilteredModels([]);
+            setModel('');
+        }
+    }, [Brand]);
+
+    console.log(optionsBrand)
+    console.log(optionsModel)
+
     return (
         <>
 
@@ -156,7 +171,7 @@ const CarDetails = ({ updateCarDetails }) => {
                 isOpenCardDetails &&
 
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
-                    <ModalAdd isOpen={isOpenAdd} onClose={Onclose} Text={Text} Category={Category} updateList={setUpdateList} />
+                    <ModalAdd isOpen={isOpenAdd} onClose={Onclose} Text={Text} Category={Category} updateList={setUpdateList} Brand={optionsBrand}/>
                     <div className='bg-[#071620] m-10 rounded-lg w-auto h-[80%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                         <div className='ml-8 mr-8 mb-12 mt-8'>
                             <div className='text-left flex justify-between cursor-pointer items-center'>
@@ -239,7 +254,7 @@ const CarDetails = ({ updateCarDetails }) => {
                                                     <label htmlFor="Model" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                                         Modelo
                                                     </label>
-                                                    <button onClick={() => OpenModal("Modelo", "optionsModel")}>
+                                                    <button onClick={ () => OpenModal("Modelo", "optionsModel")}>
                                                         <FaPlusCircle size={20} className='ml-2' />
                                                     </button>
                                                 </div>
@@ -247,7 +262,7 @@ const CarDetails = ({ updateCarDetails }) => {
                                                 <SelectL
                                                     value={Model}
                                                     onChange={setModel}
-                                                    options={optionsModel}
+                                                    options={filteredModels}
                                                     isClearable
                                                     placeholder="Selecciona"
                                                     isDisabled={!Brand}

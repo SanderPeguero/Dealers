@@ -1,13 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addNewOption } from '../../Functions/Sales/Sales';
-const ModalAdd = ({ isOpen, onClose, Text, Category, updateList }) => {
+import Select from 'react-select'
+const customSelectStyles = {
+    control: (provided) => ({
+        ...provided,
+        backgroundColor: '#12232E',
+        color: 'white',
+        borderRadius: '0.5rem',
+        borderColor: '#004A77',
+        cursor: 'pointer',
+    }),
+    menu: (provided) => ({
+        ...provided,
+        backgroundColor: '#12232E',
+        color: 'white',
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        backgroundColor: state.isFocused ? '#004A77' : '#12232E',
+        color: 'white',
+        cursor: 'pointer',
+    }),
+    singleValue: (provided) => ({
+        ...provided,
+        color: 'white',
+    }),
+    input: (provided) => ({
+        ...provided,
+        color: 'white',
+    }),
+    placeholder: (provided) => ({
+        ...provided,
+        color: 'white',
+    }),
+};
+
+const ModalAdd = ({ isOpen, onClose, Text, Category, updateList, Brand }) => {
     const [newOption, setNewOption] = useState('');
+    const [optionBrand, setoptionBrand] = useState([])
+    const [selectedBrand, setSelectedBrand] = useState('');
 
     const handleAccept = () => {
         if (newOption.trim()) {
             const optionObject = { value: newOption.toLowerCase(), label: newOption };
             console.log(optionObject)
-            addNewOption(Category, optionObject).then(() => {
+            addNewOption(Category, optionObject, selectedBrand.value).then(() => {
                 console.log(`Nueva opción agregada a ${Category}`);
                 updateList(true)
             }).catch((error) => {
@@ -20,6 +57,15 @@ const ModalAdd = ({ isOpen, onClose, Text, Category, updateList }) => {
     const handleClose = () => {
         onClose();
     }
+
+    useEffect(() => {
+      if (Text === "Modelo") {
+        setoptionBrand(Brand)
+      }
+    }, [Text])
+
+    console.log(selectedBrand)
+    
 
     return (
         <>
@@ -44,6 +90,27 @@ const ModalAdd = ({ isOpen, onClose, Text, Category, updateList }) => {
                                     </button>
                                 </div>
                             </div>
+                            {Text === "Modelo" &&
+                                <div className="p-4">
+                                    <div>
+                                        <Select
+                                            value={selectedBrand}
+                                            onChange={setSelectedBrand}
+                                            options={optionBrand}
+                                            styles={customSelectStyles}
+                                            isClearable
+                                            placeholder="Selecciona"
+                                          
+                                        />
+
+                                        {/* <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{Text}</label>
+                                    <input onChange={(e) => setNewOption(e.target.value)}
+                                        type="text" id="newOption" className="bg-[#12232E] text-sm rounded-lg hover:bg-slate-500 transition-all block w-full p-2.5" required /> */}
+                                    </div>
+                                </div>
+
+                            }
+
                             <div className="p-4">
                                 <div>
                                     <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{Text}</label>
