@@ -21,10 +21,10 @@ const EngineDetails = ({ updateEngineDetails }) => {
     const [Text, setText] = useState("")
 
     const EngineDetailsdatos = useMemo(() => ({
-        FuelType,
+        FuelType: FuelType.label,
         Mileage,
-        Transmition,
-        DriverTrain,
+        Transmition: FuelType.label,
+        DriverTrain: DriverTrain.label,
         EngineCapacity,
         Power,
     }), [FuelType, Mileage, Transmition, DriverTrain, EngineCapacity, Power]);
@@ -112,6 +112,8 @@ const EngineDetails = ({ updateEngineDetails }) => {
 
     }, [UpdateList])
 
+    console.log("Datos de Opciones")
+    console.log(EngineDetailsdatos)
 
     return (
         <>

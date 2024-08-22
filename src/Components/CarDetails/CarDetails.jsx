@@ -50,11 +50,11 @@ const CarDetails = ({ updateCarDetails }) => {
     const CarDetailsdatos = useMemo(() => ({
         Title,
         Condition,
-        BodyType,
-        Brand,
-        Model,
+        BodyType: BodyType.label,
+        Brand: Brand.label,
+        Model: Model.label,
         Amount,
-        Year: Year,
+        Year: Year.label,
         Capacidad: capacity,
         Color,
         Description
@@ -160,9 +160,6 @@ const CarDetails = ({ updateCarDetails }) => {
             setModel('');
         }
     }, [Brand]);
-
-    console.log(optionsBrand)
-    console.log(optionsModel)
 
     return (
         <>

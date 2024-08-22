@@ -8,6 +8,7 @@ import { FaPlus } from "react-icons/fa6";
 
 import { GoChevronRight } from "react-icons/go";
 import { MdDelete } from 'react-icons/md';
+import FilterComponent from '../Filter/Filter';
 
 const Recommended = () => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar,
@@ -18,7 +19,6 @@ const Recommended = () => {
     const [showAll, setShowAll] = useState(false);
 
     const [SeeCar, setSeeCar] = useState([])
-    const navigate = useNavigate();
 
     const handleOpenModal = (car) => {
         setAvailable(car)
@@ -88,6 +88,9 @@ const Recommended = () => {
 
                     </div>
 
+                </div>
+                <div>
+                    <FilterComponent />
                 </div>
                 {SeeCar.length > 9 && (
                     <div className="flex w-full mt-3 px-6 py-3 justify-end font-bold lg:text-2xl">
