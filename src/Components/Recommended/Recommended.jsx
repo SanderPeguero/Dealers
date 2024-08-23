@@ -12,7 +12,7 @@ import FilterComponent from '../Filter/Filter';
 
 const Recommended = () => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar,
-        setAvailable, isFiltro, setCarEdit, Formatnumber, DeleteCarSale,
+        setAvailable, isFilter, setCarEdit, Formatnumber, DeleteCarSale,
         isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
     } = useContextCar()
     const [showModal, setShowModal] = useState(false);
@@ -40,12 +40,17 @@ const Recommended = () => {
 
 
     useEffect(() => {
-        if (isFiltro) {
-            setSeeCar([...SerchingCar]);
-        } else {
+        if (isFilter === true) {
+            if (SerchingCar.length > 0) {
+                setSeeCar([...SerchingCar]);
+            } else {
+                setSeeCar([...ListCar]);
+            }
+        } else  {
             setSeeCar([...ListCar]);
         }
-    }, [isFiltro, ListCar, SerchingCar]);
+
+    }, [isFilter, ListCar, SerchingCar]);
 
     const handleDelete = async (carSaleId) => {
         try {

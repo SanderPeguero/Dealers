@@ -112,9 +112,6 @@ const EngineDetails = ({ updateEngineDetails }) => {
 
     }, [UpdateList])
 
-    console.log("Datos de Opciones")
-    console.log(EngineDetailsdatos)
-
     return (
         <>
             {isOpenEngineDetails &&

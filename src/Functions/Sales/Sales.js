@@ -138,14 +138,15 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
                 const IdCarSale = doc.id;
                 data.IdCarSale = IdCarSale;
 
-                if (data.Sale.DetalleCoche?.Condicion === "Nuevo") {
+                if (data.Sale.CarDetails?.Condition === "Nuevo") {
                     newCars.push(data);
-                } else if (data.Sale.DetalleCoche?.Condicion === "Usado") {
+                } else if (data.Sale.CarDetails?.Condition === "Usado") {
                     usedCars.push(data);
                 }
                 CarSale.push(data);
 
             });
+
             localStorage.setItem("newCars", JSON.stringify(newCars))
             setLisCarNew(JSON.parse(localStorage.getItem("newCars")));
 
@@ -293,7 +294,6 @@ export const GetItemsCarDetails = async (setoptionBodyType, setoptionsBrand, set
 
         if (snapshot.exists()) {
             const data = snapshot.val();
-            console.log("Datos extraídos:", data);
 
             setoptionBodyType(data.optionBodyType)
             setoptionsBrand(data.optionsBrand)
@@ -321,7 +321,6 @@ export const GetItemsCarEngine = async (setoptionTypeFuel, setoptionTransmission
 
         if (snapshot.exists()) {
             const data = snapshot.val();
-            console.log("Datos extraídos:", data)
 
             setoptionTypeFuel(data.optionTypeFuel)
             setoptionTransmission(data.optionTransmission)

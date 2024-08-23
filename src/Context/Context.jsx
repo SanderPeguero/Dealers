@@ -9,6 +9,7 @@ import {
 } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
 import { GetHero, GetContact, editTitleContact } from "../Functions/HomeAdmin/HomeAdmin"
+import { useStateManager } from "react-select";
 
 const Context = createContext();
 
@@ -71,12 +72,12 @@ export function ProviderContext({ children }) {
     const [PhoneContact, setPhoneContact] = useState('')
     const [TitletwoContact, setTitletwoContact] = useState('')
     const [Socialnetworks, setSocialnetworks] = useState([])
-    
+
     const [CheckContact, setCheckContact] = useState(false)
-  
-    //Socialnetworks
 
-
+    //Filter
+    const [SerchingCar, setSerchingCar] = useState([])
+    const [isFilter, setisFilter] = useState(false)
 
 
     useEffect(() => {
@@ -108,12 +109,12 @@ export function ProviderContext({ children }) {
 
     useEffect(() => {
         if (CheckContact === true) {
-             GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
-             setCheckContact(false)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
+            setCheckContact(false)
         }
-       
+
     }, [CheckContact])
-    
+
 
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);
@@ -131,7 +132,7 @@ export function ProviderContext({ children }) {
         return '0';
     }
 
-    const handleLast= () => {
+    const handleLast = () => {
         if (isOpenPrice === true) {
             setisOpenImage(true)
             setisOpenPrice(false)
@@ -202,11 +203,70 @@ export function ProviderContext({ children }) {
         }
     }, [changeReserve])
 
-
-
-
-    const handleRefresh = () =>{
+    const handleRefresh = () => {
         window.location.reload();
+    }
+
+    const filterCars = (ListCar, Options, normalizeString) => {
+
+        const areAllOptionsEmpty = !Options.search.trim() &&
+            !Options.YearDesde &&
+            !Options.YearHasta &&
+            !Options.brand &&
+            !Options.model &&
+            Options.rangoPrice[0] === 0 &&
+            Options.rangoPrice[1] === 100000;
+
+        if (areAllOptionsEmpty) {
+            setSerchingCar(ListCar);
+            return;
+        }
+
+
+        let filteredCars = ListCar.filter((car) => {
+            const { Title, Brand, Model, Year } = car.Sale.CarDetails;
+            const Price = car.Sale.Price.Price;
+
+            const matchesSearch = Options.search.trim().length !== 0 ?
+                normalizeString(Title).includes(normalizeString(Options.search)) : true;
+
+            const matchesBrand = Options.brand ?
+                normalizeString(Brand) === normalizeString(Options.brand) : true;
+
+            const matchesModel = Options.model ?
+                normalizeString(Model) === normalizeString(Options.model) : true;
+
+            const matchesYear = (Options.YearDesde || Options.YearHasta) ?
+                (Year >= (Options.YearDesde || Year) && Year <= (Options.YearHasta || Year)) : true;
+
+            const matchesPrice = Options.rangoPrice.length === 2 ?
+                (Price >= Options.rangoPrice[0] && Price <= Options.rangoPrice[1]) : true;
+
+            return matchesSearch && matchesBrand && matchesModel && matchesYear && matchesPrice;
+        });
+
+        setSerchingCar(filteredCars);
+    }
+
+
+
+    const handleSearching = (Status, Options) => {
+
+        const normalizeString = (str) => {
+            return str.toLowerCase().trim().replace(/\s+/g, ' ');
+        }
+
+        if (Status === 'Todo') {
+
+            filterCars(ListCar, Options, normalizeString)
+
+        } else if (Status === 'Nuevo') {
+
+            filterCars(LisCarNew, Options, normalizeString)
+
+        } else if (Status === 'Usado') {
+            filterCars(LisCarUsed, Options, normalizeString)
+        }
     }
 
     return (
@@ -300,9 +360,13 @@ export function ProviderContext({ children }) {
                 Socialnetworks, setSocialnetworks,
                 GetContact,
                 setCheckContact,
-                setchangeReserve
+                setchangeReserve,
 
-
+                setSerchingCar,
+                setisFilter,
+                isFilter,
+                SerchingCar,
+                handleSearching
 
             }}
         >
