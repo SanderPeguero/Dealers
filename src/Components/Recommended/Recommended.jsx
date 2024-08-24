@@ -17,11 +17,14 @@ const Recommended = () => {
     const [showAll, setShowAll] = useState(false);
 
     const [SeeCar, setSeeCar] = useState([])
+    const navigate = useNavigate();
 
     const handleOpenModal = (car) => {
+        console.log("Hola abre el modal")
         setAvailable(car)
     };
     const handlFormulario = () => {
+        console.log("El supuesto formulario")
         window.scrollTo(0, 0);
         navigate('/admin/DetailsAutos');
     };
