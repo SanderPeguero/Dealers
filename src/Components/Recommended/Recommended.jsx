@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import Modal from './modal';
 import { useContextCar } from '../../Context/Context';
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +13,6 @@ const Recommended = () => {
         setAvailable, isFiltro, setCarEdit, Formatnumber, DeleteCarSale,
         isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
     } = useContextCar()
-    const [showModal, setShowModal] = useState(false);
     const [showAll, setShowAll] = useState(false);
 
     const [SeeCar, setSeeCar] = useState([])
@@ -22,11 +20,10 @@ const Recommended = () => {
 
     const handleOpenModal = (car) => {
         setAvailable(car)
-        setShowModal(true);
     };
-
-    const handleCloseModal = () => {
-        setShowModal(false);
+    const handlFormulario = () => {
+        window.scrollTo(0, 0);
+        navigate('/admin/DetailsAutos');
     };
 
     const handleAddAuto = () => {
@@ -118,7 +115,7 @@ const Recommended = () => {
                             )}
 
                             {displayedCars.map((car, index) => (
-                                <div key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
+                                <div onClick={handlFormulario} key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
                                     {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                         <div className='flex flex-row'>
                                             <div className="px-3 py-2 text-xs leading-4">
@@ -163,7 +160,6 @@ const Recommended = () => {
                 </div>
             </div>
 
-            <Modal showModal={showModal} handleClose={handleCloseModal} />
         </div>
     );
 };
