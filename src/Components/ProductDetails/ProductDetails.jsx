@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { useContextCar } from '../../Context/Context'
-
+import ReserveModal from "./ReserveModal";
 const ProductDetails = () => {
     const { CarAvailable, Formatnumber, ReservaCar } = useContextCar()
     const [isOpen, setIosOpen] = useState(false);
-
+    const [showModal, setShowModal]= useState(false)
     const [nameUser, setNameUser] = useState('');
     const [emailUser, setEmailUser] = useState('');
     const [phoneUser, setPhoneUser] = useState('');
@@ -13,6 +13,12 @@ const ProductDetails = () => {
     const currentDate = new Date();
     const ReservationDate = currentDate.toLocaleString();
 
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
     const validateName = (name) => {
         return name && name.trim().length > 0;
     };
@@ -221,79 +227,16 @@ const ProductDetails = () => {
                                 ))}
                             </div>
 
-                            <div className="flex flex-col ml-5 max-md:ml-0 max-md:w-full">
-                                <div className="mt-24  text-base font-medium text-white max-md:mt-10 max-md:max-w-full">
-
-                                    <div className='text-2xl'>
-                                        Hacer reserva
-                                    </div>
-
-                                    <div className="py-2 mt-4">
-                                        <label htmlFor="nombre" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre completo</label>
-                                        <input
-                                            type="text"
-                                            name="nombre"
-                                            id="nombre"
-                                            onChange={(e) => setNameUser(e.target.value)}
-                                            className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre completo" required />
-
-                                    </div>
-
-                                    <div className="py-2">
-                                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            id="email"
-                                            onChange={(e) => setEmailUser(e.target.value)}
-                                            className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required />
-
-                                    </div>
-
-                                    <div className="py-2">
-                                        <label htmlFor="telefono" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
-                                        <input
-                                            type="text"
-                                            name="telefono"
-                                            id="telefono"
-                                            onChange={(e) => setPhoneUser(e.target.value)}
-                                            className="bg-gray-50 border h-12 w-full p-2.5 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Teléfono" required />
-
-                                    </div>
-
-                                </div>
-
-                                {/* Tu contenido del componente aquí */}
-                                <button
-                                    className="justify-center py-4 mt-16 text-xl text-white whitespace-nowrap rounded-lg bg-sky-600 hover:bg-sky-400 bg-opacity-60 max-md:px-5 max-md:mt-10"
-                                    onClick={handleReservationClick}>Reservar</button>
-
-                                {
-                                    isOpen && (
-                                        <div className="fixed inset-0 flex items-center justify-center z-50 sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm">
-                                            <div className="flex flex-col items-center px-20 py-8 text-3xl text-black rounded-2xl bg-zinc-300 max-w-[671px] max-md:w-[85%] max-md:h-65">
-                                                <img
-                                                    loading="lazy"
-                                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/8deecdfa608c19b062408dc30ffa638c671c7967a8c0d2febfa133cf058b525a?"
-                                                    className="max-w-full aspect-square w-[80px]"
-                                                />
-                                                <div className="justify-center mt-8 text-xl max-md:text-lg">Gracias por compatirnos tu interes.</div>
-                                                <div className="mt-3 text-xl max-md:text-sm m justify-center">
-                                                    Brevemente nos estaremos contactando con usted.
-                                                </div>
-                                                <button className="justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap rounded-lg bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10"
-                                                    onClick={() => setIosOpen(false)}>
-                                                    Cerrar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )
-                                }
+                        
 
 
+                        </div>
+                        
+                        <div className="mt-28 relative">
+                            <div  className="border border-sky-600  rounded-lg py-3 px-2 text-center">
+                                <button onClick={handleOpenModal} className="text-4xl text-center text-blue-500">Hacer Reserva</button>
                             </div>
-
-
+                            <ReserveModal showModal={showModal} handleCloseModal={handleCloseModal}/>
                         </div>
 
                     </div>
@@ -417,7 +360,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
-
+            
         </div>
     );
 }
