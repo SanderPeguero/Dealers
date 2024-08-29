@@ -114,48 +114,61 @@ const Recommended = () => {
                                 </div>
                             )}
 
-                            {displayedCars.map((car, index) => (
-                                <div onClick={handlFormulario} key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
-                                    {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
-                                        <div className='flex flex-row'>
-                                            <div className="px-3 py-2 text-xs leading-4">
-                                                <button onClick={() => handleEditAuto(car)}
-                                                    className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
-                                                    <FaEdit size={14} className="text-yellow-500" />
-                                                </button>
-                                            </div>
-                                            <div className="px-3 py-2 text-xs leading-4">
-                                                <button onClick={() => handleDelete(car.IdCarSale)} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-red-400 hover:text-white focus:outline-none">
-                                                    <MdDelete size={14} className="text-red-500" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )}
-                                    <div className="flex overflow-hidden relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
-                                        <button onClick={() => handleOpenModal(car)}>
-                                            <img
-                                                loading="lazy"
-                                                srcSet={car.Sale.Multimedia?.Image[0]}
-                                                className="object-cover absolute inset-0 size-full"
-                                                alt={car.Sale.CarDetails?.Title}
-                                            />
-                                        </button>
-                                        <div className="flex absolute inset-x-0 bottom-0 text-sm px-2.5 gap-20 py-5 bg-black bg-opacity-30 max-md:mt-52">
-                                            <div className="flex-auto">{car.Sale.CarDetails?.Title}</div>
-                                            <div className="">${Formatnumber(car.Sale.Price?.Price)}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                            {displayedCars.map((car, index) => {
 
+                                const ShowCar = (!user && car.Sale.CarDetails.Amount > 0) || (user && (WhichRole === 'admin' || WhichRole === 'Owner'));
+
+                                if (ShowCar){
+                                    return(
+                                        <div onClick={handlFormulario} key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
+                
+                                        
+                                        {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
+                                            <div className='flex flex-row'>
+                                                <div className="px-3 py-2 text-xs leading-4">
+                                                    <button onClick={() => handleEditAuto(car)}
+                                                        className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
+                                                        <FaEdit size={14} className="text-yellow-500" />
+                                                    </button>
+                                                </div>
+                                                <div className="px-3 py-2 text-xs leading-4">
+                                                    <button onClick={() => handleDelete(car.IdCarSale)} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-red-400 hover:text-white focus:outline-none">
+                                                        <MdDelete size={14} className="text-red-500" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+
+                                        )}
+
+                                        <div className="flex  relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
+                                            <button onClick={() => handleOpenModal(car)}>
+                                                <img
+                                                    loading="lazy"
+                                                    srcSet={car.Sale.Multimedia?.Image[0]}
+                                                    className="object-cover absolute inset-0 size-full"
+                                                    alt={car.Sale.CarDetails?.Title}
+                                                />
+                                                
+                                            </button>
+                                            <div className="flex absolute inset-x-0 bottom-0 text-sm px-2.5 gap-20 py-5 bg-black bg-opacity-30 max-md:mt-52">
+                                                <div className="flex-auto">{car.Sale.CarDetails?.Title}</div>
+                                                <div className="">${Formatnumber(car.Sale.Price?.Price)}</div>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+                                        )
+                                    }
+
+                                
+                            })}
 
 
                         </div>
 
-
-
                     </div>
-
 
                 </div>
             </div>
