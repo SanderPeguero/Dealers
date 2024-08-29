@@ -77,6 +77,8 @@ const ProductDetails = () => {
         CarAvailable?.Sale?.Multimedia.Image[0] || ''
     );
 
+    console.log(CarAvailable)
+
 
     return (
 

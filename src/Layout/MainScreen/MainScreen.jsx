@@ -231,8 +231,8 @@ const MainScreen = () => {
                 <Navbar background={'dark:bg-[#12232E]'} />
                 <Hero />
 
-                <div ref={AutosRef} >
-                    <Recommended />
+                <div  >
+                    <Recommended refAutos={AutosRef}/>
                 </div>
 
                 <div ref={ContactoRef}>

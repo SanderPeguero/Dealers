@@ -9,7 +9,7 @@ import { GoChevronRight } from "react-icons/go";
 import { MdDelete } from 'react-icons/md';
 import FilterComponent from '../Filter/Filter';
 
-const Recommended = () => {
+const Recommended = ({refAutos}) => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar,
         setAvailable, isFilter, setCarEdit, Formatnumber, DeleteCarSale,
         isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
@@ -22,6 +22,9 @@ const Recommended = () => {
     const handleOpenModal = (car) => {
         console.log("Hola abre el modal")
         setAvailable(car)
+        console.log("El supuesto formulario")
+        window.scrollTo(0, 0);
+        navigate('/admin/DetailsAutos');
     };
     const handlFormulario = () => {
         console.log("El supuesto formulario")
@@ -84,7 +87,7 @@ const Recommended = () => {
     return (
         <div className="bg-transparent flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
 
-            <div className="flex flex-col z-10 mt-96  justify-between w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
+            <div ref={refAutos} className="flex flex-col z-10 mt-96  justify-between w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
 
 
                 <div className="flex">
@@ -126,7 +129,8 @@ const Recommended = () => {
                             )}
 
                             {displayedCars.map((car, index) => (
-                                <div onClick={handlFormulario} key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
+                                <div  key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
+
                                     {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
                                         <div className='flex flex-row'>
                                             <div className="px-3 py-2 text-xs leading-4">

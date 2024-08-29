@@ -165,15 +165,13 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
 }
 
 
-export const ReservaCar = async (reservationData) => {
+export const ReservaCar = async (reservationData, CarAvailable) => {
 
     try {
 
-        //   await dbFire.collection('ReservationCar').add(reservationData);
-
         const docRef = await addDoc(collection(dbFire, "ReservationCar"), reservationData);
+        await EditCarSale(CarAvailable.IdCarSale, CarAvailable)
 
-        //   alert('Reservation successfully saved!');
     } catch (error) {
         console.error("Error saving reservation: ", error);
     }
