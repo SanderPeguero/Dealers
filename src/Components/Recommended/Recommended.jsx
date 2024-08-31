@@ -15,9 +15,36 @@ const Recommended = ({refAutos}) => {
         isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
     } = useContextCar()
     const [showAll, setShowAll] = useState(false);
-
     const [SeeCar, setSeeCar] = useState([])
     const navigate = useNavigate();
+
+
+    const [currentpages, setCurrentPages]= useState(1);
+    const itemsPerPage = 8;
+    const Lastitem = currentpages * itemsPerPage;
+    const firstitem = Lastitem - itemsPerPage;
+
+  const currentItems = ListCar.slice(firstitem, Lastitem);
+
+  const totalPages = Math.ceil(ListCar.length / itemsPerPage);
+  const handleNextPage = () => {
+    if (currentpages < totalPages) {
+        setCurrentPages(currentpages + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentpages > 1) {
+        setCurrentPages(currentpages - 1);
+
+    }
+  };
+    
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPages(pageNumber);
+  };
+
 
     const handleOpenModal = (car) => {
         console.log("Hola abre el modal")
@@ -82,7 +109,7 @@ const Recommended = ({refAutos}) => {
         }
     }
 
-    const displayedCars = showAll ? SeeCar : SeeCar.slice(0, 9);
+    
 
     return (
         <div className="bg-transparent flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
@@ -118,11 +145,12 @@ const Recommended = ({refAutos}) => {
                                     </div>
                                 </div>
                             )}
-
-                            {displayedCars.map((car, index) => (
+                            
+                            {currentItems.map((car, index) => (
+                                
                                 <div  key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
 
-                                    {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
+                                    {user && (WhichRole === 'admin' || WhichRole === 'Owner') &&  (
                                         <div className='flex flex-row'>
                                             <div className="px-3 py-2 text-xs leading-4">
                                                 <button onClick={() => handleEditAuto(car)}
@@ -137,7 +165,8 @@ const Recommended = ({refAutos}) => {
                                             </div>
                                         </div>
                                     )}
-                                    <div className="flex overflow-hidden relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
+
+                                        <div className="flex overflow-hidden relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
                                         <button onClick={() => handleOpenModal(car)}>
                                             <img
                                                 loading="lazy"
@@ -151,52 +180,43 @@ const Recommended = ({refAutos}) => {
                                             <div className="">${Formatnumber(car.Sale.Price?.Price)}</div>
                                         </div>
                                     </div>
+
+                                    
                                 </div>
                             ))}
 
 
 
                         </div>
-                        {SeeCar.length > 9 && (
+                       
                         <div className="flex w-full mt-3 px-6 py-3 justify-center font-bold lg:text-2xl">
                             <div class="flex items-center gap-2 ">
-                                <button
-                                    class="flex items-center gap-2  px-6 py-3 font-sans text-xs font-bold text-center md:text-2xl  text-blue-500 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                <button onClick={handlePrevPage}
+                                    class="flex items-center gap-2  px-6 py-3 font-sans text-xs font-bold text-center md:text-2xl  text-blue-500 hover:bg-sky-500 hover:transition-all hover:text-white uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                     type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className='md:h-8 md:w-8' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" className='md:h-9 md:w-9' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                     aria-hidden="true" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
                                     </svg>
                                     Anterior
                                 </button>
-                                <div class="flex items-center gap-1  ">
+                                {Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => (
                                     <button
-                                    class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    type="button">
-                                    <span class="absolute md:text-3xl  text-blue-500 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                                        1
-                                    </span>
+                                        key={number}
+                                        onClick={() => handlePageChange(number)}
+                                        className={`px-4 py-2 mx-1 rounded-full ${
+                                            currentpages === number ? 'bg-blue-500 text-white' : 'bg-yellow-50 text-gray-700'
+                                        }`}
+                                    >
+                                        {number}
                                     </button>
-                                    <button
-                                    class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    type="button">
-                                    <span class="absolute md:text-3xl  text-blue-500 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                                        2
-                                    </span>
-                                    </button>
-                                    <button
-                                    class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full bg-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    type="button">
-                                    <span class="absolute md:text-3xl  text-blue-500 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                                        3
-                                    </span>
-                                    </button>
-                                </div>
-                                <button
-                                    class="flex items-center md:text-2xl  gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                    ))}
+                                
+                                <button onClick={handleNextPage} 
+                                    class="flex items-center md:text-2xl  gap-2 px-6 py-3 font-sans text-xs font-bold text-center hover:bg-sky-500 hover:transition-all hover:text-white text-blue-500 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                     type="button">
                                     Siguiente
-                                    <svg xmlns="http://www.w3.org/2000/svg" className='md:h-8 md:w-8' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" className='md:h-9 md:w-9 ' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                     aria-hidden="true" class="w-4 h-4">
                                     <path  stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
                                     </svg>
@@ -206,7 +226,6 @@ const Recommended = ({refAutos}) => {
 
 
                         </div>
-                )}
 
 
                     </div>
@@ -217,6 +236,7 @@ const Recommended = ({refAutos}) => {
 
         </div>
     );
+
 };
 
 export default Recommended;
