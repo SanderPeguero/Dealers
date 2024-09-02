@@ -16,8 +16,35 @@ const Recommended = ({refAutos}) => {
     } = useContextCar()
     const navigate = useNavigate();
     const [showAll, setShowAll] = useState(false);
-
     const [SeeCar, setSeeCar] = useState([])
+
+
+    const [currentpages, setCurrentPages]= useState(1);
+    const itemsPerPage = 8;
+    const Lastitem = currentpages * itemsPerPage;
+    const firstitem = Lastitem - itemsPerPage;
+
+  const currentItems = ListCar.slice(firstitem, Lastitem);
+
+  const totalPages = Math.ceil(ListCar.length / itemsPerPage);
+  const handleNextPage = () => {
+    if (currentpages < totalPages) {
+        setCurrentPages(currentpages + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentpages > 1) {
+        setCurrentPages(currentpages - 1);
+
+    }
+  };
+    
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPages(pageNumber);
+  };
+
 
     const handleOpenModal = (car) => {
         console.log("Hola abre el modal")
@@ -81,7 +108,7 @@ const Recommended = ({refAutos}) => {
         }
     }
 
-    const displayedCars = showAll ? SeeCar : SeeCar.slice(0, 9);
+    
 
     return (
         <div className="bg-transparent flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
@@ -99,16 +126,7 @@ const Recommended = ({refAutos}) => {
                 <div>
                     <FilterComponent />
                 </div>
-                {SeeCar.length > 9 && (
-                    <div className="flex w-full mt-3 px-6 py-3 justify-end font-bold lg:text-2xl">
-                        <div className="flex text-blue-500 items-center">
-                            <button onClick={() => setShowAll(!showAll)} className="text-[1rem]">
-                                {showAll ? 'Ver menos' : 'Ver más'}
-                            </button>
-                            <GoChevronRight className='w-[18px]' />
-                        </div>
-                    </div>
-                )}
+                
                 <div className="mt-6 max-md:max-w-full">
                     <div className="">
 
@@ -180,6 +198,40 @@ const Recommended = ({refAutos}) => {
 
 
                         </div>
+                       
+                        <div className="flex w-full mt-3 px-6 py-3 justify-center font-bold lg:text-2xl">
+                            <div class="flex items-center gap-2 ">
+                                <button onClick={handlePrevPage}
+                                    class="flex items-center gap-2  px-6 py-3 font-sans text-xs font-bold text-center md:text-2xl  text-blue-500 hover:bg-sky-500 hover:transition-all hover:text-white uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                    type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className='md:h-9 md:w-9' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    aria-hidden="true" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                                    </svg>
+                                    Anterior
+                                </button>
+                                {Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => (
+                                    <button
+                                        key={number}
+                                        onClick={() => handlePageChange(number)}
+                                        className={`px-4 py-2 mx-1 rounded-full ${
+                                            currentpages === number ? 'bg-blue-500 text-white' : 'bg-yellow-50 text-gray-700'
+                                        }`}
+                                    >
+                                        {number}
+                                    </button>
+                                    ))}
+                                
+                                <button onClick={handleNextPage} 
+                                    class="flex items-center md:text-2xl  gap-2 px-6 py-3 font-sans text-xs font-bold text-center hover:bg-sky-500 hover:transition-all hover:text-white text-blue-500 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                    type="button">
+                                    Siguiente
+                                    <svg xmlns="http://www.w3.org/2000/svg" className='md:h-9 md:w-9 ' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    aria-hidden="true" class="w-4 h-4">
+                                    <path  stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                                    </svg>
+                                </button>
+                            </div> 
 
                     </div>
 
@@ -188,6 +240,7 @@ const Recommended = ({refAutos}) => {
 
         </div>
     );
+
 };
 
 export default Recommended;
