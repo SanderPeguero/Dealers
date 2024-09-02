@@ -26,7 +26,7 @@ export function ProviderContext({ children }) {
 
     const [WhichRole, setWhichRole] = useState(null)
     const [user, setUser] = useState(null)
-
+    const [Amount, setAmaount] = useState(null)
     const [LisCarNew, setLisCarNew] = useState([])
     const [LisCarUsed, setLisCarUsed] = useState([])
     const [ListCar, setListCar] = useState([])
