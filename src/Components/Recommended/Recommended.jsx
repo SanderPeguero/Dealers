@@ -21,6 +21,8 @@ const Recommended = () => {
 
     const handleOpenModal = (car) => {
         setAvailable(car)
+        window.scrollTo(0, 0);
+        navigate('/admin/DetailsAutos');
     };
     const handlFormulario = () => {
         window.scrollTo(0, 0);
