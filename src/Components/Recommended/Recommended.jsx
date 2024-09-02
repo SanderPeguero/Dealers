@@ -9,7 +9,7 @@ import { GoChevronRight } from "react-icons/go";
 import { MdDelete } from 'react-icons/md';
 import FilterComponent from '../Filter/Filter';
 
-const Recommended = ({refAutos}) => {
+const Recommended = ({ refAutos }) => {
     const { user, WhichRole, ListCar, setListCar, SerchingCar,
         setAvailable, isFilter, setCarEdit, Formatnumber, DeleteCarSale,
         isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
@@ -19,31 +19,31 @@ const Recommended = ({refAutos}) => {
     const [SeeCar, setSeeCar] = useState([])
 
 
-    const [currentpages, setCurrentPages]= useState(1);
+    const [currentpages, setCurrentPages] = useState(1);
     const itemsPerPage = 8;
     const Lastitem = currentpages * itemsPerPage;
     const firstitem = Lastitem - itemsPerPage;
 
-  const currentItems = ListCar.slice(firstitem, Lastitem);
+    const currentItems = ListCar.slice(firstitem, Lastitem);
 
-  const totalPages = Math.ceil(ListCar.length / itemsPerPage);
-  const handleNextPage = () => {
-    if (currentpages < totalPages) {
-        setCurrentPages(currentpages + 1);
-    }
-  };
+    const totalPages = Math.ceil(ListCar.length / itemsPerPage);
+    const handleNextPage = () => {
+        if (currentpages < totalPages) {
+            setCurrentPages(currentpages + 1);
+        }
+    };
 
-  const handlePrevPage = () => {
-    if (currentpages > 1) {
-        setCurrentPages(currentpages - 1);
+    const handlePrevPage = () => {
+        if (currentpages > 1) {
+            setCurrentPages(currentpages - 1);
 
-    }
-  };
-    
+        }
+    };
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPages(pageNumber);
-  };
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPages(pageNumber);
+    };
 
 
     const handleOpenModal = (car) => {
@@ -75,7 +75,7 @@ const Recommended = ({refAutos}) => {
             } else {
                 setSeeCar([...ListCar]);
             }
-        } else  {
+        } else {
             setSeeCar([...ListCar]);
         }
 
@@ -108,7 +108,7 @@ const Recommended = ({refAutos}) => {
         }
     }
 
-    
+
 
     return (
         <div className="bg-transparent flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
@@ -126,7 +126,7 @@ const Recommended = ({refAutos}) => {
                 <div>
                     <FilterComponent />
                 </div>
-                
+
                 <div className="mt-6 max-md:max-w-full">
                     <div className="">
 
@@ -145,68 +145,65 @@ const Recommended = ({refAutos}) => {
                                 </div>
                             )}
 
-                            {displayedCars.map((car, index) => {
+                            {currentItems.map((car, index) => {
 
-                                const ShowCar = (!user && car.Sale.CarDetails.Amount > 0) || (user && (WhichRole === 'admin' || WhichRole === 'Owner'));
+                                const ShowCar = (!user && car.Sale.CarDetails.Amount > 0) || (user && (WhichRole === 'admin' || WhichRole === 'Owner'))
 
-                                if (ShowCar){
-                                    return(
-                                        <div  key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
-                
-                                        
-                                        {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
-                                            <div className='flex flex-row'>
-                                                <div className="px-3 py-2 text-xs leading-4">
-                                                    <button onClick={() => handleEditAuto(car)}
-                                                        className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
-                                                        <FaEdit size={14} className="text-yellow-500" />
-                                                    </button>
+                                if (ShowCar) {
+                                    return (
+                                        <div key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
+
+                                            {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
+                                                <div className='flex flex-row'>
+                                                    <div className="px-3 py-2 text-xs leading-4">
+                                                        <button onClick={() => handleEditAuto(car)}
+                                                            className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
+                                                            <FaEdit size={14} className="text-yellow-500" />
+                                                        </button>
+                                                    </div>
+                                                    <div className="px-3 py-2 text-xs leading-4">
+                                                        <button onClick={() => handleDelete(car.IdCarSale)} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-red-400 hover:text-white focus:outline-none">
+                                                            <MdDelete size={14} className="text-red-500" />
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div className="px-3 py-2 text-xs leading-4">
-                                                    <button onClick={() => handleDelete(car.IdCarSale)} className="px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-red-400 hover:text-white focus:outline-none">
-                                                        <MdDelete size={14} className="text-red-500" />
-                                                    </button>
+                                            )}
+
+                                            <div className="flex overflow-hidden relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
+                                                <button onClick={() => handleOpenModal(car)}>
+                                                    <img
+                                                        loading="lazy"
+                                                        srcSet={car.Sale.Multimedia?.Image[0]}
+                                                        className="object-cover absolute inset-0 size-full"
+                                                        alt={car.Sale.CarDetails?.Title}
+                                                    />
+                                                </button>
+                                                <div className="flex absolute inset-x-0 bottom-0 text-sm px-2.5 gap-20 py-5 bg-black bg-opacity-30 max-md:mt-52">
+                                                    <div className="flex-auto">{car.Sale.CarDetails?.Title}</div>
+                                                    <div className="">${Formatnumber(car.Sale.Price?.Price)}</div>
                                                 </div>
                                             </div>
-                                            
 
-                                        )}
 
-                                        <div className="flex  relative flex-col rounded-lg grow pt-20 text-lg text-white aspect-[1.15] max-md:mt-6">
-                                            <button onClick={() => handleOpenModal(car)}>
-                                                <img
-                                                    loading="lazy"
-                                                    srcSet={car.Sale.Multimedia?.Image[0]}
-                                                    className="object-cover absolute inset-0 size-full"
-                                                    alt={car.Sale.CarDetails?.Title}
-                                                />
-                                                
-                                            </button>
-                                            <div className="flex absolute inset-x-0 bottom-0 text-sm px-2.5 gap-20 py-5 bg-black bg-opacity-30 max-md:mt-52">
-                                                <div className="flex-auto">{car.Sale.CarDetails?.Title}</div>
-                                                <div className="">${Formatnumber(car.Sale.Price?.Price)}</div>
-                                            </div>
-                                            
                                         </div>
+                                    )
+                                }
 
-                                    </div>
-                                        )
-                                    }
 
-                                
                             })}
 
 
+
                         </div>
-                       
+
                         <div className="flex w-full mt-3 px-6 py-3 justify-center font-bold lg:text-2xl">
                             <div class="flex items-center gap-2 ">
                                 <button onClick={handlePrevPage}
                                     class="flex items-center gap-2  px-6 py-3 font-sans text-xs font-bold text-center md:text-2xl  text-blue-500 hover:bg-sky-500 hover:transition-all hover:text-white uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                     type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" className='md:h-9 md:w-9' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    aria-hidden="true" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                                        aria-hidden="true" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
                                     </svg>
                                     Anterior
                                 </button>
@@ -214,26 +211,31 @@ const Recommended = ({refAutos}) => {
                                     <button
                                         key={number}
                                         onClick={() => handlePageChange(number)}
-                                        className={`px-4 py-2 mx-1 rounded-full ${
-                                            currentpages === number ? 'bg-blue-500 text-white' : 'bg-yellow-50 text-gray-700'
-                                        }`}
+                                        className={`px-4 py-2 mx-1 rounded-full ${currentpages === number ? 'bg-blue-500 text-white' : 'bg-yellow-50 text-gray-700'
+                                            }`}
                                     >
                                         {number}
                                     </button>
-                                    ))}
-                                
-                                <button onClick={handleNextPage} 
+                                ))}
+
+                                <button onClick={handleNextPage}
                                     class="flex items-center md:text-2xl  gap-2 px-6 py-3 font-sans text-xs font-bold text-center hover:bg-sky-500 hover:transition-all hover:text-white text-blue-500 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                     type="button">
                                     Siguiente
                                     <svg xmlns="http://www.w3.org/2000/svg" className='md:h-9 md:w-9 ' fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    aria-hidden="true" class="w-4 h-4">
-                                    <path  stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                                        aria-hidden="true" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
                                     </svg>
                                 </button>
-                            </div> 
+                            </div>
+
+
+
+                        </div>
+
 
                     </div>
+
 
                 </div>
             </div>
