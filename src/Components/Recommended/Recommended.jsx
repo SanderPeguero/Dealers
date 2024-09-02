@@ -14,6 +14,7 @@ const Recommended = () => {
         setAvailable, isFilter, setCarEdit, Formatnumber, DeleteCarSale,
         isOpenCardDetails, setisOpenCardDetails, ListCarSale, setLisCarNew, setLisCarUsed, EditCarSale
     } = useContextCar()
+    const navigate = useNavigate();
     const [showAll, setShowAll] = useState(false);
 
     const [SeeCar, setSeeCar] = useState([])
@@ -128,7 +129,7 @@ const Recommended = () => {
 
                                 if (ShowCar){
                                     return(
-                                        <div onClick={handlFormulario} key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
+                                        <div  key={index} className="flex flex-col max-md:ml-0 max-md:w-full">
                 
                                         
                                         {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
