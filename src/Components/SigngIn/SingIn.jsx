@@ -1,29 +1,65 @@
 import React, { useState, useEffect } from "react";
 import { useContextCar } from "../../Context/Context";
 import { useNavigate, Link } from "react-router-dom"
+import Toast from "../Toast/Toast";
 const SignIn = () => {
 
-    const { SignInAuth,  setWhichRole } = useContextCar()
+    const { SignInAuth, setWhichRole } = useContextCar()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phone, setPhone] = useState('')
     const navigate = useNavigate()
 
-    const handleSubmit = () => {
-        const datos = {
-            name: name,
-            email: email,
-            password: password,
-            phone: phone,
-            role: 'user'
-        }
+    const [toastOpen, setToastOpen] = useState(false);
+    const [toastType, setToastType] = useState('success');
+    const [toastMessage, setToastMessage] = useState('');
 
-        SignInAuth(datos, navigate, setWhichRole)
-    }
+    const launchToast = (type, message) => {
+        setToastType(type);
+        setToastMessage(message);
+        setToastOpen(true);
+    };
+
+    const handleSubmit = async () => {
+
+        if (!name.trim() || !email.trim() || !password.trim() || !phone.trim()) {
+            launchToast('error', 'Todos los campos son obligatorios.');
+            return;
+        }
+    
+        const datos = {
+            name: name.trim(),
+            email: email.trim(),
+            password: password.trim(),
+            phone: phone.trim(),
+            role: 'user'
+        };
+    
+        try {
+            await SignInAuth(datos, setWhichRole);
+            navigate('/admin/TableUser', {
+                state: {
+                    showToast: true,
+                    toastType: 'success',
+                    toastMessage: 'Cuenta creada con éxito!'
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            launchToast('error', 'Error al crear la cuenta. Verifique sus credenciales.');
+        }
+    };
+    
 
     return (
         <div className="flex flex-col items-center px-16 pt-20 pb-2.5 w-full bg-zinc-950 max-md:px-5 max-md:max-w-full">
+            <Toast
+                type={toastType}
+                message={toastMessage}
+                isOpen={toastOpen}
+                onClose={() => setToastOpen(false)}
+            />
             <div className="mt-5 w-full max-w-[1060px] max-md:max-w-full">
                 <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                     <div className="flex flex-col w-[67%] max-md:ml-0 max-md:w-full">
@@ -47,35 +83,35 @@ const SignIn = () => {
 
                             <div className="py-2">
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input 
-                                type="email" 
-                                name="email" 
-                                id="email" 
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required />
 
                             </div>
 
                             <div className="py-2">
                                 <label htmlFor="telefono" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
-                                <input 
-                                type="text" 
-                                name="telefono" 
-                                id="telefono" 
-                                onChange={(e) => setPhone(e.target.value)}
-                                className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Teléfono" required />
+                                <input
+                                    type="text"
+                                    name="telefono"
+                                    id="telefono"
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Teléfono" required />
 
                             </div>
 
 
                             <div className="py-2">
                                 <label htmlFor="contraseña" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Constaseña</label>
-                                <input 
-                                type="password" 
-                                name="constaseña" 
-                                id="constaseña" 
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Constaseña" required />
+                                <input
+                                    type="password"
+                                    name="constaseña"
+                                    id="constaseña"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Constaseña" required />
 
                             </div>
 
@@ -84,10 +120,6 @@ const SignIn = () => {
                                 Registrar
                             </button>
 
-                            <div className="self-center mt-7 text-center text-blue-400">
-                                Ya tienes una cuenta?{" "}
-                                <Link to="/admin/LognIn" className="font-bold text-blue-400">Login</Link>
-                            </div>
                         </div>
                     </div>
 

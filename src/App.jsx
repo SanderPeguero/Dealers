@@ -7,6 +7,7 @@ import SignInLayout from './Layout/SignInLayout/SignInLayout'
 import Footer from './Layout/Footer/Footer'
 import ReservarLayout from './Layout/ReservarLayout/ReservarLayout'
 import DetailsAutos from './Layout/DetailsAutos/DetailsAuto'
+import UserLayout from './Layout/UserLayout/UserLayout'
 function App() {
   const { user, WhichRole, locationR } = useContextCar()
 
@@ -22,6 +23,7 @@ function App() {
     { path: '/SignIn', element: <SignInLayout /> },
     { path: '/Reservas', element: <ReservarLayout />},
     { path: '/DetailsAutos', element: <DetailsAutos /> },
+    { path: '/TableUser', element: <UserLayout /> },
   
   ]
 

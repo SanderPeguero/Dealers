@@ -3,71 +3,39 @@ import {auth, db} from "../../firebase/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updatePhoneNumber, signOut } from "firebase/auth";
 import { set, ref, get, update } from "firebase/database"
 
-export const LognInAuth = (email, password, navigate, setWhichRole) => {
+export const LognInAuth = async (email, password, setWhichRole) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-  signInWithEmailAndPassword(auth, email, password)
+    // Extraer el rol y el nombre del usuario desde la base de datos
+    const userData = await ListUser(user.uid, setWhichRole);
+ 
+    if (userData) {
+      // Almacenar los datos relevantes en el localStorage
+      localStorage.setItem("Token", await user.getIdToken());
+      localStorage.setItem("DisplayName", userData.name);  // Guardar el nombre desde la base de datos
+    }
 
-    .then((userCredential) => {
+    return user;
+  } catch (error) {
+    console.error("Error during login:", error);
+    throw error; // Re-lanzar el error para manejarlo en la llamada
+  }
+};
 
+export const SignInAuth = async (datos) => {
+ return  createUserWithEmailAndPassword(auth, datos.email, datos.password)
+    .then(async (userCredential) => {
       const user = userCredential.user;
 
-      ListUser(user.uid, setWhichRole)
-      navigate('/admin')
-
-      user.getIdToken().then((value) => {
-
-        localStorage.setItem("Token", value)
-
-        localStorage.setItem("DisplayName", user.displayName)
-
-
-      })
-
+      await SaveUser(datos, user.uid);
 
     })
-
     .catch((error) => {
-
-      console.log(error)
-
+      console.error('Error al crear la cuenta:', error);
     });
-}
-
-export const SignInAuth = (datos, navigate, setWhichRole) => {
-
-  createUserWithEmailAndPassword(auth, datos.email, datos.password)
-
-    .then((userCredential) => {
-
-      const user = userCredential.user;
-
-      updateProfile(
-
-        auth.currentUser,
-
-        { displayName: datos.name }
-
-      )
-
-      updatePhoneNumber(
-
-        auth.currentUser,
-
-        { phoneNumber: datos.phone }
-
-      )
-
-      SaveUser(datos, user.uid)
-      LognInAuth(datos.email, datos.password, navigate, setWhichRole)
-
-    })
-
-    .catch((error) => {
-
-      console.log(error)
-
-    });
-}
+};
 
 export const ListUser = (userId, setWhichRole) => {
 
@@ -81,6 +49,7 @@ export const ListUser = (userId, setWhichRole) => {
 
         const user = snapshot.val()
         setWhichRole(user.role)
+        return user
 
 
       } else {

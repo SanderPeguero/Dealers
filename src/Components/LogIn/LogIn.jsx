@@ -4,6 +4,7 @@ import { useContextCar } from "../../Context/Context"
 
 import { Link, useNavigate } from "react-router-dom"
 
+import Toast from "../Toast/Toast"
 const LogIn = () => {
 
     const { LognInAuth, user, setWhichRole } = useContextCar()
@@ -14,13 +15,42 @@ const LogIn = () => {
 
     const navigate = useNavigate()
 
-    const handleLogIn = () => {
-        LognInAuth(email, password, navigate, setWhichRole) 
-        
+    const [toastOpen, setToastOpen] = useState(false);
+    const [toastType, setToastType] = useState('success');
+    const [toastMessage, setToastMessage] = useState('');
+
+    const launchToast = (type, message) => {
+        setToastType(type);
+        setToastMessage(message);
+        setToastOpen(true);
+    };
+
+    const handleLogIn = async () => {
+        try {
+            await LognInAuth(email, password, setWhichRole);
+            navigate('/admin', {
+                state: {
+                    showToast: true,
+                    toastType: 'success',
+                    toastMessage: 'Inició sesión con éxito!'
+                }
+            });
+            
+        } catch (error) {
+            console.error(error);
+            launchToast('error', 'Error al iniciar sesión. Verifique sus credenciales.');
+        }
     }
 
     return (
         <div className="flex flex-col items-center px-16 pt-20 pb-2.5 w-full bg-zinc-950 max-md:px-5 max-md:max-w-full">
+
+            <Toast
+                type={toastType}
+                message={toastMessage}
+                isOpen={toastOpen}
+                onClose={() => setToastOpen(false)}
+            />
             <div className="mt-5 w-full max-w-[1060px] max-md:max-w-full">
                 <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                     <div className="flex flex-col w-[67%] max-md:ml-0 max-md:w-full">
@@ -54,10 +84,6 @@ const LogIn = () => {
                                 LogIn
                             </button>
 
-                            <div className="self-center mt-7 text-center text-blue-400">
-                                No tienes una cuenta?{" "}
-                                <Link to="/admin/SignIn" className="font-bold text-blue-400">Registrarte</Link>
-                            </div>
                         </div>
                     </div>
 

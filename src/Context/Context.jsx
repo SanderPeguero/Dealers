@@ -288,7 +288,7 @@ export function ProviderContext({ children }) {
                 LognInAuth,
                 logout,
                 ListUser,
-                ListAllUsers,
+                ListAllUser,
                 updateUserRole,
                 setLisCarNew,
                 setLisCarUsed,

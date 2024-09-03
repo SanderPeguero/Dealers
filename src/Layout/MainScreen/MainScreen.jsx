@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from "react"
+import { useLocation } from "react-router-dom";
 import Navbar from "../NavBar/NavBar"
 import Hero from '../../Components/Hero/Hero'
 import Recommended from "../../Components/Recommended/Recommended"
-// import Testimonio from '../../Components/Testimono/Testimonio'
 import Contact from '../../Components/Contact/Contact'
 import { useContextCar } from "../../Context/Context"
-// import Testimonio from "../../Components/Testimono/Testimonio"
 import CarDetails from "../../Components/CarDetails/CarDetails"
 import EngineDetails from "../../Components/EngineDetails/EngineDetails"
 import Dimension from "../../Components/Dimension/Dimension"
@@ -18,6 +17,7 @@ import bien from "../../Components/Price/Price"
 import validatePrecio from "../../Components/Price/Price"
 import close from "../../assets/img/close.png"
 import carsucess from "../../assets/img/carsucess.png"
+import Toast from "../../Components/Toast/Toast"
 const CarSaleDatos = {
     Sale: {
         IdCarSale: "",
@@ -152,6 +152,19 @@ const MainScreen = () => {
         }
     }, [CarEdit])
 
+    const location = useLocation();
+    const [toastOpen, setToastOpen] = useState(false);
+    const [toastType, setToastType] = useState('success');
+    const [toastMessage, setToastMessage] = useState('');
+
+    useEffect(() => {
+        if (location.state?.showToast) {
+            setToastType(location.state.toastType || 'success');
+            setToastMessage(location.state.toastMessage || 'Operation successful!');
+            setToastOpen(true);
+        }
+    }, [location.state]);
+
 
 
     return (
@@ -162,6 +175,12 @@ const MainScreen = () => {
             <Feature FeatureDatos={CarSaleDatos.Sale.Features} newFeature={newFeature} setNewFeature={setNewFeature} />
             <UpImagine AudiovisualDatos={CarSaleDatos.Sale.Multimedia} />
             <Price PriceDatos={CarSaleDatos.Sale.Price} handleSale={handleSale} handleEdit={handleEdit} />
+            <Toast
+                type={toastType}
+                message={toastMessage}
+                isOpen={toastOpen}
+                onClose={() => setToastOpen(false)}
+            />
             {notification ? (
                 <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
 
