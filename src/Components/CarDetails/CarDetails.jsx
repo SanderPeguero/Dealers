@@ -30,7 +30,7 @@ const CarDetails = ({ updateCarDetails }) => {
         const value = e.target.value;
         if (value === '' || Number(value) >= 0) {
             setAmount(Number(value));
-            setAmountError(''); 
+            setAmountError('');
         } else {
             setAmountError('La cantidad no puede ser negativa.');
         }
@@ -58,7 +58,7 @@ const CarDetails = ({ updateCarDetails }) => {
         Capacidad: capacity,
         Color,
         Description
-    }), [Title, Condition, BodyType, Brand, Model,Amount, Year, capacity, Color, Description]);
+    }), [Title, Condition, BodyType, Brand, Model, Amount, Year, capacity, Color, Description]);
 
     useEffect(() => {
         updateCarDetails(CarDetailsdatos)
@@ -66,12 +66,15 @@ const CarDetails = ({ updateCarDetails }) => {
 
     useEffect(() => {
         if (CarEdit !== null) {
+            console.log("Rellenar Datos")
+            console.log(CarEdit)
             setTitle(CarEdit.Sale.CarDetails.Title)
             setCondition(CarEdit.Sale.CarDetails.Condition)
-            setBodyType(CarEdit.Sale.CarDetails.BodyType)
-            setBrand(CarEdit.Sale.CarDetails.Brand)
-            setModel(CarEdit.Sale.CarDetails.Model)
-            setYear(CarEdit.Sale.CarDetails.Year)
+            setBodyType({ label: CarEdit.Sale.CarDetails.BodyType, value: CarEdit.Sale.CarDetails.BodyType });
+            setBrand({ label: CarEdit.Sale.CarDetails.Brand, value: CarEdit.Sale.CarDetails.Brand });
+            setModel({ label: CarEdit.Sale.CarDetails.Model, value: CarEdit.Sale.CarDetails.Model });
+            setAmount(CarEdit.Sale.CarDetails.Amount)
+            setYear({ label: CarEdit.Sale.CarDetails.Year, value: CarEdit.Sale.CarDetails.Year });
             setColor(CarEdit.Sale.CarDetails.Color)
             setDescription(CarEdit.Sale.CarDetails.Description)
 
@@ -168,7 +171,7 @@ const CarDetails = ({ updateCarDetails }) => {
                 isOpenCardDetails &&
 
                 <div className='fixed inset-0 backdrop-blur-md z-50'>
-                    <ModalAdd isOpen={isOpenAdd} onClose={Onclose} Text={Text} Category={Category} updateList={setUpdateList} Brand={optionsBrand}/>
+                    <ModalAdd isOpen={isOpenAdd} onClose={Onclose} Text={Text} Category={Category} updateList={setUpdateList} Brand={optionsBrand} />
                     <div className='bg-[#071620] m-10 rounded-lg w-auto h-[80%] mt-[6rem] text-white mb-8 overflow-y-auto max-h-screen md:max-h-none'>
                         <div className='ml-8 mr-8 mb-12 mt-8'>
                             <div className='text-left flex justify-between cursor-pointer items-center'>
@@ -251,7 +254,7 @@ const CarDetails = ({ updateCarDetails }) => {
                                                     <label htmlFor="Model" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                                         Modelo
                                                     </label>
-                                                    <button onClick={ () => OpenModal("Modelo", "optionsModel")}>
+                                                    <button onClick={() => OpenModal("Modelo", "optionsModel")}>
                                                         <FaPlusCircle size={20} className='ml-2' />
                                                     </button>
                                                 </div>

@@ -104,6 +104,8 @@ const AvailableCarDetails = () => {
         );
     };
 
+
+
     return (
         <div className='bg-zinc-950'>
             <ReserveModal showModal={showModal} handleCloseModal={handleCloseModal} />
@@ -232,6 +234,8 @@ const AvailableCarDetails = () => {
 
                     <button
                         onClick={handleOpenModal}
+                        disabled={CarAvailable?.Sale?.CarDetails?.Amount == null || CarAvailable?.Sale?.CarDetails?.Amount <= 0}
+
                         className="justify-center px-16 py-4 text-base font-semibold text-center text-white whitespace-nowrap bg-sky-600 rounded max-md:px-5">
                         Reservar
                     </button>

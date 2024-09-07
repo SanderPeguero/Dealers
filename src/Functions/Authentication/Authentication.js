@@ -8,19 +8,18 @@ export const LognInAuth = async (email, password, setWhichRole) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Extraer el rol y el nombre del usuario desde la base de datos
     const userData = await ListUser(user.uid, setWhichRole);
  
     if (userData) {
-      // Almacenar los datos relevantes en el localStorage
+
       localStorage.setItem("Token", await user.getIdToken());
-      localStorage.setItem("DisplayName", userData.name);  // Guardar el nombre desde la base de datos
+      localStorage.setItem("DisplayName", userData.name);  
     }
 
     return user;
   } catch (error) {
     console.error("Error during login:", error);
-    throw error; // Re-lanzar el error para manejarlo en la llamada
+    throw error; 
   }
 };
 

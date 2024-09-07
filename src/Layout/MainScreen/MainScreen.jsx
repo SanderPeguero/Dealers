@@ -131,9 +131,12 @@ const MainScreen = () => {
     const handleEdit = async (e) => {
         e.preventDefault();
 
+        console.log("Editar car details")
+        console.log(CarSaleDatos)
+
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
             try {
-                await EditCarSale(CarEdit.IdCarSale, CarSaleDatos);
+                await EditCarSale(CarEdit.IdCarSale, CarSaleDatos)
                 alert("Guardado");
             } catch (error) {
                 console.error("Error al actualizar los datos:", error);
