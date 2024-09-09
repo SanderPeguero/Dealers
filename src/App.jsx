@@ -8,6 +8,9 @@ import Footer from './Layout/Footer/Footer'
 import ReservarLayout from './Layout/ReservarLayout/ReservarLayout'
 import DetailsAutos from './Layout/DetailsAutos/DetailsAuto'
 import UserLayout from './Layout/UserLayout/UserLayout'
+import AboutUSLayout from './Layout/AboutUSLayout/AboutUSLayout'
+
+
 function App() {
   const { user, WhichRole, locationR } = useContextCar()
 
@@ -15,6 +18,8 @@ function App() {
   const commonRoutes = [
     { path: '/', element: <MainScreen /> },
     { path: '/DetailsAutos', element: <DetailsAutos /> },
+    { path: '/AboutUS', element: <AboutUSLayout /> },
+
   ]
 
   const AdminRoutes = [
@@ -24,6 +29,7 @@ function App() {
     { path: '/Reservas', element: <ReservarLayout />},
     { path: '/DetailsAutos', element: <DetailsAutos /> },
     { path: '/TableUser', element: <UserLayout /> },
+    
   
   ]
 
