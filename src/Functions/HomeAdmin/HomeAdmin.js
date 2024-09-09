@@ -97,7 +97,7 @@ export const deleteImageURL = async (imageKey) => {
 
 
 
-export const GetContact = async (setTitleContact, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks) => {
+export const GetContact = async (setTitleContact, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks,setBackgroundImage) => {
 
     const ContactRef = ref(db, 'Contact');
     try {
@@ -113,6 +113,7 @@ export const GetContact = async (setTitleContact, setUbicationContacts, setGmail
             setPhoneContact(ContactData.Phone)
             setTitletwoContact(ContactData.Titletwo)
             setSocialnetworks(ContactData.SocialMedia)
+            setBackgroundImage(ContactData.BackgroundImage)
 
         } else {
             console.log("No data available");
@@ -179,7 +180,47 @@ export const ImagenRedSocial = async (datos, index) => {
     }
 };
 
+export const BackImage = async (datos, index) => {
+    const ContactRef = ref(db, 'Contact');
+    try {
+
+        const snapshot = await get(ContactRef);
+        if (snapshot.exists()) {
+            const currentData = snapshot.val();
+            let BackgroundImageArray = currentData.BackgroundImage || [];
+
+            if (index >= 0 && index < BackgroundImageArray.length) {
+               
+                BackgroundImageArray[index] = datos;
+
+                await update(ContactRef, { BackgroundImage: BackgroundImageArray });
+                console.log("Imagen de Fondo de Contacto actualizada");
+            } else {
+                console.error("Índice fuera de rango");
+            }
+        } else {
+            console.error("No se encontraron datos en Contact");
+        }
+    } catch (error) {
+        console.error("Error al actualizar", error);
+    }
+};
+
 export const uploadImageRedSocial = async (file) => {
+
+    const storageRef = storageref(storage, `Contact/${file.name}`);
+    try {
+
+        const snapshot = await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(snapshot.ref);
+        return url;
+    } catch (error) {
+        console.error("Error al subir la imagen:", error);
+        return null;
+    }
+};
+
+export const uploadBackgroundImage = async (file) => {
 
     const storageRef = storageref(storage, `Contact/${file.name}`);
     try {
@@ -215,6 +256,30 @@ export const AgregarRedSocial = async (nuevaRedSocial) => {
         console.error("Error al agregar nueva red social", error);
     }
 };
+
+export const AddNewBackgroundImage = async (NewBackground) => {
+    const ContactRef = ref(db, 'Contact');
+    try {
+        const snapshot = await get(ContactRef);
+        if (snapshot.exists()) {
+            const currentData = snapshot.val();
+            let BackgroundImageArray = currentData.BackgroundImage || [];
+
+            // Agregar la nueva red social al final del arreglo
+            BackgroundImageArray.push(NewBackground);
+
+            // Subir el arreglo actualizado de nuevo a Firebase
+            await update(ContactRef, { BackgroundImage: BackgroundImageArray });
+            console.log("Nueva Imagen de Fondo de Contacto Agregada" );
+            console.log(NewBackground.Url)
+        } else {
+            console.error("No se encontraron datos en Contact");
+        }
+    } catch (error) {
+        console.error("Error al agregar nueva Imagen de Fondo de Contacto", error);
+    }
+};
+
 
 export const deleteSocialMedia = async (index) => {
     const ContactRef = ref(db, 'Contact');

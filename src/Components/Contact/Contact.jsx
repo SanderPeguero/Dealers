@@ -6,6 +6,8 @@ import { TiSocialTwitterCircular } from "react-icons/ti";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { FaTiktok } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
+import AddBackgroundImage from "./AddBackgroundImage";
+import handleSaveImage from "./AddBackgroundImage"
 
 import facebooktwo from "../../assets/img/facebooktwo.png"
 import instagramtwo from "../../assets/img/instagramtwo.png"
@@ -35,7 +37,7 @@ const defaultCenter = {
 const Contact = () => {
 
     const { user, WhichRole, GetContact, setCheckContact, TitleContacts, setTitleContacts, UbicationContacts, setUbicationContacts,
-        GmailContact, setGmailContact, PhoneContact, setPhoneContact, TitletwoContact, setTitletwoContact, setSocialnetworks, Socialnetworks } = useContextCar()
+        GmailContact, setGmailContact, PhoneContact, setPhoneContact, TitletwoContact, setTitletwoContact, setSocialnetworks, Socialnetworks, setBackgroundImage, BackgroundImage } = useContextCar()
 
     const [TitleContact, setTitleContact] = useState('Encuentranos en')
     const [UbicationContact, setUbicationContact] = useState('#12 Av. Antonio G. San Frac., Duarte, 31000, Rep. Dom.')
@@ -84,10 +86,9 @@ const Contact = () => {
     }
     const [isOpenEditImg, setisOpenEditImg] = useState(false)
 
-    const handleOpenEditImage = () => {
-        // setisOpenEditImg(!isOpenEditImg)
-        // ImagenRedSocial()
-    }
+   
+
+    const [openAddImageModal, setOpenAddImageModal]= useState (false)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [socialLinks, setSocialLinks] = useState({});
@@ -119,6 +120,11 @@ const Contact = () => {
         setIndexEdit(index)
     }
 
+    const HandleOpenBackgroundModal=()=>{
+        setOpenAddImageModal(true)
+    }
+
+    const HandleCloseBackgroundModal=()=>{setOpenAddImageModal(false)}
     const CloseModalEdit = () => {
         setisOpenEditModal(false)
     }
@@ -146,12 +152,13 @@ const Contact = () => {
     return (
         <div className="relative w-full min-h-[768px] mt-20 max-md:mt-10 max-md:max-w-full">
 
+            {BackgroundImage.map((klk) => (
+                <div className="absolute inset-0 bg-cover bg-no-repeat"
+                    style={{ backgroundImage: `url(${klk?.UrlBackgroundImage})`, filter: 'blur(2px)' }}>
 
-            <div className="absolute inset-0 bg-cover bg-no-repeat"
-                style={{ backgroundImage: `url(${CarBackgroud})`, filter: 'blur(2px)' }}>
 
-            </div>
-
+                </div>
+            ))}
 
 
             <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -162,10 +169,11 @@ const Contact = () => {
                 {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
 
                     <div className="px-3 py-2   text-xs leading-4">
-                        <button onClick={() => handleOpenEditImage()} className=" flex px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
+                        <button onClick={HandleOpenBackgroundModal} className=" flex px-3 py-1 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
                             <FaEdit size={14} className="text-yellow-400 " />
                             <div className="mx-2 text-yellow-500">Editar Fondo</div>
                         </button>
+                        <AddBackgroundImage openAddImageModal={openAddImageModal} HandleClose={HandleCloseBackgroundModal} />
                     </div>
                 )}
                 <div className="relative flex flex-col justify-center items-center px-16 py-1 h-full w-full max-md:px-5">
@@ -414,7 +422,7 @@ const Contact = () => {
                                         {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
 
                                             <div className="cursor-pointer mt-4" onClick={openModal} >
-                                                <IoAddCircleOutline size={54} className="text-white bg-transparent rounded-full" />
+                                                <IoAddCircleOutline size={74} className="text-white bg-transparent rounded-full" />
                                             </div>
                                         )}
                                     </div>
