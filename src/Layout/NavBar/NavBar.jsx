@@ -6,7 +6,7 @@ import close from "../../assets/img/close.png"
 import menu from "../../assets/img/menu.png"
 import { document } from 'postcss';
 const Navbar = ({ background }) => {
-    const { user,WhichRole, logout, AutosVisible, setAutosVisible, ContactoVisibles, setContactoVisibles, locationR, setlocationR } = useContextCar()
+    const { user,WhichRole, logout, AutosVisible, setAutosVisible, ContactVisible, setContactVisible, locationR, setlocationR,setContactVisibles } = useContextCar()
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const Open= ()=>{
@@ -55,10 +55,10 @@ const Navbar = ({ background }) => {
     const handleContactoVisibles = () => {
         if (location.pathname !== '/' && location.pathname !== '/admin') {
             navigate('/')
-            setContactoVisibles(true)
+            setContactVisible(true)
         }
         else {
-            setContactoVisibles(true)
+            setContactVisible(true)
             setIsMenuOpen(!isMenuOpen)
         }
     }

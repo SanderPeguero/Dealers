@@ -255,7 +255,7 @@ const MainScreen = () => {
                 </div>
 
                 <div ref={ContactoRef}>
-                    <Contact />
+                    <Contact  />
                 </div>
 
 

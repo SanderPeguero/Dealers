@@ -72,6 +72,7 @@ export function ProviderContext({ children }) {
     const [PhoneContact, setPhoneContact] = useState('')
     const [TitletwoContact, setTitletwoContact] = useState('')
     const [Socialnetworks, setSocialnetworks] = useState([])
+    const [BackgroundImage, setBackgroundImage] = useState([])
 
     const [CheckContact, setCheckContact] = useState(false)
 
@@ -93,7 +94,7 @@ export function ProviderContext({ children }) {
             ListUser(user.uid, setWhichRole)
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
             GetHero(setTitleHero, setDescriptionHero, setSliderImg)
-            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks, setBackgroundImage)
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -104,12 +105,12 @@ export function ProviderContext({ children }) {
 
     useEffect(() => {
         GetHero(setTitleHero, setDescriptionHero, setSliderImg)
-        GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
+        GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks, setBackgroundImage)
     }, [])
 
     useEffect(() => {
         if (CheckContact === true) {
-            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks)
+            GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks, setBackgroundImage)
             setCheckContact(false)
         }
 
@@ -358,6 +359,8 @@ export function ProviderContext({ children }) {
                 TitletwoContact, setTitletwoContact,
                 GetContact,
                 Socialnetworks, setSocialnetworks,
+                setBackgroundImage,
+                BackgroundImage,
                 GetContact,
                 setCheckContact,
                 setchangeReserve,
