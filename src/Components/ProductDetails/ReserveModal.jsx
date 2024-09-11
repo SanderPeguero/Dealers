@@ -12,7 +12,8 @@ function ReserveModal({ showModal, setShowModal, handleCloseModal }) {
     const [phoneUser, setPhoneUser] = useState('');
 
     const currentDate = new Date();
-    const ReservationDate = currentDate.toLocaleString();
+    const ReservationDate = currentDate.toLocaleDateString();
+    const ReservationTime = currentDate.toLocaleTimeString();
 
     const validateName = (name) => {
         return name && name.trim().length > 0;
@@ -35,6 +36,8 @@ function ReserveModal({ showModal, setShowModal, handleCloseModal }) {
         return phoneRegex.test(phone);
     };
 
+    console.log(CarAvailable)
+
     const handleReservationClick = async () => {
 
         if (!validateName(nameUser)) {
@@ -53,11 +56,14 @@ function ReserveModal({ showModal, setShowModal, handleCloseModal }) {
         }
 
         const reservationData = {
+            IdReservedcar: CarAvailable.IdCarSale,
             informationUser: {
                 nameUser,
                 emailUser,
                 phoneUser,
-                ReservationDate
+                ReservationDate,
+                ReservationTime,
+                State: "Reservado"
             },
             informationVehicle: {
                 Title: CarAvailable.Sale.CarDetails.Title,

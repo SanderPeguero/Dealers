@@ -14,6 +14,7 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
     const [inputyear, setInputYear] = useState("");
     const [inputcolor, setInputColor] = useState("");
     const [inputprice, setInputPrice] = useState("");
+    const [inputState, setinputState] = useState("")
 
     const ReservationData = useMemo(() => ({
         inputname,
@@ -23,8 +24,9 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
         inputAuto,
         inputyear,
         inputcolor,
-        inputprice
-    }), [inputname, inputphone, inputemail, inputcondiction, inputAuto, inputyear, inputcolor, inputprice]);
+        inputprice,
+        inputState
+    }), [inputname, inputphone, inputemail, inputcondiction, inputAuto, inputyear, inputcolor, inputprice, inputState]);
 
     useEffect(() => {
         if (reserva !== null) {
@@ -36,6 +38,7 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
             setInputColor(reserva?.informationVehicle.color || "");
             setInputPrice(reserva?.informationVehicle.price || "");
             setInputCondiction(reserva?.informationVehicle.condition || "");
+            setinputState(reserva?.informationUser.State || "");
         }
     }, [reserva]);
 
@@ -47,7 +50,9 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
                 nameUser: ReservationData.inputname,
                 emailUser: ReservationData.inputemail,
                 phoneUser: ReservationData.inputphone,
-                ReservationDate: reserva?.informationUser.ReservationDate
+                ReservationDate: reserva?.informationUser.ReservationDate,
+                ReservationTime: reserva?.informationUser.ReservationTime,
+                State: ReservationData.inputState
             },
             informationVehicle: {
                 Title: ReservationData.inputAuto,
@@ -116,7 +121,7 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
                                 <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Condición:</h1></div>
-                                <input value={inputcondiction} onChange={(e) => setInputCondiction(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <input disabled value={inputcondiction} onChange={(e) => setInputCondiction(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
                         </div>
                     </div>
@@ -125,22 +130,26 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
                         <div className="flex flex-col grow whitespace-nowrap sm:ml-0 md:-ml-5 lg:ml-3">
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4">
                                 <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Auto:</h1></div>
-                                <input value={inputAuto} onChange={(e) => setInputAuto(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <input disabled value={inputAuto} onChange={(e) => setInputAuto(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
                                 <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Año:</h1></div>
-                                <input value={inputyear} onChange={(e) => setInputYear(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <input disabled value={inputyear} onChange={(e) => setInputYear(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
                                 <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Color:</h1></div>
-                                <input value={inputcolor} onChange={(e) => setInputColor(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <input disabled value={inputcolor} onChange={(e) => setInputColor(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
                                 <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Precio:</h1></div>
-                                <input value={inputprice} onChange={(e) => setInputPrice(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <input  value={inputprice} onChange={(e) => setInputPrice(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                            </div>
+                            <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
+                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Estado:</h1></div>
+                                <input value={inputState} onChange={(e) => setinputState(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
                         </div>
                     </div>
