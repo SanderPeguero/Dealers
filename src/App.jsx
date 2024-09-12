@@ -29,7 +29,7 @@ function App() {
     { path: '/Reservas', element: <ReservarLayout />},
     { path: '/DetailsAutos', element: <DetailsAutos /> },
     { path: '/TableUser', element: <UserLayout /> },
-    
+    { path: '/Reservations', element: <ReservarLayout />},
   
   ]
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useContextCar } from '../../Context/Context';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link, useLocation, NavLink} from 'react-router-dom';
 
 import close from "../../assets/img/close.png"
 import menu from "../../assets/img/menu.png"
@@ -95,12 +95,12 @@ const Navbar = ({ background }) => {
             <div  className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4  ">
                 <a to="https://flowbite.com" className="flex items-center -mr-14 space-x-3 rtl:space-x-reverse">
                     <img src="https://i.ibb.co/xXWCwHF/logo.png" className="h-12" alt="logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Cars  Showroom</span>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hidden lg:flex">Cars  Showroom</span>
                 </a>
                 <div  className="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
                     {/* Profile */}
                     {user ? <div  className="relative ml-3">
-                        <div className='flex flex-row items-center'>
+                        <div className='flex flex-row items-center mr-2 md:mt-[9.5px] '>
                             <span className="mr-4 text-white hidden md:flex">{user.displayName}</span>
                             <button  onClick={() => setopenSettingUser(!openSettingUser)  }   type="button" className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                 <span className="absolute -inset-1.5"></span>
@@ -126,7 +126,9 @@ const Navbar = ({ background }) => {
                     </div>
                         :
                         user === null && location.pathname.includes('/admin') && (
-                            <Link to='/admin/LognIn' className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 hidden md:inline">Sign in</Link>
+                            <NavLink to='/admin/LognIn'  className={({isActive})=>
+                                isActive ?   "text-blue-500 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 hidden md:inline"
+                               : "text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 hidden md:inline"}>Sign in</NavLink>
                         )
                     }
 
@@ -136,16 +138,18 @@ const Navbar = ({ background }) => {
                     </button>
                 </div>
                  
-                <div id="mega-menu"  className={`items-center absolute mt-[250px] md:relative left-0 md:mt-3 bg-slate-400 md:bg-transparent m-auto justify-between   w-full md:block md:w-auto z-50 md:order-1 ${isMenuOpen ? "block" : "hidden"}`}>
-                    <ul className="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+                <div id="mega-menu"  className={`items-center absolute mt-[270px]  md:relative left-0 md:mt-2 bg-gray-800 md:bg-transparent m-auto justify-between   w-full md:block md:w-auto z-50 md:order-1 ${isMenuOpen ? "block" : "hidden"}`}>
+                    <ul className="flex flex-col mt-4 font-medium md:flex-row md:mt-[7px] md:space-x-8 rtl:space-x-reverse">
                         <li>
-                            <Link
+                            <NavLink
                                 to={getAdjustedPath('/')}
-                                className="block py-2 px-3 hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all text-blue-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                className={({isActive})=>
+                                 isActive ?   "block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                : "block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"}
                                 aria-current="page" onClick={Open}
                             >
                                 Home
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li>
@@ -158,12 +162,14 @@ const Navbar = ({ background }) => {
                             </button>
                         </li>
                         <li>
-                            <Link to='/AboutUs'
+                            <NavLink to='/AboutUs'
                                
-                                className="block py-2 px-3 hover:text-center scale-x-95 w-full hover:scale-x-110 transition-all text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                               className={({isActive})=>
+                                isActive ?   "block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                               : "block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"}
                             >
                                 Sobre Nosotros
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
                             <button
@@ -177,7 +183,7 @@ const Navbar = ({ background }) => {
                                 <div>
                                     <button
                                         onClick={handleReservas}
-                                        className="block  text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+                                        className="block py-2 hover:text-center scale-x-95 w-full hover:scale-x-110 transition-all px-3  text-start text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
 
                                         Reservas
 
