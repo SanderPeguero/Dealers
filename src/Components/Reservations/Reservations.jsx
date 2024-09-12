@@ -34,7 +34,6 @@ const Reservations = () => {
     const [showDetailsCar, setshowDetailsCar] = useState(false)
     const [selectedReserva, setSelectedReserva] = useState(null);
 
-    // Generar una lista de años para el dropdown (ej. desde 1990 hasta el año actual)
     const currentYear = new Date().getFullYear();
     const years = Array.from(new Array(35), (val, index) => currentYear - index);
 
@@ -57,18 +56,8 @@ const Reservations = () => {
         reservas.informationUser.ReservationTime.toLowerCase().includes(TimeFilter.toLowerCase())
     )
 
-    // ReservaCarList.map((data) => {
-    //     console.log(data.IdReservedcar)
-    // })
 
     const [dataCarDetails, setDataCarDetails] = useState(null)
-
-    // ListCar.map((data) => (
-    //     console.log(data.Sale.IdCarSale)
-    // )
-
-    // )
-
 
     const handleOpenDetails = (idCar) => {
 
@@ -180,7 +169,6 @@ const Reservations = () => {
                                         <div className='font-medium text-gray-100 mx-2'>{reserva.informationUser?.ReservationTime}</div>
                                     </th>
                                     <th>
-                                        {/*flex justify-center p-1 rounded-lg font-medium text-gray-100 mx-2  */}
                                         <div className={`flex justify-center p-1 rounded-lg font-medium text-gray-100 mx-2 ${reserva.informationUser?.State === "Reservado" ? 'bg-red-600' : 'bg-green-600'}`}>
                                             {reserva.informationUser?.State}
                                         </div>

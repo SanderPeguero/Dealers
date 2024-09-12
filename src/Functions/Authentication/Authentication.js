@@ -1,5 +1,4 @@
-
-import {auth, db} from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updatePhoneNumber, signOut } from "firebase/auth";
 import { set, ref, get, update } from "firebase/database"
 
@@ -124,4 +123,27 @@ export const logout = async () => {
   localStorage.clear()
   window.location.reload();
 
+}
+
+export const deleteUser = async (userId, state, setListAllUser) => {
+  const userRef = ref(db, `Users/${userId}`);
+  try {
+      await update(userRef, { State: state });
+      console.log(" updated successfully");
+      ListAllUsers(setListAllUser)
+  } catch (error) {
+      console.error("Error updating :", error);
+  }
+}
+
+export const updateUser = async (userId, data, setListAllUser) => {
+
+  const userRef = ref(db, `Users/${userId}`);
+    try {
+        await update(userRef, data);
+        console.log(" updated successfully");
+        ListAllUsers(setListAllUser)
+    } catch (error) {
+        console.error("Error updating :", error);
+    }
 }

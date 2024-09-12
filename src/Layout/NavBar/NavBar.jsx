@@ -78,7 +78,7 @@ const Navbar = ({ background }) => {
       setopenSettingUser(false)
     } else {
       // Si el usuario está scrolleando hacia arriba, mostrar el menú
-      setIsVisible(true);
+
     }
    
   };

@@ -1,8 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useContextCar } from '../../Context/Context';
 import { IoPersonAdd } from "react-icons/io5";
 import { Link, useLocation } from 'react-router-dom';
 import Toast from '../Toast/Toast';
+import { deleteUser } from '../../Functions/Authentication/Authentication';
+import edit from "../../assets/img/edit.png";
+import delet from "../../assets/img/delet.png";
+import UserModal from './UserModal';
 const TableUser = () => {
     const { ListAllUser, updateUserRole, setListAllUser } = useContextCar();
 
@@ -17,6 +21,8 @@ const TableUser = () => {
     const [toastOpen, setToastOpen] = useState(false);
     const [toastType, setToastType] = useState('success');
     const [toastMessage, setToastMessage] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [selectUser, setselectUser] = useState(null)
 
     useEffect(() => {
         if (location.state?.showToast) {
@@ -26,6 +32,44 @@ const TableUser = () => {
         }
     }, [location.state]);
 
+    const handleStateChange = async (e, userId) => {
+        console.log(userId)
+        const newState = e.target.value;
+        await deleteUser(userId, newState, setListAllUser);
+    }
+
+    const handleDeleteUser = async (id) => {
+        const confirmDelete = window.confirm("¿Estás seguro que deseas remover este Usuario?");
+        if (confirmDelete) {
+            await deleteUser(id, 'Removed', setListAllUser);
+        } else {
+            alert("Usuario no eliminado!");
+        }
+    }
+
+    const handleOpenModal = (user) => {
+        setselectUser(user);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setselectUser(null);
+    };
+
+    const getStateClass = (state) => {
+        switch (state) {
+            case 'Active':
+                return 'bg-green-600';
+            case 'Disabled':
+                return 'bg-orange-600';
+            case 'Removed':
+                return 'bg-red-600';
+            default:
+                return 'bg-gray-600';
+        }
+    };
+
     return (
         <div className="overflow-x-auto">
             <Toast
@@ -33,6 +77,11 @@ const TableUser = () => {
                 message={toastMessage}
                 isOpen={toastOpen}
                 onClose={() => setToastOpen(false)}
+            />
+            <UserModal
+                showModal={showModal}
+                handleClose={handleCloseModal}
+                user={selectUser}
             />
             <div className="min-w-full inline-block align-middle">
 
@@ -54,6 +103,8 @@ const TableUser = () => {
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-100">Teléfono</th>
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-100">Roles</th>
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-100">Permisos</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Estado</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Acción</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-600 border-t border-gray-600">
@@ -152,6 +203,27 @@ const TableUser = () => {
                                                     </span>
                                                 </>
                                             )}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <div className={`p-2 rounded-md ${getStateClass(user.State)}`}>
+                                            <select
+                                                className="bg-transparent text-black cursor-pointer outline-none"
+                                                value={user.State}
+                                                onChange={(e) => handleStateChange(e, user.id)}
+                                            >
+                                                <option value="Active">Active</option>
+                                                <option value="Disabled">Disabled</option>
+                                                <option value="Removed">Removed</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td onClick={(e) => e.stopPropagation()} >
+                                        <div className='flex justify-center gap-5'>
+                                            <button className='hover:bg-slate-400 p-2'>
+                                                <img onClick={() => handleOpenModal(user)} className='w-6 h-6 cursor-pointer' src={edit} alt="" />
+                                            </button>
+
                                         </div>
                                     </td>
                                 </tr>
