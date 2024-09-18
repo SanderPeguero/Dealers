@@ -64,9 +64,6 @@ const ModalAdd = ({ isOpen, onClose, Text, Category, updateList, Brand }) => {
       }
     }, [Text])
 
-    console.log(selectedBrand)
-    
-
     return (
         <>
             {isOpen && (

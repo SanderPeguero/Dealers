@@ -2,23 +2,32 @@ import { auth, db } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, updatePhoneNumber, signOut } from "firebase/auth";
 import { set, ref, get, update } from "firebase/database"
 
+
+
 export const LognInAuth = async (email, password, setWhichRole) => {
   try {
+
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
     const userData = await ListUser(user.uid, setWhichRole);
- 
+    
     if (userData) {
 
-      localStorage.setItem("Token", await user.getIdToken());
-      localStorage.setItem("DisplayName", userData.name);  
+      if (userData.State === 'Active') {
+
+        localStorage.setItem("Token", await user.getIdToken());
+        localStorage.setItem("DisplayName", userData.name);  
+      } else {
+
+        throw new Error(`Login denied`);
+      }
     }
 
     return user;
   } catch (error) {
     console.error("Error during login:", error);
-    throw error; 
+    throw error;  
   }
 };
 

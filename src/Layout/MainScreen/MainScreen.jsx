@@ -18,6 +18,7 @@ import validatePrecio from "../../Components/Price/Price"
 import close from "../../assets/img/close.png"
 import carsucess from "../../assets/img/carsucess.png"
 import Toast from "../../Components/Toast/Toast"
+import AddCarModal from "../../Components/AddCarModal/AddCarModal";
 const CarSaleDatos = {
     Sale: {
         IdCarSale: "",
@@ -103,6 +104,8 @@ const MainScreen = () => {
 
     const handleSale = (e) => {
         e.preventDefault();
+        console.log("Main Screen")
+        console.log(CarSaleDatos)
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
             try {
                 console.log(CarSaleDatos)
@@ -117,27 +120,22 @@ const MainScreen = () => {
         }
     };
 
-    // const handleEdit = (e) => {
 
-    //     e.preventDefault()
-    //     if (validateCarSaleDatos(CarSaleDatos.Sale)) {
-    //         alert("Guardado");
-    //     } else {
-    //         EditCarSale(CarSaleDatos, CarEdit.IdCarSale);
-    //         alert('Por favor completa todos los campos.');
-    //     }
-    // }
 
-    const handleEdit = async (e) => {
+    const handleEdit = async (e, handleClose) => {
         e.preventDefault();
-
-        console.log("Editar car details")
-        console.log(CarSaleDatos)
 
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
             try {
-                await EditCarSale(CarEdit.IdCarSale, CarSaleDatos)
-                alert("Guardado");
+                const result = await EditCarSale(CarEdit.IdCarSale, CarSaleDatos); 
+                
+                if (result.success) {
+                    alert("Guardado con éxito");
+                    handleClose();
+                } else {
+                    alert("Hubo un problema al guardar los datos.");
+                    console.error("Error details:", result.error); 
+                }
             } catch (error) {
                 console.error("Error al actualizar los datos:", error);
                 alert("Hubo un error al actualizar los datos.");
@@ -146,7 +144,7 @@ const MainScreen = () => {
             alert('Por favor completa todos los campos.');
         }
     };
-
+    
 
 
     useEffect(() => {
@@ -168,16 +166,25 @@ const MainScreen = () => {
         }
     }, [location.state]);
 
+    console.log(CarSaleDatos)
+
 
 
     return (
         <>
-            <CarDetails updateCarDetails={updateCarDetails} />
-            <EngineDetails updateEngineDetails={updateEngineDetails} />
-            <Dimension updateDimension={updateDimension} />
-            <Feature FeatureDatos={CarSaleDatos.Sale.Features} newFeature={newFeature} setNewFeature={setNewFeature} />
-            <UpImagine AudiovisualDatos={CarSaleDatos.Sale.Multimedia} />
-            <Price PriceDatos={CarSaleDatos.Sale.Price} handleSale={handleSale} handleEdit={handleEdit} />
+            <AddCarModal
+                updateCarDetails={updateCarDetails}
+                updateEngineDetails={updateEngineDetails}
+                updateDimension={updateDimension}
+                FeatureDatos={CarSaleDatos.Sale.Features}
+                newFeature={newFeature}
+                setNewFeature={setNewFeature}
+                AudiovisualDatos={CarSaleDatos.Sale.Multimedia}
+                PriceDatos={CarSaleDatos.Sale.Price}
+                handleSale={handleSale}
+                handleEdit={handleEdit}
+            />
+
             <Toast
                 type={toastType}
                 message={toastMessage}
@@ -254,11 +261,11 @@ const MainScreen = () => {
                 <Hero />
 
                 <div  >
-                    <Recommended refAutos={AutosRef}/>
+                    <Recommended refAutos={AutosRef} />
                 </div>
 
                 <div ref={ContactoRef}>
-                    <Contact  />
+                    <Contact />
                 </div>
 
 

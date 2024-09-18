@@ -2,9 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useContextCar } from '../../Context/Context';
 import { IoMdClose } from "react-icons/io";
 import { editReserve } from "../../Functions/Sales/Sales";
-
+import SelectL from '../Select/Select';
 const ReservationModal = ({ showModal, handleClose, reserva }) => {
-    const { setchangeReserve } = useContextCar();
+    const { setchangeReserve, ListCar } = useContextCar();
 
     const [inputname, setInputName] = useState("");
     const [inputphone, setInputPhone] = useState("");
@@ -60,8 +60,8 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
                 model: reserva?.informationVehicle.model,
                 condition: ReservationData.inputcondiction,
                 price: ReservationData.inputprice,
-                year: ReservationData.inputyear, 
-                color: ReservationData.inputcolor 
+                year: ReservationData.inputyear,
+                color: ReservationData.inputcolor
             }
         };
 
@@ -78,6 +78,30 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
         setInputPrice('');
         setchangeReserve(true);
         handleClose();
+    };
+
+    const getAvailableCarOptions = () => {
+        return ListCar
+            .filter(car => car.Sale.CarDetails.Amount > 0)
+            .map(car => ({
+                value: car.IdCarSale,
+                label: `${car.Sale.CarDetails.Title}`,
+                year: car.Sale.CarDetails.Year,
+                color: car.Sale.CarDetails.Color,
+                price: car.Sale.Price.Price,
+                condition: car.Sale.CarDetails.Condition
+            }));
+    };
+
+    const handleCarSelection = (selectedOption) => {
+
+        if (selectedOption) {
+            setInputAuto(selectedOption.label); 
+            setInputYear(selectedOption.year);
+            setInputColor(selectedOption.color);
+            setInputPrice(selectedOption.price);
+            setInputCondiction(selectedOption.condition);
+        }
     };
 
     if (!showModal) return null;
@@ -129,8 +153,17 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
                     <div className="flex flex-col w-[75%] max-md:ml-0 max-md:w-full gap-8 ml-4">
                         <div className="flex flex-col grow whitespace-nowrap sm:ml-0 md:-ml-5 lg:ml-3">
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Auto:</h1></div>
-                                <input disabled value={inputAuto} onChange={(e) => setInputAuto(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <div className="text-2xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Auto:</h1></div>
+                                <div className=' rounded-lg px-2 sm:text-2xl md:text-[20px]'>
+                                    <SelectL
+                                        value={getAvailableCarOptions().find(option => option.label === inputAuto)}
+                                        onChange={handleCarSelection}
+                                        options={getAvailableCarOptions()}
+                                        isClearable
+                                        placeholder="Selecciona un auto"
+                                    />
+                                </div>
+
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
@@ -145,7 +178,7 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
                                 <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Precio:</h1></div>
-                                <input  value={inputprice} onChange={(e) => setInputPrice(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <input value={inputprice} onChange={(e) => setInputPrice(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
                                 <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Estado:</h1></div>
