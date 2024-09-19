@@ -3,7 +3,7 @@ import { useContextCar } from '../../Context/Context';
 import { IoMdClose } from "react-icons/io";
 import { editReserve } from "../../Functions/Sales/Sales";
 import SelectL from '../Select/Select';
-const ReservationModal = ({ showModal, handleClose, reserva }) => {
+const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }) => {
     const { setchangeReserve, ListCar } = useContextCar();
 
     const [inputname, setInputName] = useState("");
@@ -15,6 +15,7 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
     const [inputcolor, setInputColor] = useState("");
     const [inputprice, setInputPrice] = useState("");
     const [inputState, setinputState] = useState("")
+
 
     const ReservationData = useMemo(() => ({
         inputname,
@@ -65,9 +66,19 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
             }
         };
 
-        console.log(reservationUpdate)
+        try {
+            const result =   await editReserve(reserva.id, reservationUpdate)
+            if (result.success) {
+                console.log("cierto")
+                setgood(true)
+            }else {
+                seterror(!error)
+            }
+        } catch (error) {
+            
+        }
 
-        await editReserve(reserva.id, reservationUpdate);
+      
         setInputName('');
         setInputPhone('');
         setInputEmail('');
@@ -108,6 +119,8 @@ const ReservationModal = ({ showModal, handleClose, reserva }) => {
 
     return (
         <div className='fixed inset-0 flex items-center justify-center z-50 text-white backdrop-blur-sm'>
+                
+
             <div className="bg-gray-900 cursor-pointer sm:max-w-[98%] relative m-12 rounded-xl p-12 z-10 md:p-6 max-sm:p-4 md:rounded-md sm:rounded-sm">
                 <div className='sm:flex mt-1 max-md:text-3xl inline-flex items-center font-extrabold text-white max-md:flex-wrap max-md:max-w-full justify-between'>
                     <h2 className="flex-auto sm:text-[25px] text-[18px] md:text-3xl">Detalles de la Reserva</h2>

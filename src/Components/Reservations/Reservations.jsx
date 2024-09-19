@@ -4,7 +4,8 @@ import edit from "../../assets/img/edit.png";
 import delet from "../../assets/img/delet.png";
 import ReservationModal from './ReservationModal';
 import DetailsCarModal from './DetailsCarModal';
-
+import close from "../../assets/img/close.png"
+import carsucess from "../../assets/img/carsucess.png"
 const Reservations = () => {
     const { ReservaCarList, Formatnumber, ListCar, setchangeReserve, DeleteReservation, setListReservation, ListReservation } = useContextCar();
 
@@ -32,7 +33,10 @@ const Reservations = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [showDetailsCar, setshowDetailsCar] = useState(false)
-    const [selectedReserva, setSelectedReserva] = useState(null);
+    const [selectedReserva, setSelectedReserva] = useState(null)
+
+    const [good, setgood] = useState(false)
+    const [error, seterror] = useState(false)
 
     const currentYear = new Date().getFullYear();
     const years = Array.from(new Array(35), (val, index) => currentYear - index);
@@ -77,6 +81,48 @@ const Reservations = () => {
     return (
         <div className="overflow-x-auto">
             <DetailsCarModal showDatails={showDetailsCar} setshowDatails={setshowDetailsCar} dataCarDetails={dataCarDetails} />
+            {good ? (
+                <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
+
+                    <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-green-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
+                        <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all  hover:bg-red-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => setgood(false)}>
+                            <img src={close} alt="" />
+                        </button>
+                        <img
+                            loading="lazy"
+                            src={carsucess}
+                            className="max-w-full aspect-square w-[80px]"
+                        />
+                        <div className="justify-center mt-8 text-xl max-md:text-lg">¡¡¡Exito!!!!</div>
+                        <div className=" mt-3 text-xl max-md:text-sm m justify-center ">
+                            ¡Se ha actualizado Éxitosamente!
+                        </div>
+
+                    </div>
+                </div>
+            ) : ""}
+
+
+            {error ? (
+                <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
+
+                    <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-red-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
+                        <button className="absolute w-20 h-20 right-5 -top-10 rounded-full justify-center px-7 py-4 mt-16 text-xl text-white whitespace-nowrap transition-all  hover:bg-green-700 bg-opacity-60 max-md:px-5 max-md:mt-10" onClick={() => seterror(false)}>
+                            <img src={close} alt="" />
+                        </button>
+                        <img
+                            loading="lazy"
+                            src="https://th.bing.com/th/id/R.0f19a8e91142bad74846a88bd6c65a57?rik=vc6qcTmPlSf3bQ&pid=ImgRaw&r=0"
+                            className="max-w-full aspect-square w-[80px]"
+                        />
+                        <div className="justify-center mt-8 text-xl max-md:text-lg">UPs!</div>
+                        <div className=" mt-3 text-xl max-md:text-sm m justify-center ">
+                            ¡Algo ha Salido Mal!
+                        </div>
+
+                    </div>
+                </div>
+            ) : ""}
             <div className='md:flex md:justify-start m-auto w-full'>
                 <div className='flex justify-between md:w-[300px] px-2 mb-4 md:mb-0'>
                     <input
@@ -189,7 +235,7 @@ const Reservations = () => {
                     </table>
                 </div>
             </div>
-            <ReservationModal showModal={showModal} handleClose={handleCloseModal} reserva={selectedReserva} />
+            <ReservationModal showModal={showModal} handleClose={handleCloseModal} reserva={selectedReserva} setgood={setgood} seterror={seterror}/>
         </div>
     );
 }

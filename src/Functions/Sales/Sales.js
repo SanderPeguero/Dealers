@@ -81,9 +81,9 @@ export const editReserve = async (reservaId, updateData) => {
     try {
         const docRef = doc(dbFire, 'ReservationCar', reservaId);
         await updateDoc(docRef, updateData);
-        console.log("Reserva Actualizada");
+        return { success: true };
     } catch (error) {
-        console.error("Error al actualizar Reserva:", error);
+        return { success: false, error }; 
     }
 };
 
@@ -150,15 +150,22 @@ export const ListCarSale = async (setLisCarNew, setLisCarUsed, setListCar) => {
                 CarSale.push(data);
 
             });
+            setLisCarNew(newCars)
+            setLisCarUsed(usedCars)
+            setListCar(CarSale)
 
-            localStorage.setItem("newCars", JSON.stringify(newCars))
-            setLisCarNew(JSON.parse(localStorage.getItem("newCars")));
+            // localStorage.setItem("newCars", JSON.stringify(newCars))
+            // setLisCarNew(JSON.parse(localStorage.getItem("newCars")));
 
-            localStorage.setItem("usedCars", JSON.stringify(usedCars))
-            setLisCarUsed(JSON.parse(localStorage.getItem("usedCars")));
+            // localStorage.setItem("usedCars", JSON.stringify(usedCars))
+            // setLisCarUsed(JSON.parse(localStorage.getItem("usedCars")));
 
-            localStorage.setItem("CarSale", JSON.stringify(CarSale))
-            setListCar(JSON.parse(localStorage.getItem("CarSale")));
+            // localStorage.setItem("CarSale", JSON.stringify(CarSale))
+            // setListCar(JSON.parse(localStorage.getItem("CarSale")))
+
+            localStorage.removeItem('CarSale');
+
+
 
         });
 

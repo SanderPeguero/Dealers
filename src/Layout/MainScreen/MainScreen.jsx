@@ -104,11 +104,10 @@ const MainScreen = () => {
 
     const handleSale = (e) => {
         e.preventDefault();
-        console.log("Main Screen")
-        console.log(CarSaleDatos)
+
         if (validateCarSaleDatos(CarSaleDatos.Sale)) {
             try {
-                console.log(CarSaleDatos)
+
                 SaveCarSale(CarSaleDatos, user.uid);
                 setGood(!bien)
             } catch (error) {
@@ -166,7 +165,7 @@ const MainScreen = () => {
         }
     }, [location.state]);
 
-    console.log(CarSaleDatos)
+  
 
 
 

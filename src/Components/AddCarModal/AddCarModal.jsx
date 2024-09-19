@@ -341,11 +341,10 @@ const AddCarModal = (
 
         setMedia([])
         setLinkUrl([])
-
         setPrice(0)
 
         setisOpenCardDetails(false)
-
+        handleRefresh()
 
     }
 
