@@ -8,8 +8,8 @@ import {
     ListCarSale, DeleteCarSale, EditCarSale, ListReservaCar, ReservaCar, GetReserva, DeleteReservation
 } from "../Functions/Sales/Sales";
 import { SignInAuth, LognInAuth, logout, ListUser, ListAllUsers, updateUserRole } from "../Functions/Authentication/Authentication"
-import { GetHero, GetContact, editTitleContact } from "../Functions/HomeAdmin/HomeAdmin"
-import { useStateManager } from "react-select";
+import { GetHero, GetContact, editTitleContact, GetAbout } from "../Functions/HomeAdmin/HomeAdmin"
+
 
 const Context = createContext();
 
@@ -76,6 +76,21 @@ export function ProviderContext({ children }) {
 
     const [CheckContact, setCheckContact] = useState(false)
 
+
+    // Informacion de Sobre Nosotros
+    const [FirstTitle, setFirstTitle] = useState('')
+    const [Paragraph, setParagraph] = useState('')
+    const [DateButton, setDateButton] = useState('')
+    const [FirstBackgroundImage, setFirstBackgroundImage] = useState('')
+    const [ServicesTitle, setServicesTitle] = useState('')
+    const [SellnewcarIconServices, setSellnewcarIconServices] = useState("")
+    const [SellusedcarIconServices, setSellusedcarIconServices] = useState("")
+    const [SellmycarIconServices, setSellmycarIconServices] = useState("")
+    const [AchievementsText, setAchievementsText] = useState("")
+    const [AchievementsImage, setAchievementsImage] = useState("")
+    const [CheckAbout, setCheckAbout] = useState("")
+
+
     //Filter
     const [SerchingCar, setSerchingCar] = useState([])
     const [isFilter, setisFilter] = useState(false)
@@ -95,6 +110,7 @@ export function ProviderContext({ children }) {
             ListCarSale(setLisCarNew, setLisCarUsed, setListCar)
             GetHero(setTitleHero, setDescriptionHero, setSliderImg)
             GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks, setBackgroundImage)
+            GetAbout (setFirstTitle, setParagraph, setDateButton, setFirstBackgroundImage, setServicesTitle, setSellnewcarIconServices,setSellusedcarIconServices, setSellmycarIconServices, setAchievementsText, setAchievementsImage )
             ListAllUsers(setListAllUser)
         }
     }, [user])
@@ -105,7 +121,9 @@ export function ProviderContext({ children }) {
 
     useEffect(() => {
         GetHero(setTitleHero, setDescriptionHero, setSliderImg)
+        GetAbout (setFirstTitle, setParagraph, setDateButton, setFirstBackgroundImage, setServicesTitle, setSellnewcarIconServices,setSellusedcarIconServices, setSellmycarIconServices, setAchievementsText, setAchievementsImage )
         GetContact(setTitleContacts, setUbicationContacts, setGmailContact, setPhoneContact, setTitletwoContact, setSocialnetworks, setBackgroundImage)
+        
     }, [])
 
     useEffect(() => {
@@ -115,7 +133,13 @@ export function ProviderContext({ children }) {
         }
 
     }, [CheckContact])
+    useEffect(() => {
+        if (CheckAbout === true) {
+            GetAbout (setFirstTitle, setParagraph, setDateButton, setFirstBackgroundImage, setServicesTitle, setSellnewcarIconServices,setSellusedcarIconServices, setSellmycarIconServices, setAchievementsText, setAchievementsImage )
+            setCheckAbout(false)
+        }
 
+    }, [CheckAbout])
 
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);
@@ -279,7 +303,6 @@ export function ProviderContext({ children }) {
                 CarAvailable,
                 setAvailable,
                 DeleteReservation,
-
                 SaveCarSale,
                 SaveMedia,
                 SaveArchivo,
@@ -310,7 +333,6 @@ export function ProviderContext({ children }) {
                 CarEdit,
                 setCarEdit,
                 DeleteCarSale,
-
                 EditCarSale,
                 ListReservation,
                 setListReservation,
@@ -350,7 +372,6 @@ export function ProviderContext({ children }) {
                 ListReservaCar,
                 setReservaCarList,
                 ListCarSale, setLisCarNew, setLisCarUsed, setListCar,
-
                 editTitleContact,
                 TitleContacts, setTitleContacts,
                 UbicationContacts, setUbicationContacts,
@@ -364,13 +385,22 @@ export function ProviderContext({ children }) {
                 GetContact,
                 setCheckContact,
                 setchangeReserve,
-
+                AchievementsImage, setAchievementsImage,
+                AchievementsText, setAchievementsText,
+                SellmycarIconServices, setSellmycarIconServices,
+                SellusedcarIconServices, setSellusedcarIconServices,
+                SellnewcarIconServices, setSellnewcarIconServices,
+                ServicesTitle, setServicesTitle,
+                FirstBackgroundImage, setFirstBackgroundImage,
+                DateButton, setDateButton,
+                Paragraph, setParagraph,
+                FirstTitle, setFirstTitle,
+                CheckAbout, setCheckAbout,
                 setSerchingCar,
                 setisFilter,
                 isFilter,
                 SerchingCar,
                 handleSearching
-
             }}
         >
             {children}

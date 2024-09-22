@@ -357,4 +357,163 @@ export const updateSocialMediaLinks = async (socialLinks) => {
     }
 };
 
+export const GetAbout = async (setFirstTitle, setParagraph, setDateButton, setFirstBackgroundImage, setServicesTitle, setSellnewcarIconServices,setSellusedcarIconServices, setSellmycarIconServices, setAchievementsText, setAchievementsImage   ) => {
+
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+        const AboutUsSnashop = await get(AboutUsRef);
+
+        if (AboutUsSnashop.exists()) {
+            const AboutUsData = AboutUsSnashop.val();
+            // console.log(ContactData)
+
+            setFirstTitle(AboutUsData.TitleOne)
+            setParagraph(AboutUsData.FirstParagraph)
+            setDateButton(AboutUsData.Date)
+            setFirstBackgroundImage(AboutUsData.FirstBackground)
+            setServicesTitle(AboutUsData.SecondTitle)
+            setSellnewcarIconServices(AboutUsData.NewCarIcon)
+            setSellusedcarIconServices(AboutUsData.UsedCarIcon)
+            setSellmycarIconServices(AboutUsData.SellMyCarIcon)
+            setAchievementsText(AboutUsData.Achievements)
+            setAchievementsImage(AboutUsData.AchievementsImg)
+        } else {
+            console.log("No data available");
+
+        }
+    } catch (error) {
+        console.error("Error:", error);
+
+    }
+
+}
+
+export const editFirstTitle = async (NewTitle) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+        await update(AboutUsRef, { TitleOne: NewTitle });
+        console.log("Título actualizado");
+    } catch (error) {
+        console.error("Error al actualizar el título:", error);
+    }
+};
+
+export const editParagraph = async (NewParagraph) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+        await update(AboutUsRef, { FirstParagraph: NewParagraph });
+        console.log("Parrafo actualizado");
+    } catch (error) {
+        console.error("Error al actualizar el Parrafo:", error);
+    }
+};
+export const editDateButton = async (NewDateButton) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+        await update(AboutUsRef, { Date: NewDateButton });
+        console.log("Fecha actualizada");
+    } catch (error) {
+        console.error("Error al actualizar la Fecha:", error);
+    }
+};
+export const editServicesTitle = async (NewServicesTitle) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+        await update(AboutUsRef, { SecondTitle: NewServicesTitle });
+        console.log("Titulo de Servicios actualizado");
+    } catch (error) {
+        console.error("Error al actualizar Titulo de Servicios:", error);
+    }
+};
+export const editAchievementsText = async (NewAchievementsText) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+        await update(AboutUsRef, { Achievements: NewAchievementsText });
+        console.log("Parrafo de Logros actualizado");
+    } catch (error) {
+        console.error("Error al actualizar Parrafo de Logros:", error);
+    }
+};
+
+export const FirstImageAbout = async (datos) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+
+           update(AboutUsRef, { FirstBackground: datos });
+           console.log("Imagen de Presentación actualizada");
+            
+    } catch (error) {
+        console.error("Error al actualizar", error);
+    }
+};
+
+export const uploadFirstImageAbout = async (file) => {
+
+    const storageRef = storageref(storage, `AboutUS/${file.name}`);
+    try {
+
+        const snapshot = await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(snapshot.ref);
+        return url;
+    } catch (error) {
+        console.error("Error al subir la imagen:", error);
+        return null;
+    }
+};
+export const AddNewFirstImageAbout = async (NewFirstImageAbout) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+            await update(AboutUsRef, { FirstBackground: NewFirstImageAbout });
+            console.log("Nueva Imagen de Presentación Agregada" );
+            console.log(NewFirstImageAbout.Url)
+
+    } catch (error) {
+        console.error("Error al agregar nueva Imagen de Presentación", error);
+    }
+};
+
+
+
+
+export const AchievementsImg = async (datos) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+
+           update(AboutUsRef, { AchievementsImg: datos });
+           console.log("Imagen de Logros Actualizada");
+            
+    } catch (error) {
+        console.error("Error al actualizar", error);
+    }
+};
+
+export const uploadAchievementsImg = async (file) => {
+
+    const storageRef = storageref(storage, `AboutUS/${file.name}`);
+    try {
+
+        const snapshot = await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(snapshot.ref);
+        return url;
+    } catch (error) {
+        console.error("Error al subir la imagen:", error);
+        return null;
+    }
+};
+
+export const AddAchievementsImg = async (NewAchievementsImg) => {
+    const AboutUsRef = ref(db, 'AboutUS');
+    try {
+            await update(AboutUsRef, { AchievementsImg: NewAchievementsImg });
+            console.log("Nueva Imagen de Logro Agregada" );
+            console.log(NewAchievementsImg.Url)
+
+    } catch (error) {
+        console.error("Error al agregar nueva Imagen de Logro", error);
+    }
+};
+
+
+
+
 
