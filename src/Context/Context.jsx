@@ -133,6 +133,7 @@ export function ProviderContext({ children }) {
         }
 
     }, [CheckContact])
+
     useEffect(() => {
         if (CheckAbout === true) {
             GetAbout (setFirstTitle, setParagraph, setDateButton, setFirstBackgroundImage, setServicesTitle, setSellnewcarIconServices,setSellusedcarIconServices, setSellmycarIconServices, setAchievementsText, setAchievementsImage )
@@ -140,6 +141,7 @@ export function ProviderContext({ children }) {
         }
 
     }, [CheckAbout])
+    
 
     const handleRemove = (dato) => {
         const nuevaLista = CarDatos.filter(item => item !== dato);

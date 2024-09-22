@@ -40,7 +40,9 @@ function AboutUS() {
                 GetAbout(setFirstTitle, setParagraph, setDateButton, setServicesTitle, setAchievementsText)
             }
         }
-
+        useEffect (()=>{
+            FirstTitle;
+        },[FirstTitle])
         const handleEditParagraph = () => {
             const NewParagraph = prompt('Editar Parrafo', Paragraph);
             if (NewParagraph !== null) {
@@ -131,7 +133,7 @@ function AboutUS() {
                         
                     </div>
                 )}
-                <img src={FirstBackgroundImage?.UrlPresentationImage} className='md:w-full md:h-[900px] w-full h-full rounded-xl'  alt="MainImage" />
+                <img src={FirstBackgroundImage?.UrlPresentationImage} className='md:w-full md:h-full w-full h-full rounded-xl'  alt="MainImage" />
                 
             </div>
             
@@ -214,7 +216,7 @@ function AboutUS() {
                 <img className='lg:w-full lg:h-full rounded-xl md:w-full md:h-full hidden md:flex  ' src={AchievementsImage?.UrlAchievementsImg} alt="ThirdImage" />
                 <div>
                     {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
-                        <div className="flex justify-center px-3 py-2 text-xs">
+                        <div className="md:flex justify-center px-3 py-2 hidden text-xs">
                             <button onClick={() => HandleOpenAchievementsModal()}  className="px-6 flex py-3 border border-blue-500 text-blue-500 rounded transition duration-300 hover:bg-yellow-400 hover:text-white focus:outline-none">
                                 <FaEdit size={14} className="text-yellow-400" />
                                 <div className="mx-2 text-yellow-500">Editar Imagen</div>
