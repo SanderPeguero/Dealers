@@ -2,14 +2,15 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useContextCar } from '../../Context/Context';
 import { IoMdClose } from "react-icons/io";
 import { updateUser } from '../../Functions/Authentication/Authentication';
-const UserModal = ({ showModal, handleClose, user }) => {
+import StateChange from "../../assets/img/StateChange.png"
+const UserModal = ({ showModal, handleClose, user,  }) => {
     const { setListAllUser } = useContextCar()
-
+    const [OpenEditModal, setOpenEditModal] = useState(false)
     const [Name, setName] = useState("")
     const [Email, setEmail] = useState("")
     const [Phone, setPhone] = useState("")
     const [Password, setPassword] = useState("")
-
+    
     useEffect(() => {
         if (user !== null) {
             setName(user?.name || "")
@@ -18,10 +19,10 @@ const UserModal = ({ showModal, handleClose, user }) => {
             setPassword(user?.password || "")
         }
     }, [user]);
-
+   
     const handleSaveEdit = async (e) => {
         e.preventDefault()
-
+        
         const datos = {
             name: Name,
             email: Email,
@@ -30,8 +31,8 @@ const UserModal = ({ showModal, handleClose, user }) => {
             role: user?.role
         }
 
-        await updateUser(user?.id, datos, setListAllUser)
-
+        await updateUser(user?.id, datos, setListAllUser,) 
+ 
         handleClose();
     };
 
@@ -106,6 +107,7 @@ const UserModal = ({ showModal, handleClose, user }) => {
                     >
                         Editar
                     </button>
+                    
                 </div>
             </div>
         </div>

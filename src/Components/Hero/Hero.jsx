@@ -61,7 +61,7 @@ const Hero = () => {
 
                 <div className="z-10 lg:mt-32 mb-0  overflow-hidden  md:mt-5 max-md:mb-2.5 max-md:max-w-full">
                     <div className={`w-full  -z-50 absolute right-0 top-0  `}>
-                        <img className="w-screen h-[300px]  md:h-[500px] lg:h-[600px] xl:h-[950px]  bg-cover brightness-50 blur-[2px] contrast-125" src={SliderImg[current]} alt="" />
+                        <img className="w-screen h-[300px]  md:h-full lg:h-full xl:h-full bg-contain brightness-50 blur-[2px] contrast-125" src={SliderImg[current]} alt="" />
                     </div>
                     <div className="md:absolute z-50 top-0 md:right-0 md:left-0 md:px-12 ">
 

@@ -6,6 +6,8 @@ import Toast from '../Toast/Toast';
 import { deleteUser } from '../../Functions/Authentication/Authentication';
 import edit from "../../assets/img/edit.png";
 import delet from "../../assets/img/delet.png";
+import StateChange from "../../assets/img/StateChange.png"
+import useredit from "../../assets/img/useredit.png"
 import UserModal from './UserModal';
 const TableUser = () => {
     const { ListAllUser, updateUserRole, setListAllUser } = useContextCar();
@@ -16,14 +18,14 @@ const TableUser = () => {
             updateUserRole(userId, newRole, setListAllUser);
         }
     }
-
+    const [OpenEditModal, setOpenEditModal] = useState(false)
     const location = useLocation();
     const [toastOpen, setToastOpen] = useState(false);
     const [toastType, setToastType] = useState('success');
     const [toastMessage, setToastMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [selectUser, setselectUser] = useState(null)
-
+    const [OpenModal, setOpenModal] = useState(false)
     useEffect(() => {
         if (location.state?.showToast) {
             setToastType(location.state.toastType || 'success');
@@ -36,8 +38,10 @@ const TableUser = () => {
         console.log(userId)
         const newState = e.target.value;
         await deleteUser(userId, newState, setListAllUser);
+        setOpenModal(true)
     }
-
+    
+    const [error, seterror] = useState(false)
     const handleDeleteUser = async (id) => {
         const confirmDelete = window.confirm("¿Estás seguro que deseas remover este Usuario?");
         if (confirmDelete) {
@@ -46,7 +50,18 @@ const TableUser = () => {
             alert("Usuario no eliminado!");
         }
     }
+    useEffect(() => {
+        setInterval(() => {
+          setOpenModal();
+        }, 4500);
 
+      }, []);
+      useEffect(() => {
+        setInterval(() => {
+          setOpenEditModal();
+        }, 3500);
+
+      }, []);
     const handleOpenModal = (user) => {
         setselectUser(user);
         setShowModal(true);
@@ -55,6 +70,7 @@ const TableUser = () => {
     const handleCloseModal = () => {
         setShowModal(false);
         setselectUser(null);
+        setOpenEditModal(true)
     };
 
     const getStateClass = (state) => {
@@ -82,7 +98,27 @@ const TableUser = () => {
                 showModal={showModal}
                 handleClose={handleCloseModal}
                 user={selectUser}
+                
             />
+           
+
+           {OpenEditModal ? (
+                            <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
+
+                                <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-green-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
+                                <img
+                                    loading="lazy"
+                                    src={useredit}
+                                    className="max-w-full aspect-square w-[80px]"
+                                />
+                                <div className="justify-center mt-8 text-xl max-md:text-lg">¡¡¡Exito!!!!</div>
+                                <div className=" mt-3 text-xl max-md:text-sm m justify-center ">
+                                ¡Haz Cambiado Editado el Usuario Exitosamente!
+                                </div>
+
+                            </div>
+                            </div>
+                        ) : ""}
             <div className="min-w-full inline-block align-middle">
 
                 <div className="overflow-hidden rounded-lg  shadow-md m-5">
@@ -216,6 +252,24 @@ const TableUser = () => {
                                                 <option value="Disabled">Disabled</option>
                                                 <option value="Removed">Removed</option>
                                             </select>
+                                            {OpenModal ? (
+                                                    <div className="fixed  inset-0 flex items-center justify-center z-50  sm:mx-0 min-h-screen w-full text-white backdrop-blur-sm  ">
+
+                                                    <div className="flex flex-col relative items-center px-20 py-8 text-3xl text-white rounded-2xl bg-green-400 max-w-[671px] max-md:w-[85%] max-md:h-65  ">
+                                                    
+                                                        <img
+                                                            loading="lazy"
+                                                            src={StateChange}
+                                                            className="max-w-full aspect-square w-[80px]"
+                                                        />
+                                                        <div className="justify-center mt-8 text-xl max-md:text-lg">¡¡¡Exito!!!!</div>
+                                                        <div className=" mt-3 text-xl max-md:text-sm m justify-center ">
+                                                            ¡Haz Cambiado el Estado Exitosamente!
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            ) : ""}
                                         </div>
                                     </td>
                                     <td onClick={(e) => e.stopPropagation()} >

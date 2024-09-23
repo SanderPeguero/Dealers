@@ -12,13 +12,16 @@ const Reservations = () => {
     const handleDeleteReservation = async (ReservationId) => {
         try {
             await DeleteReservation(ReservationId);
+            
             const [updatedReservaCarList] = await Promise.all([
                 ReservaCarList(),
+                
             ]);
 
-            if (Array.isArray(updatedListCarSale)) {
+            if (Array.isArray(updatedListCarSale)) {setDeleteModal(true)
                 setListReservation(updatedReservaCarList);
-                setOpenModal(true);
+               
+                
             }
         } catch (error) {
             console.log("Algo ha salido mal");
@@ -38,6 +41,7 @@ const Reservations = () => {
     const [good, setgood] = useState(false)
     const [error, seterror] = useState(false)
 
+
     const currentYear = new Date().getFullYear();
     const years = Array.from(new Array(35), (val, index) => currentYear - index);
 
@@ -46,6 +50,7 @@ const Reservations = () => {
         setShowModal(true);
         setchangeReserve(false);
     };
+
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -123,6 +128,8 @@ const Reservations = () => {
                     </div>
                 </div>
             ) : ""}
+
+            
             <div className='md:flex md:justify-start m-auto w-full'>
                 <div className='flex justify-between md:w-[300px] px-2 mb-4 md:mb-0'>
                     <input
@@ -226,6 +233,7 @@ const Reservations = () => {
                                             </button>
                                             <button className="hover:bg-slate-400 p-2">
                                                 <img className='w-6 h-6 cursor-pointer' onClick={() => handleDeleteReservation(reserva.id)} src={delet} alt="deletebutton" />
+                                                
                                             </button>
                                         </div>
                                     </th>
