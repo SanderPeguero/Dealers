@@ -107,9 +107,9 @@ const AvailableCarDetails = () => {
 
 
     return (
-        <div className='bg-zinc-950'>
+        <div className=' bg-white dark:bg-zinc-950'>
             <ReserveModal showModal={showModal} handleCloseModal={handleCloseModal} />
-            <nav className="text-sm sm:text-base text-white p-4 md:p-6 lg:p-6 rounded-md shadow-lg">
+            <nav className="text-sm sm:text-base text-black dark:text-white p-4 md:p-6 lg:p-6 rounded-md shadow-lg">
                 <ol className="list-none p-0 inline-flex space-x-2">
                     <li className="flex items-center">
                         <Link to={getAdjustedPath('/')} className="text-gray-300 hover:text-blue-500 transition-colors duration-300">Home</Link>
@@ -207,7 +207,7 @@ const AvailableCarDetails = () => {
                 </div>
 
             </div>
-            <div className="text-sm sm:text-base bg-gray-900 text-white p-2 md:p-4 lg:p-6 drop-shadow-lg mt-4">
+            <div className="text-sm sm:text-base bg-white text-black dark:bg-gray-900 dark:text-white p-2 md:p-4 lg:p-6 drop-shadow-lg mt-4">
                 <div className="flex flex-row items-center px-10">
                     <ol className="list-none font-bold p-0 flex-1 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-16">
                         <li className="flex items-center">
@@ -245,10 +245,10 @@ const AvailableCarDetails = () => {
 
             <div className="p-12">
                 <div className="mb-5">
-                    <div className="text-2xl font-bold text-zinc-300 max-md:max-w-full">
+                    <div className="text-2xl font-bold text-black dark:text-zinc-300 max-md:max-w-full">
                         Descripción
                     </div>
-                    <div className="text-zinc-300 mt-5 text-base bg-clip-text max-md:max-w-full">
+                    <div className="text-black dark:text-zinc-300 mt-5 text-base bg-clip-text max-md:max-w-full">
                         {CarAvailable?.Sale?.CarDetails?.Description}
 
                     </div>
@@ -257,7 +257,7 @@ const AvailableCarDetails = () => {
                 <div>
                     <div className="flex flex-col  ">
                         <span className="text-2xl text-white">Detalles de autos</span>
-                        <hr class="w-full h-1 mt-2  bg-gray-100 border-0 rounded  dark:bg-gray-700" />
+                        <hr class="w-full h-1 mt-2  bg-gray-300 border-0 rounded  dark:bg-gray-700" />
                     </div>
                     <div className=" py-12 flex items-center justify-center">
 
@@ -365,9 +365,9 @@ const AvailableCarDetails = () => {
 
                     <div className="flex flex-col  ">
                         <span className="text-2xl text-white">Características de auto</span>
-                        <hr class="w-full h-1 mt-2  bg-gray-100 border-0 rounded  dark:bg-gray-700" />
+                        <hr class="w-full h-1 mt-2  bg-gray-300 border-0 rounded  dark:bg-gray-700" />
                     </div>
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 text-white ">
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 text-black dark:text-white ">
                         {CarAvailable?.Sale?.Features?.Features.map((feature, index) => (
                             <div key={index} className="flex">
                                 <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

@@ -255,7 +255,7 @@ const MainScreen = () => {
             ) : ""}
 
 
-            <div className="bg-black">
+            <div className="bg-white dark:bg-black">
                 <Navbar background={'dark:bg-[#12232E]'} />
                 <Hero />
 

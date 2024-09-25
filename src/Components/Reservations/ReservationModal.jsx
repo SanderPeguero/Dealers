@@ -78,11 +78,11 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
             })
 
             if (
-                CarDatosUpdate !== null && 
+                CarDatosUpdate !== null &&
                 CarDatosUpdate.Sale.CarDetails.Amount > 0 &&
                 carPrevios !== null &&
                 carPrevios.Sale.CarDetails.Amount > 0
-            
+
             ) {
 
                 CarDatosUpdate.Sale.CarDetails.Amount -= 1
@@ -156,47 +156,47 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
     if (!showModal) return null;
 
     return (
-        <div className='fixed inset-0 flex items-center justify-center z-50 text-white backdrop-blur-sm'>
+        <div className='fixed inset-0 flex items-center justify-center z-50 text-black dark:text-white backdrop-blur-sm'>
 
 
-            <div className="bg-gray-900 cursor-pointer sm:max-w-[98%] relative m-12 rounded-xl p-12 z-10 md:p-6 max-sm:p-4 md:rounded-md sm:rounded-sm">
-                <div className='sm:flex mt-1 max-md:text-3xl inline-flex items-center font-extrabold text-white max-md:flex-wrap max-md:max-w-full justify-between'>
+            <div className=" bg-white dark:bg-gray-900 cursor-pointer sm:max-w-[98%] relative m-12 rounded-xl p-12 z-10 md:p-6 max-sm:p-4 md:rounded-md sm:rounded-sm">
+                <div className='sm:flex mt-1 max-md:text-3xl inline-flex items-center font-extrabold text-black dark:text-white max-md:flex-wrap max-md:max-w-full justify-between'>
                     <h2 className="flex-auto sm:text-[25px] text-[18px] md:text-3xl">Detalles de la Reserva</h2>
                     <IoMdClose className='cursor-pointer absolute right-2 top-1 sm:top-3 sm:right-4 md:top-3 md:right-5 md:w-20 md:h-10 hover:bg-red-600 hover:rounded-full' onClick={handleClose} />
                 </div>
 
                 <div className="flex items-center gap-3 sm:mt-4">
-                    <div className="font-bold text-white max-md:text-2xl"><h1 className='text-[20px] sm:text-2xl'>Fecha:</h1></div>
-                    <div className="text-white text-opacity-50 text-[15px] sm:text-2xl">{reserva?.informationUser.ReservationDate}</div>
+                    <div className="font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[20px] sm:text-2xl'>Fecha:</h1></div>
+                    <div className="text-black dark:text-white text-opacity-50 text-[15px] sm:text-2xl">{reserva?.informationUser.ReservationDate}</div>
                 </div>
 
-                <div className="sm:mt-2 mt-1 bg-slate-50 border-white border-solid border-[3px] min-h-[4px] max-md:max-w-full" />
+                <div className="sm:mt-2 mt-1 bg-slate-800 dark:bg-slate-50 border-black dark:border-white border-solid border-[3px] min-h-[4px] max-md:max-w-full" />
 
                 <div className='md:flex max-w-full md:-mx-2 md:text-[10px] gap-12 justify-between lg:mx-10'>
                     <div className="flex flex-col w-full md:max-w-[75%]">
                         <div className="flex flex-col grow whitespace-nowrap">
                             <div className="sm:block items-center gap-4 sm:mb-2 sm:mt-2 md:mb-0 mt-0">
-                                <div className="font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Nombre:</h1></div>
+                                <div className="font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Nombre:</h1></div>
                                 <div className='flex gap-2'>
-                                    <input value={inputname} onChange={(e) => setInputName(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                    <input value={inputname} onChange={(e) => setInputName(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                                 </div>
                             </div>
 
                             <div className="sm:block items-center gap-4 sm:mb-2 sm:mt-2 mt-2">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Teléfono:</h1></div>
+                                <div className="text-xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Teléfono:</h1></div>
                                 <div className='flex gap-2'>
-                                    <input value={inputphone} onChange={(e) => setInputPhone(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                    <input value={inputphone} onChange={(e) => setInputPhone(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                                 </div>
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Email:</h1></div>
-                                <input value={inputemail} onChange={(e) => setInputEmail(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <div className="text-xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Email:</h1></div>
+                                <input value={inputemail} onChange={(e) => setInputEmail(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Condición:</h1></div>
-                                <input disabled value={inputcondiction} onChange={(e) => setInputCondiction(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <div className="text-xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Condición:</h1></div>
+                                <input disabled value={inputcondiction} onChange={(e) => setInputCondiction(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
                         </div>
                     </div>
@@ -204,8 +204,9 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
                     <div className="flex flex-col w-[75%] max-md:ml-0 max-md:w-full gap-8 ml-4">
                         <div className="flex flex-col grow whitespace-nowrap sm:ml-0 md:-ml-5 lg:ml-3">
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4">
-                                <div className="text-2xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Auto:</h1></div>
+                                <div className="text-2xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Auto:</h1></div>
                                 <div className=' rounded-lg px-2 sm:text-2xl md:text-[20px]'>
+                            
                                     <SelectL
                                         value={getAvailableCarOptions().find(option => option.label === inputAuto)}
                                         onChange={handleCarSelection}
@@ -218,22 +219,22 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Año:</h1></div>
-                                <input disabled value={inputyear} onChange={(e) => setInputYear(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <div className="text-xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Año:</h1></div>
+                                <input disabled value={inputyear} onChange={(e) => setInputYear(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Color:</h1></div>
-                                <input disabled value={inputcolor} onChange={(e) => setInputColor(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <div className="text-xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Color:</h1></div>
+                                <input disabled value={inputcolor} onChange={(e) => setInputColor(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
 
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Precio:</h1></div>
-                                <input value={inputprice} onChange={(e) => setInputPrice(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <div className="text-xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Precio:</h1></div>
+                                <input value={inputprice} onChange={(e) => setInputPrice(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
                             <div className="sm:block items-center sm:mb-2 sm:mt-2 gap-4 mt-2">
-                                <div className="text-xl font-bold text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Estado:</h1></div>
-                                <input value={inputState} onChange={(e) => setinputState(e.target.value)} className="bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
+                                <div className="text-xl font-bold text-black dark:text-white max-md:text-2xl"><h1 className='text-[18px] sm:text-2xl md:text-[20px]'>Estado:</h1></div>
+                                <input value={inputState} onChange={(e) => setinputState(e.target.value)} className="bg-gray-100 dark:bg-[#19415c] rounded-lg px-2 sm:text-2xl md:text-[20px]" type="text" />
                             </div>
                         </div>
                     </div>

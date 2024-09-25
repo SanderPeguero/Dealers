@@ -85,7 +85,7 @@ const TableUser = () => {
             />
             <div className="min-w-full inline-block align-middle">
 
-                <div className="overflow-hidden rounded-lg  shadow-md m-5">
+                <div className="overflow-hidden rounded-lg   m-5">
                     <div className="flex justify-end mb-8">
                         <Link
                             to="/admin/SignIn"
@@ -96,20 +96,20 @@ const TableUser = () => {
                         </Link>
                     </div>
 
-                    <table className="min-w-full divide-y divide-gray-600 bg-[#12232E] text-left text-sm text-gray-500">
-                        <thead className="bg-[#0e1b24]">
+                    <table className=" shadow-md min-w-full divide-y divide-gray-600 bg-gray-100 dark:bg-[#12232E] text-left text-sm text-black dark:text-gray-500">
+                        <thead className="bg-gray-100 dark:bg-[#0e1b24]">
                             <tr>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Nombre</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Teléfono</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Roles</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Permisos</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Estado</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-100">Acción</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-black dark:text-gray-100">Nombre</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-black dark:text-gray-100">Teléfono</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-black dark:text-gray-100">Roles</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-black dark:text-gray-100">Permisos</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-black dark:text-gray-100">Estado</th>
+                                <th scope="col" className="px-6 py-4 font-medium text-black dark:text-gray-100">Acción</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-600 border-t border-gray-600">
                             {ListAllUser.map((user) => (
-                                <tr key={user.id} className="hover:bg-gray-900 text-gray-100 max-w-full">
+                                <tr key={user.id} className=" hover:bg-gray-300 dark:hover:bg-gray-900  text-gray-900 dark:text-gray-100 max-w-full">
                                     <th className="flex gap-3 px-6 py-4 font-normal text-gray-100">
                                         <div className="relative h-10 w-10">
                                             <img
@@ -120,8 +120,8 @@ const TableUser = () => {
                                             <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
                                         </div>
                                         <div className="text-sm">
-                                            <div className="font-medium text-gray-100">{user.name}</div>
-                                            <div className="text-gray-400">{user.email}</div>
+                                            <div className="font-medium text-black dark:text-gray-100">{user.name}</div>
+                                            <div className="text-gray-600 dark:text-gray-400">{user.email}</div>
                                         </div>
                                     </th>
                                     <td className="px-6 py-4">{user.phone}</td>

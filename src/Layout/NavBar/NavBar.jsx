@@ -90,6 +90,7 @@ const Navbar = ({ background }) => {
 
     }, []);
 
+
     return (
 
         <nav className={`relative bg-transparent z-20  border-gray-200 `}>
@@ -103,7 +104,7 @@ const Navbar = ({ background }) => {
                     {/* Profile */}
                     {user ? (
                         <div className="relative flex items-center">
-                            <span className="text-white hidden md:inline-block mr-4">{user.displayName}</span>
+                            <span className=" text-black dark:text-white hidden md:inline-block mr-4">{user.displayName}</span>
                             <button
                                 onClick={() => setopenSettingUser(!openSettingUser)}
                                 type="button"
@@ -122,7 +123,7 @@ const Navbar = ({ background }) => {
 
                             {openSettingUser && (
                                 <div
-                                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-300 dark:bg-gray-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     role="menu"
                                     aria-orientation="vertical"
                                     aria-labelledby="user-menu-button"
@@ -130,7 +131,7 @@ const Navbar = ({ background }) => {
                                 >
                                     <a
                                         href="#"
-                                        className="block px-4 py-2 text-sm text-white hover:bg-gray-600"
+                                        className="block px-4 py-2 text-sm text-black dark:text-white hover:bg-gray-600"
                                         role="menuitem"
                                         tabIndex="-1"
                                         id="user-menu-item-0"
@@ -139,7 +140,7 @@ const Navbar = ({ background }) => {
                                     </a>
                                     <a
                                         href="#"
-                                        className="block px-4 py-2 text-sm text-white hover:bg-gray-600"
+                                        className="block px-4 py-2 text-sm text-black dark:text-white hover:bg-gray-600"
                                         role="menuitem"
                                         tabIndex="-1"
                                         id="user-menu-item-1"
@@ -149,7 +150,7 @@ const Navbar = ({ background }) => {
                                     {user && WhichRole === 'Owner' && (
                                         <Link
                                             to="/admin/TableUser"
-                                            className="block px-4 py-2 text-sm text-white hover:bg-gray-600"
+                                            className="block px-4 py-2 text-sm text-black dark:text-white hover:bg-gray-600"
                                             role="menuitem"
                                             tabIndex="-1"
                                             id="user-menu-item-1"
@@ -159,7 +160,7 @@ const Navbar = ({ background }) => {
                                     )}
                                     <button
                                         onClick={(e) => handleLogout(e)}
-                                        className="block px-4 py-2 w-full text-sm text-left text-white hover:bg-gray-600"
+                                        className="block px-4 py-2 w-full text-sm text-left text-black dark:text-white hover:bg-gray-600"
                                         role="menuitem"
                                         tabIndex="-1"
                                         id="user-menu-item-2"
@@ -223,8 +224,8 @@ const Navbar = ({ background }) => {
                             <NavLink to='/AboutUs'
 
                                 className={({ isActive }) =>
-                                    isActive ? "block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-                                        : "block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0  text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"}
+                                    isActive ? "text-black  block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                                        : " text-black dark:text-white block py-2 px-3  hover:text-center scale-x-95 max-w-full hover:scale-x-110 transition-all  border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0   md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"}
                             >
                                 Sobre Nosotros
                             </NavLink>

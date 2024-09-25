@@ -40,7 +40,7 @@ function App() {
 
     <>
       <Router>
-        <Routes>1
+        <Routes>
           {routes.map((route, index) => (
             <Route key={index} {...route} />
           ))}

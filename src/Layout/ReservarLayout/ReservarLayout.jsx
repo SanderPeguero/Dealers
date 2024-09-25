@@ -4,11 +4,11 @@ import Reservations from '../../Components/Reservations/Reservations'
 
 const ReservarLayout = () => {
   return (
-    <div className='bg-black'>
+    <div className='bg-white dark:bg-black'>
       <Navbar />
 
-      <div className='bg-[#0B0C10] max-h-full '>
-        <div className='h-[10rem] bg-[#12232E] text-white mb-16'>
+      <div className=' bg-white dark:bg-[#0B0C10] max-h-full '>
+        <div className='h-[10rem] bg-white dark:bg-[#12232E] text-black dark:text-white mb-16'>
           <div className='ml-10 lg:ml-[8rem] flex flex-col'>
             <h1 className='mt-8 text-4xl'>
               Lista de autos reservados

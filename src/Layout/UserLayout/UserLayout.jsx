@@ -3,11 +3,11 @@ import Navbar from '../NavBar/NavBar'
 import TableUser from '../../Components/TableUser/TableUser'
 const UserLayout = () => {
     return (
-        <div className='bg-black'>
+        <div className='bg-white dark:bg-black'>
             <Navbar />
 
-            <div className='bg-[#0B0C10] max-h-full '>
-                <div className="bg-[#12232E] text-white py-4">
+            <div className='bg-white dark:bg-[#0B0C10] max-h-full '>
+                <div className="bg-white dark:bg-[#12232E] text-black dark:text-white py-4">
                     <div className="ml-8 lg:ml-32">
                         <h1 className="text-4xl font-bold">
                             Usuarios

@@ -132,7 +132,7 @@ const Recommended = ({ refAutos }) => {
 
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-3    ">
                             {user && (WhichRole === 'admin' || WhichRole === 'Owner') && (
-                                <div className="flex items-center justify-center text-2xl border text-white rounded transition duration-300 hover:bg-blue-500 hover:text-white focus:outline-none">
+                                <div className="flex items-center justify-center text-2xl border text-black dark:text-white rounded transition duration-300 hover:bg-blue-500 hover:text-white focus:outline-none">
 
                                     <div className="">
                                         <button onClick={() => handleAddAuto()}

@@ -131,7 +131,7 @@ const FilterComponent = () => {
 
 
   return (
-    <div className="flex flex-col justify-center mt-8 p-6 bg-gray-900 rounded max-md:px-5 max-md:max-w-full">
+    <div className="flex flex-col justify-center mt-8 p-6 bg-gray-100 dark:bg-gray-900 shadow-md rounded max-md:px-5 max-md:max-w-full">
       <div className="w-full justify-center flex gap-10 self-center max-w-full text-sky-600 whitespace-nowrap">
         <button
           onClick={handleTodo}
@@ -159,16 +159,16 @@ const FilterComponent = () => {
 
 
       <div className="bg-transparent flex gap-5 justify-between items-start mt-6 text-sm font-semibold text-white whitespace-nowrap max-md:flex-wrap">
-        <div className="relative bg-transparent w-full border border-[#004A77] rounded-lg">
+        <div className="relative bg-transparent w-full  rounded-lg">
           <div className="bg-transparent absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg className="bg-transparent w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
           </div>
-          <input value={Search} onChange={(e) => setSearch(e.target.value)} type="search" id="simple-search" className="bg-gray-50 border  transition-all border-[#004A77] text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block ps-10 p-2.5 w-full dark:bg-[#12232E] dark:border-[#12232E] dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar" required />
+          <input value={Search} onChange={(e) => setSearch(e.target.value)} type="search" id="simple-search" className="bg-gray-100  border  transition-all border-[#CCCCCC] dark:border-[#004A77] text-white text-sm rounded-lg block ps-10 p-2.5 w-full dark:bg-[#12232E]  dark:placeholder-gray-400 " placeholder="Buscar" required />
         </div>
 
         <div className="flex w-full gap-5">
           <div className="w-full">
-            <div className='bg-gray-700 rounded'>
+            <div className=''>
               <SelectL
                 value={Marca}
                 onChange={setMarca}
@@ -180,7 +180,7 @@ const FilterComponent = () => {
           </div>
 
           <div className="w-full">
-            <div className='bg-gray-700 rounded'>
+            <div className=''>
               <SelectL
                 value={Modelo}
                 onChange={setModelo}

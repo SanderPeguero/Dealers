@@ -6,8 +6,8 @@ const DetailsAutos = () => {
 
     return (
 
-        <div className="bg-black">
-            <Navbar background={'dark:bg-[#12232E]'} />
+        <div className=" bg-white dark:bg-black">
+            <Navbar background={' dark:bg-[#12232E]'} />
             <AvailableCarDetails />
         </div>
     )

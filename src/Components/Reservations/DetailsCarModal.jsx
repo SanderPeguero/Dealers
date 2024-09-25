@@ -27,13 +27,13 @@ const DetailsCarModal = ({ showDatails, setshowDatails, dataCarDetails }) => {
                     <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                     <div  onClick={(e) => e.stopPropagation()}  className="relative  overflow-hidden shadow-xl max-w-screen-lg w-full m-4 transition transform ease-out duration-300 opacity-100 scale-100">
 
-                        <div className="px-6 py-4 bg-[#12232E]">
-                            <h3 className="text-lg leading-6 font-medium text-white">
+                        <div className="px-6 py-4  bg-gray-100 dark:bg-[#12232E]">
+                            <h3 className="text-lg leading-6 font-medium text-black dark:text-white">
                                 Detalles de carro reservado
                             </h3>
                         </div>
                         <div
-                            className="prose max-w-screen-lg p-8 overflow-y-auto bg-zinc-950"
+                            className="prose max-w-screen-lg p-8 overflow-y-auto bg-white dark:bg-zinc-950"
                             style={{
                                 maxHeight: '70vh',
                             }}
@@ -122,8 +122,8 @@ const DetailsCarModal = ({ showDatails, setshowDatails, dataCarDetails }) => {
 
                             </div>
                             <div className='my-4'>
-                                <h2 className=" text-white text-2xl font-bold mb-4">{dataCarDetails.Sale.CarDetails.Title}</h2>
-                                <p className="mb-4 text-white">
+                                <h2 className=" text-black dark:text-white text-2xl font-bold mb-4">{dataCarDetails.Sale.CarDetails.Title}</h2>
+                                <p className="mb-4 text-black dark:text-white">
                                     {dataCarDetails.Sale.CarDetails.Description}
                                 </p>
                             </div>
@@ -131,8 +131,8 @@ const DetailsCarModal = ({ showDatails, setshowDatails, dataCarDetails }) => {
 
                             <div>
                                 <div className="flex flex-col  ">
-                                    <span className="text-2xl text-white">Detalles de autos</span>
-                                    <hr class="w-full h-1 mt-2  bg-gray-100 border-0 rounded  dark:bg-gray-700" />
+                                    <span className="text-2xl text-black dark:text-white">Detalles de autos</span>
+                                    <hr class="w-full h-1 mt-2  bg-gray-300 border-0 rounded  dark:bg-gray-700" />
                                 </div>
                                 <div className=" py-12 flex items-center justify-center">
 
@@ -239,10 +239,10 @@ const DetailsCarModal = ({ showDatails, setshowDatails, dataCarDetails }) => {
                             <div className="">
 
                                 <div className="flex flex-col  ">
-                                    <span className="text-2xl text-white">Características de auto</span>
-                                    <hr class="w-full h-1 mt-2  bg-gray-100 border-0 rounded  dark:bg-gray-700" />
+                                    <span className="text-2xl text-black dark:text-white">Características de auto</span>
+                                    <hr class="w-full h-1 mt-2  bg-gray-300 border-0 rounded  dark:bg-gray-700" />
                                 </div>
-                                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 text-white ">
+                                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 text-black dark:text-white ">
                                     {dataCarDetails?.Sale?.Features?.Features.map((feature, index) => (
                                         <div key={index} className="flex items-center">
                                             <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -257,7 +257,7 @@ const DetailsCarModal = ({ showDatails, setshowDatails, dataCarDetails }) => {
 
 
                         </div>
-                        <div className="bg-[#12232E] px-4 py-3 sm:px-6 flex align-items justify-end p-4 gap-4 flex-row">
+                        <div className=" bg-gray-100 dark:bg-[#12232E] px-4 py-3 sm:px-6 flex align-items justify-end p-4 gap-4 flex-row">
                             {/* Botón para cerrar el modal */}
                             <button
                                 onClick={() => setshowDatails(false)}

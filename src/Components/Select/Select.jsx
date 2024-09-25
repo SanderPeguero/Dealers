@@ -1,42 +1,58 @@
-import React from 'react';
-import Select from 'react-select'
-
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 
 const SelectL = ({ value, onChange, options, placeholder, isDisabled }) => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        setIsDarkMode(darkModeMediaQuery.matches);
+
+        const handleChange = (e) => {
+            setIsDarkMode(e.matches);
+        };
+
+        darkModeMediaQuery.addEventListener('change', handleChange);
+
+        return () => {
+            darkModeMediaQuery.removeEventListener('change', handleChange);
+        };
+    }, []);
+
+
     const customSelectStyles = {
         control: (provided) => ({
             ...provided,
-            backgroundColor: '#12232E',
-            color: 'white',
+            backgroundColor: isDarkMode ? '#12232E' : '#FFFFFF',  
+            color: isDarkMode ? 'white' : 'black', 
             borderRadius: '0.5rem',
-            borderColor: '#004A77',
+            borderColor: isDarkMode ? '#004A77' : '#CCCCCC',  
             cursor: 'pointer',
         }),
         menu: (provided) => ({
             ...provided,
-            backgroundColor: '#12232E',
-            color: 'white',
+            backgroundColor: isDarkMode ? '#12232E' : '#FFFFFF', 
+            color: isDarkMode ? 'white' : 'black',  
         }),
         option: (provided, state) => ({
             ...provided,
-            backgroundColor: state.isFocused ? '#004A77' : '#12232E',
-            color: 'white',
+            backgroundColor: state.isFocused ? '#004A77' : (isDarkMode ? '#12232E' : '#FFFFFF'),  
+            color: isDarkMode ? 'white' : 'black',  
             cursor: 'pointer',
         }),
         singleValue: (provided) => ({
             ...provided,
-            color: 'white',
+            color: isDarkMode ? 'white' : 'black',  
         }),
         input: (provided) => ({
             ...provided,
-            color: 'white',
+            color: isDarkMode ? 'white' : 'black', 
         }),
         placeholder: (provided) => ({
             ...provided,
-            color: 'white',
+            color: isDarkMode ? 'white' : 'black', 
         }),
     };
-
 
     return (
         <Select
@@ -47,6 +63,7 @@ const SelectL = ({ value, onChange, options, placeholder, isDisabled }) => {
             isClearable
             placeholder={placeholder}
             isDisabled={isDisabled}
+            className="w-full"
         />
     );
 };

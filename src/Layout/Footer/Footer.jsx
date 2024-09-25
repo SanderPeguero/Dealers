@@ -10,28 +10,28 @@ const Footer = () => {
 
 
     return (
-        <footer className="bg-[#12232E] text-white p-4 text-center">
-            <div className="bg-[#12232E] container mx-auto">
-                <div className='flex justify-center bg-[#12232E]'>
-                    <img className='bg-[#12232E]' src={CarLogo} />
+        <footer className="bg-white text-black dark:bg-[#12232E] dark:text-white p-4 text-center">
+            <div className=" container mx-auto">
+                <div className='flex justify-center '>
+                    <img className='' src={CarLogo} />
                 </div>
                 <div className='border border-gray-600 my-8'></div>
-                <div className='bg-[#12232E] grid lg:grid-cols-3  justify-center   w-full'>
-                    <div className='bg-[#12232E] grid lg:grid-cols-1 items-center w-full'>
-                        <a href='#/AboutUS' className='mb-4 bg-[#12232E] cursor-pointer' >
+                <div className=' grid lg:grid-cols-3  justify-center   w-full'>
+                    <div className=' grid lg:grid-cols-1 items-center w-full'>
+                        <a href='#/AboutUS' className='mb-4  cursor-pointer' >
                             SOBRE NOSOTROS
                         </a>
 
-                        <div className='mb-4 bg-[#12232E]'>
+                        <div className='mb-4 '>
                             CONTACTO
                         </div>
                     </div>
 
-                    <div className='bg-[#12232E] grid lg:grid-cols-1 items-center w-full'>
-                        <div className='mb-4 bg-[#12232E]'>
+                    <div className=' grid lg:grid-cols-1 items-center w-full'>
+                        <div className='mb-4 '>
                             {GmailContact}
                         </div>
-                        <div className='mb-4 bg-[#12232E] '>
+                        <div className='mb-4  '>
                             {PhoneContact}
                         </div>
                     </div>
@@ -44,7 +44,7 @@ const Footer = () => {
 
 
                         <div className='mt-4 '>
-                            <div className='flex flex-row items-center justify-center bg-[#12232E] '>
+                            <div className='flex flex-row items-center justify-center  '>
                                
 
                                 {Socialnetworks.map((social, index) => (
@@ -65,8 +65,8 @@ const Footer = () => {
                 </div>
 
 
-                <div className='border border-gray-600 my-8 bg-[#12232E]'></div>
-                <p className='bg-[#12232E]'>&copy; 2021 Atom Dev Team. All Rights reserved.</p>
+                <div className='border border-gray-600 my-8 '></div>
+                <p className=''>&copy; 2021 Atom Dev Team. All Rights reserved.</p>
             </div>
         </footer>
     )
