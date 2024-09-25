@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useContextCar } from '../../Context/Context';
 import { IoMdClose } from "react-icons/io";
-import { editReserve } from "../../Functions/Sales/Sales";
+import { editReserve, EditCarSale } from "../../Functions/Sales/Sales";
 import SelectL from '../Select/Select';
+
 const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }) => {
     const { setchangeReserve, ListCar } = useContextCar();
 
+    const [idReservarCar, setidReservarCar] = useState(null)
     const [inputname, setInputName] = useState("");
     const [inputphone, setInputPhone] = useState("");
     const [inputemail, setInputEmail] = useState("");
@@ -15,7 +17,7 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
     const [inputcolor, setInputColor] = useState("");
     const [inputprice, setInputPrice] = useState("");
     const [inputState, setinputState] = useState("")
-
+    const [CarDatosUpdate, setCarDatosUpdate] = useState(null)
 
     const ReservationData = useMemo(() => ({
         inputname,
@@ -31,6 +33,8 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
 
     useEffect(() => {
         if (reserva !== null) {
+            console.log(reserva)
+            setidReservarCar(reserva?.IdReservedcar)
             setInputName(reserva?.informationUser.nameUser || "");
             setInputPhone(reserva?.informationUser.phoneUser || "");
             setInputEmail(reserva?.informationUser.emailUser || "");
@@ -43,10 +47,12 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
         }
     }, [reserva]);
 
+
     const handleSaveEdit = async (e) => {
         e.preventDefault();
 
         const reservationUpdate = {
+            IdReservedcar: CarDatosUpdate?.IdCarSale,
             informationUser: {
                 nameUser: ReservationData.inputname,
                 emailUser: ReservationData.inputemail,
@@ -67,18 +73,46 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
         };
 
         try {
-            const result =   await editReserve(reserva.id, reservationUpdate)
-            if (result.success) {
-                console.log("cierto")
-                setgood(true)
-            }else {
-                seterror(!error)
-            }
-        } catch (error) {
+            const carPrevios = ListCar.find(data => {
+                return data.IdCarSale === idReservarCar
+            })
+
+            if (
+                CarDatosUpdate !== null && 
+                CarDatosUpdate.Sale.CarDetails.Amount > 0 &&
+                carPrevios !== null &&
+                carPrevios.Sale.CarDetails.Amount > 0
             
+            ) {
+
+                CarDatosUpdate.Sale.CarDetails.Amount -= 1
+
+                carPrevios.Sale.CarDetails.Amount += 1
+
+                await EditCarSale(CarDatosUpdate.IdCarSale, CarDatosUpdate)
+
+                await EditCarSale(carPrevios.IdCarSale, carPrevios)
+
+                const result = await editReserve(reserva.id, reservationUpdate)
+
+                if (result.success) {
+
+                    setgood(true)
+
+                } else {
+
+                    seterror(!error);
+                }
+
+            } else {
+                seterror(!error);
+            }
+
+
+        } catch (error) {
+            console.error("Error al guardar la reserva o actualizar el auto:", error);
         }
 
-      
         setInputName('');
         setInputPhone('');
         setInputEmail('');
@@ -100,18 +134,22 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
                 year: car.Sale.CarDetails.Year,
                 color: car.Sale.CarDetails.Color,
                 price: car.Sale.Price.Price,
-                condition: car.Sale.CarDetails.Condition
+                condition: car.Sale.CarDetails.Condition,
+                CarObject: car,
+
             }));
     };
 
     const handleCarSelection = (selectedOption) => {
 
         if (selectedOption) {
-            setInputAuto(selectedOption.label); 
+            setInputAuto(selectedOption.label);
             setInputYear(selectedOption.year);
             setInputColor(selectedOption.color);
             setInputPrice(selectedOption.price);
             setInputCondiction(selectedOption.condition);
+
+            setCarDatosUpdate(selectedOption.CarObject)
         }
     };
 
@@ -119,7 +157,7 @@ const ReservationModal = ({ showModal, handleClose, reserva, setgood, seterror }
 
     return (
         <div className='fixed inset-0 flex items-center justify-center z-50 text-white backdrop-blur-sm'>
-                
+
 
             <div className="bg-gray-900 cursor-pointer sm:max-w-[98%] relative m-12 rounded-xl p-12 z-10 md:p-6 max-sm:p-4 md:rounded-md sm:rounded-sm">
                 <div className='sm:flex mt-1 max-md:text-3xl inline-flex items-center font-extrabold text-white max-md:flex-wrap max-md:max-w-full justify-between'>

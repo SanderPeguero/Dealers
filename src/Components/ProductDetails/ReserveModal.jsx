@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useContextCar } from '../../Context/Context'
 import close from "../../assets/img/close.png"
 import { validateCarSaleDatos } from '../../Layout/MainScreen/Validations';
+import { EditCarSale } from '../../Functions/Sales/Sales';
 function ReserveModal({ showModal, setShowModal, handleCloseModal }) {
 
     const { CarAvailable, Formatnumber, ReservaCar } = useContextCar()
@@ -80,8 +81,7 @@ function ReserveModal({ showModal, setShowModal, handleCloseModal }) {
         if (validateCarSaleDatos(CarAvailable.Sale)) {
             if (CarAvailable.Sale.CarDetails.Amount > 0) {
                 CarAvailable.Sale.CarDetails.Amount -= 1;
-                console.log("Reservaciones");
-                console.log(CarAvailable);
+                await EditCarSale(CarAvailable.IdCarSale, CarAvailable)
                 await ReservaCar(reservationData, CarAvailable)
                 setIosOpen(true);
             } else {
