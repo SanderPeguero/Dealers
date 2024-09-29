@@ -111,9 +111,9 @@ const Recommended = ({ refAutos }) => {
 
 
     return (
-        <div className="bg-transparent flex justify-center md:m-10 items-center xl:mt-36 max-md:px-5 bg-[#0B0C10]" >
+        <div className="bg-transparent flex justify-center md:m-10  items-center  max-md:px-5 bg-[#0B0C10]" >
 
-            <div ref={refAutos} className="flex flex-col z-10 mt-96  justify-between w-full max-w-[992px] max-md:mt-10 max-md:max-w-full">
+            <div ref={refAutos} className="flex flex-col z-10    justify-between w-full max-w-[992px]  max-md:max-w-full">
 
 
                 <div className="flex">
